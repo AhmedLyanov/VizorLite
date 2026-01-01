@@ -1,0 +1,29 @@
+header{
+    width: 100%;
+    height: 70px;
+    padding: 15px 0;
+    position: fixed;
+    width: 100%;
+    background: var( --primary-white);
+}
+.headerContent {
+    padding: 0 20px;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.navigation{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.navigation a{
+    color: var(--primary-navigation-links);
+    font-size: 15px;
+    text-decoration: none;
+    font-family: var( --primary-font);
+}

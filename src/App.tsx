@@ -1,23 +1,19 @@
-
-import './App.css';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import DefaultLayout from "./layout/default/default";
+import Home from "./views/home/index";
+import NotFound from "./views/notfound/index"
+import "./App.css";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<DefaultLayout/>}>
+            <Route index element={<Home />}/>
+        </Route>
+        <Route path="*" element={<NotFound/>}/>
+      </Routes>
+    </BrowserRouter>
   );
 }
 
