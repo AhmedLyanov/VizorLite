@@ -1,12 +1,12 @@
 import { Outlet } from "react-router-dom";
-import Header from "../../components/layout/header/index";
+import AIHelper from "../../components/ui/aiHelper/AiHelper";
 
 export default function DefaultLayout() {
   return (
     <>
-      <Header />
-      <main className="layout-default-content" style={{paddingTop: 70}} >
+      <main className="layout-default-content">
         <Outlet />
+        <AIHelper />
       </main>
     </>
   );

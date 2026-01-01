@@ -1,4 +1,4 @@
-import Logo from "../../ui/logo/index";
+import Logo from "../../ui/logo/Logotype";
 import { NAVIGATION_TEXT } from "../../../constants";
 import styles from "./Header.module.css";
 
