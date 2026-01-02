@@ -1,6 +1,6 @@
 export const AI_TEXT = {
   TITLE: {
-    MAIN: 'Маркус',
+    MAIN: 'Ассистент Маркус',
   },
   BUTTONS: {
     TOGGLE: 'AI',

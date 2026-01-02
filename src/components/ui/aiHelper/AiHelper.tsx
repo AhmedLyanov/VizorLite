@@ -72,7 +72,7 @@ export default function AssistantModal({}: Props) {
                 onClick={handleSendMessage}
                 disabled={!message.trim()}
               >
-                {AI_TEXT.BUTTONS.SEND}
+                <img src="/images/send.svg" alt="send message to AI" width={30} height={30} />
               </button>
             </div>
           </div>
