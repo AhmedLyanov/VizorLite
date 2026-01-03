@@ -1,11 +1,12 @@
-header{
+header {
     width: 100%;
     height: 60px;
     padding: 15px 0;
     position: fixed;
-    background: var( --primary-white);
+    background: var(--primary-white);
     z-index: 5;
 }
+
 .headerContent {
     padding: 0 20px;
     height: 100%;
@@ -14,16 +15,26 @@ header{
     align-items: center;
 }
 
-.navigation{
+.navigation {
     width: 100%;
     display: flex;
     justify-content: center;
     gap: 10px;
 }
 
-.navigation a{
+.navigation a {
     color: var(--primary-navigation-links);
     font-size: 15px;
     text-decoration: none;
-    font-family: var( --primary-font);
+    font-family: var(--primary-font);
+}
+
+
+@media (min-width: 1080px) {
+    .navigation {
+        gap: 100px;
+    }
+    .navigation a {
+        font-size: px;
+    }
 }

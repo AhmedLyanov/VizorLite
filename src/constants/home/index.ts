@@ -1,6 +1,6 @@
 export const HOME_TEXTS = {
   HERO: {
-    TITLE: "общайтесь, планируйте, решайте с Vizorlite",
+    TITLE: "Vizorlite - общайтесь, планируйте, решайте",
   },
   INSTALL_BANNER: {
     TITLE: "VizorLite",

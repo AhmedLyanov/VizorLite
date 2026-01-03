@@ -39,7 +39,7 @@
     padding: 15px 0 8px;
 }
 
-.bottomLinks {
+.bottomUtilsButtons {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -49,7 +49,7 @@
     padding: 0 12px;
 }
 
-.bottomLink {
+.bottomUtilsButton {
     display: inline-flex;
     align-items: center;
     gap: 8px;
@@ -80,6 +80,7 @@
     }
     
     .contentContainer {
+        padding: 25px 0px;
         max-width: 800px;
     }
     
@@ -96,14 +97,14 @@
         margin-right: auto;
     }
     
-    .bottomLinks {
+    .bottomUtilsButtons {
         flex-direction: row;
         justify-content: center;
         gap: 20px;
         max-width: 800px;
     }
     
-    .bottomLink {
+    .bottomUtilsButton {
         width: auto;
         padding: 8px 20px;
     }
@@ -114,12 +115,12 @@
         font-size: 28px;
     }
     
-    .bottomLink:hover {
+    .bottomUtilsButton:hover {
         background: rgba(0, 0, 0, 0.02);
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
     }
     
-    .bottomLink:hover .linkIcon {
+    .bottomUtilsButton:hover .linkIcon {
         opacity: 0.9;
     }
 }

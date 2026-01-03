@@ -1,0 +1,53 @@
+aside {
+    display: none;
+    width: 70px;
+    height: 100vh;
+    padding: 30px 0;
+
+}
+
+.asideContent {
+    display: grid;
+    justify-items: center;
+    height: 100%;
+    align-content: space-between;
+}
+
+.asideContentTop {
+    display: grid;
+    gap: 13px;
+}
+
+.asideContentBottom {
+    display: grid;
+    justify-items: center;
+    gap: 13px;
+}
+
+.asideNavigationButton{
+    width: 40px;
+    height: 40px;
+    display: grid;
+    align-items: center;
+    justify-items: center;
+    border-radius: 100%;
+    background: transparent;
+    transition: background 0.5s;
+}
+
+.asideNavigationButton:hover{
+    background: rgb(224, 224, 224);
+}
+
+.asideNavigationButton img{
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+}
+
+@media (min-width: 768px) {
+    aside {
+        display: block;
+    }
+
+}
