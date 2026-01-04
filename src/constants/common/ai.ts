@@ -1,14 +1,15 @@
+
 export const AI_TEXT = {
   TITLE: {
-    MAIN: 'Ассистент Маркус',
+    MAIN: "ai.title.main",
   },
   BUTTONS: {
-    TOGGLE: 'AI',
-    SEND: 'Отправить',
-    CLOSE: '✕',
+    TOGGLE: "ai.button.toggle",
+    SEND: "ai.button.send",
+    CLOSE: "ai.button.close",
   },
   MESSAGES: {
-    WELCOME: 'Привет, я Маркус, если вам нужна помощь по сайту то я всегда здесь',
-    PLACEHOLDER: 'Введите ваш вопрос...',
+    WELCOME: "ai.message.welcome",
+    PLACEHOLDER: "ai.message.placeholder",
   },
 } as const;

@@ -1,84 +1,124 @@
 export const ABOUT_TEXTS = {
   HERO: {
-    TITLE: "О VizorLite",
-    SUBTITLE: "Мы делаем видеоконференции простыми, доступными и безопасными для каждого",
+    TITLE: "about.hero.title",
+    SUBTITLE: "about.hero.subtitle",
   },
   MISSION: {
-    TITLE: "Наша миссия",
-    DESCRIPTION: "Сломать барьеры в онлайн-общении. Мы верим, что качественная видеосвязь должна быть бесплатной, безопасной и доступной без скачиваний и регистраций.",
+    TITLE: "about.mission.title",
+    DESCRIPTION: "about.mission.description",
   },
   VALUES: {
-    TITLE: "Наши ценности",
+    TITLE: "about.values.title",
     ITEMS: [
       {
-        ICON: "videoconference.svg",
-        TITLE: "Доступность",
-        DESCRIPTION: "Сделали видеосвязь простой и бесплатной для всех"
+        ICON: "about.values.items.accessibility.icon",
+        TITLE: "about.values.items.accessibility.title",
+        DESCRIPTION: "about.values.items.accessibility.description"
       },
       {
-        ICON: "webcamera.svg",
-        TITLE: "Конфиденциальность",
-        DESCRIPTION: "Ваши разговоры остаются между участниками"
+        ICON: "about.values.items.confidentiality.icon",
+        TITLE: "about.values.items.confidentiality.title",
+        DESCRIPTION: "about.values.items.confidentiality.description"
       },
       {
-        ICON: "check.svg",
-        TITLE: "Простота",
-        DESCRIPTION: "Никаких установок, регистраций и сложных настроек"
+        ICON: "about.values.items.simplicity.icon",
+        TITLE: "about.values.items.simplicity.title",
+        DESCRIPTION: "about.values.items.simplicity.description"
       }
     ]
   },
   STATS: {
-    TITLE: "VizorLite в цифрах",
+    TITLE: "about.stats.title",
     ITEMS: [
-      { VALUE: "50K+", LABEL: "пользователей" },
-      { VALUE: "1M+", LABEL: "минут звонков" },
-      { VALUE: "99%", LABEL: "стабильность" },
-      { VALUE: "24/7", LABEL: "поддержка" }
+      { 
+        VALUE: "about.stats.items.users.value", 
+        LABEL: "about.stats.items.users.label" 
+      },
+      { 
+        VALUE: "about.stats.items.minutes.value", 
+        LABEL: "about.stats.items.minutes.label" 
+      },
+      { 
+        VALUE: "about.stats.items.stability.value", 
+        LABEL: "about.stats.items.stability.label" 
+      },
+      { 
+        VALUE: "about.stats.items.support.value", 
+        LABEL: "about.stats.items.support.label" 
+      }
     ]
   },
   TEAM: {
-    TITLE: "Наша команда",
+    TITLE: "about.team.title",
     ITEMS: [
       {
         ID: 1,
-        NAME: "Алексей Петров",
-        ROLE: "Основатель & CEO",
-        DESCRIPTION: "10+ лет в веб-разработке. Создал VizorLite чтобы сделать видеоконференции доступными каждому."
+        NAME: "about.team.items.alexey.name",
+        ROLE: "about.team.items.alexey.role",
+        DESCRIPTION: "about.team.items.alexey.description"
       },
       {
         ID: 2,
-        NAME: "Мария Сидорова",
-        ROLE: "Lead Developer",
-        DESCRIPTION: "Специалист по WebRTC и реальному времени. Отвечает за стабильность и качество соединений."
+        NAME: "about.team.items.maria.name",
+        ROLE: "about.team.items.maria.role",
+        DESCRIPTION: "about.team.items.maria.description"
       },
       {
         ID: 3,
-        NAME: "Дмитрий Иванов",
-        ROLE: "UI/UX Дизайнер",
-        DESCRIPTION: "Создает интуитивные интерфейсы. Верит, что технологии должны быть красивыми и простыми."
+        NAME: "about.team.items.dmitry.name",
+        ROLE: "about.team.items.dmitry.role",
+        DESCRIPTION: "about.team.items.dmitry.description"
       }
     ]
   },
   TIMELINE: {
-    TITLE: "Наш путь",
+    TITLE: "about.timeline.title",
     ITEMS: [
-      { YEAR: "2021", EVENT: "Идея и первый прототип" },
-      { YEAR: "2022", EVENT: "Запуск закрытого бета-тестирования" },
-      { YEAR: "2023", EVENT: "Публичный релиз VizorLite" },
-      { YEAR: "2024", EVENT: "Достигли 50K активных пользователей" }
+      { 
+        YEAR: "2021", 
+        EVENT: "about.timeline.items.2021.event" 
+      },
+      { 
+        YEAR: "2022", 
+        EVENT: "about.timeline.items.2022.event" 
+      },
+      { 
+        YEAR: "2023", 
+        EVENT: "about.timeline.items.2023.event" 
+      },
+      { 
+        YEAR: "2024", 
+        EVENT: "about.timeline.items.2024.event" 
+      }
     ]
   },
   CTA: {
-    TITLE: "Начните использовать прямо сейчас",
-    DESCRIPTION: "Присоединяйтесь к тысячам пользователей, которые уже общаются через VizorLite",
-    BUTTON_TEXT: "Создать комнату"
+    TITLE: "about.cta.title",
+    DESCRIPTION: "about.cta.description",
+    BUTTON_TEXT: "about.cta.buttonText"
   },
   BOTTOM_LINKS: {
     ITEMS: [
-      { PATH: "/", LABEL: "Главная", ICON: "home.svg" },
-      { PATH: "/pricing", LABEL: "Тарифы", ICON: "dollar.svg" },
-      { PATH: "/about", LABEL: "О нас", ICON: "question.svg" },
-      { HREF: "mailto:support@vizorlite.com", LABEL: "Контакты", ICON: "send.svg" }
+      { 
+        PATH: "/", 
+        LABEL: "about.bottomLinks.items.home.label", 
+        ICON: "about.bottomLinks.items.home.icon" 
+      },
+      { 
+        PATH: "/pricing", 
+        LABEL: "about.bottomLinks.items.pricing.label", 
+        ICON: "about.bottomLinks.items.pricing.icon" 
+      },
+      { 
+        PATH: "/about", 
+        LABEL: "about.bottomLinks.items.about.label", 
+        ICON: "about.bottomLinks.items.about.icon" 
+      },
+      { 
+        HREF: "mailto:support@vizorlite.com", 
+        LABEL: "about.bottomLinks.items.contacts.label", 
+        ICON: "about.bottomLinks.items.contacts.icon" 
+      }
     ]
   }
 } as const;

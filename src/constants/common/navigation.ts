@@ -1,7 +1,7 @@
 export const NAVIGATION_TEXT = {
   TITLE: {
-    HOME: 'Главная',
-    ABOUT: 'О нас',
+    HOME: "nav.home",
+    ABOUT: "nav.about",
   },
   LINK: {
     HOME: '/',

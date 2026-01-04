@@ -1,20 +1,26 @@
+import { FormattedMessage } from "react-intl";
+import { Link } from "react-router-dom";
+
 import Logo from "../../ui/logo/Logotype";
 import { NAVIGATION_TEXT } from "../../../constants";
 import styles from "./Header.module.css";
 
-type Props = {};
-
-export default function index({}: Props) {
+export default function Header() {
   return (
     <header className={styles.Header}>
       <div className={styles.headerContent}>
         <div className="logotype">
-         <Logo />
+          <Logo />
         </div>
+
         <nav className={styles.navigation}>
-          <a href={NAVIGATION_TEXT.LINK.HOME}>{NAVIGATION_TEXT.TITLE.HOME}</a>
-          <a href={NAVIGATION_TEXT.LINK.ABOUT}>{NAVIGATION_TEXT.TITLE.ABOUT}</a>
-          <a href={NAVIGATION_TEXT.LINK.ABOUT}>{NAVIGATION_TEXT.TITLE.ABOUT}</a>
+          <Link to={NAVIGATION_TEXT.LINK.HOME}>
+            <FormattedMessage id="nav.home" />
+          </Link>
+
+          <Link to={NAVIGATION_TEXT.LINK.ABOUT}>
+            <FormattedMessage id="nav.about" />
+          </Link>
         </nav>
       </div>
     </header>

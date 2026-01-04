@@ -1,11 +1,22 @@
 export const HOME_TEXTS = {
   HERO: {
-    TITLE: "Vizorlite - общайтесь, планируйте, решайте",
+    TITLE: "home.hero.title",
   },
+
   INSTALL_BANNER: {
-    TITLE: "VizorLite",
-    DESCRIPTION:
-      "Скачайте приложение для более удобной работы с сервисом на вашем устройстве",
-    INSTALL_BUTTON: "Установить",
+    TITLE: "home.install.title",
+    DESCRIPTION: "home.install.description",
+    INSTALL_BUTTON: "home.install.button",
+  },
+
+  BUTTONS: {
+    CREATE_MEETING: "home.button.create",
+    JOIN_MEETING: "home.button.join",
+  },
+
+  BOTTOM: {
+    PRICING: "home.bottom.pricing",
+    TRANSLATE: "home.bottom.translate",
+    FAQ: "home.bottom.faq",
   },
 } as const;

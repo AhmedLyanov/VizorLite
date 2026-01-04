@@ -1,23 +1,25 @@
-import { useState } from 'react';
-import styles from './AiHelper.module.css';
-import { AI_TEXT } from '../../../constants/common/ai';
+import { useState } from "react";
+import { useIntl } from "react-intl";
 
-type Props = {}
+import styles from "./AiHelper.module.css";
+import { AI_TEXT } from "../../../constants/common/ai";
 
-export default function AssistantModal({}: Props) {
+export default function AssistantModal() {
+  const intl = useIntl();
+
   const [isOpen, setIsOpen] = useState(false);
-  const [message, setMessage] = useState('');
+  const [message, setMessage] = useState("");
   const [messages, setMessages] = useState<string[]>([]);
 
   const handleSendMessage = () => {
     if (message.trim()) {
       setMessages([...messages, message]);
-      setMessage('');
+      setMessage("");
     }
   };
 
   const handleKeyPress = (e: React.KeyboardEvent) => {
-    if (e.key === 'Enter' && !e.shiftKey) {
+    if (e.key === "Enter" && !e.shiftKey) {
       e.preventDefault();
       handleSendMessage();
     }
@@ -25,22 +27,25 @@ export default function AssistantModal({}: Props) {
 
   return (
     <div className={styles.assistantContainer}>
-      <button 
+      <button
         className={styles.assistantToggleBtn}
         onClick={() => setIsOpen(!isOpen)}
       >
-        {AI_TEXT.BUTTONS.TOGGLE}
+        {intl.formatMessage({ id: AI_TEXT.BUTTONS.TOGGLE })}
       </button>
-      
+
       {isOpen && (
         <div className={styles.assistantModal}>
           <div className={styles.assistantHeader}>
-            <h3 className={styles.assistantTitle}>{AI_TEXT.TITLE.MAIN}</h3>
-            <button 
+            <h3 className={styles.assistantTitle}>
+              {intl.formatMessage({ id: AI_TEXT.TITLE.MAIN })}
+            </h3>
+
+            <button
               className={styles.closeBtn}
               onClick={() => setIsOpen(false)}
             >
-              {AI_TEXT.BUTTONS.CLOSE}
+              {intl.formatMessage({ id: AI_TEXT.BUTTONS.CLOSE })}
             </button>
           </div>
 
@@ -48,11 +53,18 @@ export default function AssistantModal({}: Props) {
             <div className={styles.messagesContainer}>
               {messages.length === 0 ? (
                 <div className={styles.welcomeMessage}>
-                  <p>{AI_TEXT.MESSAGES.WELCOME}</p>
+                  <p>
+                    {intl.formatMessage({
+                      id: AI_TEXT.MESSAGES.WELCOME,
+                    })}
+                  </p>
                 </div>
               ) : (
                 messages.map((msg, index) => (
-                  <div key={index} className={`${styles.message} ${styles.userMessage}`}>
+                  <div
+                    key={index}
+                    className={`${styles.message} ${styles.userMessage}`}
+                  >
                     {msg}
                   </div>
                 ))
@@ -64,15 +76,26 @@ export default function AssistantModal({}: Props) {
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
                 onKeyPress={handleKeyPress}
-                placeholder={AI_TEXT.MESSAGES.PLACEHOLDER}
+                placeholder={intl.formatMessage({
+                  id: AI_TEXT.MESSAGES.PLACEHOLDER,
+                })}
                 rows={2}
               />
-              <button 
+
+              <button
                 className={styles.sendButton}
                 onClick={handleSendMessage}
                 disabled={!message.trim()}
+                title={intl.formatMessage({
+                  id: AI_TEXT.BUTTONS.SEND,
+                })}
               >
-                <img src="/images/send.svg" alt="send message to AI" width={30} height={30} />
+                <img
+                  src="/images/send.svg"
+                  alt="send message to AI"
+                  width={30}
+                  height={30}
+                />
               </button>
             </div>
           </div>
