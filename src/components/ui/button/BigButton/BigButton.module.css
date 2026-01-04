@@ -1,0 +1,37 @@
+.containerBigbutton {
+  background: var(--primary-bigbutton-color);
+  box-shadow: var(--primary-bigbutton-shadow);
+  border-radius: 20px;
+  padding: 10px 50px;
+  user-select: none;
+  transition: all var(--transition-normal);
+  outline: none;
+  transform-origin: center;
+}
+.containerBigbutton:hover {
+  background: var(--primary-bigbutton-hover-color);
+}
+
+.containerBigbutton:active {
+  background: var(--primary-bigbutton-active-color);
+  box-shadow: var(--primary-bigbutton-active-shadow);
+  transform: translateY(0) scale(0.98);
+}
+
+.BigButton {
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  display: grid;
+  justify-items: center;
+  font-family: var(--primary-font);
+}
+
+.BigButton_image {
+  max-width: 130px;
+  height: auto;
+}
+.BigButton_text {
+  font-size: 18px;
+}
+

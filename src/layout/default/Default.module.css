@@ -1,0 +1,10 @@
+.defaulLayoutContainer{
+  display: flex;
+  min-height: 100vh;
+  width: 100%;
+}
+.layoutDefaultContent {
+  flex: 1;
+  order: 1;
+  overflow-y: auto;
+}

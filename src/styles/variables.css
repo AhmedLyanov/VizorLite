@@ -1,0 +1,21 @@
+:root {
+  --primary-background-color: linear-gradient(135deg, #f5f7ff 0%, #e6e9ff 100%);
+  --primary-white: #ffffff;
+  --primary-title-color: #333;
+
+  /*Buttons*/
+  --primary-bigbutton-color: #ffffff;
+  --primary-bigbutton-shadow: 1px 1px 20px rgba(51, 51, 51, 0.3);
+  --primary-bigbutton-hover-color: #f8f9ff;
+  --primary-bigbutton-active-color: #f0f2ff;
+  --primary-bigbutton-active-shadow: 1px 1px 10px rgba(51, 51, 51, 0.2);
+
+  --primary-navigation-links: #333;
+  
+  /*fonts*/
+  --primary-font: "Inter", sans-serif;
+
+  /* Анимации */
+  --transition-fast: 0.15s ease;
+  --transition-normal: 0.25s ease;
+}
