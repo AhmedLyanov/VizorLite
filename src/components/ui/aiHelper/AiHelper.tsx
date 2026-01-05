@@ -1,24 +1,28 @@
-import { useState } from "react";
+import { KeyboardEvent } from "react";
 import { useIntl } from "react-intl";
 
 import styles from "./AiHelper.module.css";
 import { AI_TEXT } from "../../../constants/common/ai";
+import { useAiStore } from "../../../store/useAi";
 
 export default function AssistantModal() {
   const intl = useIntl();
-
-  const [isOpen, setIsOpen] = useState(false);
-  const [message, setMessage] = useState("");
-  const [messages, setMessages] = useState<string[]>([]);
+  
+  const {
+    isOpen,
+    message,
+    messages,
+    toggleAi,
+    closeAi,
+    setMessage,
+    sendMessage,
+  } = useAiStore();
 
   const handleSendMessage = () => {
-    if (message.trim()) {
-      setMessages([...messages, message]);
-      setMessage("");
-    }
+    sendMessage();
   };
 
-  const handleKeyPress = (e: React.KeyboardEvent) => {
+  const handleKeyPress = (e: KeyboardEvent<HTMLTextAreaElement>) => {
     if (e.key === "Enter" && !e.shiftKey) {
       e.preventDefault();
       handleSendMessage();
@@ -29,13 +33,15 @@ export default function AssistantModal() {
     <div className={styles.assistantContainer}>
       <button
         className={styles.assistantToggleBtn}
-        onClick={() => setIsOpen(!isOpen)}
+        onClick={toggleAi}
+        aria-label={intl.formatMessage({ id: AI_TEXT.BUTTONS.TOGGLE })}
+        aria-expanded={isOpen}
       >
         {intl.formatMessage({ id: AI_TEXT.BUTTONS.TOGGLE })}
       </button>
 
       {isOpen && (
-        <div className={styles.assistantModal}>
+        <div className={styles.assistantModal} role="dialog" aria-modal="true">
           <div className={styles.assistantHeader}>
             <h3 className={styles.assistantTitle}>
               {intl.formatMessage({ id: AI_TEXT.TITLE.MAIN })}
@@ -43,7 +49,8 @@ export default function AssistantModal() {
 
             <button
               className={styles.closeBtn}
-              onClick={() => setIsOpen(false)}
+              onClick={closeAi}
+              aria-label={intl.formatMessage({ id: AI_TEXT.BUTTONS.CLOSE })}
             >
               {intl.formatMessage({ id: AI_TEXT.BUTTONS.CLOSE })}
             </button>
@@ -60,7 +67,7 @@ export default function AssistantModal() {
                   </p>
                 </div>
               ) : (
-                messages.map((msg, index) => (
+                messages.map((msg: string, index: number) => (
                   <div
                     key={index}
                     className={`${styles.message} ${styles.userMessage}`}
@@ -80,12 +87,16 @@ export default function AssistantModal() {
                   id: AI_TEXT.MESSAGES.PLACEHOLDER,
                 })}
                 rows={2}
+                aria-label="message for AI assistant"
               />
 
               <button
                 className={styles.sendButton}
                 onClick={handleSendMessage}
                 disabled={!message.trim()}
+                aria-label={intl.formatMessage({
+                  id: AI_TEXT.BUTTONS.SEND,
+                })}
                 title={intl.formatMessage({
                   id: AI_TEXT.BUTTONS.SEND,
                 })}
