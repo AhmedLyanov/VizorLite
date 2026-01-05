@@ -1,68 +1,68 @@
 export const PRICING_TEXTS = {
-  TITLE: "Тарифы",
-  SUBTITLE: "Выберите подходящий план для ваших видеовстреч",
-  RECOMMENDED: "Рекомендуем",
-  SELECT_BUTTON: "Выбрать план",
+  TITLE: "pricing.title",
+  SUBTITLE: "pricing.subtitle",
+  RECOMMENDED: "pricing.recommended",
+  SELECT_BUTTON: "pricing.selectButton",
   
   PLANS: {
     BASIC: {
-      NAME: "Базовый",
-      PRICE: "0₽",
-      PERIOD: "/месяц",
+      NAME: "pricing.plans.basic.name",
+      PRICE: "pricing.plans.basic.price",
+      PERIOD: "pricing.plans.basic.period",
       FEATURES: [
-        "До 3 участников в встрече",
-        "40 минут на встречу",
-        "Общий чат",
-        "Базовая поддержка"
+        "pricing.plans.basic.features.participants",
+        "pricing.plans.basic.features.time",
+        "pricing.plans.basic.features.chat",
+        "pricing.plans.basic.features.support"
       ]
     },
     BUSINESS: {
-      NAME: "Бизнес",
-      PRICE: "990₽",
-      PERIOD: "/месяц",
+      NAME: "pricing.plans.business.name",
+      PRICE: "pricing.plans.business.price",
+      PERIOD: "pricing.plans.business.period",
       FEATURES: [
-        "До 25 участников в встрече",
-        "Безлимитное время встреч",
-        "Запись встреч",
-        "Расширенные настройки",
-        "Приоритетная поддержка",
-        "Облачное хранилище 10ГБ"
+        "pricing.plans.business.features.participants",
+        "pricing.plans.business.features.time",
+        "pricing.plans.business.features.recording",
+        "pricing.plans.business.features.settings",
+        "pricing.plans.business.features.support",
+        "pricing.plans.business.features.storage"
       ]
     },
     PREMIUM: {
-      NAME: "Премиум",
-      PRICE: "1990₽",
-      PERIOD: "/месяц",
+      NAME: "pricing.plans.premium.name",
+      PRICE: "pricing.plans.premium.price",
+      PERIOD: "pricing.plans.premium.period",
       FEATURES: [
-        "До 100 участников в встрече",
-        "Безлимитное время встреч",
-        "Запись встреч в HD",
-        "Кастомный брендинг",
-        "Персональный менеджер",
-        "Облачное хранилище 50ГБ",
-        "Расширенная аналитика"
+        "pricing.plans.premium.features.participants",
+        "pricing.plans.premium.features.time",
+        "pricing.plans.premium.features.recording",
+        "pricing.plans.premium.features.branding",
+        "pricing.plans.premium.features.manager",
+        "pricing.plans.premium.features.storage",
+        "pricing.plans.premium.features.analytics"
       ]
     }
   },
   
   FAQ: {
-    TITLE: "Частые вопросы",
+    TITLE: "pricing.faq.title",
     ITEMS: [
       {
-        question: "Можно ли поменять тариф позже?",
-        answer: "Да, вы можете изменить тариф в любое время в личном кабинете."
+        question: "pricing.faq.items.0.question",
+        answer: "pricing.faq.items.0.answer"
       },
       {
-        question: "Есть ли пробный период?",
-        answer: "Для Business и Premium тарифов доступен 14-дневный пробный период."
+        question: "pricing.faq.items.1.question",
+        answer: "pricing.faq.items.1.answer"
       },
       {
-        question: "Как происходит оплата?",
-        answer: "Оплата картой через безопасный платежный шлюз. Автоматическое списание каждый месяц."
+        question: "pricing.faq.items.2.question",
+        answer: "pricing.faq.items.2.answer"
       },
       {
-        question: "Можно ли отменить подписку?",
-        answer: "Да, отмена доступна в любое время. Доступ к функциям сохранится до конца оплаченного периода."
+        question: "pricing.faq.items.3.question",
+        answer: "pricing.faq.items.3.answer"
       }
     ]
   }

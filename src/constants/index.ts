@@ -10,12 +10,6 @@ export const TEXTS = {
   ABOUT: ABOUT_TEXTS, 
 } as const;
 
-export const COMMON_TEXTS = {
-  NOTFOUND: {
-    TITLE: 'Страница не найдена',
-    DESCRIPTION: 'Извините, запрашиваемая страница не существует или была перемещена',
-    BUTTON: 'Вернуться на главную',
-  },
-} as const;
+
 
 export { NAVIGATION_TEXT, HOME_TEXTS, PRICING_TEXTS, ABOUT_TEXTS };
