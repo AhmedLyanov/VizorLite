@@ -1,10 +1,11 @@
 import { Link } from "react-router-dom";
 import { useIntl } from "react-intl";
+import { Skeleton } from "antd";
 import { HOME_TEXTS } from "../../constants";
 import styles from "./HomePage.module.css";
 import InstallBanner from "../../components/ui/installBanner/InstallBanner";
-import BigButton from "../../components/ui/button/BigButton/BigButton";
-import LanguageSwitcher from "../../components/ui/LanguageSwitcher/LanguageSwitcher";
+import BigButton from "../../components/ui/button/bigButton/BigButton";
+import LanguageSwitcher from "../../components/ui/languageSwitcher/LanguageSwitcher";
 
 
 
@@ -45,7 +46,7 @@ export default function HomePage() {
               {intl.formatMessage({ id: HOME_TEXTS.BOTTOM.PRICING })}
             </span>
           </Link>
-
+            
           <LanguageSwitcher/>
 
           <Link to="/faq" className={styles.bottomUtilsButton}>

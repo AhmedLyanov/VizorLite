@@ -64,7 +64,7 @@ export default function LanguageSwitcher({
               key={lang.code}
               className={`${styles.langItem} ${locale === lang.code ? styles.active : ""}`}
               onClick={() => handleLanguageChange(lang.code)}
-              aria-label={`Выбрать ${lang.name}`}
+              aria-label={`Choice ${lang.name}`}
             >
               <span className={styles.flag}>{lang.flag}</span>
               <span className={styles.langName}>{lang.name}</span>

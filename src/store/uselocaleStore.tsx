@@ -41,6 +41,7 @@ export const useLocaleStore = create<LocaleStore>()(
       getAvailableLocales: () => [
         { code: LOCALES.RUSSIAN, name: "Русский", flag: "🇷🇺" },
         { code: LOCALES.ENGLISH, name: "English", flag: "🇺🇸" },
+        { code: LOCALES.JAPANESE, name: "日本語", flag: "jp" },
       ],
     }),
     {

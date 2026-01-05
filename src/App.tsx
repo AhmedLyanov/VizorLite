@@ -1,8 +1,10 @@
 import { Suspense, lazy } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Spin } from "antd";
 
 import IntlProviderWrapper from "./providers/IntlProviderWrapper";
-import { LocaleProvider } from "./i18n/LocaleContext"; 
+import { LocaleProvider } from "./i18n/LocaleContext";
+import LoadingSpinner from "./components/ui/loading/LoadingSpinner";
 import DefaultLayout from "./layout/default/Default";
 import MinimalLayout from "./layout/minimal/Minimal";
 
@@ -16,7 +18,11 @@ function App() {
     <LocaleProvider>
       <IntlProviderWrapper>
         <BrowserRouter>
-          <Suspense fallback={<div>Loading...</div>}>
+          <Suspense
+            fallback={
+              <LoadingSpinner/>
+            }
+          >
             <Routes>
               <Route element={<MinimalLayout />}>
                 <Route path="/pricing" element={<PricingPage />} />
