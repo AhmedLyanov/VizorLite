@@ -1,7 +1,6 @@
-import { useState, useContext, useEffect, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useIntl } from "react-intl";
-import { LocaleContext } from "../../../i18n/LocaleContext";
-import { LOCALES } from "../../../i18n";
+import { useLocaleStore } from "../../../store/uselocaleStore";
 import { Icon } from "../../../shared/icons/Icon";
 import styles from "./LanguageSwitcher.module.css";
 
@@ -13,14 +12,11 @@ export default function LanguageSwitcher({
   className = "" 
 }: LanguageSwitcherProps) {
   const intl = useIntl();
-  const { locale, setLocale } = useContext(LocaleContext)!;
+  const { locale, setLocale, getAvailableLocales } = useLocaleStore();
   const [isOpen, setIsOpen] = useState(false);
   const wrapperRef = useRef<HTMLDivElement>(null);
 
-  const languages = [
-    { code: LOCALES.RUSSIAN, name: "Русский", flag: "🇷🇺" },
-    { code: LOCALES.ENGLISH, name: "English", flag: "🇺🇸" },
-  ];
+  const languages = getAvailableLocales();
 
   const handleLanguageChange = (langCode: string) => {
     setLocale(langCode as any);
@@ -55,6 +51,7 @@ export default function LanguageSwitcher({
       <button
         className={styles.langToggleButton}
         onClick={handleToggle}
+        aria-label={intl.formatMessage({ id: "home.bottom.translate" })}
       >
         <Icon name="translate" size={20} />
         <span>{intl.formatMessage({ id: "home.bottom.translate" })}</span>

@@ -1,10 +1,8 @@
-import { Suspense, lazy, useState } from "react";
-import { IntlProvider } from "react-intl";
+import { Suspense, lazy } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-import { LOCALES, messages, Locale } from "./i18n";
-import { LocaleContext } from "./i18n/LocaleContext";
-
+import IntlProviderWrapper from "./providers/IntlProviderWrapper";
+import { LocaleProvider } from "./i18n/LocaleContext"; 
 import DefaultLayout from "./layout/default/Default";
 import MinimalLayout from "./layout/minimal/Minimal";
 
@@ -14,34 +12,27 @@ const PricingPage = lazy(() => import("./views/pricing/PricingPage"));
 const NotFound = lazy(() => import("./views/notfound/Notfound"));
 
 function App() {
-  const [locale, setLocale] = useState<Locale>(LOCALES.ENGLISH);
-
   return (
-    <LocaleContext.Provider value={{ locale, setLocale }}>
+    <LocaleProvider>
+      <IntlProviderWrapper>
+        <BrowserRouter>
+          <Suspense fallback={<div>Loading...</div>}>
+            <Routes>
+              <Route element={<MinimalLayout />}>
+                <Route path="/pricing" element={<PricingPage />} />
+                <Route path="/about" element={<AboutPage />} />
+              </Route>
 
-    <IntlProvider
-      locale={locale}
-      messages={messages[locale]}
-      defaultLocale={LOCALES.ENGLISH}
-    >
-      <BrowserRouter>
-        <Suspense fallback={<div>Загрузка...</div>}>
-          <Routes>
-            <Route element={<MinimalLayout />}>
-              <Route path="/pricing" element={<PricingPage />} />
-              <Route path="/about" element={<AboutPage />} />
-            </Route>
+              <Route element={<DefaultLayout />}>
+                <Route path="/" element={<HomePage />} />
+              </Route>
 
-            <Route element={<DefaultLayout />}>
-              <Route path="/" element={<HomePage />} />
-            </Route>
-
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </Suspense>
-      </BrowserRouter>
-    </IntlProvider>
-    </LocaleContext.Provider>
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </Suspense>
+        </BrowserRouter>
+      </IntlProviderWrapper>
+    </LocaleProvider>
   );
 }
 
