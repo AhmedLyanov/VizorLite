@@ -33,10 +33,10 @@
 }
 
 .assistantModal {
-  position: absolute;
-  bottom: 60px;
-  right: 0;
-  min-width: 250px;
+  position: relative; 
+  bottom: auto;
+  right: auto;
+  min-width: 150px;
   height: 420px;
   background: var(--primary-white);
   border-radius: 16px;
@@ -150,10 +150,15 @@
   resize: none;
   width: 100%;
   outline: none;
+  border: none;
+  background: transparent;
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
 }
 
 .inputContainer textarea:focus {
-  border-color: rgba(0, 0, 0, 0.2);
+  outline: none;
 }
 
 .inputContainer textarea::placeholder {
@@ -175,14 +180,18 @@
   outline: none;
   flex-shrink: 0;
   margin-left: 10px;
+  border: none;
+}
+
+.sendButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 
 .sendButton:active:not(:disabled) {
   background: #f0f2ff;
   transform: translateY(1px) scale(0.98);
 }
-
-
 
 .messagesContainer::-webkit-scrollbar {
   width: 4px;
@@ -199,6 +208,31 @@
 
 .messagesContainer::-webkit-scrollbar-thumb:hover {
   background: rgba(0, 0, 0, 0.15);
+}
+
+.aiPopover :global(.ant-popover-inner) {
+  background: transparent !important;
+  box-shadow: none !important;
+  border: none !important;
+  padding: 0 !important;
+}
+
+.aiPopover :global(.ant-popover-arrow) {
+  display: none !important;
+}
+
+.aiPopover :global(.ant-popover-inner-content) {
+  padding: 0 !important;
+  background: transparent !important;
+}
+
+.aiPopover :global(.ant-badge-count) {
+  box-shadow: 0 0 0 1px var(--primary-white);
+  font-size: 10px;
+  min-width: 16px;
+  height: 16px;
+  line-height: 16px;
+  background: #1890ff;
 }
 
 @media (min-width: 750px) {
@@ -238,5 +272,18 @@
     word-wrap: break-word;
     font-size: 16px;
     line-height: 1.4;
+  }
+}
+
+@media (max-width: 480px) {
+  .assistantContainer {
+    bottom: 16px;
+    right: 16px;
+  }
+  
+  .assistantModal {
+    min-width: calc(100vw - 32px);
+    max-width: 320px;
+    height: 400px;
   }
 }
