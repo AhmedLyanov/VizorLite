@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect } from "react";
-import { Locale } from "./locales";
+import type { Locale } from "../i18n/locales";
 import { useLocaleStore } from "../store/uselocaleStore";
 
 type LocaleContextType = {

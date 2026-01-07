@@ -1,6 +1,7 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
-import { LOCALES, Locale, messages } from "../i18n";
+import { LOCALES, messages } from "../i18n";
+import type { Locale } from "../i18n/locales";
 
 interface LocaleStore {
   locale: Locale;

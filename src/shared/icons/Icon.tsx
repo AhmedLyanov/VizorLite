@@ -1,20 +1,13 @@
-import { icons, IconName } from "./icons";
+import { icons } from "./Icons";
+
+type IconName = keyof typeof icons;
 
 type Props = {
   name: IconName;
   size?: number;
-  className?: string;
 };
 
-export function Icon({ name, size = 24, className }: Props) {
+export function Icon({ name, size = 24 }: Props) {
   const Svg = icons[name];
-
-  return (
-    <Svg
-      width={size}
-      height={size}
-      className={className}
-      aria-hidden
-    />
-  );
+  return <Svg width={size} height={size} />;
 }
