@@ -1,14 +1,19 @@
 import express from "express";
 import dotenv from "dotenv";
+import mongoose from "mongoose";
+import userRoutes from "./routes/user.routes.js";
 
 dotenv.config();
+
 const app = express();
 const PORT = process.env.PORT || 3000;
+
 app.use(express.json());
 app.use((req, res, next) => {
   console.log(`${new Date().toISOString()} - ${req.method} ${req.url}`);
   next();
 });
+app.use('/api/users', userRoutes)
 
 
 
@@ -38,6 +43,17 @@ app.use((err, req, res, next) => {
   });
 });
 
-app.listen(PORT, () => {
-  console.log(`Active ${PORT}`);
-});
+const startServer = async () => {
+  try {
+    await mongoose.connect(process.env.MONGODB_URI);
+    console.log("DB connected successfully");
+    app.listen(PORT, () => {
+      console.log(`Active, port:${PORT}`);
+    });
+  } catch (error) {
+    console.error("Connection error:", error.message);
+    process.exit(1);
+  }
+};
+
+startServer();

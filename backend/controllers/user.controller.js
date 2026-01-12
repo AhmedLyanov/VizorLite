@@ -1,0 +1,140 @@
+import { User } from "../models/User.model.js";
+import { generateToken } from "../utils/jwt.js";
+
+export const register = async (req, res) => {
+  try {
+    const { email, password, username } = req.body;
+    const exists = await User.findOne({
+      $or: [{ email }, { username }],
+    });
+
+    if (exists) {
+      return res.status(400).json({
+        error: "Пользователь уже существует",
+      });
+    }
+
+    const user = await User.create({
+      email,
+      password,
+      username,
+    });
+
+    const token = generateToken(user._id);
+
+    res.status(201).json({
+      user: {
+        id: user._id,
+        email: user.email,
+        username: user.username,
+        createdAt: user.createdAt,
+      },
+      token,
+    });
+  } catch (error) {
+    res.status(500).json({
+      error: "Ошибка регистрации",
+    });
+    console.error(error);
+  }
+};
+
+export const login = async (req, res) => {
+  try {
+    const { email, password } = req.body;
+
+    const user = await User.findOne({ email });
+
+    if (!user) {
+      return res.status(401).json({
+        error: "Invalid credentials",
+      });
+    }
+
+    const validPassword = await user.comparePassword(password);
+
+    if (!validPassword) {
+      return res.status(401).json({
+        error: "Invalid credentials",
+      });
+    }
+
+    const token = generateToken(user._id);
+
+    res.json({
+      user: {
+        id: user._id,
+        email: user.email,
+        username: user.username,
+        createdAt: user.createdAt,
+      },
+      token,
+    });
+  } catch (error) {
+    res.status(500).json({
+      error: "Login error",
+    });
+  }
+};
+
+export const getProfile = async (req, res) => {
+  try {
+    const user = await User.findById(req.userId).select("-password");
+
+    if (!user) {
+      return res.status(404).json({
+        error: "User not found",
+      });
+    }
+
+    res.json({ user });
+  } catch (error) {
+    res.status(500).json({
+      error: "Error get profile",
+    });
+  }
+};
+
+export const updateProfile = async (req, res) => {
+  try {
+    const { email, username } = req.body;
+
+    if (email || username) {
+      const exists = await User.findOne({
+        $and: [{ _id: { $ne: req.userId } }, { $or: [] }],
+      });
+
+      if (email) exists.$or.push({ email });
+      if (username) exists.$or.push({ username });
+
+      if (exists) {
+        return res.status(400).json({
+          error: "Email or Login exist!",
+        });
+      }
+    }
+
+    const user = await User.findByIdAndUpdate(
+      req.userId,
+      { $set: req.body },
+      { new: true, runValidators: true }
+    ).select("-password");
+
+    res.json({ user });
+  } catch (error) {
+    res.status(500).json({
+      error: "Ошибка обновления",
+    });
+  }
+};
+
+export const deleteAccount = async (req, res) => {
+  try {
+    await User.findByIdAndDelete(req.userId);
+    res.json({ message: "Аккаунт удален" });
+  } catch (error) {
+    res.status(500).json({
+      error: "Ошибка удаления",
+    });
+  }
+};
