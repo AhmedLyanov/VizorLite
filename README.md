@@ -1,73 +1,203 @@
-# React + TypeScript + Vite
+# VizorLite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+VizorLite — это современное веб-приложение для видеоконференций, которое позволяет пользователям легко создавать и присоединяться к видеовстречам без необходимости установки дополнительного программного обеспечения или регистрации. Платформа ориентирована на простоту использования, доступность и конфиденциальность.
 
-Currently, two official plugins are available:
+## Описание проекта
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+VizorLite представляет собой полнофункциональное приложение для видеоконференций, состоящее из двух основных компонентов: фронтенд на основе React и бэкенд на Node.js. Проект разработан с учетом принципов доступности, безопасности и простоты использования, позволяя пользователям быстро начинать видеозвонки без сложных настроек.
 
-## React Compiler
+### Основные возможности
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **Создание видеовстреч**: Пользователи могут легко создавать новые видеоконференции
+- **Присоединение к встречам**: Возможность присоединяться к существующим встречам по ссылке
+- **Управление аккаунтом**: Регистрация, авторизация и управление профилем пользователя
+- **Многоязычность**: Поддержка нескольких языков (русский, английский, японский)
+- **Тарифные планы**: Различные тарифы для разных потребностей (базовый, бизнес, премиум)
+- **Мобильная версия**: Возможность установки как PWA-приложения
 
-## Expanding the ESLint configuration
+## Архитектура проекта
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+Проект разделен на две основные части:
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+### Backend (серверная часть)
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+- **Язык программирования**: JavaScript (ES6+)
+- **Фреймворк**: Express.js (версия 5.2.1)
+- **База данных**: MongoDB (с использованием Mongoose ORM)
+- **Аутентификация**: JWT-токены
+- **Хэширование паролей**: bcrypt
+- **Сервер**: Node.js
+- **Сборка и запуск**: Bun, Docker
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+#### Основные модули:
+- **Controllers**: Обработка запросов и логика приложения
+- **Models**: Структура данных и взаимодействие с базой данных
+- **Routes**: Определение маршрутов API
+- **Middleware**: Промежуточное ПО (аутентификация, логирование)
+- **Utils**: Вспомогательные функции (JWT, другие утилиты)
+
+#### API endpoints:
+- `/api/users/register` - регистрация нового пользователя
+- `/api/users/login` - вход пользователя в систему
+- `/api/users/profile` - получение профиля пользователя (требует аутентификации)
+- `/api/users/profile` - обновление профиля пользователя (требует аутентификации)
+- `/api/users/account` - удаление аккаунта пользователя (требует аутентификации)
+
+### Frontend (клиентская часть)
+
+- **Язык программирования**: TypeScript
+- **Фреймворк**: React (версия 19.2.0)
+- **Маршрутизация**: React Router DOM
+- **UI библиотека**: Ant Design
+- **Состояние**: Zustand
+- **Интернационализация**: react-intl
+- **Сборка**: Vite
+- **Сервер**: Nginx (в контейнере Docker)
+
+#### Основные компоненты:
+- **Views**: Страницы приложения (главная, о нас, тарифы, 404)
+- **Components**: Переиспользуемые компоненты UI
+- **Layouts**: Структура страниц (Default, Minimal)
+- **Providers**: Контексты и провайдеры (локализация)
+- **Constants**: Константы для интернационализации
+- **i18n**: Файлы локализации
+
+## Технологии
+
+### Backend:
+- **Node.js** - серверная платформа
+- **Express.js** - веб-фреймворк
+- **MongoDB** - документоориентированная база данных
+- **Mongoose** - ODM для MongoDB
+- **JWT** - токены для аутентификации
+- **Bcrypt** - хэширование паролей
+- **Dotenv** - управление переменными окружения
+- **Nodemon** - автоматическая перезагрузка сервера при разработке
+
+### Frontend:
+- **React** - библиотека для создания пользовательских интерфейсов
+- **TypeScript** - строгая типизация
+- **React Router** - навигация между страницами
+- **Ant Design** - библиотека компонентов UI
+- **Zustand** - управление состоянием
+- **React Intl** - интернационализация
+- **Vite** - сборщик проекта
+- **CSS Modules** - стилизация компонентов
+
+### Инфраструктура:
+- **Docker** - контейнеризация
+- **Docker Compose** - оркестрация контейнеров
+- **Nginx** - веб-сервер для фронтенда
+
+## Установка и запуск
+
+### Требования:
+- Node.js (версия 18 или выше)
+- Docker и Docker Compose
+- MongoDB (локально или через Docker)
+
+### Локальный запуск:
+
+1. Клонируйте репозиторий:
+```bash
+git clone https://github.com/AhmedLyanov/VizorLite.git
+cd VizorLite
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+2. Установите зависимости для backend и frontend:
+```bash
+# Установка зависимостей для backend
+cd backend
+npm install
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+# Установка зависимостей для frontend
+cd ../frontend
+npm install
 ```
+
+3. Настройте переменные окружения:
+Создайте файл `.env` в директории backend на основе файла `.env.example`:
+```env
+PORT=3000
+MONGODB_URI=mongodb://localhost:27017/vizorlite
+JWT_SECRET=your_jwt_secret_key
+NODE_ENV=development
+```
+
+4. Запустите приложение с помощью Docker Compose:
+```bash
+docker-compose up --build
+```
+
+После запуска:
+- Frontend будет доступен по адресу http://localhost:5000
+- Backend будет доступен по адресу http://localhost:3000
+
+## Структура проекта
+
+```
+VizorLite/
+├── backend/                 # Серверная часть приложения
+│   ├── controllers/         # Контроллеры для обработки запросов
+│   ├── middleware/          # Промежуточное ПО
+│   ├── models/              # Модели данных
+│   ├── routes/              # Маршруты API
+│   ├── utils/               # Вспомогательные функции
+│   ├── index.js             # Главный файл сервера
+│   ├── package.json         # Зависимости и скрипты
+│   └── Dockerfile           # Файл для сборки Docker-образа
+├── frontend/                # Клиентская часть приложения
+│   ├── public/              # Публичные ресурсы
+│   ├── src/
+│   │   ├── components/      # Компоненты UI
+│   │   ├── constants/       # Константы приложения
+│   │   ├── i18n/            # Интернационализация
+│   │   ├── layout/          # Макеты страниц
+│   │   ├── providers/       # Провайдеры контекста
+│   │   ├── views/           # Страницы приложения
+│   │   ├── App.tsx          # Главный компонент
+│   │   └── main.tsx         # Точка входа
+│   ├── index.html           # Главная HTML-страница
+│   ├── package.json         # Зависимости и скрипты
+│   └── Dockerfile           # Файл для сборки Docker-образа
+├── docker-compose.yml       # Конфигурация Docker Compose
+└── README.md                # Документация проекта
+```
+
+## Особенности приложения
+
+1. **Простота использования**: Пользователи могут начать видеозвонок без регистрации
+2. **Конфиденциальность**: Все данные пользователей защищены и не передаются третьим лицам
+3. **Многоязычность**: Поддержка русского, английского и японского языков
+4. **Адаптивный дизайн**: Приложение корректно отображается на различных устройствах
+5. **Интеграция с AI**: Встроенный помощник "Маркус" для помощи пользователям
+6. **Тарифные планы**: Различные варианты подписки в зависимости от потребностей
+
+## Безопасность
+
+- Пароли хэшируются с использованием bcrypt
+- Аутентификация реализована с помощью JWT-токенов
+- Все чувствительные данные хранятся в переменных окружения
+- Валидация входных данных на сервере
+
+## Вклад в развитие проекта
+
+Если вы хотите внести свой вклад в развитие проекта:
+
+1. Сделайте форк репозитория
+2. Создайте новую ветку для вашей функции (`git checkout -b feature/NewFeature`)
+3. Зафиксируйте изменения (`git commit -m 'Add some NewFeature'`)
+4. Отправьте изменения в удаленную ветку (`git push origin feature/NewFeature`)
+5. Создайте Pull Request
+
+## Лицензия
+
+Этот проект распространяется под лицензией ISC. Подробности см. в файле LICENSE.
+
+## Авторы
+
+- **Ahmed** - основной разработчик
+
+## Контакты
+
+Для связи с командой проекта используйте раздел Issues в репозитории GitHub.

@@ -13,24 +13,18 @@ app.use((req, res, next) => {
   console.log(`${new Date().toISOString()} - ${req.method} ${req.url}`);
   next();
 });
-app.use('/api/users', userRoutes)
-
-
-
+app.use("/api/users", userRoutes);
 
 app.get("/", (req, res) => {
   res.json({
-    message: "Добро пожаловать на мой сервер!",
-    status: "success",
+    message: "Welcome Universe!",
   });
 });
-
-
 
 app.use((req, res) => {
   res.status(404).json({
     success: false,
-    message: "Маршрут не найден"
+    message: "Маршрут не найден",
   });
 });
 
@@ -39,7 +33,7 @@ app.use((err, req, res, next) => {
   res.status(500).json({
     success: false,
     message: "Внутренняя ошибка сервера",
-    error: process.env.NODE_ENV === "development" ? err.message : {}
+    error: process.env.NODE_ENV === "development" ? err.message : {},
   });
 });
 
