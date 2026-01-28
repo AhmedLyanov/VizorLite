@@ -5,6 +5,18 @@ export const messages = {
     "nav.about": "О нас",
     "nav.home": "Главная",
 
+    "authentication.main.title": "Регистрация",
+
+    "authentication.form.username.label": "Имя пользователя",
+    "authentication.form.username.placeholder": "Введите ваше имя",
+    "authentication.form.email.label": "Email",
+    "authentication.form.email.placeholder": "example@mail.com",
+    "authentication.form.password.label": "Пароль",
+    "authentication.form.password.placeholder": "Создайте надежный пароль",
+    "authentication.form.submit.button": "Зарегистрироваться",
+    "authentication.links.haveAccount": "Уже есть аккаунт?",
+
+
     "home.hero.title": "VizorLite — общайтесь, планируйте, решайте",
     "home.install.title": "VizorLite",
     "home.install.description":
@@ -148,6 +160,16 @@ export const messages = {
   [LOCALES.ENGLISH]: {
     "nav.about": "About Us",
     "nav.home": "Home",
+
+    "authentication.main.title": "Registration",
+    "authentication.form.username.label": "Username",
+    "authentication.form.username.placeholder": "Enter your name",
+    "authentication.form.email.label": "Email",
+    "authentication.form.email.placeholder": "example@mail.com",
+    "authentication.form.password.label": "Password",
+    "authentication.form.password.placeholder": "Create a strong password",
+    "authentication.form.submit.button": "Register",
+    "authentication.links.haveAccount": "Already have an account?",
 
     "home.hero.title": "VizorLite — meet, plan, decide",
     "home.install.title": "VizorLite",
@@ -293,6 +315,16 @@ export const messages = {
   [LOCALES.JAPANESE]: {
     "nav.about": "私たちについて",
     "nav.home": "ホーム",
+
+    "authentication.main.title": "登録",
+    "authentication.form.username.label": "ユーザー名",
+    "authentication.form.username.placeholder": "名前を入力してください",
+    "authentication.form.email.label": "メールアドレス",
+    "authentication.form.email.placeholder": "example@mail.com",
+    "authentication.form.password.label": "パスワード",
+    "authentication.form.password.placeholder": "強力なパスワードを作成してください",
+    "authentication.form.submit.button": "登録する",
+    "authentication.links.haveAccount": "すでにアカウントをお持ちですか？",
 
     "home.hero.title": "VizorLite — 話し合い、計画、決定",
     "home.install.title": "VizorLite",
