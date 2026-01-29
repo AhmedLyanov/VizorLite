@@ -12,6 +12,7 @@ import MinimalLayout from "./layout/minimal/Minimal";
 
 const AuthPage = lazy(() => import("./views/auth/AuthPage"))
 const HomePage = lazy(() => import("./views/home/HomePage"));
+const ProfilePage = lazy(() => import("./views/profile/ProfilePage"))
 const AboutPage = lazy(() => import("./views/about/AboutPage"));
 const PricingPage = lazy(() => import("./views/pricing/PricingPage"));
 const NotFound = lazy(() => import("./views/notfound/Notfound"));
@@ -35,6 +36,8 @@ function App() {
 
                 <Route element={<DefaultLayout />}>
                   <Route path="/" element={<HomePage />} />
+                  <Route path="/profile" element={<ProfilePage />} />
+
                 </Route>
 
                 <Route element={<SecureLayout />}>

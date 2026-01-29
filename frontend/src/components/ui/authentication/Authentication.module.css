@@ -75,17 +75,58 @@
 }
 
 
+.authenticationContainer {
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 0 12px;
+}
 
+.modeSelector {
+    display: flex;
+    margin-bottom: 24px;
+    background: var(--primary-white);
+    border-radius: 12px;
+    padding: 4px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+}
 
+.modeButton {
+    flex: 1;
+    padding: 12px 16px;
+    background: transparent;
+    border: none;
+    border-radius: 8px;
+    font-family: var(--primary-font);
+    font-size: 14px;
+    font-weight: 500;
+    color: rgba(0, 0, 0, 0.5);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
 
-.registrationForm {
+.modeButton.active {
+    background: var(--primary-title-color);
+    color: var(--primary-white);
+    font-weight: 600;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.authForm {
     background: var(--primary-white);
     border-radius: 16px;
     padding: 24px 20px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
     width: 100%;
-    max-width: 400px;
-    margin: 0 auto;
+}
+
+.formTitle {
+    color: var(--primary-title-color);
+    text-align: center;
+    font-family: var(--primary-font);
+    font-size: 20px;
+    font-weight: 600;
+    margin: 0 0 24px 0;
 }
 
 .formGroup {
@@ -125,6 +166,24 @@
     opacity: 0.7;
 }
 
+.formInput:disabled {
+    background: rgba(0, 0, 0, 0.02);
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+.errorMessage {
+    padding: 12px 16px;
+    background: rgba(255, 59, 48, 0.1);
+    border: 1px solid rgba(255, 59, 48, 0.2);
+    border-radius: 8px;
+    color: #ff3b30;
+    font-family: var(--primary-font);
+    font-size: 14px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
 .submitButton {
     width: 100%;
     padding: 16px;
@@ -140,14 +199,58 @@
     margin-top: 10px;
 }
 
-.submitButton:hover {
+.submitButton:hover:not(:disabled) {
     opacity: 0.9;
     transform: translateY(-1px);
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
 }
 
-.submitButton:active {
+.submitButton:active:not(:disabled) {
     transform: translateY(0);
+}
+
+.submitButton:disabled {
+    background: rgba(0, 0, 0, 0.2);
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+.switchMode {
+    margin-top: 24px;
+    text-align: center;
+    padding-top: 20px;
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.switchText {
+    color: rgba(0, 0, 0, 0.6);
+    font-family: var(--primary-font);
+    font-size: 14px;
+    margin-bottom: 8px;
+}
+
+.switchButton {
+    background: none;
+    border: none;
+    color: var(--primary-title-color);
+    font-family: var(--primary-font);
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    padding: 0;
+    text-decoration: underline;
+    transition: all 0.2s ease;
+}
+
+.switchButton:hover:not(:disabled) {
+    opacity: 0.8;
+}
+
+.switchButton:disabled {
+    color: rgba(0, 0, 0, 0.3);
+    cursor: not-allowed;
+    text-decoration: none;
 }
 
 @media (min-width: 768px) {
@@ -184,9 +287,22 @@
         padding: 8px 20px;
     }
     
-    .registrationForm {
-        padding: 32px 28px;
+    .authenticationContainer {
         max-width: 450px;
+    }
+    
+    .authForm {
+        padding: 32px 28px;
+    }
+    
+    .modeButton {
+        padding: 14px 20px;
+        font-size: 15px;
+    }
+    
+    .formTitle {
+        font-size: 22px;
+        margin-bottom: 28px;
     }
     
     .formInput {
@@ -214,11 +330,15 @@
         opacity: 0.9;
     }
     
-    .formInput:hover {
+    .modeButton:hover:not(.active) {
+        background: rgba(0, 0, 0, 0.03);
+    }
+    
+    .formInput:hover:not(:disabled) {
         border-color: rgba(0, 0, 0, 0.2);
     }
     
-    .submitButton {
-        transition: all 0.2s ease;
+    .switchButton:hover:not(:disabled) {
+        opacity: 0.7;
     }
 }

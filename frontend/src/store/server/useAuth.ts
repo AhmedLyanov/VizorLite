@@ -25,6 +25,7 @@ export const useLogin = () => {
     onSuccess: (data) => {
       localStorage.setItem('token', data.token)
       queryClient.setQueryData(['currentUser'], data.user)
+      console.log('Login successful!')
     },
     onError: (error) => {
       console.error('Login failed:', error)
