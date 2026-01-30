@@ -1,11 +1,19 @@
 import styles from "./Aside.module.css";
+import { useAuth } from '../../../contexts/AuthContext';
 import { Icon } from "../../../shared/icons/Icon";
 
 export default function index() {
+  const { isAuthenticated } = useAuth();
+
   return (
     <aside className={styles.aside}>
       <div className={styles.asideContent}>
         <div className={styles.asideContentTop}>
+          {isAuthenticated && (
+            <a href="/profile" className={styles.navLink}>
+              <span>Profile</span>
+            </a>
+          )}
           <button title="title test" className={styles.asideNavigationButton}>
             <Icon name="mail" />
           </button>
