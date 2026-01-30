@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { useRegister, useLogin } from '../../../store/server/useAuth'
 import { useIntl } from "react-intl"
 import { AUTHENTICATION_TEXTS } from '../../../constants/authentication'
@@ -8,55 +9,50 @@ type FormMode = 'login' | 'register'
 
 export default function Authentication() {
   const intl = useIntl()
+  const navigate = useNavigate()
   const [mode, setMode] = useState<FormMode>('login')
-  
-  const { 
-    mutate: register, 
-    isPending: isRegisterPending,  
-    isError: isRegisterError, 
-    error: registerError 
-  } = useRegister()
-  
-  const { 
-    mutate: login, 
-    isPending: isLoginPending,  
-    isError: isLoginError, 
-    error: loginError 
-  } = useLogin()
-  
+
+  const { mutateAsync: register, isPending: isRegisterPending, isError: isRegisterError, error: registerError } = useRegister()
+  const { mutateAsync: login, isPending: isLoginPending, isError: isLoginError, error: loginError } = useLogin()
+
   const isPending = isRegisterPending || isLoginPending
   const isError = isRegisterError || isLoginError
   const error = registerError || loginError
-  
+
   const [formData, setFormData] = useState({
     username: '',
     email: '',
     password: '',
   })
-  
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value,
     })
   }
-  
-  const handleSubmit = (e: React.FormEvent) => {
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    
-    if (mode === 'register') {
-      if (!formData.username.trim() || !formData.email.trim() || !formData.password.trim()) {
-        return
+
+    try {
+      if (mode === 'register') {
+        if (!formData.username.trim() || !formData.email.trim() || !formData.password.trim()) {
+          return
+        }
+        await register(formData)
+        navigate('/profile', { replace: true })
+      } else {
+        if (!formData.email.trim() || !formData.password.trim()) {
+          return
+        }
+        await login({ email: formData.email, password: formData.password })
+        navigate('/profile', { replace: true })
       }
-      register(formData)
-    } else {
-      if (!formData.email.trim() || !formData.password.trim()) {
-        return
-      }
-      login({ email: formData.email, password: formData.password })
+    } catch (err) {
     }
   }
-  
+
   const toggleMode = () => {
     setMode(mode === 'login' ? 'register' : 'login')
     setFormData({
@@ -65,7 +61,7 @@ export default function Authentication() {
       password: '',
     })
   }
-  
+
   return (
     <div className={styles.authenticationContainer}>
       <div className={styles.modeSelector}>
@@ -84,15 +80,15 @@ export default function Authentication() {
           {intl.formatMessage({ id: AUTHENTICATION_TEXTS.FORM.REGISTER_BUTTON })}
         </button>
       </div>
-      
+
       <form className={styles.authForm} onSubmit={handleSubmit}>
         <h2 className={styles.formTitle}>
-          {mode === 'login' 
+          {mode === 'login'
             ? intl.formatMessage({ id: AUTHENTICATION_TEXTS.FORM.LOGIN_TITLE })
             : intl.formatMessage({ id: AUTHENTICATION_TEXTS.FORM.REGISTER_TITLE })
           }
         </h2>
-        
+
 
         {mode === 'register' && (
           <div className={styles.formGroup}>
@@ -112,7 +108,7 @@ export default function Authentication() {
             />
           </div>
         )}
-        
+
         <div className={styles.formGroup}>
           <label htmlFor="email" className={styles.formLabel}>
             {intl.formatMessage({ id: AUTHENTICATION_TEXTS.FORM.EMAIL_LABEL })}
@@ -129,7 +125,7 @@ export default function Authentication() {
             disabled={isPending}
           />
         </div>
-        
+
         <div className={styles.formGroup}>
           <label htmlFor="password" className={styles.formLabel}>
             {intl.formatMessage({ id: AUTHENTICATION_TEXTS.FORM.PASSWORD_LABEL })}
@@ -147,15 +143,15 @@ export default function Authentication() {
             minLength={6}
           />
         </div>
-        
+
         {isError && (
           <div className={styles.errorMessage}>
             {error instanceof Error ? error.message : `${mode === 'login' ? 'Login' : 'Registration'} failed`}
           </div>
         )}
-        
-        <button 
-          type="submit" 
+
+        <button
+          type="submit"
           className={styles.submitButton}
           disabled={isPending}
         >
@@ -167,7 +163,7 @@ export default function Authentication() {
               : intl.formatMessage({ id: AUTHENTICATION_TEXTS.FORM.REGISTER_SUBMIT })
           )}
         </button>
-        
+
         <div className={styles.switchMode}>
           <p className={styles.switchText}>
             {mode === 'login'

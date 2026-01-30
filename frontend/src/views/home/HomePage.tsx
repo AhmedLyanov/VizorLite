@@ -4,7 +4,7 @@ import { HOME_TEXTS } from "../../constants";
 import styles from "./HomePage.module.css";
 import InstallBanner from "../../components/ui/installBanner/InstallBanner";
 import BigButton from "../../components/ui/button/BigButton/BigButton";
-import LanguageSwitcher from "../../components/ui/LanguageSwitcher/LanguageSwitcher";
+import LanguageSwitcher from "../../components/ui/languageSwitcher/LanguageSwitcher";
 
 
 

@@ -35,8 +35,6 @@ export default function InstallBanner() {
 
   const handleInstallClick = () => {
     hideBanner();
-
-    console.log("Install button clicked");
   };
 
   if (!isMobileDevice || !isBannerVisible) {

@@ -2,7 +2,7 @@ import styles from "./Aside.module.css";
 import { useAuth } from '../../../contexts/AuthContext';
 import { Icon } from "../../../shared/icons/Icon";
 
-export default function index() {
+export default function Aside() {
   const { isAuthenticated } = useAuth();
 
   return (

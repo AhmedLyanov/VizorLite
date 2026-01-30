@@ -1,6 +1,5 @@
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
-import { registerUser, loginUser } from '../../api/authApi'
-import { getProfile, type ProfileData } from '../../api/profileApi'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
+import { registerUser, loginUser} from '../../api/authApi'
 
 export const useRegister = () => {
   const queryClient = useQueryClient()
@@ -9,10 +8,11 @@ export const useRegister = () => {
     mutationFn: registerUser,
     onSuccess: (data) => {
       localStorage.setItem('token', data.token)
-      queryClient.setQueryData(['user'], data.user)
+      localStorage.setItem('user', JSON.stringify(data.user))
+      queryClient.setQueryData(['currentUser'], data.user)
     },
     onError: (error) => {
-      console.error('Registration failed:', error)
+      console.error(error)
     }
   })
 }
@@ -24,37 +24,11 @@ export const useLogin = () => {
     mutationFn: loginUser,
     onSuccess: (data) => {
       localStorage.setItem('token', data.token)
-      queryClient.setQueryData(['user'], data.user)
+      localStorage.setItem('user', JSON.stringify(data.user))
+      queryClient.setQueryData(['currentUser'], data.user)
     },
     onError: (error) => {
       console.error('Login failed:', error)
     }
   })
-}
-
-export const useAuthCheck = () => {
-  return !!localStorage.getItem('token')
-}
-
-
-export const useProfile = () => {
-  return useQuery<ProfileData>({
-    queryKey: ['profile'],
-    queryFn: getProfile,
-    enabled: !!localStorage.getItem('token'), 
-    retry: false, 
-    staleTime: 5 * 60 * 1000, 
-  })
-}
-
-
-
-export const useLogout = () => {
-  const queryClient = useQueryClient()
-  
-  return () => {
-    localStorage.removeItem('token')
-    queryClient.removeQueries({ queryKey: ['user'] })
-    queryClient.removeQueries({ queryKey: ['profile'] })
-  }
 }
