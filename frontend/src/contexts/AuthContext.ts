@@ -1,6 +1,6 @@
 import { createContext, useContext } from 'react';
-import type { AuthResponse } from '../api/authApi';
-import type { ProfileData } from '../api/profileApi';
+import type { AuthResponse } from '../shared/api/authApi';
+import type { ProfileData } from '../shared/api/profileApi';
 
 export interface AuthContextType {
   user: AuthResponse['user'] | null;
