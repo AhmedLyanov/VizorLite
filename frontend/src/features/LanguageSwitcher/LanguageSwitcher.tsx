@@ -3,7 +3,7 @@ import { useIntl } from "react-intl";
 import { Dropdown } from "antd";
 import type { MenuProps } from "antd";
 import { useLocaleStore } from "../../entities/locale";
-import { Icon } from "../../shared/icons/Icon";
+import { Icon } from "../../shared/assets/icons/Icon";
 import styles from "./LanguageSwitcher.module.css";
 
 interface LanguageSwitcherProps {
@@ -54,8 +54,8 @@ export default function LanguageSwitcher({
         menu={{ items }}
         trigger={['click']}
         placement="bottomLeft"
-        overlayClassName={styles.antdDropdown}
-        destroyPopupOnHide
+        className={styles.antdDropdown}
+        destroyOnHidden
       >
         <button
           className={styles.langToggleButton}

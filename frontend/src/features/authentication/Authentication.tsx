@@ -1,8 +1,8 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { useRegister, useLogin } from '../../../store/server/useAuth'
+import { useRegister, useLogin } from '../../entities/user/useAuth'
 import { useIntl } from "react-intl"
-import { AUTHENTICATION_TEXTS } from '../../../constants/authentication'
+import { AUTHENTICATION_TEXTS } from '../../shared/constants/authentication'
 import styles from './Authentication.module.css'
 
 type FormMode = 'login' | 'register'

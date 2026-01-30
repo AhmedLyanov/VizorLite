@@ -3,6 +3,7 @@ import type { KeyboardEvent } from "react";
 import { useIntl } from "react-intl";
 import { Popover, Badge } from "antd";
 import { useAiStore } from "../../entities/ai/useAi";
+import sendIcon from "../../shared/assets/send.svg"
 import { AI_TEXT } from "../../shared/constants/common/ai";
 import styles from "./AiHelper.module.css";
 
@@ -101,7 +102,7 @@ export default function AiHelperAntd() {
             })}
           >
             <img
-              src="/images/send.svg"
+              src={sendIcon}
               alt="send message to AI"
               width={30}
               height={30}
@@ -120,9 +121,9 @@ export default function AiHelperAntd() {
         open={popoverOpen}
         onOpenChange={handleOpenChange}
         placement="topRight"
-        overlayClassName={styles.aiPopover}
+        className={styles.aiPopover}
         arrow={false}
-        destroyTooltipOnHide
+        destroyOnHidden
       >
           <Badge 
             count={messages.length > 0 ? messages.length : null} 

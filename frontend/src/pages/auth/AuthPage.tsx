@@ -1,5 +1,5 @@
 
-import Authentication from "../../components/ui/authentication/authentication"
+import Authentication from "../../features/authentication/Authentication"
 
 export default function authpage() {
   return (

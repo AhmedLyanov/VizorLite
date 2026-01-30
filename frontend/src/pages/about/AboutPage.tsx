@@ -30,7 +30,7 @@ const AboutPage: React.FC = () => {
             {ABOUT_TEXTS.VALUES.ITEMS.map((value, index) => (
               <div key={index} className={styles.valueItem}>
                 <img
-                  src={`/images/${intl.formatMessage({ id: value.ICON })}`}
+                  src={`@/shared/assets/${intl.formatMessage({ id: value.ICON })}`}
                   alt={intl.formatMessage({ id: value.TITLE })}
                   className={styles.valueIcon}
                 />
@@ -125,7 +125,7 @@ const AboutPage: React.FC = () => {
         <div className={styles.bottomLinks}>
           {ABOUT_TEXTS.BOTTOM_LINKS.ITEMS.map((link, index) => {
             const label = intl.formatMessage({ id: link.LABEL });
-            const iconSrc = `/images/${intl.formatMessage({ id: link.ICON })}`;
+            const iconSrc = `@/shared/assets/${intl.formatMessage({ id: link.ICON })}`;
             
             if ("HREF" in link) {
               return (

@@ -1,6 +1,6 @@
 import styles from "./Aside.module.css";
 import { useAuth } from "../../contexts/AuthContext";
-import { Icon } from "../../shared/icons/Icon";
+import { Icon } from "../../shared/assets/icons/Icon";
 
 export default function Aside() {
   const { isAuthenticated } = useAuth();
