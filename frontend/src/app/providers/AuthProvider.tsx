@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react';
 import { useQuery } from '@tanstack/react-query';
-import { AuthContext } from '../../contexts/AuthContext';
+import { AuthContext } from '../../entities/user/AuthContext';
 import { getProfile } from '../../shared/api/profileApi';
 
 interface AuthProviderProps {

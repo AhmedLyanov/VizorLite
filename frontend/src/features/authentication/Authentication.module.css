@@ -1,80 +1,3 @@
-.sectionContent {
-    width: 100%;
-    min-height: 100vh;
-    padding: 12px 8px;
-    background: var(--primary-background-color);
-    overflow-x: hidden;
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-}
-
-.contentContainer {
-    width: 100%;
-    margin: 0 auto;
-    flex: 1;
-}
-
-.mainTitle {
-    color: var(--primary-title-color);
-    text-align: center;
-    font-family: var(--primary-font);
-    font-size: 22px;
-    margin: 15px auto 0;
-    padding: 0 12px;
-    line-height: 1.3;
-}
-
-.containerBigbuttons {
-    margin-top: 20px;
-    display: grid;
-    gap: 15px;
-    width: 100%;
-    padding: 0 12px;
-    grid-template-columns: 1fr;
-}
-
-.bottomContent {
-    margin-top: auto;
-    padding: 15px 0 8px;
-}
-
-.bottomUtilsButtons {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 12px;
-    width: 100%;
-    margin: 0 auto;
-    padding: 0 12px;
-}
-
-.bottomUtilsButton {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 10px 24px;
-    background: var(--primary-white);
-    border-radius: 12px;
-    text-decoration: none;
-    color: var(--primary-title-color);
-    font-family: var(--primary-font);
-    font-size: 14px;
-    font-weight: 500;
-    transition: all 0.2s ease;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
-    width: 100%;
-    max-width: 280px;
-    justify-content: center;
-}
-
-.linkIcon {
-    width: 16px;
-    height: 16px;
-    opacity: 0.7;
-}
-
-
 .authenticationContainer {
     width: 100%;
     max-width: 400px;
@@ -131,6 +54,7 @@
 
 .formGroup {
     margin-bottom: 20px;
+    position: relative;
 }
 
 .formLabel {
@@ -142,9 +66,15 @@
     margin-bottom: 8px;
 }
 
+.passwordInputWrapper {
+    position: relative;
+    width: 100%;
+}
+
 .formInput {
     width: 100%;
     padding: 14px 16px;
+    padding-right: 50px;
     border: 1.5px solid rgba(0, 0, 0, 0.1);
     border-radius: 12px;
     font-family: var(--primary-font);
@@ -153,6 +83,10 @@
     background: var(--primary-white);
     transition: all 0.2s ease;
     box-sizing: border-box;
+}
+
+.formInput:not([type="password"]):not([type="text"][name="password"]) {
+    padding-right: 16px;
 }
 
 .formInput:focus {
@@ -170,6 +104,53 @@
     background: rgba(0, 0, 0, 0.02);
     cursor: not-allowed;
     opacity: 0.7;
+}
+
+.showPasswordButton {
+    position: absolute;
+    right: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 24px;
+    height: 24px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0.5;
+    transition: opacity 0.2s ease;
+    z-index: 2;
+}
+
+.showPasswordButton:hover:not(:disabled) {
+    opacity: 0.8;
+}
+
+.showPasswordButton:active:not(:disabled) {
+    opacity: 1;
+}
+
+.showPasswordButton:focus {
+    outline: none;
+}
+
+.showPasswordButton:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+}
+
+.showPasswordButton img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+input[type="password"]::-ms-reveal,
+input[type="password"]::-ms-clear {
+    display: none;
 }
 
 .errorMessage {
@@ -201,13 +182,9 @@
 
 .submitButton:hover:not(:disabled) {
     opacity: 0.9;
-    transform: translateY(-1px);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
 }
 
-.submitButton:active:not(:disabled) {
-    transform: translateY(0);
-}
+
 
 .submitButton:disabled {
     background: rgba(0, 0, 0, 0.2);
@@ -254,41 +231,9 @@
 }
 
 @media (min-width: 768px) {
-    .sectionContent {
-        padding: 15px 10px;
-    }
-    
-    .contentContainer {
-        padding: 25px 0px;
-        max-width: 800px;
-    }
-    
-    .mainTitle {
-        font-size: 25px;
-        margin-top: 20px;
-    }
-    
-    .containerBigbuttons {
-        gap: 20px;
-        max-width: 800px;
-        margin-left: auto;
-        margin-right: auto;
-    }
-    
-    .bottomUtilsButtons {
-        flex-direction: row;
-        justify-content: center;
-        gap: 20px;
-        max-width: 800px;
-    }
-    
-    .bottomUtilsButton {
-        width: auto;
-        padding: 8px 20px;
-    }
-    
     .authenticationContainer {
         max-width: 450px;
+        padding: 20px;
     }
     
     .authForm {
@@ -307,7 +252,18 @@
     
     .formInput {
         padding: 16px 18px;
+        padding-right: 52px;
         font-size: 16px;
+    }
+    
+    .formInput:not([type="password"]):not([type="text"][name="password"]) {
+        padding-right: 18px;
+    }
+    
+    .showPasswordButton {
+        right: 16px;
+        width: 26px;
+        height: 26px;
     }
     
     .submitButton {
@@ -317,28 +273,30 @@
 }
 
 @media (min-width: 1024px) {
-    .mainTitle {
-        font-size: 28px;
+    .authenticationContainer {
+        max-width: 480px;
     }
     
-    .bottomUtilsButton:hover {
-        background: rgba(0, 0, 0, 0.02);
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
-    }
-    
-    .bottomUtilsButton:hover .linkIcon {
-        opacity: 0.9;
-    }
-    
-    .modeButton:hover:not(.active) {
+    .modeButton:hover:not(.active):not(:disabled) {
         background: rgba(0, 0, 0, 0.03);
     }
     
-    .formInput:hover:not(:disabled) {
+    .formInput:hover:not(:disabled):not(:focus) {
         border-color: rgba(0, 0, 0, 0.2);
+    }
+    
+    .showPasswordButton:hover:not(:disabled) {
+        opacity: 0.7;
     }
     
     .switchButton:hover:not(:disabled) {
         opacity: 0.7;
     }
+}
+
+.modeButton,
+.formInput,
+.submitButton,
+.switchButton {
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }

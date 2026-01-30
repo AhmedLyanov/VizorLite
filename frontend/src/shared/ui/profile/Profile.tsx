@@ -1,4 +1,4 @@
-import { useAuth } from '../../../contexts/AuthContext';
+import { useAuth } from '../../../entities/user/AuthContext';
 import LoadingSpinner from '../loading/LoadingSpinner';
 import styles from './Profile.module.css';
 

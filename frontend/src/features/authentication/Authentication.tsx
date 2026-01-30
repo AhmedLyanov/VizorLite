@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom'
 import { useRegister, useLogin } from '../../entities/user/useAuth'
 import { useIntl } from "react-intl"
 import { AUTHENTICATION_TEXTS } from '../../shared/constants/authentication'
+import eyeOn from "../../shared/assets/eye-on.svg";
+import eyeOff from "../../shared/assets/eye-off.svg";
 import styles from './Authentication.module.css'
 
 type FormMode = 'login' | 'register'
@@ -10,6 +12,7 @@ type FormMode = 'login' | 'register'
 export default function Authentication() {
   const intl = useIntl()
   const navigate = useNavigate()
+  const [showPassword, setShowPassword] = useState(false);
   const [mode, setMode] = useState<FormMode>('login')
 
   const { mutateAsync: register, isPending: isRegisterPending, isError: isRegisterError, error: registerError } = useRegister()
@@ -50,6 +53,7 @@ export default function Authentication() {
         navigate('/profile', { replace: true })
       }
     } catch (err) {
+      // Ошибка уже обрабатывается в хуках useRegister/useLogin
     }
   }
 
@@ -88,7 +92,6 @@ export default function Authentication() {
             : intl.formatMessage({ id: AUTHENTICATION_TEXTS.FORM.REGISTER_TITLE })
           }
         </h2>
-
 
         {mode === 'register' && (
           <div className={styles.formGroup}>
@@ -130,18 +133,29 @@ export default function Authentication() {
           <label htmlFor="password" className={styles.formLabel}>
             {intl.formatMessage({ id: AUTHENTICATION_TEXTS.FORM.PASSWORD_LABEL })}
           </label>
-          <input
-            type="password"
-            id="password"
-            name="password"
-            value={formData.password}
-            onChange={handleChange}
-            className={styles.formInput}
-            placeholder={intl.formatMessage({ id: AUTHENTICATION_TEXTS.FORM.PASSWORD_PLACEHOLDER })}
-            required
-            disabled={isPending}
-            minLength={6}
-          />
+          <div className={styles.passwordInputWrapper}>
+            <input
+              type={showPassword ? "text" : "password"}
+              id="password"
+              name="password"
+              value={formData.password}
+              onChange={handleChange}
+              className={styles.formInput}
+              placeholder={intl.formatMessage({ id: AUTHENTICATION_TEXTS.FORM.PASSWORD_PLACEHOLDER })}
+              required
+              disabled={isPending}
+              minLength={6}
+            />
+            <button 
+              type="button" 
+              className={styles.showPasswordButton} 
+              onClick={() => setShowPassword(prev => !prev)}
+              aria-label={showPassword ? "Hide password" : "Show password"}
+              disabled={isPending}
+            >
+              <img src={showPassword ? eyeOn : eyeOff} alt="" />
+            </button>
+          </div>
         </div>
 
         {isError && (

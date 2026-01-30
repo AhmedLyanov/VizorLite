@@ -1,5 +1,5 @@
 import styles from "./Aside.module.css";
-import { useAuth } from "../../contexts/AuthContext";
+import { useAuth } from "../../entities/user/AuthContext";
 import { Icon } from "../../shared/assets/icons/Icon";
 
 export default function Aside() {

@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { useIntl } from "react-intl";
 import { PRICING_TEXTS } from "../../shared/constants";
+import questionIcon from "../../shared/assets/question.svg"
 import styles from "./Pricing.module.css";
 
 export default function PricingPage() {
@@ -144,7 +145,7 @@ export default function PricingPage() {
           </Link>
           <Link to="/about" className={styles.bottomLink}>
             <img 
-              src="/images/question.svg" 
+              src={questionIcon}
               alt={intl.formatMessage({ id: "nav.about" })} 
               className={styles.linkIcon} 
             />
