@@ -11,7 +11,6 @@ export const AUTHENTICATION_TEXTS = {
     PASSWORD_PLACEHOLDER: "authentication.form.password.placeholder",
     SUBMIT_BUTTON: "authentication.form.submit.button",
     
-    // Добавленные тексты для переключения режимов
     LOGIN_BUTTON: "authentication.form.login.button",
     REGISTER_BUTTON: "authentication.form.register.button",
     LOGIN_TITLE: "authentication.form.login.title",
@@ -19,24 +18,20 @@ export const AUTHENTICATION_TEXTS = {
     LOGIN_SUBMIT: "authentication.form.login.submit",
     REGISTER_SUBMIT: "authentication.form.register.submit",
     
-    // Добавленные тексты для сообщений
     NO_ACCOUNT: "authentication.form.noAccount",
     HAVE_ACCOUNT: "authentication.form.haveAccount",
     CREATE_ACCOUNT: "authentication.form.createAccount",
     GO_TO_LOGIN: "authentication.form.goToLogin",
     
-    // Добавленные тексты для валидации/сообщений
     LOGIN_FAILED: "authentication.form.login.failed",
     REGISTRATION_FAILED: "authentication.form.registration.failed",
     LOGGING_IN: "authentication.form.logging.in",
     CREATING_ACCOUNT: "authentication.form.creating.account",
     
-    // Добавленные тексты для валидации полей
     REQUIRED_FIELD: "authentication.form.required.field",
     INVALID_EMAIL: "authentication.form.invalid.email",
     PASSWORD_MIN_LENGTH: "authentication.form.password.min.length",
     
-    // Добавленные тексты для состояния загрузки
     LOADING: "authentication.form.loading",
   },
   LINKS: {

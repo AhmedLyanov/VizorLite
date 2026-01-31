@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 import { io, Socket } from "socket.io-client";
+import style from "./RoomPage.module.css";
 import Peer from "simple-peer";
 
 export default function RoomPage() {
@@ -122,11 +123,8 @@ export default function RoomPage() {
 
   
   return (
-    <div style={{ padding: 24 }}>
-      <h2>Комната: {roomId}</h2>
-      <p>Роль: {role}</p>
-
-      <div style={{ display: "flex", gap: 20 }}>
+    <div className={style.containerRoom}>
+      <div>
         <video ref={localVideoRef} autoPlay muted playsInline width={300} />
         <video ref={remoteVideoRef} autoPlay playsInline width={300} />
       </div>
