@@ -8,6 +8,7 @@ import { ProtectedRoute } from "../../shared/ui/protected";
 
 const HomePage = lazy(() => import("../../pages/home/HomePage"));
 const ProfilePage = lazy(() => import("../../pages/profile/ProfilePage"));
+const RoomPage = lazy(() => import("../../pages/room/RoomPage"));
 const AuthPage = lazy(() => import("../../pages/auth/AuthPage"));
 const AboutPage = lazy(() => import("../../pages/about/AboutPage"));
 const PricingPage = lazy(() => import("../../pages/pricing/PricingPage"));
@@ -39,7 +40,10 @@ export const routes: RouteObject[] = [
 
   {
     element: <SecureLayout />,
-    children: [{ path: "/auth", element: <AuthPage /> }],
+    children: [
+      { path: "/auth", element: <AuthPage /> },
+      {path: "/room/:roomId", element: <RoomPage/>}
+    ],
   },
 
   { path: "*", element: <NotFound /> },
