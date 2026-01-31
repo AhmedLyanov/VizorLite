@@ -119,6 +119,8 @@ export default function RoomPage() {
     peerRef.current = peer;
   }, [role, otherSocketId, stream]);
 
+
+  
   return (
     <div style={{ padding: 24 }}>
       <h2>Комната: {roomId}</h2>

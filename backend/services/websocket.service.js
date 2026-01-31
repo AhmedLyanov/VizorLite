@@ -18,12 +18,10 @@ class SocketService {
     });
 
     this.setupEventHandlers();
-    console.log("Socket.io инициализирован");
   }
 
   setupEventHandlers() {
     this.io.on("connection", (socket) => {
-      console.log("Новое подключение:", socket.id);
 
       socket.on("join-room", ({ roomId, userId, userName }) => {
         socket.join(roomId);
@@ -40,9 +38,7 @@ class SocketService {
         const role = roomSize === 1 ? "initiator" : "receiver";
         socket.emit("room-role", { role });
 
-        console.log(
-          `${socket.id} joined room ${roomId} as ${role}`
-        );
+        
 
         socket.to(roomId).emit("user-connected", {
           socketId: socket.id,
@@ -66,8 +62,6 @@ class SocketService {
       });
 
       socket.on("disconnect", () => {
-        console.log("Клиент отключился:", socket.id);
-
         const user = this.users.get(socket.id);
         if (!user) return;
 
