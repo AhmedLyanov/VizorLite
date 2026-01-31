@@ -16,7 +16,8 @@
     height: 60px;
     margin: 0 auto 15px;
     background: var(--primary-title-color);
-    color: var(--primary-background-color);
+    color: var(--primary-white);
+    user-select: none;
     border-radius: 50%;
     display: flex;
     align-items: center;
