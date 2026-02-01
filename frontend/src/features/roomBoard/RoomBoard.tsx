@@ -1,5 +1,5 @@
 import styles from "./RoomBoard.module.css";
-import { Icon } from "../../assets/icons/Icon";
+import { Icon } from "../../shared/assets/icons/Icon";
 import { useState } from "react";
 
 export default function RoomBoard() {

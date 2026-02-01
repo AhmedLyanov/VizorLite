@@ -8,7 +8,7 @@ import styles from "./HomePage.module.css";
 
 import InstallBanner from "../../widgets/installBanner/InstallBanner";
 import BigButton from "../../shared/ui/button/BigButton/BigButton";
-import LanguageSwitcher from "../../features/LanguageSwitcher/LanguageSwitcher";
+import LanguageSwitcher from "../../features/languageSwitcher/LanguageSwitcher";
 import JoinMeetingModal from "../../features/joinMeetModal/joinMeeting";
 
 

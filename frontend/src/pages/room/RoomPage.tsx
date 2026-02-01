@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 import { io, Socket } from "socket.io-client";
-import RoomBoard from "../../shared/ui/roomBoard/RoomBoard";
+import RoomBoard from "../../features/roomBoard/RoomBoard";
 import style from "./RoomPage.module.css";
 import Peer from "simple-peer";
 
