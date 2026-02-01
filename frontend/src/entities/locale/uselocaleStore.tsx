@@ -30,7 +30,7 @@ export const useLocaleStore = create<LocaleStore>()(
       isChanging: false,
       isLanguageSwitcherOpen: false,
 
-    
+
 
       setLocale: (locale) => {
         set({
@@ -70,6 +70,7 @@ export const useLocaleStore = create<LocaleStore>()(
       getAvailableLocales: () => [
         { code: LOCALES.RUSSIAN, name: "Русский", flag: "🇷🇺" },
         { code: LOCALES.ENGLISH, name: "English", flag: "🇺🇸" },
+        { code: LOCALES.GERMAN, name: "Deutsch", flag: "🇩🇪" },
         { code: LOCALES.JAPANESE, name: "日本語", flag: "🇯🇵" },
       ],
     }),
@@ -77,7 +78,7 @@ export const useLocaleStore = create<LocaleStore>()(
       name: "vizorlite-locale",
       partialize: (state) => ({
         locale: state.locale,
-       
+
       }),
     }
   )

@@ -67,6 +67,7 @@ export default function JoinMeetingModal({ isOpen, onClose }: Props) {
   return (
     <div className={styles.overlay}>
       <div className={styles.modal}>
+        
         <h2>{intl.formatMessage({ id: JOINMEETING_TEXTS.HERO.TITLE })}</h2>
         
       
