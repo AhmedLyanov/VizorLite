@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 import { io, Socket } from "socket.io-client";
+import RoomBoard from "../../shared/ui/roomBoard/RoomBoard";
 import style from "./RoomPage.module.css";
 import Peer from "simple-peer";
 
@@ -121,13 +122,14 @@ export default function RoomPage() {
   }, [role, otherSocketId, stream]);
 
 
-  
+
   return (
     <div className={style.containerRoom}>
-      <div>
-        <video ref={localVideoRef} autoPlay muted playsInline width={300} />
-        <video ref={remoteVideoRef} autoPlay playsInline width={300} />
+      <div className={style.roomBox}>
+        <video className={style.roomParticipant} ref={localVideoRef} autoPlay muted playsInline width={300} />
+        <video className={style.roomParticipant} ref={remoteVideoRef} autoPlay playsInline width={300} />
       </div>
+      <RoomBoard />
     </div>
   );
 }
