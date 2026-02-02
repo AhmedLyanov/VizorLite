@@ -22,6 +22,9 @@ export const roomIcons = {
 
   micOff: (props: SVGProps<SVGSVGElement>) => (
     <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
       viewBox="0 0 24 24"
       fill="none"
       stroke="white"
@@ -30,7 +33,7 @@ export const roomIcons = {
       strokeLinejoin="round"
       {...props}
     >
-      <path d="M1 1l22 22" stroke="white" strokeWidth="2.5" />
+      <line x1="1" y1="1" x2="23" y2="23" stroke="white" strokeWidth="2.5" />
       <path d="M9 9v3a3 3 0 0 0 5.12 2.12" />
       <path d="M15 9.34V4a3 3 0 0 0-5.94-.6" />
       <path d="M17 16.95A7 7 0 0 1 5 12v-2m14 0v2a7 7 0 0 1-.11 1.23" />
@@ -40,6 +43,9 @@ export const roomIcons = {
 
   cameraOn: (props: SVGProps<SVGSVGElement>) => (
     <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
       viewBox="0 0 24 24"
       fill="none"
       stroke="white"
@@ -55,6 +61,9 @@ export const roomIcons = {
 
   cameraOff: (props: SVGProps<SVGSVGElement>) => (
     <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
       viewBox="0 0 24 24"
       fill="none"
       stroke="white"
@@ -63,15 +72,19 @@ export const roomIcons = {
       strokeLinejoin="round"
       {...props}
     >
-      <path d="M1 1l22 22" stroke="white" strokeWidth="2.5" />
+      <line x1="1" y1="1" x2="23" y2="23" stroke="white" strokeWidth="2.5" />
       <path d="M21 21H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h3m3-3h6l2 3h4a2 2 0 0 1 2 2v9.34" />
       <path d="M16 16c-.28.49-.69.92-1.19 1.23" />
       <path d="M9.87 9.87a4 4 0 0 0 5.66 5.66" />
     </svg>
   ),
 
-  screenShare: (props: SVGProps<SVGSVGElement>) => (
+
+  link: (props: SVGProps<SVGSVGElement>) => (
     <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
       viewBox="0 0 24 24"
       fill="none"
       stroke="white"
@@ -80,16 +93,16 @@ export const roomIcons = {
       strokeLinejoin="round"
       {...props}
     >
-      <path d="M17 2H7a5 5 0 0 0-5 5v10a5 5 0 0 0 5 5h10a5 5 0 0 0 5-5V7a5 5 0 0 0-5-5z" />
-      <path d="M12 16v4" />
-      <path d="M16 12h4" />
-      <path d="M8 12H4" />
-      <path d="M12 8V4" />
+      <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
+      <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
     </svg>
   ),
 
   hangUp: (props: SVGProps<SVGSVGElement>) => (
     <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
       viewBox="0 0 24 24"
       fill="none"
       stroke="white"

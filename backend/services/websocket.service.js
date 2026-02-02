@@ -22,24 +22,40 @@ class SocketService {
 
   setupEventHandlers() {
     this.io.on("connection", (socket) => {
+      console.log(`🔌 Client connected: ${socket.id}`);
 
       socket.on("join-room", ({ roomId, userId, userName }) => {
         socket.join(roomId);
 
+        // Инициализация комнаты
         if (!this.rooms.has(roomId)) {
           this.rooms.set(roomId, new Set());
         }
 
-        this.rooms.get(roomId).add(socket.id);
+        const room = this.rooms.get(roomId);
+        room.add(socket.id);
         this.users.set(socket.id, { userId, userName, roomId });
 
-        const roomSize = this.rooms.get(roomId).size;
+        console.log(`🏠 User ${socket.id} (${userName}) joined room ${roomId}, total: ${room.size}`);
 
-        const role = roomSize === 1 ? "initiator" : "receiver";
+        // Отправляем роль пользователю
+        const role = room.size === 1 ? "initiator" : "receiver";
         socket.emit("room-role", { role });
 
-        
+        // Отправляем информацию о существующих пользователях новому участнику
+        const existingUsers = Array.from(room)
+          .filter(id => id !== socket.id)
+          .map(id => ({
+            socketId: id,
+            userName: this.users.get(id)?.userName || 'User'
+          }));
 
+        if (existingUsers.length > 0) {
+          console.log(`📨 Sending existing users to ${socket.id}:`, existingUsers);
+          socket.emit("existing-users", { users: existingUsers });
+        }
+
+        // Уведомляем всех остальных о новом участнике
         socket.to(roomId).emit("user-connected", {
           socketId: socket.id,
           userId,
@@ -48,14 +64,16 @@ class SocketService {
       });
 
       socket.on("offer", ({ offer, to }) => {
-        socket.to(to).emit("offer", {
+        console.log(`📤 Offer from ${socket.id} to ${to}`);
+        this.io.to(to).emit("offer", {
           offer,
           from: socket.id,
         });
       });
 
       socket.on("answer", ({ answer, to }) => {
-        socket.to(to).emit("answer", {
+        console.log(`📤 Answer from ${socket.id} to ${to}`);
+        this.io.to(to).emit("answer", {
           answer,
           from: socket.id,
         });
@@ -63,19 +81,27 @@ class SocketService {
 
       socket.on("disconnect", () => {
         const user = this.users.get(socket.id);
-        if (!user) return;
+        if (!user) {
+          console.log(`⚠️ Unknown user disconnected: ${socket.id}`);
+          return;
+        }
 
-        const { roomId } = user;
+        const { roomId, userName } = user;
+        console.log(`🔌 User ${socket.id} (${userName}) disconnected from room ${roomId}`);
 
         if (this.rooms.has(roomId)) {
-          this.rooms.get(roomId).delete(socket.id);
+          const room = this.rooms.get(roomId);
+          room.delete(socket.id);
 
+          // Уведомляем остальных участников
           socket.to(roomId).emit("user-disconnected", {
             socketId: socket.id,
           });
 
-          if (this.rooms.get(roomId).size === 0) {
+          // Удаляем комнату если она пустая
+          if (room.size === 0) {
             this.rooms.delete(roomId);
+            console.log(`🗑️ Room ${roomId} deleted (empty)`);
           }
         }
 
