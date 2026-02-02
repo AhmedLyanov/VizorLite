@@ -2,6 +2,7 @@ import styles from "./RoomBoard.module.css";
 import { Icon } from "../../shared/assets/icons/Icon";
 import { useState, useCallback } from "react";
 import { Tooltip, message } from 'antd';
+import LeaveRoomModal from "../leaveRoom/LeaveRoom";
 
 interface RoomBoardProps {
   stream: MediaStream | null;
@@ -17,6 +18,7 @@ export default function RoomBoard({
   isCameraOn = true
 }: RoomBoardProps) {
   const [isMicOn, setIsMicOn] = useState(true);
+  const [isLeaveModalOpen, setIsLeaveModalOpen] = useState(false); 
   const [messageApi, contextHolder] = message.useMessage();
 
   const toggleMicrophone = useCallback(() => {
@@ -27,23 +29,42 @@ export default function RoomBoard({
       track.enabled = !track.enabled;
     });
     
-    setIsMicOn(prev => !prev);
+    const newMicState = !isMicOn;
+    setIsMicOn(newMicState);
     
     messageApi.open({
-      type: isMicOn ? 'warning' : 'success',
-      content: isMicOn ? 'Микрофон выключен' : 'Микрофон включен',
+      type: newMicState ? 'success' : 'warning',
+      content: newMicState ? 'Микрофон включен' : 'Микрофон выключен',
       duration: 2,
     });
   }, [stream, isMicOn, messageApi]);
 
-  const handleLeaveRoom = useCallback(() => {
-    if (confirm("Вы уверены, что хотите покинуть комнату?")) {
-      onLeaveRoom();
+  const handleToggleCamera = useCallback(() => {
+    if (onToggleCamera) {
+      onToggleCamera();
+      messageApi.open({
+        type: !isCameraOn ? 'success' : 'warning',
+        content: !isCameraOn ? 'Камера включена' : 'Камера выключена',
+        duration: 2,
+      });
     }
+  }, [onToggleCamera, isCameraOn, messageApi]);
+
+  const handleLeaveRoom = useCallback(() => {
+    setIsLeaveModalOpen(true);
+  }, []);
+
+  const confirmLeaveRoom = useCallback(() => {
+    setIsLeaveModalOpen(false);
+    onLeaveRoom();
   }, [onLeaveRoom]);
 
+  const cancelLeaveRoom = useCallback(() => {
+    setIsLeaveModalOpen(false);
+  }, []);
+
   const copyRoomLink = useCallback(() => {
-    const roomLink = window.location.href;
+    const roomLink = `Хей, привет! \nПрисоединяйся к видеовстрече, \nвот ссылка: ${window.location.href}`;
     navigator.clipboard.writeText(roomLink).then(() => {
       messageApi.success('Ссылка на комнату скопирована!', 2);
     }).catch(() => {
@@ -62,17 +83,15 @@ export default function RoomBoard({
               className={`${styles.roomBoardButton} ${!isMicOn ? styles.buttonActive : ''}`}
             >
               <Icon name={isMicOn ? "micOn" : "micOff"} />
-              <span className={styles.buttonLabel}>Микрофон</span>
             </button>
           </Tooltip>
           
           <Tooltip placement="top" title={isCameraOn ? "Выключить камеру" : "Включить камеру"}>
             <button 
-              onClick={onToggleCamera} 
+              onClick={handleToggleCamera} 
               className={`${styles.roomBoardButton} ${!isCameraOn ? styles.buttonActive : ''}`}
             >
               <Icon name={isCameraOn ? "cameraOn" : "cameraOff"} />
-              <span className={styles.buttonLabel}>Камера</span>
             </button>
           </Tooltip>
 
@@ -82,7 +101,6 @@ export default function RoomBoard({
               className={styles.roomBoardButton}
             >
               <Icon name="link" />
-              <span className={styles.buttonLabel}>Ссылка</span>
             </button>
           </Tooltip>
           
@@ -92,11 +110,16 @@ export default function RoomBoard({
               className={`${styles.roomBoardButton} ${styles.buttonLeave}`}
             >
               <Icon name="hangUp" />
-              <span className={styles.buttonLabel}>Выйти</span>
             </button>
           </Tooltip>
         </div>
       </div>
+
+      <LeaveRoomModal
+        isOpen={isLeaveModalOpen}
+        onClose={cancelLeaveRoom}
+        onConfirm={confirmLeaveRoom}
+      />
     </>
   );
 }
