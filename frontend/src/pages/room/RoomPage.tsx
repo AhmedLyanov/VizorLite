@@ -56,14 +56,13 @@ export default function RoomPage() {
   };
 
   const createPeerConnection = (socketId: string, initiator: boolean): Peer.Instance => {
-    
     const peer = new Peer({
       initiator,
       trickle: true,
       stream: stream!,
     });
 
-    peer.on("signal", (signalData) => {
+    peer.on("signal", (signalData: any) => {
       if (!socketRef.current) return;
       
       if (signalData.type === 'offer') {
@@ -76,7 +75,7 @@ export default function RoomPage() {
           answer: signalData, 
           to: socketId 
         });
-      } else if (signalData.candidate) {
+      } else if (signalData.type === 'candidate') {
         socketRef.current.emit("ice-candidate", {
           candidate: signalData,
           to: socketId
@@ -94,7 +93,6 @@ export default function RoomPage() {
     });
 
     peer.on("error", (err) => {
-      console.error(`⚠️ Peer error with ${socketId}:`, err.message);
       cleanupPeer(socketId);
     });
 
@@ -119,8 +117,6 @@ export default function RoomPage() {
   };
 
   const handleLeaveRoom = () => {
-    console.log("🚪 Leaving room");
-    
     peersRef.current.forEach((peer) => {
       peer.destroy();
     });
@@ -134,7 +130,8 @@ export default function RoomPage() {
     if (stream) {
       stream.getTracks().forEach(track => track.stop());
     }
-        navigate('/');
+    
+    navigate('/');
   };
 
   useEffect(() => {
@@ -157,8 +154,7 @@ export default function RoomPage() {
       });
     });
 
-    socket.on("user-connected", ({ socketId, userId, userName }) => {
-      
+    socket.on("user-connected", ({ socketId, userName }) => {
       setParticipants(prev => {
         const newMap = new Map(prev);
         newMap.set(socketId, { userName });
@@ -171,32 +167,23 @@ export default function RoomPage() {
     });
 
     socket.on("offer", ({ offer, from }) => {
-      console.log("📥 Received offer from:", from);
-      
       let peer = peersRef.current.get(from);
       
       if (!peer) {
         peer = createPeerConnection(from, false);
-      } else {
-        console.log(`🔄 Using existing peer with ${from}`);
       }
+      
       peer.signal(offer);
     });
 
     socket.on("answer", ({ answer, from }) => {
-      console.log("📥 Received answer from:", from);
-      
       const peer = peersRef.current.get(from);
       if (peer) {
         peer.signal(answer);
-      } else {
-        console.warn(`⚠️ No peer found for socket ${from}`);
       }
     });
 
     socket.on("ice-candidate", ({ candidate, from }) => {
-      console.log("🧊 Received ICE candidate from:", from);
-      
       const peer = peersRef.current.get(from);
       if (peer) {
         peer.signal(candidate);
@@ -204,8 +191,6 @@ export default function RoomPage() {
     });
 
     socket.on("existing-users", ({ users }) => {
-      console.log("👥 Existing users in room:", users);
-      
       users.forEach((user: { socketId: string; userName: string }) => {
         setParticipants(prev => {
           const newMap = new Map(prev);
@@ -216,12 +201,10 @@ export default function RoomPage() {
     });
 
     socket.on("user-disconnected", ({ socketId }) => {
-      console.log("➖ User disconnected:", socketId);
       cleanupPeer(socketId);
     });
 
     return () => {
-      console.log("🧹 Cleaning up connections");
       socket.disconnect();
       
       peersRef.current.forEach((peer) => {
@@ -271,8 +254,12 @@ export default function RoomPage() {
           </div>
         ))}
 
+        {remoteVideos.size === 0 && (
+          <div className={style.emptyState}>
+            <p>Ожидание других участников...</p>
+          </div>
+        )}
       </div>
-      
       <RoomBoard 
         stream={stream}
         onLeaveRoom={handleLeaveRoom}
