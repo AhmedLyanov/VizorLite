@@ -1,12 +1,22 @@
 import Room from '../models/Room.model.js';
-import { v4 as uuidv4 } from 'uuid';
+import { nanoid } from 'nanoid';
+const generateUniqueRoomId = async () => {
+  let roomId;
+  let roomExists;
+  
+  do {
+    roomId = nanoid(12); 
+    roomExists = await Room.findOne({ roomId });
+  } while (roomExists); 
+  
+  return roomId;
+};
 
 export const createRoom = async (req, res) => {
   try {
     const { name, settings } = req.body;
     const userId = req.userId;
-
-    const roomId = uuidv4().split('-')[0];
+    const roomId = await generateUniqueRoomId();
 
     const room = new Room({
       roomId,
@@ -16,7 +26,12 @@ export const createRoom = async (req, res) => {
         user: userId,
         socketId: ''
       }],
-      settings: settings || {}
+      settings: settings || {
+        maxParticipants: 10,
+        recordingEnabled: false,
+        screenSharingEnabled: true,
+        chatEnabled: true
+      }
     });
 
     await room.save();
@@ -32,6 +47,7 @@ export const createRoom = async (req, res) => {
       }
     });
   } catch (error) {
+    console.error('Error creating room:', error);
     res.status(500).json({
       success: false,
       message: 'Ошибка создания комнаты',
@@ -61,10 +77,11 @@ export const joinRoom = async (req, res) => {
       });
     }
 
-    if (room.participants.length >= room.settings.maxParticipants) {
+    const maxParticipants = room.settings?.maxParticipants || 10;
+    if (room.participants.length >= maxParticipants) {
       return res.status(400).json({
         success: false,
-        message: 'Комната переполнена'
+        message: `Комната переполнена (максимум ${maxParticipants} участников)`
       });
     }
 
@@ -75,7 +92,8 @@ export const joinRoom = async (req, res) => {
     if (!isAlreadyParticipant) {
       room.participants.push({
         user: userId,
-        socketId: ''
+        socketId: '',
+        joinedAt: new Date()
       });
       await room.save();
     }
@@ -92,6 +110,7 @@ export const joinRoom = async (req, res) => {
       }
     });
   } catch (error) {
+    console.error('Error joining room:', error);
     res.status(500).json({
       success: false,
       message: 'Ошибка входа в комнату',
@@ -120,6 +139,7 @@ export const getRoomDetails = async (req, res) => {
       data: room
     });
   } catch (error) {
+    console.error('Error getting room details:', error);
     res.status(500).json({
       success: false,
       message: 'Ошибка получения данных комнаты',
@@ -158,6 +178,7 @@ export const endRoom = async (req, res) => {
       message: 'Комната завершена'
     });
   } catch (error) {
+    console.error('Error ending room:', error);
     res.status(500).json({
       success: false,
       message: 'Ошибка завершения комнаты',
@@ -186,6 +207,7 @@ export const getUserRooms = async (req, res) => {
       data: rooms
     });
   } catch (error) {
+    console.error('Error getting user rooms:', error);
     res.status(500).json({
       success: false,
       message: 'Ошибка получения комнат пользователя',
@@ -208,9 +230,23 @@ export const leaveRoom = async (req, res) => {
       });
     }
 
-    room.participants = room.participants.filter(
-      p => p.user.toString() !== userId.toString()
+    const participantIndex = room.participants.findIndex(
+      p => p.user.toString() === userId.toString()
     );
+    
+    if (participantIndex === -1) {
+      return res.status(400).json({
+        success: false,
+        message: 'Вы не являетесь участником этой комнаты'
+      });
+    }
+
+    room.participants.splice(participantIndex, 1);
+    
+    if (room.participants.length === 0 && room.host.toString() !== userId.toString()) {
+      room.isActive = false;
+      room.endedAt = new Date();
+    }
     
     await room.save();
 
@@ -219,6 +255,7 @@ export const leaveRoom = async (req, res) => {
       message: 'Вы покинули комнату'
     });
   } catch (error) {
+    console.error('Error leaving room:', error);
     res.status(500).json({
       success: false,
       message: 'Ошибка выхода из комнаты',

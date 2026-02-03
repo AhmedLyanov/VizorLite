@@ -10,7 +10,8 @@ import styles from "./AiHelper.module.css";
 export default function AiHelperAntd() {
   const intl = useIntl();
   const [popoverOpen, setPopoverOpen] = useState(false);
-  
+  const [isMobile, setIsMobile] = useState(false);
+
   const {
     message,
     messages,
@@ -26,10 +27,21 @@ export default function AiHelperAntd() {
   } = useAiStore();
 
   useEffect(() => {
-    if (popoverOpen) {
-      checkServiceStatus();
-    }
-  }, [popoverOpen, checkServiceStatus]);
+    checkServiceStatus();
+  }, [checkServiceStatus]);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+
+    return () => {
+      window.removeEventListener('resize', checkMobile);
+    };
+  }, []);
 
   const handleSendMessage = async () => {
     if (!message.trim()) return;
@@ -47,13 +59,19 @@ export default function AiHelperAntd() {
     setPopoverOpen(open);
     if (open) {
       openAi();
+      checkServiceStatus();
     } else {
       closeAi();
     }
   };
 
   const renderOriginalContent = () => (
-    <div className={styles.assistantModal} role="dialog" aria-modal="true">
+    <div
+      className={styles.assistantModal}
+      role="dialog"
+      aria-modal="true"
+      aria-label={intl.formatMessage({ id: AI_TEXT.TITLE.MAIN })}
+    >
       <div className={styles.assistantHeader}>
         <h3 className={styles.assistantTitle}>
           {intl.formatMessage({ id: AI_TEXT.TITLE.MAIN })}
@@ -64,34 +82,35 @@ export default function AiHelperAntd() {
           onClick={() => setPopoverOpen(false)}
           aria-label={intl.formatMessage({ id: AI_TEXT.BUTTONS.CLOSE })}
         >
-          {intl.formatMessage({ id: AI_TEXT.BUTTONS.CLOSE })}
+          ✕
         </button>
       </div>
 
       <div className={styles.assistantBody}>
         {!isServiceAvailable && (
-          <Alert
-            type="warning"
-            showIcon
-            closable
-            banner
-            message="AI Service Unavailable"
-            description="The AI assistant service is currently unavailable. Please try again later."
-            style={{ marginBottom: '16px' }}
-          />
+          <div className={styles.alertWrapper}>
+            <Alert
+              type="warning"
+              showIcon
+              closable
+              message="AI Service Unavailable"
+              description="The AI assistant service is currently unavailable. Please try again later."
+              onClose={() => { }}
+            />
+          </div>
         )}
 
         {error && (
-          <Alert
-            type="error"
-            showIcon
-            closable
-            banner
-            message="Error"
-            description={error}
-            onClose={() => setError(null)}
-            style={{ marginBottom: '16px' }}
-          />
+          <div className={styles.alertWrapper}>
+            <Alert
+              type="error"
+              showIcon
+              closable
+              message="Error"
+              description={error}
+              onClose={() => setError(null)}
+            />
+          </div>
         )}
 
         <div className={styles.messagesContainer}>
@@ -107,23 +126,22 @@ export default function AiHelperAntd() {
             messages.map((msg, index) => (
               <div
                 key={index}
-                className={`${styles.message} ${
-                  msg.role === 'user' ? styles.userMessage : styles.assistantMessage
-                }`}
+                className={`${styles.message} ${msg.role === 'user' ? styles.userMessage : styles.assistantMessage
+                  }`}
               >
                 <div className={styles.messageContent}>
                   {msg.content}
                 </div>
                 <span className={styles.messageTime}>
-                  {new Date(msg.timestamp).toLocaleTimeString([], { 
-                    hour: '2-digit', 
-                    minute: '2-digit' 
+                  {new Date(msg.timestamp).toLocaleTimeString([], {
+                    hour: '2-digit',
+                    minute: '2-digit'
                   })}
                 </span>
               </div>
             ))
           )}
-          
+
           {isLoading && (
             <div className={styles.loadingIndicator}>
               <Spin size="small" />
@@ -140,9 +158,11 @@ export default function AiHelperAntd() {
             placeholder={intl.formatMessage({
               id: AI_TEXT.MESSAGES.PLACEHOLDER,
             })}
-            rows={2}
+            rows={isMobile ? 1 : 2}
+            maxLength={500}
             aria-label="message for AI assistant"
             disabled={isLoading || !isServiceAvailable}
+            className={styles.textarea}
           />
 
           <button
@@ -161,9 +181,8 @@ export default function AiHelperAntd() {
             ) : (
               <img
                 src={sendIcon}
-                alt="send message to AI"
-                width={30}
-                height={30}
+                alt="send message"
+                className={styles.sendIcon}
               />
             )}
           </button>
@@ -179,18 +198,23 @@ export default function AiHelperAntd() {
         trigger="click"
         open={popoverOpen}
         onOpenChange={handleOpenChange}
-        placement="topRight"
-        className={styles.aiPopover}
+        placement={isMobile ? "top" : "topRight"}
+        overlayClassName={styles.aiPopover}
         arrow={false}
-        destroyOnHidden
+        destroyTooltipOnHide
+        overlayStyle={{
+          width: isMobile ? 'calc(100vw - 32px)' : 'auto',
+          maxWidth: isMobile ? '100%' : '500px'
+        }}
       >
-        <Badge 
-          count={messages.filter(m => m.role === 'assistant').length > 0 
-            ? messages.filter(m => m.role === 'assistant').length 
-            : null} 
+        <Badge
+          count={messages.filter(m => m.role === 'assistant').length > 0
+            ? messages.filter(m => m.role === 'assistant').length
+            : null}
           size="small"
-          offset={[-5, 5]}
+          offset={isMobile ? [-3, 3] : [-5, 5]}
           color="#108ee9"
+          className={styles.badge}
         >
           <button
             className={styles.assistantToggleBtn}

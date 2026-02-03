@@ -9,8 +9,8 @@
   width: 50px;
   height: 50px;
   border-radius: 25px;
-  background: var(--primary-white);
-  color: var(--primary-title-color);
+  background: #ffffff;
+  color: #333333;
   border: 1px solid rgba(0, 0, 0, 0.1);
   font-family: var(--primary-font);
   font-size: 14px;
@@ -20,6 +20,10 @@
   transition: all 0.25s ease;
   user-select: none;
   outline: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
 }
 
 .assistantToggleBtn:hover {
@@ -36,9 +40,10 @@
   position: relative; 
   bottom: auto;
   right: auto;
-  min-width: 150px;
+  min-width: 280px;
+  max-width: 100%;
   height: 420px;
-  background: var(--primary-white);
+  background: #ffffff;
   border-radius: 16px;
   box-shadow: 1px 1px 30px rgba(51, 51, 51, 0.15);
   display: flex;
@@ -48,28 +53,32 @@
 }
 
 .assistantHeader {
-  background: var(--primary-white);
-  color: var(--primary-title-color);
+  background: #ffffff;
+  color: #333333;
   padding: 16px 20px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  flex-shrink: 0;
 }
 
 .assistantTitle {
   margin: 0;
   font-size: 16px;
   font-weight: 500;
-  color: var(--primary-title-color);
+  color: #333333;
   font-family: var(--primary-font);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .closeBtn {
   background: transparent;
   border: none;
-  color: var(--primary-title-color);
-  font-size: 18px;
+  color: #666666;
+  font-size: 20px;
   cursor: pointer;
   padding: 0;
   width: 30px;
@@ -78,75 +87,127 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: background 0.15s ease;
-  opacity: 0.6;
+  transition: all 0.15s ease;
+  opacity: 0.7;
+  flex-shrink: 0;
+  margin-left: 10px;
 }
 
 .closeBtn:hover {
   background: rgba(0, 0, 0, 0.05);
-  opacity: 0.8;
+  opacity: 1;
+  color: #333333;
 }
 
 .assistantBody {
   flex: 1;
   display: flex;
   flex-direction: column;
-  padding: 20px;
-  background: var(--primary-background-color);
+  padding: 16px;
+  background: #f8f9fa;
+  overflow: hidden;
+}
+
+.alertWrapper {
+  margin-bottom: 12px;
+  flex-shrink: 0;
 }
 
 .messagesContainer {
   flex: 1;
   overflow-y: auto;
-  margin-bottom: 16px;
-  padding-right: 10px;
+  margin-bottom: 12px;
+  padding-right: 8px;
+  min-height: 0;
 }
 
 .welcomeMessage {
-  color: var(--primary-title-color);
+  color: #666666;
   padding: 16px;
   border-radius: 12px;
   text-align: center;
-  background: var(--primary-white);
+  background: #ffffff;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
   opacity: 0.8;
-  font-size: 12px;
+  font-size: 14px;
+  margin: 8px 0;
+  border: 1px solid rgba(0, 0, 0, 0.03);
 }
 
 .message {
-  padding: 12px 16px;
+  padding: 10px 14px;
   margin-bottom: 8px;
   border-radius: 16px;
   max-width: 85%;
   word-wrap: break-word;
   font-size: 14px;
   line-height: 1.4;
+  display: flex;
+  flex-direction: column;
 }
 
 .userMessage {
-  background: var(--primary-white);
-  color: var(--primary-title-color);
+  background: #e3f2fd;
+  color: #1565c0;
   margin-left: auto;
-  border: 1px solid rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(21, 101, 192, 0.1);
+  box-shadow: 0 2px 6px rgba(21, 101, 192, 0.05);
+  align-items: flex-end;
+}
+
+.assistantMessage {
+  background: #ffffff;
+  color: #333333;
+  margin-right: auto;
+  border: 1px solid rgba(0, 0, 0, 0.08);
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
+  align-items: flex-start;
+}
+
+.messageContent {
+  margin-bottom: 4px;
+  word-break: break-word;
+}
+
+.messageTime {
+  font-size: 10px;
+  opacity: 0.6;
+  margin-top: 2px;
+  color: #666666;
+}
+
+.loadingIndicator {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  color: #666666;
+  font-size: 14px;
+  opacity: 0.8;
 }
 
 .inputContainer {
   display: flex;
-  justify-content: space-between;
+  align-items: flex-end;
   width: 100%;
-  padding: 12px 16px;
-  background: var(--primary-white);
-  border: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 12px;
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.12);
   border-radius: 12px;
   font-family: var(--primary-font);
   font-size: 14px;
   line-height: 1.4;
-  transition: border-color 0.15s ease;
-  color: var(--primary-title-color);
+  transition: all 0.15s ease;
+  color: #333333;
+  flex-shrink: 0;
 }
 
-.inputContainer textarea {
+.inputContainer:focus-within {
+  border-color: #1890ff;
+  box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.1);
+}
+
+.textarea {
   resize: none;
   width: 100%;
   outline: none;
@@ -154,23 +215,26 @@
   background: transparent;
   font-family: inherit;
   font-size: inherit;
-  color: inherit;
+  color: #333333;
+  min-height: 40px;
+  max-height: 120px;
+  line-height: 1.5;
 }
 
-.inputContainer textarea:focus {
+.textarea:focus {
   outline: none;
 }
 
-.inputContainer textarea::placeholder {
-  color: rgba(0, 0, 0, 0.4);
+.textarea::placeholder {
+  color: #999999;
 }
 
 .sendButton {
-  padding: 10px;
-  width: 30px;
-  height: 30px;
-  background: transparent;
-  border-radius: 12px;
+  padding: 8px;
+  width: 36px;
+  height: 36px;
+  background: #1890ff;
+  border-radius: 50%;
   cursor: pointer;
   transition: all 0.25s ease;
   display: flex;
@@ -179,18 +243,27 @@
   user-select: none;
   outline: none;
   flex-shrink: 0;
-  margin-left: 10px;
+  margin-left: 8px;
   border: none;
 }
 
+.sendButton:not(:disabled):hover {
+  background: #40a9ff;
+}
+
 .sendButton:disabled {
-  opacity: 0.5;
+  background: #d9d9d9;
   cursor: not-allowed;
 }
 
 .sendButton:active:not(:disabled) {
-  background: #f0f2ff;
-  transform: translateY(1px) scale(0.98);
+  background: #096dd9;
+}
+
+.sendIcon {
+  width: 18px;
+  height: 18px;
+  filter: brightness(0) invert(1);
 }
 
 .messagesContainer::-webkit-scrollbar {
@@ -202,88 +275,196 @@
 }
 
 .messagesContainer::-webkit-scrollbar-thumb {
-  background: rgba(0, 0, 0, 0.1);
+  background: rgba(0, 0, 0, 0.15);
   border-radius: 2px;
 }
 
 .messagesContainer::-webkit-scrollbar-thumb:hover {
-  background: rgba(0, 0, 0, 0.15);
+  background: rgba(0, 0, 0, 0.25);
 }
 
-.aiPopover :global(.ant-popover-inner) {
-  background: transparent !important;
-  box-shadow: none !important;
-  border: none !important;
-  padding: 0 !important;
+.aiPopover .ant-popover-inner {
+  background: transparent;
+  box-shadow: none;
+  border: none;
+  padding: 0;
 }
 
-.aiPopover :global(.ant-popover-arrow) {
-  display: none !important;
+.aiPopover .ant-popover-arrow {
+  display: none;
 }
 
-.aiPopover :global(.ant-popover-inner-content) {
-  padding: 0 !important;
-  background: transparent !important;
+.aiPopover .ant-popover-inner-content {
+  padding: 0;
+  background: transparent;
 }
 
-.aiPopover :global(.ant-badge-count) {
-  box-shadow: 0 0 0 1px var(--primary-white);
+:global(.custom-ai-popover .ant-popover-inner) {
+  background: transparent;
+  box-shadow: none;
+  border: none;
+  padding: 0;
+}
+
+:global(.custom-ai-popover .ant-popover-arrow) {
+  display: none;
+}
+
+:global(.custom-ai-popover .ant-popover-inner-content) {
+  padding: 0;
+  background: transparent;
+}
+
+.badge .ant-badge-count {
+  box-shadow: 0 0 0 1px #ffffff;
   font-size: 10px;
-  min-width: 16px;
-  height: 16px;
-  line-height: 16px;
+  min-width: 18px;
+  height: 18px;
+  line-height: 18px;
+  font-weight: 500;
   background: #1890ff;
 }
 
-@media (min-width: 750px) {
-  .assistantModal {
-    min-width: 350px;
-    height: 420px;
-  }
-  .welcomeMessage {
-    font-size: 15px;
-  }
-
-  .message {
-    padding: 12px 16px;
-    margin-bottom: 8px;
-    border-radius: 16px;
-    max-width: 85%;
-    word-wrap: break-word;
-    font-size: 17px;
-    line-height: 1.4;
-  }
-}
-@media (min-width: 1024px) {
-  .assistantModal {
-    min-width: 450px;
-    height: 500px;
-    font-size: 20px;
-  }
-  .welcomeMessage {
-    font-size: 16px;
-  }
-
-  .message {
-    padding: 12px 16px;
-    margin-bottom: 8px;
-    border-radius: 16px;
-    max-width: 85%;
-    word-wrap: break-word;
-    font-size: 16px;
-    line-height: 1.4;
-  }
-}
-
-@media (max-width: 480px) {
+@media (max-width: 768px) {
   .assistantContainer {
     bottom: 16px;
     right: 16px;
   }
   
+  .assistantToggleBtn {
+    width: 44px;
+    height: 44px;
+    font-size: 12px;
+  }
+  
   .assistantModal {
-    min-width: calc(100vw - 32px);
-    max-width: 320px;
-    height: 400px;
+    width: calc(100vw - 32px);
+    max-width: 400px;
+    height: 65vh;
+    min-height: 400px;
+    max-height: 600px;
+    border-radius: 12px;
+  }
+  
+  .assistantHeader {
+    padding: 12px 16px;
+  }
+  
+  .assistantTitle {
+    font-size: 15px;
+  }
+  
+  .closeBtn {
+    width: 28px;
+    height: 28px;
+    font-size: 18px;
+  }
+  
+  .assistantBody {
+    padding: 12px;
+  }
+  
+  .welcomeMessage {
+    padding: 12px;
+    font-size: 13px;
+  }
+  
+  .message {
+    padding: 8px 12px;
+    font-size: 13px;
+    max-width: 90%;
+  }
+  
+  .messageContent {
+    font-size: 13px;
+  }
+  
+  .inputContainer {
+    padding: 10px;
+  }
+  
+  .textarea {
+    font-size: 13px;
+    min-height: 36px;
+  }
+  
+  .sendButton {
+    width: 32px;
+    height: 32px;
+    padding: 6px;
+  }
+  
+  .sendIcon {
+    width: 16px;
+    height: 16px;
+  }
+  
+  .badge .ant-badge-count {
+    min-width: 16px;
+    height: 16px;
+    line-height: 16px;
+    font-size: 9px;
+  }
+}
+
+@media (max-width: 480px) {
+  .assistantContainer {
+    bottom: 12px;
+    right: 12px;
+  }
+  
+  .assistantToggleBtn {
+    width: 40px;
+    height: 40px;
+    font-size: 11px;
+  }
+  
+  .assistantModal {
+    width: calc(100vw - 24px);
+    height: 70vh;
+    min-height: 380px;
+    border-radius: 10px;
+  }
+  
+  .message {
+    max-width: 95%;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  .assistantModal {
+    min-width: 320px;
+    max-width: 400px;
+    height: 480px;
+  }
+  
+  .message {
+    max-width: 80%;
+  }
+}
+
+@media (min-width: 1025px) {
+  .assistantModal {
+    min-width: 400px;
+    max-width: 500px;
+    height: 520px;
+  }
+  
+  .message {
+    max-width: 75%;
+  }
+  
+  .messageContent {
+    font-size: 15px;
+  }
+  
+  .userMessage {
+    background: #e3f2fd;
+    border-color: rgba(21, 101, 192, 0.15);
+  }
+  
+  .assistantMessage {
+    background: #ffffff;
+    border-color: rgba(0, 0, 0, 0.1);
   }
 }
