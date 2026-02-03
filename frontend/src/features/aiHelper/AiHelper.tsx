@@ -1,9 +1,9 @@
-import {useState} from "react"
+import { useState, useEffect } from "react";
 import type { KeyboardEvent } from "react";
 import { useIntl } from "react-intl";
-import { Popover, Badge } from "antd";
+import { Popover, Badge, Spin, Alert } from "antd";
 import { useAiStore } from "../../entities/ai/useAi";
-import sendIcon from "../../shared/assets/send.svg"
+import sendIcon from "../../shared/assets/send.svg";
 import { AI_TEXT } from "../../shared/constants/common/ai";
 import styles from "./AiHelper.module.css";
 
@@ -14,14 +14,26 @@ export default function AiHelperAntd() {
   const {
     message,
     messages,
+    isLoading,
+    error,
+    isServiceAvailable,
     openAi,
     closeAi,
     setMessage,
     sendMessage,
+    checkServiceStatus,
+    setError,
   } = useAiStore();
 
-  const handleSendMessage = () => {
-    sendMessage();
+  useEffect(() => {
+    if (popoverOpen) {
+      checkServiceStatus();
+    }
+  }, [popoverOpen, checkServiceStatus]);
+
+  const handleSendMessage = async () => {
+    if (!message.trim()) return;
+    await sendMessage();
   };
 
   const handleKeyPress = (e: KeyboardEvent<HTMLTextAreaElement>) => {
@@ -57,6 +69,31 @@ export default function AiHelperAntd() {
       </div>
 
       <div className={styles.assistantBody}>
+        {!isServiceAvailable && (
+          <Alert
+            type="warning"
+            showIcon
+            closable
+            banner
+            message="AI Service Unavailable"
+            description="The AI assistant service is currently unavailable. Please try again later."
+            style={{ marginBottom: '16px' }}
+          />
+        )}
+
+        {error && (
+          <Alert
+            type="error"
+            showIcon
+            closable
+            banner
+            message="Error"
+            description={error}
+            onClose={() => setError(null)}
+            style={{ marginBottom: '16px' }}
+          />
+        )}
+
         <div className={styles.messagesContainer}>
           {messages.length === 0 ? (
             <div className={styles.welcomeMessage}>
@@ -67,14 +104,31 @@ export default function AiHelperAntd() {
               </p>
             </div>
           ) : (
-            messages.map((msg: string, index: number) => (
+            messages.map((msg, index) => (
               <div
                 key={index}
-                className={`${styles.message} ${styles.userMessage}`}
+                className={`${styles.message} ${
+                  msg.role === 'user' ? styles.userMessage : styles.assistantMessage
+                }`}
               >
-                {msg}
+                <div className={styles.messageContent}>
+                  {msg.content}
+                </div>
+                <span className={styles.messageTime}>
+                  {new Date(msg.timestamp).toLocaleTimeString([], { 
+                    hour: '2-digit', 
+                    minute: '2-digit' 
+                  })}
+                </span>
               </div>
             ))
+          )}
+          
+          {isLoading && (
+            <div className={styles.loadingIndicator}>
+              <Spin size="small" />
+              <span>Thinking...</span>
+            </div>
           )}
         </div>
 
@@ -88,12 +142,13 @@ export default function AiHelperAntd() {
             })}
             rows={2}
             aria-label="message for AI assistant"
+            disabled={isLoading || !isServiceAvailable}
           />
 
           <button
             className={styles.sendButton}
             onClick={handleSendMessage}
-            disabled={!message.trim()}
+            disabled={!message.trim() || isLoading || !isServiceAvailable}
             aria-label={intl.formatMessage({
               id: AI_TEXT.BUTTONS.SEND,
             })}
@@ -101,12 +156,16 @@ export default function AiHelperAntd() {
               id: AI_TEXT.BUTTONS.SEND,
             })}
           >
-            <img
-              src={sendIcon}
-              alt="send message to AI"
-              width={30}
-              height={30}
-            />
+            {isLoading ? (
+              <Spin size="small" />
+            ) : (
+              <img
+                src={sendIcon}
+                alt="send message to AI"
+                width={30}
+                height={30}
+              />
+            )}
           </button>
         </div>
       </div>
@@ -125,11 +184,14 @@ export default function AiHelperAntd() {
         arrow={false}
         destroyOnHidden
       >
-          <Badge 
-            count={messages.length > 0 ? messages.length : null} 
-            size="small"
-            offset={[-5, 5]}
-          >
+        <Badge 
+          count={messages.filter(m => m.role === 'assistant').length > 0 
+            ? messages.filter(m => m.role === 'assistant').length 
+            : null} 
+          size="small"
+          offset={[-5, 5]}
+          color="#108ee9"
+        >
           <button
             className={styles.assistantToggleBtn}
             onClick={() => setPopoverOpen(!popoverOpen)}
