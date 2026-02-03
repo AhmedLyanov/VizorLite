@@ -92,7 +92,7 @@ export default function RoomPage() {
       cleanupPeer(socketId);
     });
 
-    peer.on("error", (err) => {
+    peer.on("error", () => {
       cleanupPeer(socketId);
     });
 

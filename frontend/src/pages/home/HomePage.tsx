@@ -9,8 +9,7 @@ import styles from "./HomePage.module.css";
 import InstallBanner from "../../widgets/installBanner/InstallBanner";
 import BigButton from "../../shared/ui/button/BigButton/BigButton";
 import LanguageSwitcher from "../../features/languageSwitcher/LanguageSwitcher";
-import JoinMeetingModal from "../../features/joinMeetModal/joinMeeting";
-
+import JoinMeetingModal from "../../features/joinMeetModal/JoinMeeting";
 
 import webcamIcon from "../../shared/assets/webcamera.svg";
 import joinIcon from "../../shared/assets/join.svg";
