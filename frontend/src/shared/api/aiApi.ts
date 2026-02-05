@@ -21,9 +21,4 @@ export const aiApi = {
 
     return response.data;
   },
-
-  async getStatus(): Promise<{ status: string; connected: boolean }> {
-    const response = await axios.get(`${API_URL}/ai/status`);
-    return response.data;
-  },
 };

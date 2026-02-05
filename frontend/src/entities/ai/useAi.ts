@@ -23,7 +23,6 @@ interface AiState {
   addMessage: (message: Message) => void;
   clearMessages: () => void;
   sendMessage: () => Promise<void>;
-  checkServiceStatus: () => Promise<void>;
   setError: (error: string | null) => void;
 }
 
@@ -41,7 +40,6 @@ export const useAiStore = create<AiState>()(
       
       openAi: () => {
         set({ isOpen: true });
-        get().checkServiceStatus();
       },
       
       closeAi: () => set({ isOpen: false, error: null }),
@@ -57,16 +55,6 @@ export const useAiStore = create<AiState>()(
       
       setError: (error: string | null) => set({ error }),
       
-      checkServiceStatus: async () => {
-        try {
-          const status = await aiApi.getStatus();
-          set({ isServiceAvailable: status.connected });
-        } catch (error) {
-          console.error('AI status check failed:', error);
-          set({ isServiceAvailable: false, error: 'AI service unavailable' });
-        }
-      },
-
       sendMessage: async () => {
         const { message, messages, addMessage, setMessage, setError } = get();
         

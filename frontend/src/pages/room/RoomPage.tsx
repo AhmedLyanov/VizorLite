@@ -254,11 +254,7 @@ export default function RoomPage() {
           </div>
         ))}
 
-        {remoteVideos.size === 0 && (
-          <div className={style.emptyState}>
-            <p>Ожидание других участников...</p>
-          </div>
-        )}
+
       </div>
       <RoomBoard 
         stream={stream}

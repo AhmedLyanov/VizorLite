@@ -104,6 +104,16 @@ export const messages = {
     "joinmeeting.description": "Для подключения введите ссылку на встречу или её идентификатор",
 
 
+    "roomBoard.messages.micEnabled": "Микрофон включен",
+    "roomBoard.messages.micDisabled": "Микрофон выключен",
+    "roomBoard.messages.cameraEnabled": "Камера включена",
+    "roomBoard.messages.cameraDisabled": "Камера выключена",
+    "roomBoard.messages.linkCopied": "Ссылка на комнату скопирована!",
+    "roomBoard.messages.linkCopyError": "Не удалось скопировать ссылку",
+    "roomBoard.modal.title": "Покинуть комнату?",
+    "roomBoard.modal.description": "Вы уверены, что хотите выйти из видеоконференции?",
+    "roomBoard.modal.confirm": "Выйти",
+
     "home.hero.title": "VizorLite — общайтесь, планируйте, решайте",
     "home.install.title": "VizorLite",
     "home.install.description":
@@ -188,6 +198,16 @@ export const messages = {
     "about.bottomLinks.items.about.icon": "question.svg",
     "about.bottomLinks.items.contacts.label": "Контакты",
     "about.bottomLinks.items.contacts.icon": "send.svg",
+
+    "roomBoard.tooltips.micOn": "Выключить микрофон",
+    "roomBoard.tooltips.micOff": "Включить микрофон",
+    "roomBoard.tooltips.cameraOn": "Выключить камеру",
+    "roomBoard.tooltips.cameraOff": "Включить камеру",
+    "roomBoard.tooltips.copyLink": "Копировать ссылку на комнату",
+    "roomBoard.tooltips.leaveRoom": "Покинуть комнату",
+    "roomBoard.modal.cancel": "Отмена",
+
+    "roomBoard.share.message": "Хей, привет! Присоединяйся к видеовстрече в VizorLite, вот ссылка:",
 
     "pricing.title": "Тарифы",
     "pricing.subtitle": "Выберите подходящий план для ваших видеовстреч",
@@ -340,7 +360,14 @@ export const messages = {
     "authentication.subtitles.enterCredentials": "Enter your login credentials",
     "authentication.subtitles.fillDetails": "Fill in your details",
     "authentication.subtitles.enterEmailReset": "Enter email to reset password",
-
+    "roomBoard.messages.micEnabled": "Microphone enabled",
+    "roomBoard.messages.micDisabled": "Microphone disabled",
+    "roomBoard.messages.cameraEnabled": "Camera enabled",
+    "roomBoard.messages.cameraDisabled": "Camera disabled",
+    "roomBoard.messages.linkCopied": "Room link copied!",
+    "roomBoard.messages.linkCopyError": "Failed to copy link",
+    "roomBoard.modal.title": "Leave room?",
+    "roomBoard.tooltips.leaveRoom": "Leave room",
     "joinmeeting.main.title": "Join a Meeting",
     "joinmeeting.input.placeholder": "Paste link or room ID",
     "joinmeeting.button.cancel": "Cancel",
@@ -435,6 +462,17 @@ export const messages = {
     "about.bottomLinks.items.contacts.label": "Contacts",
     "about.bottomLinks.items.contacts.icon": "send.svg",
 
+
+    "roomBoard.tooltips.micOn": "Mute microphone",
+    "roomBoard.tooltips.micOff": "Unmute microphone",
+    "roomBoard.tooltips.cameraOn": "Turn off camera",
+    "roomBoard.tooltips.cameraOff": "Turn on camera",
+    "roomBoard.tooltips.copyLink": "Copy room link",
+    "roomBoard.modal.description": "Are you sure you want to leave the video meeting?",
+    "roomBoard.modal.confirm": "Yes, leave",
+    "roomBoard.modal.cancel": "Cancel",
+
+    "roomBoard.share.message": "Hey there! Join my video meeting on VizorLite, here's the link:",
     "pricing.title": "Pricing",
     "pricing.subtitle": "Choose the right plan for your video meetings",
     "pricing.recommended": "Recommended",
@@ -667,6 +705,27 @@ export const messages = {
     "about.bottomLinks.items.contacts.label": "Kontakte",
     "about.bottomLinks.items.contacts.icon": "send.svg",
 
+    "roomBoard.tooltips.micOn": "Mikrofon stummschalten",
+    "roomBoard.tooltips.micOff": "Mikrofon einschalten",
+    "roomBoard.tooltips.cameraOn": "Kamera ausschalten",
+    "roomBoard.tooltips.cameraOff": "Kamera einschalten",
+    "roomBoard.tooltips.copyLink": "Raum-Link kopieren",
+    "roomBoard.tooltips.leaveRoom": "Raum verlassen",
+
+    "roomBoard.messages.micEnabled": "Mikrofon aktiviert",
+    "roomBoard.messages.micDisabled": "Mikrofon deaktiviert",
+    "roomBoard.messages.cameraEnabled": "Kamera aktiviert",
+    "roomBoard.messages.cameraDisabled": "Kamera deaktiviert",
+    "roomBoard.messages.linkCopied": "Raum-Link kopiert!",
+    "roomBoard.messages.linkCopyError": "Fehler beim Kopieren des Links",
+
+    "roomBoard.modal.title": "Raum verlassen?",
+    "roomBoard.modal.description": "Möchten Sie das Video-Meeting wirklich verlassen?",
+    "roomBoard.modal.confirm": "Ja, verlassen",
+    "roomBoard.modal.cancel": "Abbrechen",
+
+    "roomBoard.share.message": "Hallo! Komm zu meinem Video-Meeting auf VizorLite, hier ist der Link:",
+
     "pricing.title": "Preise",
     "pricing.subtitle": "Wählen Sie den passenden Plan für Ihre Video-Meetings",
     "pricing.recommended": "Empfohlen",
@@ -894,6 +953,27 @@ export const messages = {
     "about.bottomLinks.items.about.icon": "question.svg",
     "about.bottomLinks.items.contacts.label": "お問い合わせ",
     "about.bottomLinks.items.contacts.icon": "send.svg",
+
+    "roomBoard.tooltips.micOn": "マイクをミュート",
+    "roomBoard.tooltips.micOff": "ミュートを解除",
+    "roomBoard.tooltips.cameraOn": "カメラをオフ",
+    "roomBoard.tooltips.cameraOff": "カメラをオン",
+    "roomBoard.tooltips.copyLink": "ルームリンクをコピー",
+    "roomBoard.tooltips.leaveRoom": "ルームを退出",
+
+    "roomBoard.messages.micEnabled": "マイクが有効になりました",
+    "roomBoard.messages.micDisabled": "マイクが無効になりました",
+    "roomBoard.messages.cameraEnabled": "カメラが有効になりました",
+    "roomBoard.messages.cameraDisabled": "カメラが無効になりました",
+    "roomBoard.messages.linkCopied": "ルームリンクをコピーしました！",
+    "roomBoard.messages.linkCopyError": "リンクのコピーに失敗しました",
+
+    "roomBoard.modal.title": "ルームを退出しますか？",
+    "roomBoard.modal.description": "ビデオ会議から退出してもよろしいですか？",
+    "roomBoard.modal.confirm": "はい、退出する",
+    "roomBoard.modal.cancel": "キャンセル",
+
+    "roomBoard.share.message": "こんにちは！VizorLiteでビデオ会議に参加してください。リンクはこちら：",
 
     "pricing.title": "料金プラン",
     "pricing.subtitle": "あなたのビデオ会議に合ったプランをお選びください",

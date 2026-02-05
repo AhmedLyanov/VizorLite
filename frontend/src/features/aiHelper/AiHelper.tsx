@@ -17,18 +17,15 @@ export default function AiHelperAntd() {
     messages,
     isLoading,
     error,
-    isServiceAvailable,
     openAi,
     closeAi,
     setMessage,
     sendMessage,
-    checkServiceStatus,
+    
     setError,
   } = useAiStore();
 
-  useEffect(() => {
-    checkServiceStatus();
-  }, [checkServiceStatus]);
+  
 
   useEffect(() => {
     const checkMobile = () => {
@@ -59,7 +56,6 @@ export default function AiHelperAntd() {
     setPopoverOpen(open);
     if (open) {
       openAi();
-      checkServiceStatus();
     } else {
       closeAi();
     }
@@ -87,18 +83,6 @@ export default function AiHelperAntd() {
       </div>
 
       <div className={styles.assistantBody}>
-        {!isServiceAvailable && (
-          <div className={styles.alertWrapper}>
-            <Alert
-              type="warning"
-              showIcon
-              closable
-              message="AI Service Unavailable"
-              description="The AI assistant service is currently unavailable. Please try again later."
-              onClose={() => { }}
-            />
-          </div>
-        )}
 
         {error && (
           <div className={styles.alertWrapper}>
@@ -161,14 +145,14 @@ export default function AiHelperAntd() {
             rows={isMobile ? 1 : 2}
             maxLength={500}
             aria-label="message for AI assistant"
-            disabled={isLoading || !isServiceAvailable}
+            disabled={isLoading}
             className={styles.textarea}
           />
 
           <button
             className={styles.sendButton}
             onClick={handleSendMessage}
-            disabled={!message.trim() || isLoading || !isServiceAvailable}
+            disabled={!message.trim() || isLoading}
             aria-label={intl.formatMessage({
               id: AI_TEXT.BUTTONS.SEND,
             })}
