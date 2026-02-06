@@ -1,23 +1,23 @@
 .assistantContainer {
   position: fixed;
-  bottom: 20px;
-  right: 20px;
-  z-index: 1000;
+  bottom: var(--aihelper-container-bottom);
+  right: var(--aihelper-container-right);
+  z-index: var(--aihelper-container-z-index);
 }
 
 .assistantToggleBtn {
-  width: 50px;
-  height: 50px;
-  border-radius: 25px;
-  background: #ffffff;
-  color: #333333;
-  border: 1px solid rgba(0, 0, 0, 0.1);
+  width: var(--aihelper-toggle-btn-width);
+  height: var(--aihelper-toggle-btn-height);
+  border-radius: var(--aihelper-toggle-btn-border-radius);
+  background: var(--aihelper-toggle-btn-bg);
+  color: var(--aihelper-toggle-btn-color);
+  border: var(--aihelper-toggle-btn-border);
   font-family: var(--primary-font);
-  font-size: 14px;
-  font-weight: 500;
+  font-size: var(--aihelper-toggle-btn-font-size);
+  font-weight: var(--aihelper-toggle-btn-font-weight);
   cursor: pointer;
-  box-shadow: 1px 1px 20px rgba(51, 51, 51, 0.1);
-  transition: all 0.25s ease;
+  box-shadow: var(--aihelper-toggle-btn-box-shadow);
+  transition: var(--transition-normal);
   user-select: none;
   outline: none;
   display: flex;
@@ -27,25 +27,25 @@
 }
 
 .assistantToggleBtn:hover {
-  background: #f8f9ff;
-  box-shadow: 1px 1px 25px rgba(51, 51, 51, 0.15);
+  background: var(--aihelper-toggle-btn-hover-bg);
+  box-shadow: var(--aihelper-toggle-btn-hover-shadow);
 }
 
 .assistantToggleBtn:active {
-  background: #f0f2ff;
-  box-shadow: 1px 1px 10px rgba(51, 51, 51, 0.1);
+  background: var(--aihelper-toggle-btn-active-bg);
+  box-shadow: var(--aihelper-toggle-btn-active-shadow);
 }
 
 .assistantModal {
   position: relative; 
   bottom: auto;
   right: auto;
-  min-width: 280px;
+  min-width: var(--aihelper-modal-min-width);
   max-width: 100%;
-  height: 420px;
-  background: #ffffff;
-  border-radius: 16px;
-  box-shadow: 1px 1px 30px rgba(51, 51, 51, 0.15);
+  height: var(--aihelper-modal-height);
+  background: var(--aihelper-modal-bg);
+  border-radius: var(--aihelper-modal-border-radius);
+  box-shadow: var(--aihelper-modal-box-shadow);
   display: flex;
   flex-direction: column;
   overflow: hidden;
@@ -53,21 +53,21 @@
 }
 
 .assistantHeader {
-  background: #ffffff;
-  color: #333333;
-  padding: 16px 20px;
+  background: var(--aihelper-header-bg);
+  color: var(--aihelper-header-color);
+  padding: var(--aihelper-header-padding);
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  border-bottom: var(--aihelper-header-border-bottom);
   flex-shrink: 0;
 }
 
 .assistantTitle {
   margin: 0;
-  font-size: 16px;
-  font-weight: 500;
-  color: #333333;
+  font-size: var(--aihelper-title-font-size);
+  font-weight: var(--aihelper-title-font-weight);
+  color: var(--aihelper-title-color);
   font-family: var(--primary-font);
   white-space: nowrap;
   overflow: hidden;
@@ -75,36 +75,36 @@
 }
 
 .closeBtn {
-  background: transparent;
+  background: var(--aihelper-close-btn-bg);
   border: none;
-  color: #666666;
-  font-size: 20px;
+  color: var(--aihelper-close-btn-color);
+  font-size: var(--aihelper-close-btn-font-size);
   cursor: pointer;
   padding: 0;
-  width: 30px;
-  height: 30px;
-  border-radius: 15px;
+  width: var(--aihelper-close-btn-width);
+  height: var(--aihelper-close-btn-height);
+  border-radius: var(--aihelper-close-btn-border-radius);
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.15s ease;
-  opacity: 0.7;
+  transition: var(--transition-fast);
+  opacity: var(--aihelper-close-btn-opacity);
   flex-shrink: 0;
-  margin-left: 10px;
+  margin-left: var(--aihelper-close-btn-margin-left);
 }
 
 .closeBtn:hover {
-  background: rgba(0, 0, 0, 0.05);
+  background: var(--aihelper-close-btn-hover-bg);
   opacity: 1;
-  color: #333333;
+  color: var(--aihelper-close-btn-hover-color);
 }
 
 .assistantBody {
   flex: 1;
   display: flex;
   flex-direction: column;
-  padding: 16px;
-  background: #f8f9fa;
+  padding: var(--aihelper-body-padding);
+  background: var(--aihelper-body-bg);
   overflow: hidden;
 }
 
@@ -122,45 +122,45 @@
 }
 
 .welcomeMessage {
-  color: #666666;
-  padding: 16px;
-  border-radius: 12px;
+  color: var(--aihelper-welcome-color);
+  padding: var(--aihelper-welcome-padding);
+  border-radius: var(--aihelper-welcome-border-radius);
   text-align: center;
-  background: #ffffff;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-  opacity: 0.8;
-  font-size: 14px;
+  background: var(--aihelper-welcome-bg);
+  box-shadow: var(--aihelper-welcome-box-shadow);
+  opacity: var(--aihelper-welcome-opacity);
+  font-size: var(--aihelper-welcome-font-size);
   margin: 8px 0;
-  border: 1px solid rgba(0, 0, 0, 0.03);
+  border: var(--aihelper-welcome-border);
 }
 
 .message {
-  padding: 10px 14px;
+  padding: var(--aihelper-message-padding);
   margin-bottom: 8px;
-  border-radius: 16px;
-  max-width: 85%;
+  border-radius: var(--aihelper-message-border-radius);
+  max-width: var(--aihelper-message-max-width);
   word-wrap: break-word;
-  font-size: 14px;
-  line-height: 1.4;
+  font-size: var(--aihelper-message-font-size);
+  line-height: var(--aihelper-message-line-height);
   display: flex;
   flex-direction: column;
 }
 
 .userMessage {
-  background: #e3f2fd;
-  color: #1565c0;
+  background: var(--aihelper-user-message-bg);
+  color: var(--aihelper-user-message-color);
   margin-left: auto;
-  border: 1px solid rgba(21, 101, 192, 0.1);
-  box-shadow: 0 2px 6px rgba(21, 101, 192, 0.05);
+  border: var(--aihelper-user-message-border);
+  box-shadow: var(--aihelper-user-message-box-shadow);
   align-items: flex-end;
 }
 
 .assistantMessage {
-  background: #ffffff;
-  color: #333333;
+  background: var(--aihelper-assistant-message-bg);
+  color: var(--aihelper-assistant-message-color);
   margin-right: auto;
-  border: 1px solid rgba(0, 0, 0, 0.08);
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
+  border: var(--aihelper-assistant-message-border);
+  box-shadow: var(--aihelper-assistant-message-box-shadow);
   align-items: flex-start;
 }
 
@@ -170,10 +170,10 @@
 }
 
 .messageTime {
-  font-size: 10px;
-  opacity: 0.6;
+  font-size: var(--aihelper-message-time-font-size);
+  opacity: var(--aihelper-message-time-opacity);
   margin-top: 2px;
-  color: #666666;
+  color: var(--aihelper-message-time-color);
 }
 
 .loadingIndicator {
@@ -190,21 +190,21 @@
   display: flex;
   align-items: flex-end;
   width: 100%;
-  padding: 12px;
-  background: #ffffff;
-  border: 1px solid rgba(0, 0, 0, 0.12);
-  border-radius: 12px;
+  padding: var(--aihelper-input-container-padding);
+  background: var(--aihelper-input-container-bg);
+  border: var(--aihelper-input-container-border);
+  border-radius: var(--aihelper-input-container-border-radius);
   font-family: var(--primary-font);
   font-size: 14px;
   line-height: 1.4;
-  transition: all 0.15s ease;
-  color: #333333;
+  transition: var(--transition-fast);
+  color: var(--aihelper-input-container-color);
   flex-shrink: 0;
 }
 
 .inputContainer:focus-within {
-  border-color: #1890ff;
-  box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.1);
+  border-color: var(--aihelper-input-container-focus-border);
+  box-shadow: var(--aihelper-input-container-focus-shadow);
 }
 
 .textarea {
@@ -214,10 +214,10 @@
   border: none;
   background: transparent;
   font-family: inherit;
-  font-size: inherit;
-  color: #333333;
-  min-height: 40px;
-  max-height: 120px;
+  font-size: var(--aihelper-textarea-font-size);
+  color: var(--aihelper-input-container-color);
+  min-height: var(--aihelper-textarea-min-height);
+  max-height: var(--aihelper-textarea-max-height);
   line-height: 1.5;
 }
 
@@ -226,48 +226,48 @@
 }
 
 .textarea::placeholder {
-  color: #999999;
+  color: var(--aihelper-textarea-placeholder-color);
 }
 
 .sendButton {
-  padding: 8px;
-  width: 36px;
-  height: 36px;
-  background: #1890ff;
-  border-radius: 50%;
+  padding: var(--aihelper-send-btn-padding);
+  width: var(--aihelper-send-btn-width);
+  height: var(--aihelper-send-btn-height);
+  background: var(--aihelper-send-btn-bg);
+  border-radius: var(--aihelper-send-btn-border-radius);
   cursor: pointer;
-  transition: all 0.25s ease;
+  transition: var(--transition-normal);
   display: flex;
   align-items: center;
   justify-content: center;
   user-select: none;
   outline: none;
   flex-shrink: 0;
-  margin-left: 8px;
+  margin-left: var(--aihelper-send-btn-margin-left);
   border: none;
 }
 
 .sendButton:not(:disabled):hover {
-  background: #40a9ff;
+  background: var(--aihelper-send-btn-hover-bg);
 }
 
 .sendButton:disabled {
-  background: #d9d9d9;
+  background: var(--aihelper-send-btn-disabled-bg);
   cursor: not-allowed;
 }
 
 .sendButton:active:not(:disabled) {
-  background: #096dd9;
+  background: var(--aihelper-send-btn-active-bg);
 }
 
 .sendIcon {
-  width: 18px;
-  height: 18px;
+  width: var(--aihelper-send-icon-width);
+  height: var(--aihelper-send-icon-height);
   filter: brightness(0) invert(1);
 }
 
 .messagesContainer::-webkit-scrollbar {
-  width: 4px;
+  width: var(--aihelper-scrollbar-width);
 }
 
 .messagesContainer::-webkit-scrollbar-track {
@@ -275,12 +275,12 @@
 }
 
 .messagesContainer::-webkit-scrollbar-thumb {
-  background: rgba(0, 0, 0, 0.15);
-  border-radius: 2px;
+  background: var(--aihelper-scrollbar-thumb-bg);
+  border-radius: var(--aihelper-scrollbar-thumb-border-radius);
 }
 
 .messagesContainer::-webkit-scrollbar-thumb:hover {
-  background: rgba(0, 0, 0, 0.25);
+  background: var(--aihelper-scrollbar-thumb-hover-bg);
 }
 
 .aiPopover .ant-popover-inner {
@@ -316,155 +316,155 @@
 }
 
 .badge .ant-badge-count {
-  box-shadow: 0 0 0 1px #ffffff;
-  font-size: 10px;
-  min-width: 18px;
-  height: 18px;
-  line-height: 18px;
+  box-shadow: var(--aihelper-badge-count-box-shadow);
+  font-size: var(--aihelper-badge-count-font-size);
+  min-width: var(--aihelper-badge-count-min-width);
+  height: var(--aihelper-badge-count-height);
+  line-height: var(--aihelper-badge-count-line-height);
   font-weight: 500;
-  background: #1890ff;
+  background: var(--aihelper-badge-count-bg);
 }
 
 @media (max-width: 768px) {
   .assistantContainer {
-    bottom: 16px;
-    right: 16px;
+    bottom: var(--aihelper-container-bottom-mobile);
+    right: var(--aihelper-container-right-mobile);
   }
   
   .assistantToggleBtn {
-    width: 44px;
-    height: 44px;
-    font-size: 12px;
+    width: var(--aihelper-toggle-btn-width-mobile);
+    height: var(--aihelper-toggle-btn-height-mobile);
+    font-size: var(--aihelper-toggle-btn-font-size-mobile);
   }
   
   .assistantModal {
-    width: calc(100vw - 32px);
-    max-width: 400px;
-    height: 65vh;
-    min-height: 400px;
-    max-height: 600px;
-    border-radius: 12px;
+    width: var(--aihelper-modal-width-mobile);
+    max-width: var(--aihelper-modal-max-width-mobile);
+    height: var(--aihelper-modal-height-mobile);
+    min-height: var(--aihelper-modal-min-height-mobile);
+    max-height: var(--aihelper-modal-max-height-mobile);
+    border-radius: var(--aihelper-modal-border-radius-mobile);
   }
   
   .assistantHeader {
-    padding: 12px 16px;
+    padding: var(--aihelper-header-padding-mobile);
   }
   
   .assistantTitle {
-    font-size: 15px;
+    font-size: var(--aihelper-title-font-size-mobile);
   }
   
   .closeBtn {
-    width: 28px;
-    height: 28px;
-    font-size: 18px;
+    width: var(--aihelper-close-btn-width-mobile);
+    height: var(--aihelper-close-btn-height-mobile);
+    font-size: var(--aihelper-close-btn-font-size-mobile);
   }
   
   .assistantBody {
-    padding: 12px;
+    padding: var(--aihelper-body-padding-mobile);
   }
   
   .welcomeMessage {
-    padding: 12px;
-    font-size: 13px;
+    padding: var(--aihelper-welcome-padding-mobile);
+    font-size: var(--aihelper-welcome-font-size-mobile);
   }
   
   .message {
-    padding: 8px 12px;
-    font-size: 13px;
-    max-width: 90%;
+    padding: var(--aihelper-message-padding-mobile);
+    font-size: var(--aihelper-message-font-size-mobile);
+    max-width: var(--aihelper-message-max-width-mobile);
   }
   
   .messageContent {
-    font-size: 13px;
+    font-size: var(--aihelper-message-font-size-mobile);
   }
   
   .inputContainer {
-    padding: 10px;
+    padding: var(--aihelper-input-container-padding-mobile);
   }
   
   .textarea {
-    font-size: 13px;
-    min-height: 36px;
+    font-size: var(--aihelper-textarea-font-size-mobile);
+    min-height: var(--aihelper-textarea-min-height-mobile);
   }
   
   .sendButton {
-    width: 32px;
-    height: 32px;
-    padding: 6px;
+    width: var(--aihelper-send-btn-width-mobile);
+    height: var(--aihelper-send-btn-height-mobile);
+    padding: var(--aihelper-send-btn-padding-mobile);
   }
   
   .sendIcon {
-    width: 16px;
-    height: 16px;
+    width: var(--aihelper-send-icon-width-mobile);
+    height: var(--aihelper-send-icon-height-mobile);
   }
   
   .badge .ant-badge-count {
-    min-width: 16px;
-    height: 16px;
-    line-height: 16px;
-    font-size: 9px;
+    min-width: var(--aihelper-badge-count-min-width-mobile);
+    height: var(--aihelper-badge-count-height-mobile);
+    line-height: var(--aihelper-badge-count-line-height-mobile);
+    font-size: var(--aihelper-badge-count-font-size-mobile);
   }
 }
 
 @media (max-width: 480px) {
   .assistantContainer {
-    bottom: 12px;
-    right: 12px;
+    bottom: var(--aihelper-container-bottom-480);
+    right: var(--aihelper-container-right-480);
   }
   
   .assistantToggleBtn {
-    width: 40px;
-    height: 40px;
-    font-size: 11px;
+    width: var(--aihelper-toggle-btn-width-480);
+    height: var(--aihelper-toggle-btn-height-480);
+    font-size: var(--aihelper-toggle-btn-font-size-480);
   }
   
   .assistantModal {
-    width: calc(100vw - 24px);
-    height: 70vh;
-    min-height: 380px;
-    border-radius: 10px;
+    width: var(--aihelper-modal-width-480);
+    height: var(--aihelper-modal-height-480);
+    min-height: var(--aihelper-modal-min-height-480);
+    border-radius: var(--aihelper-modal-border-radius-480);
   }
   
   .message {
-    max-width: 95%;
+    max-width: var(--aihelper-message-max-width-480);
   }
 }
 
 @media (min-width: 769px) and (max-width: 1024px) {
   .assistantModal {
-    min-width: 320px;
-    max-width: 400px;
-    height: 480px;
+    min-width: var(--aihelper-modal-min-width-768);
+    max-width: var(--aihelper-modal-max-width-768);
+    height: var(--aihelper-modal-height-768);
   }
   
   .message {
-    max-width: 80%;
+    max-width: var(--aihelper-user-message-max-width-768);
   }
 }
 
 @media (min-width: 1025px) {
   .assistantModal {
-    min-width: 400px;
-    max-width: 500px;
-    height: 520px;
+    min-width: var(--aihelper-modal-min-width-1024);
+    max-width: var(--aihelper-modal-max-width-1024);
+    height: var(--aihelper-modal-height-1024);
   }
   
   .message {
-    max-width: 75%;
+    max-width: var(--aihelper-user-message-max-width-1024);
   }
   
   .messageContent {
-    font-size: 15px;
+    font-size: var(--aihelper-message-font-size-1024);
   }
   
   .userMessage {
-    background: #e3f2fd;
-    border-color: rgba(21, 101, 192, 0.15);
+    background: var(--aihelper-user-message-bg);
+    border-color: var(--aihelper-user-message-border-1024);
   }
   
   .assistantMessage {
-    background: #ffffff;
-    border-color: rgba(0, 0, 0, 0.1);
+    background: var(--aihelper-assistant-message-bg);
+    border-color: var(--aihelper-assistant-message-border-1024);
   }
 }

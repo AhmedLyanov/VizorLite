@@ -4,122 +4,102 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: var(--joinmeeting-overlay-bg);
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 20px;
-  z-index: 1000;
-  animation: fadeIn 0.2s ease;
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
+  padding: var(--joinmeeting-overlay-padding);
+  z-index: var(--joinmeeting-overlay-z-index);
+  animation: var(--animation-fadein);
 }
 
 .modal {
-  background: var(--primary-background-color);
-  border-radius: 16px;
-  padding: 24px;
+  background: var(--joinmeeting-modal-bg);
+  border-radius: var(--joinmeeting-modal-border-radius);
+  padding: var(--joinmeeting-modal-padding);
   width: 100%;
-  max-width: 400px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-  animation: slideUp 0.3s ease;
-}
-
-@keyframes slideUp {
-  from {
-    transform: translateY(20px);
-    opacity: 0;
-  }
-  to {
-    transform: translateY(0);
-    opacity: 1;
-  }
+  max-width: var(--joinmeeting-modal-max-width);
+  box-shadow: var(--joinmeeting-modal-box-shadow);
+  animation: var(--animation-slideup);
 }
 
 .modal h2 {
   color: var(--primary-title-color);
   font-family: var(--primary-font);
-  font-size: 20px;
-  font-weight: 600;
-  margin: 0 0 20px 0;
+  font-size: var(--joinmeeting-title-font-size);
+  font-weight: var(--joinmeeting-title-font-weight);
+  margin: 0 0 var(--joinmeeting-title-margin-bottom) 0;
   text-align: center;
   line-height: 1.4;
 }
 
 .input {
   width: 100%;
-  padding: 14px 16px;
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  border-radius: 12px;
+  padding: var(--joinmeeting-input-padding);
+  border: var(--joinmeeting-input-border);
+  border-radius: var(--joinmeeting-input-border-radius);
   font-family: var(--primary-font);
-  font-size: 16px;
-  color: var(--primary-title-color);
-  background: var(--primary-white);
+  font-size: var(--joinmeeting-input-font-size);
+  color: var(--joinmeeting-input-color);
+  background: var(--joinmeeting-input-bg);
   box-sizing: border-box;
-  transition: all 0.2s ease;
+  transition: var(--transition-normal);
   margin-bottom: 8px;
 }
 
 .input:focus {
   outline: none;
-  border-color: var(--primary-accent-color, #007AFF);
-  box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.1);
+  border-color: var(--joinmeeting-input-focus-border);
+  box-shadow: var(--joinmeeting-input-focus-shadow);
 }
 
 .input::placeholder {
-  color: rgba(0, 0, 0, 0.4);
-  font-size: 15px;
+  color: var(--joinmeeting-input-placeholder-color);
+  font-size: var(--joinmeeting-input-placeholder-font-size);
 }
 
 .error {
-  color: #FF3B30;
+  color: var(--joinmeeting-error-color);
   font-family: var(--primary-font);
-  font-size: 14px;
+  font-size: var(--joinmeeting-error-font-size);
   margin: 4px 0 12px;
   text-align: center;
 }
 
 .actions {
   display: flex;
-  gap: 12px;
-  margin-top: 20px;
+  gap: var(--joinmeeting-actions-gap);
+  margin-top: var(--joinmeeting-actions-margin-top);
 }
 
 .actions button {
   flex: 1;
-  padding: 14px 20px;
-  border-radius: 12px;
+  padding: var(--joinmeeting-button-padding);
+  border-radius: var(--joinmeeting-button-border-radius);
   font-family: var(--primary-font);
-  font-size: 16px;
-  font-weight: 500;
+  font-size: var(--joinmeeting-button-font-size);
+  font-weight: var(--joinmeeting-button-font-weight);
   border: none;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: var(--transition-normal);
 }
 
 .actions button:first-child {
-  background: rgba(0, 0, 0, 0.05);
-  color: var(--primary-title-color);
+  background: var(--joinmeeting-cancel-button-bg);
+  color: var(--joinmeeting-cancel-button-color);
 }
 
 .actions button:first-child:hover {
-  background: rgba(0, 0, 0, 0.1);
+  background: var(--joinmeeting-cancel-button-hover-bg);
 }
 
 .actions button:last-child {
-  background: var(--primary-accent-color, #007AFF);
-  color: white;
+  background: var(--joinmeeting-confirm-button-bg);
+  color: var(--joinmeeting-confirm-button-color);
 }
 
 .actions button:last-child:hover {
-  background: var(--primary-accent-hover, #0056CC);
+  background: var(--joinmeeting-confirm-button-hover-bg);
   transform: translateY(-1px);
 }
 
@@ -129,44 +109,44 @@
 
 @media (min-width: 768px) {
   .modal {
-    padding: 28px;
-    max-width: 450px;
+    padding: var(--joinmeeting-modal-padding-768);
+    max-width: var(--joinmeeting-modal-max-width-768);
   }
   
   .modal h2 {
-    font-size: 22px;
-    margin-bottom: 24px;
+    font-size: var(--joinmeeting-title-font-size-768);
+    margin-bottom: var(--joinmeeting-title-margin-bottom-768);
   }
   
   .input {
-    padding: 16px 18px;
-    font-size: 17px;
+    padding: var(--joinmeeting-input-padding-768);
+    font-size: var(--joinmeeting-input-font-size-768);
   }
   
   .input::placeholder {
-    font-size: 16px;
+    font-size: var(--joinmeeting-input-placeholder-font-size-768);
   }
   
   .actions {
-    gap: 16px;
+    gap: var(--joinmeeting-actions-gap-768);
   }
   
   .actions button {
-    padding: 16px 24px;
-    font-size: 17px;
+    padding: var(--joinmeeting-button-padding-768);
+    font-size: var(--joinmeeting-button-font-size-768);
   }
 }
 
 @media (min-width: 1024px) {
   .modal {
-    max-width: 500px;
+    max-width: var(--joinmeeting-modal-max-width-1024);
   }
   
   .modal h2 {
-    font-size: 24px;
+    font-size: var(--joinmeeting-title-font-size-1024);
   }
   
   .actions button {
-    padding: 16px 28px;
+    padding: var(--joinmeeting-button-padding-1024);
   }
 }

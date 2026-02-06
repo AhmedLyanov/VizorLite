@@ -1,16 +1,16 @@
 .roomBoardContainer {
     position: fixed;
-    bottom: 20px;
+    bottom: var(--roomboard-container-bottom);
     left: 50%;
     transform: translateX(-50%);
-    width: 80%;
-    max-width: 1200px;
-    padding: 20px;
-    height: 70px;
-    background-color: rgba(0, 0, 0, 0.51);
-    z-index: 1000;
-    border-radius: 20px; 
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); 
+    width: var(--roomboard-container-width);
+    max-width: var(--roomboard-container-max-width);
+    padding: var(--roomboard-container-padding);
+    height: var(--roomboard-container-height);
+    background-color: var(--roomboard-container-bg);
+    z-index: var(--roomboard-container-z-index);
+    border-radius: var(--roomboard-container-border-radius);
+    box-shadow: var(--roomboard-container-box-shadow);
 }
 
 .roomBoardContent {
@@ -18,14 +18,15 @@
     align-items: center;
     justify-content: space-between;
     height: 100%;
-    padding: 0 20px;
-}
-.roomBoardButton{
-    background: transparent;
+    padding: var(--roomboard-content-padding);
 }
 
-@media (min-width: 768px){
-    .roomBoardContainer{
-        width: 40%;
+.roomBoardButton {
+    background: var(--roomboard-button-bg);
+}
+
+@media (min-width: 768px) {
+    .roomBoardContainer {
+        width: var(--roomboard-container-width-768);
     }
 }
