@@ -3,15 +3,15 @@ import { Server } from "socket.io";
 class SocketService {
   constructor() {
     this.io = null;
-    this.rooms = new Map(); 
-    this.users = new Map(); 
+    this.rooms = new Map();
+    this.users = new Map();
   }
 
   initialize(server) {
     this.io = new Server(server, {
       path: "/ws",
       cors: {
-        origin: "http://localhost:5173",
+        origin: process.env.FRONTEND_URL || "https://vaykino.ru",
         methods: ["GET", "POST"],
         credentials: true,
       },
