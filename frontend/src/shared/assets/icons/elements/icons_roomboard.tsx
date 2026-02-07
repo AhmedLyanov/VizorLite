@@ -8,7 +8,7 @@ export const roomIcons = {
       height="24"
       viewBox="0 0 24 24"
       fill="none"
-      stroke="white"
+      stroke="#10B981" 
       strokeWidth="2"
       strokeLinecap="round"
       strokeLinejoin="round"
@@ -27,13 +27,13 @@ export const roomIcons = {
       height="24"
       viewBox="0 0 24 24"
       fill="none"
-      stroke="white"
+      stroke="#EF4444" 
       strokeWidth="2"
       strokeLinecap="round"
       strokeLinejoin="round"
       {...props}
     >
-      <line x1="1" y1="1" x2="23" y2="23" stroke="white" strokeWidth="2.5" />
+      <line x1="1" y1="1" x2="23" y2="23" stroke="#EF4444" strokeWidth="2.5" />
       <path d="M9 9v3a3 3 0 0 0 5.12 2.12" />
       <path d="M15 9.34V4a3 3 0 0 0-5.94-.6" />
       <path d="M17 16.95A7 7 0 0 1 5 12v-2m14 0v2a7 7 0 0 1-.11 1.23" />
@@ -48,7 +48,7 @@ export const roomIcons = {
       height="24"
       viewBox="0 0 24 24"
       fill="none"
-      stroke="white"
+      stroke="#10B981" 
       strokeWidth="2"
       strokeLinecap="round"
       strokeLinejoin="round"
@@ -66,19 +66,18 @@ export const roomIcons = {
       height="24"
       viewBox="0 0 24 24"
       fill="none"
-      stroke="white"
+      stroke="#EF4444" 
       strokeWidth="2"
       strokeLinecap="round"
       strokeLinejoin="round"
       {...props}
     >
-      <line x1="1" y1="1" x2="23" y2="23" stroke="white" strokeWidth="2.5" />
+      <line x1="1" y1="1" x2="23" y2="23" stroke="#EF4444" strokeWidth="2.5" />
       <path d="M21 21H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h3m3-3h6l2 3h4a2 2 0 0 1 2 2v9.34" />
       <path d="M16 16c-.28.49-.69.92-1.19 1.23" />
       <path d="M9.87 9.87a4 4 0 0 0 5.66 5.66" />
     </svg>
   ),
-
 
   link: (props: SVGProps<SVGSVGElement>) => (
     <svg
@@ -87,7 +86,7 @@ export const roomIcons = {
       height="24"
       viewBox="0 0 24 24"
       fill="none"
-      stroke="white"
+      stroke="#3B82F6" 
       strokeWidth="2"
       strokeLinecap="round"
       strokeLinejoin="round"
@@ -105,7 +104,7 @@ export const roomIcons = {
       height="24"
       viewBox="0 0 24 24"
       fill="none"
-      stroke="white"
+      stroke="#EF4444" 
       strokeWidth="2"
       strokeLinecap="round"
       strokeLinejoin="round"

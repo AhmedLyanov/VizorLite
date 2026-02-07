@@ -1,5 +1,4 @@
 :root {
-  /* Существующие переменные */
   --primary-background-color: linear-gradient(135deg, #f5f7ff 0%, #e6e9ff 100%);
   --primary-white: #ffffff;
   --primary-title-color: #333;
@@ -21,7 +20,7 @@
   --transition-normal: 0.25s ease;
 
   /* RoomPage - Container */
-  --room-container-bg: #161616;
+  --room-container-bg: #282828;
   --room-container-padding-mobile: 10px;
   --room-container-padding-480: 15px;
   --room-container-padding-768: 20px;

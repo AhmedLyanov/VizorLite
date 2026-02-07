@@ -5,10 +5,10 @@ class AIController {
     try {
       const { message, messages } = req.body;
       const apiKey = process.env.OPENROUTER_API_KEY;
-      
+
       if (!apiKey) {
-        return res.status(500).json({ 
-          error: 'API key not configured' 
+        return res.status(500).json({
+          error: 'API key not configured'
         });
       }
 
@@ -20,9 +20,44 @@ class AIController {
       }
 
       const contextMessages = [
-        { 
-          role: "system", 
-          content: "Ты добрый и щедрый ассистент для видеоконференций. Отвечай на русском языке. Помогай пользователям с вопросами о конференциях, встречами, планированием. Будь кратким и полезным." 
+        {
+          role: "system",
+          content: `Ты строгий ассистент видеоконференции VizorLite. Твои правила:
+
+1. ОТВЕЧАЙ ТОЛЬКО на вопросы, связанные с платформой VizorLite:
+   - Настройки конференций и встреч
+   - Технические вопросы по платформе
+   - Функционал видеосвязи, чатов, демонстрации экрана
+   - Проблемы с подключением и качеством связи
+
+2. ЗАПРЕЩЕНО:
+   - Отвечать на вопросы не по теме VizorLite
+   - Обсуждать посторонние темы
+   - Давать рекомендации вне контекста платформы
+   - Поддерживать светские беседы
+
+3. ЕСЛИ вопрос не о VizorLite:
+   - Четко скажи: "Я могу отвечать только на вопросы о платформе VizorLite"
+   - Не продолжай диалог на посторонние темы
+   - Не объясняй причины отказа
+
+4. СТИЛЬ ОБЩЕНИЯ:
+   - Кратко и по делу
+   - Без лишних слов и эмоций
+   - Только факты и инструкции
+   - Без приветствий и прощаний, если не задан вопрос о них
+
+5. ЯЗЫК: Отвечай на том же языке, на котором задан вопрос.
+
+Пример правильного ответа на посторонний вопрос: 
+Вопрос: "Какая сегодня погода?"
+Ответ: "Я могу отвечать только на вопросы о платформе VizorLite"
+
+Пример правильного ответа на тему VizorLite:
+Вопрос: "Как настроить демонстрацию экрана?"
+Ответ: "В правом нижнем углу нажмите иконку 'Поделиться экраном'. Выберите окно или весь экран."
+
+НИКАКИХ ИСКЛЮЧЕНИЙ. СТРОГО СОБЛЮДАЙ ЭТИ ПРАВИЛА.`
         },
         ...messages,
         { role: "user", content: message.trim() }
@@ -42,23 +77,23 @@ class AIController {
             'HTTP-Referer': process.env.FRONTEND_URL || 'http://localhost:5173',
             'X-Title': 'VizorLite'
           },
-          timeout: 30000 
+          timeout: 30000
         }
       );
 
-      
+
       const assistantReply = response.data.choices?.[0]?.message?.content?.trim() || '';
-      
+
       if (!assistantReply) {
         console.warn('⚠️ Empty response from AI');
         return res.status(502).json({
           error: 'AI returned empty response',
           success: false
         });
-      }      
-      res.json({ 
+      }
+      res.json({
         reply: assistantReply,
-        success: true 
+        success: true
       });
 
     } catch (error) {
@@ -67,7 +102,7 @@ class AIController {
         response: error.response?.data,
         status: error.response?.status
       });
-      
+
       if (error.response) {
         res.status(error.response.status).json({
           error: error.response.data.error?.message || `AI service error (${error.response.status})`,
@@ -88,10 +123,10 @@ class AIController {
   }
 
   async status(req, res) {
-    res.json({ 
-      status: 'ok', 
+    res.json({
+      status: 'ok',
       service: 'AI Assistant',
-      connected: !!process.env.OPENROUTER_API_KEY 
+      connected: !!process.env.OPENROUTER_API_KEY
     });
   }
 }
