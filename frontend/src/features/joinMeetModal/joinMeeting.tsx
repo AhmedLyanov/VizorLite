@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { JOINMEETING_TEXTS } from "../../shared/constants/joinMeeting";
 import { useIntl } from "react-intl";
-import styles from "./JoinMeeting.module.css";
+import styles from "./joinMeeting.module.css";
 
 type Props = {
   isOpen: boolean;
