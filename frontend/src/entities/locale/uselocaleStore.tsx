@@ -72,6 +72,9 @@ export const useLocaleStore = create<LocaleStore>()(
         { code: LOCALES.ENGLISH, name: "English", flag: "🇺🇸" },
         { code: LOCALES.GERMAN, name: "Deutsch", flag: "🇩🇪" },
         { code: LOCALES.JAPANESE, name: "日本語", flag: "🇯🇵" },
+        { code: LOCALES.CHINESE, name: "中文", flag: "🇨🇳" },
+        { code: LOCALES.FRENCH, name: "Français", flag: "🇫🇷" },
+        { code: LOCALES.ARABIC, name: "العربية", flag: "🇸🇦" },
       ],
     }),
     {
