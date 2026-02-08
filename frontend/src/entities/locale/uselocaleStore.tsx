@@ -1,17 +1,17 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
-import { LOCALES, messages } from "./i18n";
+import { LOCALES, messages, type MessageKey } from "./i18n";
 import type { Locale } from "./i18n";
 
 interface LocaleStore {
   locale: Locale;
   isChanging: boolean;
-
   isLanguageSwitcherOpen: boolean;
 
   setLocale: (locale: Locale) => void;
   toggleLocale: () => void;
-  getCurrentMessages: () => (typeof messages)[keyof typeof messages];
+  getCurrentMessages: () => typeof messages[keyof typeof messages];
+  getMessage: (key: MessageKey) => string;
   getAvailableLocales: () => Array<{
     code: Locale;
     name: string;
@@ -29,8 +29,6 @@ export const useLocaleStore = create<LocaleStore>()(
       locale: LOCALES.ENGLISH,
       isChanging: false,
       isLanguageSwitcherOpen: false,
-
-
 
       setLocale: (locale) => {
         set({
@@ -67,6 +65,11 @@ export const useLocaleStore = create<LocaleStore>()(
         return messages[get().locale];
       },
 
+      getMessage: (key: MessageKey) => {
+        const localeMessages = messages[get().locale];
+        return localeMessages[key] || key; 
+      },
+
       getAvailableLocales: () => [
         { code: LOCALES.RUSSIAN, name: "Русский", flag: "🇷🇺" },
         { code: LOCALES.ENGLISH, name: "English", flag: "🇺🇸" },
@@ -81,7 +84,6 @@ export const useLocaleStore = create<LocaleStore>()(
       name: "vizorlite-locale",
       partialize: (state) => ({
         locale: state.locale,
-
       }),
     }
   )
@@ -96,5 +98,6 @@ export const useLocale = () => {
     setLocale,
     isChanging,
     messages: currentMessages,
+    getMessage: useLocaleStore((state) => state.getMessage),
   };
 };
