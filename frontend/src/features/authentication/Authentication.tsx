@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
 import { useRegister, useLogin } from '../../entities/user/useAuth'
 import { useIntl } from "react-intl"
 import { AUTHENTICATION_TEXTS } from '../../shared/constants/authentication'
@@ -11,7 +10,6 @@ type FormMode = 'login' | 'register'
 
 export default function Authentication() {
   const intl = useIntl()
-  const navigate = useNavigate()
   const [showPassword, setShowPassword] = useState(false);
   const [mode, setMode] = useState<FormMode>('login')
 
@@ -36,26 +34,23 @@ export default function Authentication() {
   }
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
+    e.preventDefault();
 
     try {
       if (mode === 'register') {
         if (!formData.username.trim() || !formData.email.trim() || !formData.password.trim()) {
-          return
+          return;
         }
-        await register(formData)
-        navigate('/profile', { replace: true })
+        await register(formData);
       } else {
         if (!formData.email.trim() || !formData.password.trim()) {
-          return
+          return;
         }
-        await login({ email: formData.email, password: formData.password })
-        navigate('/profile', { replace: true })
+        await login({ email: formData.email, password: formData.password });
       }
     } catch (err) {
-      // Ошибка уже обрабатывается в хуках useRegister/useLogin
     }
-  }
+  };
 
   const toggleMode = () => {
     setMode(mode === 'login' ? 'register' : 'login')
@@ -146,9 +141,9 @@ export default function Authentication() {
               disabled={isPending}
               minLength={6}
             />
-            <button 
-              type="button" 
-              className={styles.showPasswordButton} 
+            <button
+              type="button"
+              className={styles.showPasswordButton}
               onClick={() => setShowPassword(prev => !prev)}
               aria-label={showPassword ? "Hide password" : "Show password"}
               disabled={isPending}
