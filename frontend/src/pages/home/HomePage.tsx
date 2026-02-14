@@ -8,9 +8,8 @@ import styles from "./HomePage.module.css";
 
 import InstallBanner from "../../widgets/installBanner/InstallBanner";
 import BigButton from "../../shared/ui/button/BigButton/BigButton";
-import LanguageSwitcher from "../../features/languageSwitcher/LanguageSwitcher";
-import JoinMeetingModal from "../../features/joinMeetModal/JoinMeeting";
-
+import LanguageSwitcher from "../../features/LanguageSwitcher/LanguageSwitcher";
+import JoinMeetingModal from "../../features/joinMeetModal/joinMeeting";
 import webcamIcon from "../../shared/assets/webcamera.svg";
 import joinIcon from "../../shared/assets/join.svg";
 import dollarIcon from "../../shared/assets/dollar.svg";
@@ -18,7 +17,7 @@ import questionIcon from "../../shared/assets/question.svg";
 
 export default function HomePage() {
   const [isJoinOpen, setIsJoinOpen] = useState(false);
-  const createMeetingMutation = useCreateMeeting()
+  const createMeetingMutation = useCreateMeeting();
   const intl = useIntl();
 
   return (
@@ -39,7 +38,6 @@ export default function HomePage() {
             onClick={() => createMeetingMutation.mutate()}
           />
 
-
           <BigButton
             title={intl.formatMessage({
               id: HOME_TEXTS.BUTTONS.JOIN_MEETING,
@@ -58,18 +56,14 @@ export default function HomePage() {
         <div className={styles.bottomUtilsButtons}>
           <Link to="/pricing" className={styles.bottomUtilsButton}>
             <img src={dollarIcon} alt="" className={styles.linkIcon} />
-            <span>
-              {intl.formatMessage({ id: HOME_TEXTS.BOTTOM.PRICING })}
-            </span>
+            <span>{intl.formatMessage({ id: HOME_TEXTS.BOTTOM.PRICING })}</span>
           </Link>
 
           <LanguageSwitcher />
 
           <Link to="/faq" className={styles.bottomUtilsButton}>
             <img src={questionIcon} alt="" className={styles.linkIcon} />
-            <span>
-              {intl.formatMessage({ id: HOME_TEXTS.BOTTOM.FAQ })}
-            </span>
+            <span>{intl.formatMessage({ id: HOME_TEXTS.BOTTOM.FAQ })}</span>
           </Link>
         </div>
       </div>
