@@ -5,6 +5,7 @@ import { Tooltip, message } from 'antd';
 import LeaveRoomModal from "../leaveRoom/LeaveRoom";
 import { useIntl } from "react-intl";
 import { ROOM_BOARD_TEXTS } from "../../shared/constants/roomBoard";
+import MicLevel from "../../shared/ui/waveform/Waveform";
 
 interface RoomBoardProps {
   stream: MediaStream | null;
@@ -84,7 +85,15 @@ export default function RoomBoard({
   return (
     <>
       {contextHolder}
+      
+      <button className={styles.roomBoardChatButton}>
+        <Icon name="send"/>
+      </button>
+
       <div className={styles.roomBoardContainer}>
+        <div className={styles.roomBoardWaveform}>
+            <MicLevel />
+        </div>
         <div className={styles.roomBoardContent}>
           <Tooltip 
             placement="top" 
