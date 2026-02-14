@@ -6,7 +6,7 @@ type Props = {
 
 export default function MicLevel({ stream }: Props) {
   const [volume, setVolume] = useState(0);
-    
+
   const analyserRef = useRef<AnalyserNode | null>(null);
   const audioContextRef = useRef<AudioContext | null>(null);
   const animationRef = useRef<number | null>(null);
@@ -17,7 +17,8 @@ export default function MicLevel({ stream }: Props) {
     async function init() {
       try {
         localStream =
-          stream || (await navigator.mediaDevices.getUserMedia({ audio: true }));
+          stream ||
+          (await navigator.mediaDevices.getUserMedia({ audio: true }));
 
         const audioContext = new AudioContext();
         const source = audioContext.createMediaStreamSource(localStream);
@@ -32,15 +33,12 @@ export default function MicLevel({ stream }: Props) {
 
         const bufferLength = analyser.frequencyBinCount;
 
-        const buffer = new ArrayBuffer(bufferLength);
-        const dataArray: Uint8Array = new Uint8Array(buffer);
+        const dataArray = new Uint8Array(bufferLength);
 
         function update() {
           if (!analyserRef.current) return;
 
-analyser.getByteTimeDomainData(
-  dataArray as unknown as Uint8Array<ArrayBuffer>
-);
+          analyserRef.current.getByteTimeDomainData(dataArray);
 
           let sum = 0;
           for (let i = 0; i < dataArray.length; i++) {
@@ -66,7 +64,7 @@ analyser.getByteTimeDomainData(
       if (animationRef.current) cancelAnimationFrame(animationRef.current);
       if (audioContextRef.current) audioContextRef.current.close();
       if (!stream && localStream) {
-        localStream.getTracks().forEach(track => track.stop());
+        localStream.getTracks().forEach((track) => track.stop());
       }
     };
   }, [stream]);
