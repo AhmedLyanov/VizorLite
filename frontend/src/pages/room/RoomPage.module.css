@@ -1,0 +1,137 @@
+.containerRoom {
+    width: 100%;
+    min-height: 100vh;
+    position: relative;
+    padding: var(--room-container-padding-mobile);
+    background: var(--room-container-bg);
+    box-sizing: border-box;
+}
+
+.roomBox {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--room-box-gap-mobile);
+    justify-content: center;
+    align-items: center;
+    padding: var(--room-box-padding-mobile);
+    box-sizing: border-box;
+}
+
+.roomParticipant {
+    border: var(--room-participant-border);
+    border-radius: var(--room-participant-border-radius);
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    background: var(--room-participant-bg);
+}
+
+.videoContainer {
+    position: relative;
+    flex: var(--video-container-flex-mobile);
+    height: var(--video-container-height-mobile);
+    box-sizing: border-box;
+}
+
+.videoLabel {
+    position: absolute;
+    bottom: 8px;
+    left: 8px;
+    background: var(--video-label-bg);
+    color: var(--video-label-color);
+    padding: var(--video-label-padding-mobile);
+    border-radius: var(--video-label-border-radius);
+    font-size: var(--video-label-fontsize-mobile);
+    z-index: 1;
+}
+
+@media (min-width: 480px) {
+    .containerRoom {
+        padding: var(--room-container-padding-480);
+    }
+    
+    .roomBox {
+        gap: var(--room-box-gap-480);
+        padding: var(--room-box-padding-480);
+    }
+    
+    .videoContainer {
+        flex: var(--video-container-flex-480);
+        height: var(--video-container-height-480);
+    }
+}
+
+@media (min-width: 768px) {
+    .containerRoom {
+        padding: var(--room-container-padding-768);
+    }
+    
+    .roomBox {
+        gap: var(--room-box-gap-768);
+        padding: var(--room-box-padding-768);
+        min-height: var(--room-box-min-height);
+    }
+    
+    .videoContainer {
+        flex: var(--video-container-flex-768);
+        height: var(--video-container-height-768);
+        max-width: var(--video-container-maxwidth-768);
+    }
+    
+    .videoLabel {
+        font-size: var(--video-label-fontsize-768);
+        padding: var(--video-label-padding-768);
+    }
+}
+
+@media (min-width: 1024px) {
+    .roomBox {
+        gap: var(--room-box-gap-1024);
+        padding: var(--room-box-padding-1024);
+    }
+    
+    .videoContainer {
+        flex: var(--video-container-flex-1024);
+        height: var(--video-container-height-1024);
+        max-width: var(--video-container-maxwidth-1024);
+        min-width: var(--video-container-minwidth-1024);
+    }
+    
+    .videoLabel {
+        font-size: var(--video-label-fontsize-1024);
+        padding: var(--video-label-padding-1024);
+    }
+}
+
+@media (min-width: 1440px) {
+    .roomBox {
+        gap: var(--room-box-gap-1440);
+        padding: var(--room-box-padding-1440);
+    }
+    
+    .videoContainer {
+        flex: var(--video-container-flex-1440);
+        height: var(--video-container-height-1440);
+        max-width: var(--video-container-maxwidth-1440);
+        min-width: var(--video-container-minwidth-1440);
+    }
+    
+    .videoLabel {
+        font-size: var(--video-label-fontsize-1440);
+        padding: var(--video-label-padding-1440);
+    }
+}
+
+@media (min-width: 1920px) {
+    .videoContainer {
+        flex: var(--video-container-flex-1920);
+        height: var(--video-container-height-1920);
+        max-width: var(--video-container-maxwidth-1920);
+        min-width: var(--video-container-minwidth-1920);
+    }
+    
+    .roomBox {
+        gap: var(--room-box-gap-1920);
+        padding: var(--room-box-padding-1920);
+    }
+}

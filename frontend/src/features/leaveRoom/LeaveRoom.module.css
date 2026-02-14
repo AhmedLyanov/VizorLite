@@ -1,0 +1,123 @@
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--leaveroom-overlay-bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--leaveroom-overlay-padding);
+  z-index: var(--leaveroom-overlay-z-index);
+  animation: var(--animation-fadein);
+}
+
+.modal {
+  background: var(--leaveroom-modal-bg);
+  border-radius: var(--leaveroom-modal-border-radius);
+  padding: var(--leaveroom-modal-padding);
+  width: 100%;
+  max-width: var(--leaveroom-modal-max-width);
+  box-shadow: var(--leaveroom-modal-box-shadow);
+  animation: var(--animation-slideup);
+  border: var(--leaveroom-modal-border);
+}
+
+.modal h2 {
+  color: var(--leaveroom-title-color);
+  font-family: var(--leaveroom-title-font-family);
+  font-size: var(--leaveroom-title-font-size);
+  font-weight: var(--leaveroom-title-font-weight);
+  margin: 0 0 var(--leaveroom-title-margin-bottom) 0;
+  text-align: center;
+  line-height: 1.4;
+}
+
+.description {
+  color: var(--leaveroom-description-color);
+  font-family: var(--leaveroom-description-font-family);
+  font-size: var(--leaveroom-description-font-size);
+  line-height: var(--leaveroom-description-line-height);
+  text-align: center;
+  margin: 0 0 var(--leaveroom-description-margin-bottom) 0;
+}
+
+.actions {
+  display: flex;
+  gap: var(--leaveroom-actions-gap);
+}
+
+.actions button {
+  flex: 1;
+  padding: var(--leaveroom-button-padding);
+  border-radius: var(--leaveroom-button-border-radius);
+  font-family: var(--leaveroom-button-font-family);
+  font-size: var(--leaveroom-button-font-size);
+  font-weight: var(--leaveroom-button-font-weight);
+  border: none;
+  cursor: pointer;
+  transition: var(--transition-normal);
+}
+
+.cancelButton {
+  background: var(--leaveroom-cancel-button-bg);
+  color: var(--leaveroom-cancel-button-color);
+}
+
+.cancelButton:hover {
+  background: var(--leaveroom-cancel-button-hover-bg);
+}
+
+.confirmButton {
+  background: var(--leaveroom-confirm-button-bg);
+  color: var(--leaveroom-confirm-button-color);
+}
+
+.confirmButton:hover {
+  background: var(--leaveroom-confirm-button-hover-bg);
+}
+
+.actions button:active {
+  transform: translateY(0);
+}
+
+@media (min-width: 768px) {
+  .modal {
+    padding: var(--leaveroom-modal-padding-768);
+    max-width: var(--leaveroom-modal-max-width-768);
+  }
+  
+  .modal h2 {
+    font-size: var(--leaveroom-title-font-size-768);
+    margin-bottom: var(--leaveroom-title-margin-bottom-768);
+  }
+  
+  .description {
+    font-size: var(--leaveroom-description-font-size-768);
+    margin-bottom: var(--leaveroom-description-margin-bottom-768);
+  }
+  
+  .actions {
+    gap: var(--leaveroom-actions-gap-768);
+  }
+  
+  .actions button {
+    padding: var(--leaveroom-button-padding-768);
+    font-size: var(--leaveroom-button-font-size-768);
+  }
+}
+
+@media (min-width: 1024px) {
+  .modal {
+    max-width: var(--leaveroom-modal-max-width-1024);
+  }
+  
+  .modal h2 {
+    font-size: var(--leaveroom-title-font-size-1024);
+  }
+  
+  .actions button {
+    padding: var(--leaveroom-button-padding-1024);
+  }
+}

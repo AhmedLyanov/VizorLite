@@ -1,46 +1,204 @@
-# Getting Started with Create React App
+# VizorLite
+![VizorLite Cover](https://raw.githubusercontent.com/AhmedLyanov/VizorLite/dev/docs/cover.png)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+VizorLite — это современное веб-приложение для видеоконференций, которое позволяет пользователям легко создавать и присоединяться к видеовстречам без необходимости установки дополнительного программного обеспечения или регистрации. Платформа ориентирована на простоту использования, доступность и конфиденциальность.
 
-## Available Scripts
+## Описание проекта
 
-In the project directory, you can run:
+VizorLite представляет собой полнофункциональное приложение для видеоконференций, состоящее из двух основных компонентов: фронтенд на основе React и бэкенд на Node.js. Проект разработан с учетом принципов доступности, безопасности и простоты использования, позволяя пользователям быстро начинать видеозвонки без сложных настроек.
 
-### `npm start`
+### Основные возможности
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- **Создание видеовстреч**: Пользователи могут легко создавать новые видеоконференции
+- **Присоединение к встречам**: Возможность присоединяться к существующим встречам по ссылке
+- **Управление аккаунтом**: Регистрация, авторизация и управление профилем пользователя
+- **Многоязычность**: Поддержка нескольких языков (русский, английский, японский)
+- **Тарифные планы**: Различные тарифы для разных потребностей (базовый, бизнес, премиум)
+- **Мобильная версия**: Возможность установки как PWA-приложения
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Архитектура проекта
 
-### `npm test`
+Проект разделен на две основные части:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Backend (серверная часть)
 
-### `npm run build`
+- **Язык программирования**: JavaScript (ES6+)
+- **Фреймворк**: Express.js (версия 5.2.1)
+- **База данных**: MongoDB (с использованием Mongoose ORM)
+- **Аутентификация**: JWT-токены
+- **Хэширование паролей**: bcrypt
+- **Сервер**: Node.js
+- **Сборка и запуск**: Bun, Docker
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+#### Основные модули:
+- **Controllers**: Обработка запросов и логика приложения
+- **Models**: Структура данных и взаимодействие с базой данных
+- **Routes**: Определение маршрутов API
+- **Middleware**: Промежуточное ПО (аутентификация, логирование)
+- **Utils**: Вспомогательные функции (JWT, другие утилиты)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+#### API endpoints:
+- `/api/users/register` - регистрация нового пользователя
+- `/api/users/login` - вход пользователя в систему
+- `/api/users/profile` - получение профиля пользователя (требует аутентификации)
+- `/api/users/profile` - обновление профиля пользователя (требует аутентификации)
+- `/api/users/account` - удаление аккаунта пользователя (требует аутентификации)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Frontend (клиентская часть)
 
-### `npm run eject`
+- **Язык программирования**: TypeScript
+- **Фреймворк**: React (версия 19.2.0)
+- **Маршрутизация**: React Router DOM
+- **UI библиотека**: Ant Design
+- **Состояние**: Zustand
+- **Интернационализация**: react-intl
+- **Сборка**: Vite
+- **Сервер**: Nginx (в контейнере Docker)
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+#### Основные компоненты:
+- **Views**: Страницы приложения (главная, о нас, тарифы, 404)
+- **Components**: Переиспользуемые компоненты UI
+- **Layouts**: Структура страниц (Default, Minimal)
+- **Providers**: Контексты и провайдеры (локализация)
+- **Constants**: Константы для интернационализации
+- **i18n**: Файлы локализации
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Технологии
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+### Backend:
+- **Node.js** - серверная платформа
+- **Express.js** - веб-фреймворк
+- **MongoDB** - документоориентированная база данных
+- **Mongoose** - ODM для MongoDB
+- **JWT** - токены для аутентификации
+- **Bcrypt** - хэширование паролей
+- **Dotenv** - управление переменными окружения
+- **Nodemon** - автоматическая перезагрузка сервера при разработке
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+### Frontend:
+- **React** - библиотека для создания пользовательских интерфейсов
+- **TypeScript** - строгая типизация
+- **React Router** - навигация между страницами
+- **Ant Design** - библиотека компонентов UI
+- **Zustand** - управление состоянием
+- **React Intl** - интернационализация
+- **Vite** - сборщик проекта
+- **CSS Modules** - стилизация компонентов
 
-## Learn More
+### Инфраструктура:
+- **Docker** - контейнеризация
+- **Docker Compose** - оркестрация контейнеров
+- **Nginx** - веб-сервер для фронтенда
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Установка и запуск
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### Требования:
+- Node.js (версия 18 или выше)
+- Docker и Docker Compose
+- MongoDB (локально или через Docker)
+
+### Локальный запуск:
+
+1. Клонируйте репозиторий:
+```bash
+git clone https://github.com/AhmedLyanov/VizorLite.git
+cd VizorLite
+```
+
+2. Установите зависимости для backend и frontend:
+```bash
+# Установка зависимостей для backend
+cd backend
+npm install
+
+# Установка зависимостей для frontend
+cd ../frontend
+npm install
+```
+
+3. Настройте переменные окружения:
+Создайте файл `.env` в директории backend на основе файла `.env.example`:
+```env
+PORT=3000
+MONGODB_URI=mongodb://localhost:27017/vizorlite
+JWT_SECRET=your_jwt_secret_key
+NODE_ENV=development
+```
+
+4. Запустите приложение с помощью Docker Compose:
+```bash
+docker-compose up --build
+```
+
+После запуска:
+- Frontend будет доступен по адресу http://localhost:5000
+- Backend будет доступен по адресу http://localhost:3000
+
+## Структура проекта
+
+```
+VizorLite/
+├── backend/                 # Серверная часть приложения
+│   ├── controllers/         # Контроллеры для обработки запросов
+│   ├── middleware/          # Промежуточное ПО
+│   ├── models/              # Модели данных
+│   ├── routes/              # Маршруты API
+│   ├── utils/               # Вспомогательные функции
+│   ├── index.js             # Главный файл сервера
+│   ├── package.json         # Зависимости и скрипты
+│   └── Dockerfile           # Файл для сборки Docker-образа
+├── frontend/                # Клиентская часть приложения
+│   ├── public/              # Публичные ресурсы
+│   ├── src/
+│   │   ├── components/      # Компоненты UI
+│   │   ├── constants/       # Константы приложения
+│   │   ├── i18n/            # Интернационализация
+│   │   ├── layout/          # Макеты страниц
+│   │   ├── providers/       # Провайдеры контекста
+│   │   ├── views/           # Страницы приложения
+│   │   ├── App.tsx          # Главный компонент
+│   │   └── main.tsx         # Точка входа
+│   ├── index.html           # Главная HTML-страница
+│   ├── package.json         # Зависимости и скрипты
+│   └── Dockerfile           # Файл для сборки Docker-образа
+├── docker-compose.yml       # Конфигурация Docker Compose
+└── README.md                # Документация проекта
+```
+
+## Особенности приложения
+
+1. **Простота использования**: Пользователи могут начать видеозвонок без регистрации
+2. **Конфиденциальность**: Все данные пользователей защищены и не передаются третьим лицам
+3. **Многоязычность**: Поддержка русского, английского и японского языков
+4. **Адаптивный дизайн**: Приложение корректно отображается на различных устройствах
+5. **Интеграция с AI**: Встроенный помощник "Маркус" для помощи пользователям
+6. **Тарифные планы**: Различные варианты подписки в зависимости от потребностей
+
+## Безопасность
+
+- Пароли хэшируются с использованием bcrypt
+- Аутентификация реализована с помощью JWT-токенов
+- Все чувствительные данные хранятся в переменных окружения
+- Валидация входных данных на сервере
+
+## Вклад в развитие проекта
+
+Если вы хотите внести свой вклад в развитие проекта:
+
+1. Сделайте форк репозитория
+2. Создайте новую ветку для вашей функции (`git checkout -b feature/NewFeature`)
+3. Зафиксируйте изменения (`git commit -m 'Add some NewFeature'`)
+4. Отправьте изменения в удаленную ветку (`git push origin feature/NewFeature`)
+5. Создайте Pull Request
+
+## Лицензия
+
+Этот проект распространяется под лицензией ISC. Подробности см. в файле LICENSE.
+
+## Авторы
+
+- **Ahmed** - основной разработчик
+
+## Контакты
+
+Для связи с командой проекта используйте раздел Issues в репозитории GitHub.

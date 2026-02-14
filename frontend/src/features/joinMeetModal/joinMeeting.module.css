@@ -1,0 +1,152 @@
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--joinmeeting-overlay-bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--joinmeeting-overlay-padding);
+  z-index: var(--joinmeeting-overlay-z-index);
+  animation: var(--animation-fadein);
+}
+
+.modal {
+  background: var(--joinmeeting-modal-bg);
+  border-radius: var(--joinmeeting-modal-border-radius);
+  padding: var(--joinmeeting-modal-padding);
+  width: 100%;
+  max-width: var(--joinmeeting-modal-max-width);
+  box-shadow: var(--joinmeeting-modal-box-shadow);
+  animation: var(--animation-slideup);
+}
+
+.modal h2 {
+  color: var(--primary-title-color);
+  font-family: var(--primary-font);
+  font-size: var(--joinmeeting-title-font-size);
+  font-weight: var(--joinmeeting-title-font-weight);
+  margin: 0 0 var(--joinmeeting-title-margin-bottom) 0;
+  text-align: center;
+  line-height: 1.4;
+}
+
+.input {
+  width: 100%;
+  padding: var(--joinmeeting-input-padding);
+  border: var(--joinmeeting-input-border);
+  border-radius: var(--joinmeeting-input-border-radius);
+  font-family: var(--primary-font);
+  font-size: var(--joinmeeting-input-font-size);
+  color: var(--joinmeeting-input-color);
+  background: var(--joinmeeting-input-bg);
+  box-sizing: border-box;
+  transition: var(--transition-normal);
+  margin-bottom: 8px;
+}
+
+.input:focus {
+  outline: none;
+  border-color: var(--joinmeeting-input-focus-border);
+  box-shadow: var(--joinmeeting-input-focus-shadow);
+}
+
+.input::placeholder {
+  color: var(--joinmeeting-input-placeholder-color);
+  font-size: var(--joinmeeting-input-placeholder-font-size);
+}
+
+.error {
+  color: var(--joinmeeting-error-color);
+  font-family: var(--primary-font);
+  font-size: var(--joinmeeting-error-font-size);
+  margin: 4px 0 12px;
+  text-align: center;
+}
+
+.actions {
+  display: flex;
+  gap: var(--joinmeeting-actions-gap);
+  margin-top: var(--joinmeeting-actions-margin-top);
+}
+
+.actions button {
+  flex: 1;
+  padding: var(--joinmeeting-button-padding);
+  border-radius: var(--joinmeeting-button-border-radius);
+  font-family: var(--primary-font);
+  font-size: var(--joinmeeting-button-font-size);
+  font-weight: var(--joinmeeting-button-font-weight);
+  border: none;
+  cursor: pointer;
+  transition: var(--transition-normal);
+}
+
+.actions button:first-child {
+  background: var(--joinmeeting-cancel-button-bg);
+  color: var(--joinmeeting-cancel-button-color);
+}
+
+.actions button:first-child:hover {
+  background: var(--joinmeeting-cancel-button-hover-bg);
+}
+
+.actions button:last-child {
+  background: var(--joinmeeting-confirm-button-bg);
+  color: var(--joinmeeting-confirm-button-color);
+}
+
+.actions button:last-child:hover {
+  background: var(--joinmeeting-confirm-button-hover-bg);
+  transform: translateY(-1px);
+}
+
+.actions button:active {
+  transform: translateY(0);
+}
+
+@media (min-width: 768px) {
+  .modal {
+    padding: var(--joinmeeting-modal-padding-768);
+    max-width: var(--joinmeeting-modal-max-width-768);
+  }
+  
+  .modal h2 {
+    font-size: var(--joinmeeting-title-font-size-768);
+    margin-bottom: var(--joinmeeting-title-margin-bottom-768);
+  }
+  
+  .input {
+    padding: var(--joinmeeting-input-padding-768);
+    font-size: var(--joinmeeting-input-font-size-768);
+  }
+  
+  .input::placeholder {
+    font-size: var(--joinmeeting-input-placeholder-font-size-768);
+  }
+  
+  .actions {
+    gap: var(--joinmeeting-actions-gap-768);
+  }
+  
+  .actions button {
+    padding: var(--joinmeeting-button-padding-768);
+    font-size: var(--joinmeeting-button-font-size-768);
+  }
+}
+
+@media (min-width: 1024px) {
+  .modal {
+    max-width: var(--joinmeeting-modal-max-width-1024);
+  }
+  
+  .modal h2 {
+    font-size: var(--joinmeeting-title-font-size-1024);
+  }
+  
+  .actions button {
+    padding: var(--joinmeeting-button-padding-1024);
+  }
+}

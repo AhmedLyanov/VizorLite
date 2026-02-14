@@ -1,0 +1,32 @@
+.roomBoardContainer {
+    position: fixed;
+    bottom: var(--roomboard-container-bottom);
+    left: 50%;
+    transform: translateX(-50%);
+    width: var(--roomboard-container-width);
+    max-width: var(--roomboard-container-max-width);
+    padding: var(--roomboard-container-padding);
+    height: var(--roomboard-container-height);
+    background-color: var(--roomboard-container-bg);
+    z-index: var(--roomboard-container-z-index);
+    border-radius: var(--roomboard-container-border-radius);
+    box-shadow: var(--roomboard-container-box-shadow);
+}
+
+.roomBoardContent {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
+    padding: var(--roomboard-content-padding);
+}
+
+.roomBoardButton {
+    background: var(--roomboard-button-bg);
+}
+
+@media (min-width: 768px) {
+    .roomBoardContainer {
+        width: var(--roomboard-container-width-768);
+    }
+}
