@@ -138,7 +138,7 @@ export default function RoomPage() {
     if (!stream || joinedRef.current) return;
     joinedRef.current = true;
 
-    const socket = io("http://localhost:3000", {
+    const socket = io("https://vizorlite.ru", {
       path: "/ws",
       transports: ["websocket"],
       withCredentials: true,
