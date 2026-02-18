@@ -1,11 +1,11 @@
 import styles from "./RoomBoard.module.css";
 import { Icon } from "../../shared/assets/icons/Icon";
 import { useState, useCallback } from "react";
-import { Tooltip, message } from 'antd';
+import { Tooltip, message } from "antd";
 import LeaveRoomModal from "../leaveRoom/LeaveRoom";
 import { useIntl } from "react-intl";
 import { ROOM_BOARD_TEXTS } from "../../shared/constants/roomBoard";
-import MicLevel from "../../shared/ui/waveform/Waveform";
+import MicLevelVisualizer from "../../shared/ui/waveform/MicLevelVisualizer";
 
 interface RoomBoardProps {
   stream: MediaStream | null;
@@ -14,31 +14,31 @@ interface RoomBoardProps {
   isCameraOn?: boolean;
 }
 
-export default function RoomBoard({ 
-  stream, 
+export default function RoomBoard({
+  stream,
   onLeaveRoom,
   onToggleCamera,
-  isCameraOn = true
+  isCameraOn = true,
 }: RoomBoardProps) {
   const intl = useIntl();
   const [isMicOn, setIsMicOn] = useState(true);
-  const [isLeaveModalOpen, setIsLeaveModalOpen] = useState(false); 
+  const [isLeaveModalOpen, setIsLeaveModalOpen] = useState(false);
   const [messageApi, contextHolder] = message.useMessage();
 
   const toggleMicrophone = useCallback(() => {
     if (!stream) return;
-    
+
     const audioTracks = stream.getAudioTracks();
-    audioTracks.forEach(track => {
+    audioTracks.forEach((track) => {
       track.enabled = !track.enabled;
     });
-    
+
     const newMicState = !isMicOn;
     setIsMicOn(newMicState);
-    
+
     messageApi.open({
-      type: newMicState ? 'success' : 'warning',
-      content: newMicState 
+      type: newMicState ? "success" : "warning",
+      content: newMicState
         ? intl.formatMessage({ id: ROOM_BOARD_TEXTS.MESSAGES.MIC_ENABLED })
         : intl.formatMessage({ id: ROOM_BOARD_TEXTS.MESSAGES.MIC_DISABLED }),
       duration: 2,
@@ -49,8 +49,8 @@ export default function RoomBoard({
     if (onToggleCamera) {
       onToggleCamera();
       messageApi.open({
-        type: !isCameraOn ? 'success' : 'warning',
-        content: !isCameraOn 
+        type: !isCameraOn ? "success" : "warning",
+        content: !isCameraOn
           ? intl.formatMessage({ id: ROOM_BOARD_TEXTS.MESSAGES.CAMERA_ENABLED })
           : intl.formatMessage({ id: ROOM_BOARD_TEXTS.MESSAGES.CAMERA_DISABLED }),
         duration: 2,
@@ -74,72 +74,86 @@ export default function RoomBoard({
   const copyRoomLink = useCallback(() => {
     const shareMessage = intl.formatMessage({ id: ROOM_BOARD_TEXTS.SHARE.MESSAGE });
     const roomLink = `${shareMessage}\n${window.location.href}`;
-    
-    navigator.clipboard.writeText(roomLink).then(() => {
-      messageApi.success(intl.formatMessage({ id: ROOM_BOARD_TEXTS.MESSAGES.LINK_COPIED }), 2);
-    }).catch(() => {
-      messageApi.error(intl.formatMessage({ id: ROOM_BOARD_TEXTS.MESSAGES.LINK_COPY_ERROR }), 2);
-    });
+
+    navigator.clipboard
+      .writeText(roomLink)
+      .then(() => {
+        messageApi.success(
+          intl.formatMessage({ id: ROOM_BOARD_TEXTS.MESSAGES.LINK_COPIED }),
+          2
+        );
+      })
+      .catch(() => {
+        messageApi.error(
+          intl.formatMessage({ id: ROOM_BOARD_TEXTS.MESSAGES.LINK_COPY_ERROR }),
+          2
+        );
+      });
   }, [messageApi, intl]);
 
   return (
     <>
       {contextHolder}
-      
+
       <button className={styles.roomBoardChatButton}>
-        <Icon name="send"/>
+        <Icon name="send" />
       </button>
 
       <div className={styles.roomBoardContainer}>
         <div className={styles.roomBoardWaveform}>
-            <MicLevel />
+          <MicLevelVisualizer stream={stream} />
         </div>
         <div className={styles.roomBoardContent}>
-          <Tooltip 
-            placement="top" 
-            title={intl.formatMessage({ 
-              id: isMicOn ? ROOM_BOARD_TEXTS.TOOLTIPS.MIC_ON : ROOM_BOARD_TEXTS.TOOLTIPS.MIC_OFF 
+          <Tooltip
+            placement="top"
+            title={intl.formatMessage({
+              id: isMicOn
+                ? ROOM_BOARD_TEXTS.TOOLTIPS.MIC_ON
+                : ROOM_BOARD_TEXTS.TOOLTIPS.MIC_OFF,
             })}
           >
-            <button 
-              onClick={toggleMicrophone} 
-              className={`${styles.roomBoardButton} ${!isMicOn ? styles.buttonActive : ''}`}
+            <button
+              onClick={toggleMicrophone}
+              className={`${styles.roomBoardButton} ${
+                !isMicOn ? styles.buttonActive : ""
+              }`}
             >
               <Icon name={isMicOn ? "micOn" : "micOff"} />
             </button>
           </Tooltip>
-          
-          <Tooltip 
-            placement="top" 
-            title={intl.formatMessage({ 
-              id: isCameraOn ? ROOM_BOARD_TEXTS.TOOLTIPS.CAMERA_ON : ROOM_BOARD_TEXTS.TOOLTIPS.CAMERA_OFF 
+
+          <Tooltip
+            placement="top"
+            title={intl.formatMessage({
+              id: isCameraOn
+                ? ROOM_BOARD_TEXTS.TOOLTIPS.CAMERA_ON
+                : ROOM_BOARD_TEXTS.TOOLTIPS.CAMERA_OFF,
             })}
           >
-            <button 
-              onClick={handleToggleCamera} 
-              className={`${styles.roomBoardButton} ${!isCameraOn ? styles.buttonActive : ''}`}
+            <button
+              onClick={handleToggleCamera}
+              className={`${styles.roomBoardButton} ${
+                !isCameraOn ? styles.buttonActive : ""
+              }`}
             >
               <Icon name={isCameraOn ? "cameraOn" : "cameraOff"} />
             </button>
           </Tooltip>
 
-          <Tooltip 
-            placement="top" 
+          <Tooltip
+            placement="top"
             title={intl.formatMessage({ id: ROOM_BOARD_TEXTS.TOOLTIPS.COPY_LINK })}
           >
-            <button 
-              onClick={copyRoomLink}
-              className={styles.roomBoardButton}
-            >
+            <button onClick={copyRoomLink} className={styles.roomBoardButton}>
               <Icon name="link" />
             </button>
           </Tooltip>
-          
-          <Tooltip 
-            placement="top" 
+
+          <Tooltip
+            placement="top"
             title={intl.formatMessage({ id: ROOM_BOARD_TEXTS.TOOLTIPS.LEAVE_ROOM })}
           >
-            <button 
+            <button
               onClick={handleLeaveRoom}
               className={`${styles.roomBoardButton} ${styles.buttonLeave}`}
             >
