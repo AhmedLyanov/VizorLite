@@ -4,17 +4,18 @@ import { Icon } from "../../shared/assets/icons/Icon";
 import { Tooltip } from 'antd';
 
 export default function Aside() {
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated, user } = useAuth();
 
   return (
     <aside className={styles.aside}>
       <div className={styles.asideContent}>
         <div className={styles.asideContentTop}>
-          {isAuthenticated && (
+          {isAuthenticated && user && (
             <Tooltip placement="right" title="Профиль">
               <a href="/profile" className={styles.navLink}>
-                <span>Profile</span>
-              </a>
+                <div className={styles.asideAvatar}>
+                  {user.username?.charAt(0).toUpperCase() || "?"}
+                </div>              </a>
             </Tooltip>
           )}
           <Tooltip placement="right" title="Сообщения">

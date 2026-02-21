@@ -15,7 +15,7 @@ if (typeof process === 'undefined') {
 export default function RoomPage() {
   const { roomId } = useParams<{ roomId: string }>();
   const navigate = useNavigate();
-  
+
   if (!roomId) return <div>Room not found</div>;
 
   const socketRef = useRef<Socket | null>(null);
@@ -46,12 +46,12 @@ export default function RoomPage() {
 
   const toggleCamera = () => {
     if (!stream) return;
-    
+
     const videoTracks = stream.getVideoTracks();
     videoTracks.forEach(track => {
       track.enabled = !track.enabled;
     });
-    
+
     setIsCameraOn(prev => !prev);
   };
 
@@ -64,16 +64,16 @@ export default function RoomPage() {
 
     peer.on("signal", (signalData: any) => {
       if (!socketRef.current) return;
-      
+
       if (signalData.type === 'offer') {
-        socketRef.current.emit("offer", { 
-          offer: signalData, 
-          to: socketId 
+        socketRef.current.emit("offer", {
+          offer: signalData,
+          to: socketId
         });
       } else if (signalData.type === 'answer') {
-        socketRef.current.emit("answer", { 
-          answer: signalData, 
-          to: socketId 
+        socketRef.current.emit("answer", {
+          answer: signalData,
+          to: socketId
         });
       } else if (signalData.type === 'candidate') {
         socketRef.current.emit("ice-candidate", {
@@ -108,7 +108,7 @@ export default function RoomPage() {
     }
     remoteStreamsRef.current.delete(socketId);
     setRemoteVideos(new Map(remoteStreamsRef.current));
-    
+
     setParticipants(prev => {
       const newMap = new Map(prev);
       newMap.delete(socketId);
@@ -122,15 +122,15 @@ export default function RoomPage() {
     });
     peersRef.current.clear();
     remoteStreamsRef.current.clear();
-    
+
     if (socketRef.current) {
       socketRef.current.disconnect();
     }
-    
+
     if (stream) {
       stream.getTracks().forEach(track => track.stop());
     }
-    
+
     navigate('/');
   };
 
@@ -138,7 +138,7 @@ export default function RoomPage() {
     if (!stream || joinedRef.current) return;
     joinedRef.current = true;
 
-    const socket = io("https://vaykino.ru", {
+    const socket = io(import.meta.env.VITE_API_URL, {
       path: "/ws",
       transports: ["websocket"],
       withCredentials: true,
@@ -160,7 +160,7 @@ export default function RoomPage() {
         newMap.set(socketId, { userName });
         return newMap;
       });
-      
+
       if (!peersRef.current.has(socketId)) {
         createPeerConnection(socketId, true);
       }
@@ -168,11 +168,11 @@ export default function RoomPage() {
 
     socket.on("offer", ({ offer, from }) => {
       let peer = peersRef.current.get(from);
-      
+
       if (!peer) {
         peer = createPeerConnection(from, false);
       }
-      
+
       peer.signal(offer);
     });
 
@@ -206,7 +206,7 @@ export default function RoomPage() {
 
     return () => {
       socket.disconnect();
-      
+
       peersRef.current.forEach((peer) => {
         peer.destroy();
       });
@@ -227,12 +227,12 @@ export default function RoomPage() {
     <div className={style.containerRoom}>
       <div className={style.roomBox}>
         <div className={style.videoContainer}>
-          <video 
-            className={style.roomParticipant} 
-            ref={localVideoRef} 
-            autoPlay 
-            muted 
-            playsInline 
+          <video
+            className={style.roomParticipant}
+            ref={localVideoRef}
+            autoPlay
+            muted
+            playsInline
           />
         </div>
 
@@ -256,7 +256,7 @@ export default function RoomPage() {
 
 
       </div>
-      <RoomBoard 
+      <RoomBoard
         stream={stream}
         onLeaveRoom={handleLeaveRoom}
         onToggleCamera={toggleCamera}
