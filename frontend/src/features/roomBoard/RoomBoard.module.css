@@ -12,6 +12,49 @@
     border-radius: var(--roomboard-container-border-radius);
     box-shadow: var(--roomboard-container-box-shadow);
 }
+.roomBoardWaveformContainer {
+    position: fixed;
+    bottom: var(--roomboard-container-bottom);
+    left: calc(50% - var(--roomboard-container-width)/2 - 12px - 80px - 10px);
+    width: 80px;
+    height: var(--roomboard-container-height);
+    background-color: var(--roomboard-container-bg);
+    border-radius: var(--roomboard-container-border-radius);
+    box-shadow: var(--roomboard-container-box-shadow);
+    z-index: var(--roomboard-container-z-index);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 10px;
+}
+
+.roomBoardWaveform {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.roomBoardWaveform :global(.mic-visualizer) {
+    width: 100%;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+}
+
+.roomBoardWaveform :global(.mic-visualizer-bar) {
+    width: 4px;
+    background: #4CAF50;
+    border-radius: 4px;
+    transition: height 0.1s ease;
+}
+
+.roomBoardWaveform :global(.mic-visualizer-bar.inactive) {
+    background: #9e9e9e;
+}
 
 .roomBoardContent {
     display: flex;
@@ -39,53 +82,17 @@
     cursor: pointer;
 }
 
-.roomBoardWaveformButton {
-    position: fixed;
-    bottom: var(--roomboard-container-bottom);
-    left: calc(50% - var(--roomboard-container-width)/2 - 12px - 80px);
-    width: 80px;
-    height: var(--roomboard-container-height);
-    background-color: var(--roomboard-container-bg);
-    border: none;
-    border-radius: var(--roomboard-container-border-radius);
-    box-shadow: var(--roomboard-container-box-shadow);
-    z-index: var(--roomboard-container-z-index);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0 10px;
-}
-
-.roomBoardWaveformButton :global(.mic-visualizer) {
-    width: 100%;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 3px;
-}
-
-.roomBoardWaveformButton :global(.mic-visualizer-bar) {
-    width: 4px;
-    background: #4CAF50;
-    border-radius: 4px;
-    transition: height 0.1s ease;
-}
-
-.roomBoardWaveformButton :global(.mic-visualizer-bar.inactive) {
-    background: #9e9e9e;
-}
 
 @media (min-width: 768px) {
     .roomBoardContainer {
         width: var(--roomboard-container-width-768);
     }
     
-    .roomBoardChatButton {
-        right: calc(50% + var(--roomboard-container-width-768)/2 + 12px);
+    .roomBoardWaveformContainer {
+        left: calc(44% - var(--roomboard-container-width-768)/2 - 12px - 80px - 10px);
     }
     
-    .roomBoardWaveformButton {
-        left: calc(50% - var(--roomboard-container-width-768)/2 - 12px - 80px);
+    .roomBoardChatButton {
+        right: calc(50% + var(--roomboard-container-width-768)/2 + 12px);
     }
 }

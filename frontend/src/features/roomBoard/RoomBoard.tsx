@@ -99,10 +99,13 @@ export default function RoomBoard({
         <Icon name="send" />
       </button>
 
-      <div className={styles.roomBoardContainer}>
+      <div className={styles.roomBoardWaveformContainer}>
         <div className={styles.roomBoardWaveform}>
           <MicLevelVisualizer stream={stream} />
         </div>
+      </div>
+
+      <div className={styles.roomBoardContainer}>
         <div className={styles.roomBoardContent}>
           <Tooltip
             placement="top"
