@@ -12,6 +12,8 @@ interface RoomBoardProps {
   onLeaveRoom: () => void;
   onToggleCamera?: () => void;
   isCameraOn?: boolean;
+  onToggleScreenShare?: () => void;
+  isScreenSharing?: boolean;
 }
 
 export default function RoomBoard({
@@ -19,6 +21,8 @@ export default function RoomBoard({
   onLeaveRoom,
   onToggleCamera,
   isCameraOn = true,
+  onToggleScreenShare,
+  isScreenSharing = false,
 }: RoomBoardProps) {
   const intl = useIntl();
   const [isMicOn, setIsMicOn] = useState(true);
@@ -57,6 +61,19 @@ export default function RoomBoard({
       });
     }
   }, [onToggleCamera, isCameraOn, messageApi, intl]);
+
+  const handleToggleScreenShare = useCallback(() => {
+    if (onToggleScreenShare) {
+      onToggleScreenShare();
+      messageApi.open({
+        type: !isScreenSharing ? "success" : "warning",
+        content: !isScreenSharing
+          ? intl.formatMessage({ id: ROOM_BOARD_TEXTS.MESSAGES.SCREEN_SHARE_STARTED })
+          : intl.formatMessage({ id: ROOM_BOARD_TEXTS.MESSAGES.SCREEN_SHARE_STOPPED }),
+        duration: 2,
+      });
+    }
+  }, [onToggleScreenShare, isScreenSharing, messageApi, intl]);
 
   const handleLeaveRoom = useCallback(() => {
     setIsLeaveModalOpen(true);
@@ -140,6 +157,25 @@ export default function RoomBoard({
               }`}
             >
               <Icon name={isCameraOn ? "cameraOn" : "cameraOff"} />
+            </button>
+          </Tooltip>
+
+          <Tooltip
+            placement="top"
+            title={intl.formatMessage({
+              id: isScreenSharing
+                ? ROOM_BOARD_TEXTS.TOOLTIPS.SCREEN_SHARE_STOP
+                : ROOM_BOARD_TEXTS.TOOLTIPS.SCREEN_SHARE_START,
+            })}
+          >
+            <button
+              onClick={handleToggleScreenShare}
+              className={`${styles.roomBoardButton} ${
+                isScreenSharing ? styles.buttonActive : ""
+              }`}
+              disabled={!onToggleScreenShare}
+            >
+              <Icon name={isScreenSharing ? "screenShareOn" : "screenShareOff"} />
             </button>
           </Tooltip>
 

@@ -100,21 +100,38 @@ export const ruMessages = {
     "joinmeeting.error.invalid": "Некорректный формат ссылки или ID",
     "joinmeeting.description": "Для подключения введите ссылку на встречу или её идентификатор",
 
+    // ROOM_BOARD_TEXTS - TOOLTIPS
+    "roomBoard.tooltips.micOn": "Выключить микрофон",
+    "roomBoard.tooltips.micOff": "Включить микрофон",
+    "roomBoard.tooltips.cameraOn": "Выключить камеру",
+    "roomBoard.tooltips.cameraOff": "Включить камеру",
+    "roomBoard.tooltips.copyLink": "Копировать ссылку на комнату",
+    "roomBoard.tooltips.leaveRoom": "Покинуть комнату",
+    "roomBoard.tooltips.screenShareStart": "Начать демонстрацию экрана",
+    "roomBoard.tooltips.screenShareStop": "Остановить демонстрацию экрана",
 
+    // ROOM_BOARD_TEXTS - MESSAGES
     "roomBoard.messages.micEnabled": "Микрофон включен",
     "roomBoard.messages.micDisabled": "Микрофон выключен",
     "roomBoard.messages.cameraEnabled": "Камера включена",
     "roomBoard.messages.cameraDisabled": "Камера выключена",
     "roomBoard.messages.linkCopied": "Ссылка на комнату скопирована!",
     "roomBoard.messages.linkCopyError": "Не удалось скопировать ссылку",
+    "roomBoard.messages.screenShareStarted": "Демонстрация экрана начата",
+    "roomBoard.messages.screenShareStopped": "Демонстрация экрана остановлена",
+
+    // ROOM_BOARD_TEXTS - MODAL
     "roomBoard.modal.title": "Покинуть комнату?",
     "roomBoard.modal.description": "Вы уверены, что хотите выйти из видеоконференции?",
     "roomBoard.modal.confirm": "Выйти",
+    "roomBoard.modal.cancel": "Отмена",
+
+    // ROOM_BOARD_TEXTS - SHARE
+    "roomBoard.share.message": "Хей, привет! Присоединяйся к видеовстрече в VizorLite, вот ссылка:",
 
     "home.hero.title": "VizorLite — общайтесь, планируйте, решайте",
     "home.install.title": "VizorLite",
-    "home.install.description":
-      "Скачайте приложение для более удобной работы с сервисом на вашем устройстве",
+    "home.install.description": "Скачайте приложение для более удобной работы с сервисом на вашем устройстве",
     "home.install.button": "Установить",
     "home.button.create": "Создать видеовстречу",
     "home.button.join": "Подключиться",
@@ -126,31 +143,25 @@ export const ruMessages = {
     "ai.button.toggle": "AI",
     "ai.button.send": "Отправить",
     "ai.button.close": "✕",
-    "ai.message.welcome":
-      "Привет, я Маркус. Если вам нужна помощь по сайту — я всегда здесь.",
+    "ai.message.welcome": "Привет, я Маркус. Если вам нужна помощь по сайту — я всегда здесь.",
     "ai.message.placeholder": "Введите ваш вопрос...",
 
     "about.hero.title": "О VizorLite",
-    "about.hero.subtitle":
-      "Мы делаем видеоконференции простыми, доступными и безопасными для каждого",
+    "about.hero.subtitle": "Мы делаем видеоконференции простыми, доступными и безопасными для каждого",
 
     "about.mission.title": "Наша миссия",
-    "about.mission.description":
-      "Сломать барьеры в онлайн-общении. Мы верим, что качественная видеосвязь должна быть бесплатной, безопасной и доступной без скачиваний и регистраций.",
+    "about.mission.description": "Сломать барьеры в онлайн-общении. Мы верим, что качественная видеосвязь должна быть бесплатной, безопасной и доступной без скачиваний и регистраций.",
 
     "about.values.title": "Наши ценности",
     "about.values.items.accessibility.icon": "videoconference.svg",
     "about.values.items.accessibility.title": "Доступность",
-    "about.values.items.accessibility.description":
-      "Сделали видеосвязь простой и бесплатной для всех",
+    "about.values.items.accessibility.description": "Сделали видеосвязь простой и бесплатной для всех",
     "about.values.items.confidentiality.icon": "webcamera.svg",
     "about.values.items.confidentiality.title": "Конфиденциальность",
-    "about.values.items.confidentiality.description":
-      "Ваши разговоры остаются между участниками",
+    "about.values.items.confidentiality.description": "Ваши разговоры остаются между участниками",
     "about.values.items.simplicity.icon": "check.svg",
     "about.values.items.simplicity.title": "Простота",
-    "about.values.items.simplicity.description":
-      "Никаких установок, регистраций и сложных настроек",
+    "about.values.items.simplicity.description": "Никаких установок, регистраций и сложных настроек",
 
     "about.stats.title": "VizorLite в цифрах",
     "about.stats.items.users.value": "50K+",
@@ -165,16 +176,13 @@ export const ruMessages = {
     "about.team.title": "Наша команда",
     "about.team.items.alexey.name": "Алексей Петров",
     "about.team.items.alexey.role": "Основатель & CEO",
-    "about.team.items.alexey.description":
-      "10+ лет в веб-разработке. Создал VizorLite чтобы сделать видеоконференции доступными каждому.",
+    "about.team.items.alexey.description": "10+ лет в веб-разработке. Создал VizorLite чтобы сделать видеоконференции доступными каждому.",
     "about.team.items.maria.name": "Мария Сидорова",
     "about.team.items.maria.role": "Lead Developer",
-    "about.team.items.maria.description":
-      "Специалист по WebRTC и реальному времени. Отвечает за стабильность и качество соединений.",
+    "about.team.items.maria.description": "Специалист по WebRTC и реальному времени. Отвечает за стабильность и качество соединений.",
     "about.team.items.dmitry.name": "Дмитрий Иванов",
     "about.team.items.dmitry.role": "UI/UX Дизайнер",
-    "about.team.items.dmitry.description":
-      "Создает интуитивные интерфейсы. Верит, что технологии должны быть красивыми и простыми.",
+    "about.team.items.dmitry.description": "Создает интуитивные интерфейсы. Верит, что технологии должны быть красивыми и простыми.",
 
     "about.timeline.title": "Наш путь",
     "about.timeline.items.2021.event": "Идея и первый прототип",
@@ -183,8 +191,7 @@ export const ruMessages = {
     "about.timeline.items.2024.event": "Достигли 50K активных пользователей",
 
     "about.cta.title": "Начните использовать прямо сейчас",
-    "about.cta.description":
-      "Присоединяйтесь к тысячам пользователей, которые уже общаются через VizorLite",
+    "about.cta.description": "Присоединяйтесь к тысячам пользователей, которые уже общаются через VizorLite",
     "about.cta.buttonText": "Создать комнату",
 
     "about.bottomLinks.items.home.label": "Главная",
@@ -195,16 +202,6 @@ export const ruMessages = {
     "about.bottomLinks.items.about.icon": "question.svg",
     "about.bottomLinks.items.contacts.label": "Контакты",
     "about.bottomLinks.items.contacts.icon": "send.svg",
-
-    "roomBoard.tooltips.micOn": "Выключить микрофон",
-    "roomBoard.tooltips.micOff": "Включить микрофон",
-    "roomBoard.tooltips.cameraOn": "Выключить камеру",
-    "roomBoard.tooltips.cameraOff": "Включить камеру",
-    "roomBoard.tooltips.copyLink": "Копировать ссылку на комнату",
-    "roomBoard.tooltips.leaveRoom": "Покинуть комнату",
-    "roomBoard.modal.cancel": "Отмена",
-
-    "roomBoard.share.message": "Хей, привет! Присоединяйся к видеовстрече в VizorLite, вот ссылка:",
 
     "pricing.title": "Тарифы",
     "pricing.subtitle": "Выберите подходящий план для ваших видеовстреч",
@@ -222,8 +219,7 @@ export const ruMessages = {
     "pricing.plans.business.name": "Бизнес",
     "pricing.plans.business.price": "990₽",
     "pricing.plans.business.period": "/месяц",
-    "pricing.plans.business.features.participants":
-      "До 25 участников в встрече",
+    "pricing.plans.business.features.participants": "До 25 участников в встрече",
     "pricing.plans.business.features.time": "Безлимитное время встреч",
     "pricing.plans.business.features.recording": "Запись встреч",
     "pricing.plans.business.features.settings": "Расширенные настройки",
@@ -233,8 +229,7 @@ export const ruMessages = {
     "pricing.plans.premium.name": "Премиум",
     "pricing.plans.premium.price": "1990₽",
     "pricing.plans.premium.period": "/месяц",
-    "pricing.plans.premium.features.participants":
-      "До 100 участников в встрече",
+    "pricing.plans.premium.features.participants": "До 100 участников в встрече",
     "pricing.plans.premium.features.time": "Безлимитное время встреч",
     "pricing.plans.premium.features.recording": "Запись встреч в HD",
     "pricing.plans.premium.features.branding": "Кастомный брендинг",
@@ -244,17 +239,13 @@ export const ruMessages = {
 
     "pricing.faq.title": "Частые вопросы",
     "pricing.faq.items.0.question": "Можно ли поменять тариф позже?",
-    "pricing.faq.items.0.answer":
-      "Да, вы можете изменить тариф в любое время в личном кабинете.",
+    "pricing.faq.items.0.answer": "Да, вы можете изменить тариф в любое время в личном кабинете.",
     "pricing.faq.items.1.question": "Есть ли пробный период?",
-    "pricing.faq.items.1.answer":
-      "Для Business и Premium тарифов доступен 14-дневный пробный период.",
+    "pricing.faq.items.1.answer": "Для Business и Premium тарифов доступен 14-дневный пробный период.",
     "pricing.faq.items.2.question": "Как происходит оплата?",
-    "pricing.faq.items.2.answer":
-      "Оплата картой через безопасный платежный шлюз. Автоматическое списание каждый месяц.",
+    "pricing.faq.items.2.answer": "Оплата картой через безопасный платежный шлюз. Автоматическое списание каждый месяц.",
     "pricing.faq.items.3.question": "Можно ли отменить подписку?",
-    "pricing.faq.items.3.answer":
-      "Да, отмена доступна в любое время. Доступ к функциям сохранится до конца оплаченного периода.",
+    "pricing.faq.items.3.answer": "Да, отмена доступна в любое время. Доступ к функциям сохранится до конца оплаченного периода.",
 
     "notfound.title": "Страница не найдена",
     "notfound.description": "Извините, запрашиваемая страница не существует или была перемещена",

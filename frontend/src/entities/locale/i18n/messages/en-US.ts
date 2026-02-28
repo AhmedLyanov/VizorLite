@@ -94,14 +94,36 @@ export const enMessages = {
     "authentication.subtitles.enterCredentials": "Enter your login credentials",
     "authentication.subtitles.fillDetails": "Fill in your details",
     "authentication.subtitles.enterEmailReset": "Enter email to reset password",
+
+    // ROOM_BOARD_TEXTS - TOOLTIPS
+    "roomBoard.tooltips.micOn": "Mute microphone",
+    "roomBoard.tooltips.micOff": "Unmute microphone",
+    "roomBoard.tooltips.cameraOn": "Turn off camera",
+    "roomBoard.tooltips.cameraOff": "Turn on camera",
+    "roomBoard.tooltips.copyLink": "Copy room link",
+    "roomBoard.tooltips.leaveRoom": "Leave room",
+    "roomBoard.tooltips.screenShareStart": "Start screen sharing",
+    "roomBoard.tooltips.screenShareStop": "Stop screen sharing",
+
+    // ROOM_BOARD_TEXTS - MESSAGES
     "roomBoard.messages.micEnabled": "Microphone enabled",
     "roomBoard.messages.micDisabled": "Microphone disabled",
     "roomBoard.messages.cameraEnabled": "Camera enabled",
     "roomBoard.messages.cameraDisabled": "Camera disabled",
     "roomBoard.messages.linkCopied": "Room link copied!",
     "roomBoard.messages.linkCopyError": "Failed to copy link",
+    "roomBoard.messages.screenShareStarted": "Screen sharing started",
+    "roomBoard.messages.screenShareStopped": "Screen sharing stopped",
+
+    // ROOM_BOARD_TEXTS - MODAL
     "roomBoard.modal.title": "Leave room?",
-    "roomBoard.tooltips.leaveRoom": "Leave room",
+    "roomBoard.modal.description": "Are you sure you want to leave the video meeting?",
+    "roomBoard.modal.confirm": "Yes, leave",
+    "roomBoard.modal.cancel": "Cancel",
+
+    // ROOM_BOARD_TEXTS - SHARE
+    "roomBoard.share.message": "Hey there! Join my video meeting on VizorLite, here's the link:",
+
     "joinmeeting.main.title": "Join a Meeting",
     "joinmeeting.input.placeholder": "Paste link or room ID",
     "joinmeeting.button.cancel": "Cancel",
@@ -110,11 +132,9 @@ export const enMessages = {
     "joinmeeting.error.invalid": "Invalid link or room ID format",
     "joinmeeting.description": "To join a meeting, enter the meeting link or its ID",
 
-
     "home.hero.title": "VizorLite — meet, plan, decide",
     "home.install.title": "VizorLite",
-    "home.install.description":
-      "Download the app for a better experience on your device",
+    "home.install.description": "Download the app for a better experience on your device",
     "home.install.button": "Install",
     "home.button.create": "Create meeting",
     "home.button.join": "Join meeting",
@@ -126,31 +146,25 @@ export const enMessages = {
     "ai.button.toggle": "AI",
     "ai.button.send": "Send",
     "ai.button.close": "✕",
-    "ai.message.welcome":
-      "Hi, I'm Markus. If you need help with the site — I'm here.",
+    "ai.message.welcome": "Hi, I'm Markus. If you need help with the site — I'm here.",
     "ai.message.placeholder": "Type your question...",
 
     "about.hero.title": "About VizorLite",
-    "about.hero.subtitle":
-      "We make video conferencing simple, accessible and secure for everyone",
+    "about.hero.subtitle": "We make video conferencing simple, accessible and secure for everyone",
 
     "about.mission.title": "Our Mission",
-    "about.mission.description":
-      "Break down barriers in online communication. We believe that quality video communication should be free, secure and accessible without downloads or registration.",
+    "about.mission.description": "Break down barriers in online communication. We believe that quality video communication should be free, secure and accessible without downloads or registration.",
 
     "about.values.title": "Our Values",
     "about.values.items.accessibility.icon": "videoconference.svg",
     "about.values.items.accessibility.title": "Accessibility",
-    "about.values.items.accessibility.description":
-      "Made video communication simple and free for everyone",
+    "about.values.items.accessibility.description": "Made video communication simple and free for everyone",
     "about.values.items.confidentiality.icon": "webcamera.svg",
     "about.values.items.confidentiality.title": "Confidentiality",
-    "about.values.items.confidentiality.description":
-      "Your conversations stay between participants",
+    "about.values.items.confidentiality.description": "Your conversations stay between participants",
     "about.values.items.simplicity.icon": "check.svg",
     "about.values.items.simplicity.title": "Simplicity",
-    "about.values.items.simplicity.description":
-      "No installations, registrations or complex settings",
+    "about.values.items.simplicity.description": "No installations, registrations or complex settings",
 
     "about.stats.title": "VizorLite in Numbers",
     "about.stats.items.users.value": "50K+",
@@ -165,16 +179,13 @@ export const enMessages = {
     "about.team.title": "Our Team",
     "about.team.items.alexey.name": "Alexey Petrov",
     "about.team.items.alexey.role": "Founder & CEO",
-    "about.team.items.alexey.description":
-      "10+ years in web development. Created VizorLite to make video conferencing accessible to everyone.",
+    "about.team.items.alexey.description": "10+ years in web development. Created VizorLite to make video conferencing accessible to everyone.",
     "about.team.items.maria.name": "Maria Sidorova",
     "about.team.items.maria.role": "Lead Developer",
-    "about.team.items.maria.description":
-      "WebRTC and real-time specialist. Responsible for connection stability and quality.",
+    "about.team.items.maria.description": "WebRTC and real-time specialist. Responsible for connection stability and quality.",
     "about.team.items.dmitry.name": "Dmitry Ivanov",
     "about.team.items.dmitry.role": "UI/UX Designer",
-    "about.team.items.dmitry.description":
-      "Creates intuitive interfaces. Believes that technology should be beautiful and simple.",
+    "about.team.items.dmitry.description": "Creates intuitive interfaces. Believes that technology should be beautiful and simple.",
 
     "about.timeline.title": "Our Journey",
     "about.timeline.items.2021.event": "Idea and first prototype",
@@ -183,8 +194,7 @@ export const enMessages = {
     "about.timeline.items.2024.event": "Reached 50K active users",
 
     "about.cta.title": "Start using right now",
-    "about.cta.description":
-      "Join thousands of users who already communicate through VizorLite",
+    "about.cta.description": "Join thousands of users who already communicate through VizorLite",
     "about.cta.buttonText": "Create room",
 
     "about.bottomLinks.items.home.label": "Home",
@@ -196,17 +206,6 @@ export const enMessages = {
     "about.bottomLinks.items.contacts.label": "Contacts",
     "about.bottomLinks.items.contacts.icon": "send.svg",
 
-
-    "roomBoard.tooltips.micOn": "Mute microphone",
-    "roomBoard.tooltips.micOff": "Unmute microphone",
-    "roomBoard.tooltips.cameraOn": "Turn off camera",
-    "roomBoard.tooltips.cameraOff": "Turn on camera",
-    "roomBoard.tooltips.copyLink": "Copy room link",
-    "roomBoard.modal.description": "Are you sure you want to leave the video meeting?",
-    "roomBoard.modal.confirm": "Yes, leave",
-    "roomBoard.modal.cancel": "Cancel",
-
-    "roomBoard.share.message": "Hey there! Join my video meeting on VizorLite, here's the link:",
     "pricing.title": "Pricing",
     "pricing.subtitle": "Choose the right plan for your video meetings",
     "pricing.recommended": "Recommended",
@@ -215,8 +214,7 @@ export const enMessages = {
     "pricing.plans.basic.name": "Basic",
     "pricing.plans.basic.price": "$0",
     "pricing.plans.basic.period": "/month",
-    "pricing.plans.basic.features.participants":
-      "Up to 3 participants per meeting",
+    "pricing.plans.basic.features.participants": "Up to 3 participants per meeting",
     "pricing.plans.basic.features.time": "40 minutes per meeting",
     "pricing.plans.basic.features.chat": "Shared chat",
     "pricing.plans.basic.features.support": "Basic support",
@@ -224,8 +222,7 @@ export const enMessages = {
     "pricing.plans.business.name": "Business",
     "pricing.plans.business.price": "$10",
     "pricing.plans.business.period": "/month",
-    "pricing.plans.business.features.participants":
-      "Up to 25 participants per meeting",
+    "pricing.plans.business.features.participants": "Up to 25 participants per meeting",
     "pricing.plans.business.features.time": "Unlimited meeting time",
     "pricing.plans.business.features.recording": "Meeting recording",
     "pricing.plans.business.features.settings": "Advanced settings",
@@ -235,8 +232,7 @@ export const enMessages = {
     "pricing.plans.premium.name": "Premium",
     "pricing.plans.premium.price": "$20",
     "pricing.plans.premium.period": "/month",
-    "pricing.plans.premium.features.participants":
-      "Up to 100 participants per meeting",
+    "pricing.plans.premium.features.participants": "Up to 100 participants per meeting",
     "pricing.plans.premium.features.time": "Unlimited meeting time",
     "pricing.plans.premium.features.recording": "HD meeting recording",
     "pricing.plans.premium.features.branding": "Custom branding",
@@ -246,17 +242,13 @@ export const enMessages = {
 
     "pricing.faq.title": "Frequently Asked Questions",
     "pricing.faq.items.0.question": "Can I change my plan later?",
-    "pricing.faq.items.0.answer":
-      "Yes, you can change your plan anytime in your personal account.",
+    "pricing.faq.items.0.answer": "Yes, you can change your plan anytime in your personal account.",
     "pricing.faq.items.1.question": "Is there a trial period?",
-    "pricing.faq.items.1.answer":
-      "A 14-day trial period is available for Business and Premium plans.",
+    "pricing.faq.items.1.answer": "A 14-day trial period is available for Business and Premium plans.",
     "pricing.faq.items.2.question": "How does payment work?",
-    "pricing.faq.items.2.answer":
-      "Payment by card through a secure payment gateway. Automatic monthly billing.",
+    "pricing.faq.items.2.answer": "Payment by card through a secure payment gateway. Automatic monthly billing.",
     "pricing.faq.items.3.question": "Can I cancel my subscription?",
-    "pricing.faq.items.3.answer":
-      "Yes, cancellation is available at any time. Access to features will remain until the end of the paid period.",
+    "pricing.faq.items.3.answer": "Yes, cancellation is available at any time. Access to features will remain until the end of the paid period.",
 
     "notfound.title": "Page Not Found",
     "notfound.description": "Sorry, the requested page does not exist or has been moved",

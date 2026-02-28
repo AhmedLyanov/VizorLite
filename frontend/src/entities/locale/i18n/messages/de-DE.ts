@@ -1,5 +1,5 @@
 export const deMessages = {
-     "nav.about": "Über uns",
+    "nav.about": "Über uns",
     "nav.home": "Startseite",
 
     "authentication.form.login.button": "Anmelden",
@@ -100,6 +100,35 @@ export const deMessages = {
     "joinmeeting.error.invalid": "Ungültiges Link- oder Raum-ID-Format",
     "joinmeeting.description": "Um einem Meeting beizutreten, geben Sie den Meeting-Link oder dessen ID ein",
 
+    // ROOM_BOARD_TEXTS - TOOLTIPS
+    "roomBoard.tooltips.micOn": "Mikrofon stummschalten",
+    "roomBoard.tooltips.micOff": "Mikrofon einschalten",
+    "roomBoard.tooltips.cameraOn": "Kamera ausschalten",
+    "roomBoard.tooltips.cameraOff": "Kamera einschalten",
+    "roomBoard.tooltips.copyLink": "Raum-Link kopieren",
+    "roomBoard.tooltips.leaveRoom": "Raum verlassen",
+    "roomBoard.tooltips.screenShareStart": "Bildschirmfreigabe starten",
+    "roomBoard.tooltips.screenShareStop": "Bildschirmfreigabe beenden",
+
+    // ROOM_BOARD_TEXTS - MESSAGES
+    "roomBoard.messages.micEnabled": "Mikrofon aktiviert",
+    "roomBoard.messages.micDisabled": "Mikrofon deaktiviert",
+    "roomBoard.messages.cameraEnabled": "Kamera aktiviert",
+    "roomBoard.messages.cameraDisabled": "Kamera deaktiviert",
+    "roomBoard.messages.linkCopied": "Raum-Link kopiert!",
+    "roomBoard.messages.linkCopyError": "Fehler beim Kopieren des Links",
+    "roomBoard.messages.screenShareStarted": "Bildschirmfreigabe gestartet",
+    "roomBoard.messages.screenShareStopped": "Bildschirmfreigabe beendet",
+
+    // ROOM_BOARD_TEXTS - MODAL
+    "roomBoard.modal.title": "Raum verlassen?",
+    "roomBoard.modal.description": "Möchten Sie das Video-Meeting wirklich verlassen?",
+    "roomBoard.modal.confirm": "Ja, verlassen",
+    "roomBoard.modal.cancel": "Abbrechen",
+
+    // ROOM_BOARD_TEXTS - SHARE
+    "roomBoard.share.message": "Hallo! Komm zu meinem Video-Meeting auf VizorLite, hier ist der Link:",
+
     "home.hero.title": "VizorLite — kommunizieren, planen, entscheiden",
     "home.install.title": "VizorLite",
     "home.install.description": "Laden Sie die App herunter, um den Service komfortabler auf Ihrem Gerät zu nutzen",
@@ -173,27 +202,6 @@ export const deMessages = {
     "about.bottomLinks.items.about.icon": "question.svg",
     "about.bottomLinks.items.contacts.label": "Kontakte",
     "about.bottomLinks.items.contacts.icon": "send.svg",
-
-    "roomBoard.tooltips.micOn": "Mikrofon stummschalten",
-    "roomBoard.tooltips.micOff": "Mikrofon einschalten",
-    "roomBoard.tooltips.cameraOn": "Kamera ausschalten",
-    "roomBoard.tooltips.cameraOff": "Kamera einschalten",
-    "roomBoard.tooltips.copyLink": "Raum-Link kopieren",
-    "roomBoard.tooltips.leaveRoom": "Raum verlassen",
-
-    "roomBoard.messages.micEnabled": "Mikrofon aktiviert",
-    "roomBoard.messages.micDisabled": "Mikrofon deaktiviert",
-    "roomBoard.messages.cameraEnabled": "Kamera aktiviert",
-    "roomBoard.messages.cameraDisabled": "Kamera deaktiviert",
-    "roomBoard.messages.linkCopied": "Raum-Link kopiert!",
-    "roomBoard.messages.linkCopyError": "Fehler beim Kopieren des Links",
-
-    "roomBoard.modal.title": "Raum verlassen?",
-    "roomBoard.modal.description": "Möchten Sie das Video-Meeting wirklich verlassen?",
-    "roomBoard.modal.confirm": "Ja, verlassen",
-    "roomBoard.modal.cancel": "Abbrechen",
-
-    "roomBoard.share.message": "Hallo! Komm zu meinem Video-Meeting auf VizorLite, hier ist der Link:",
 
     "pricing.title": "Preise",
     "pricing.subtitle": "Wählen Sie den passenden Plan für Ihre Video-Meetings",

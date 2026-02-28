@@ -100,6 +100,35 @@ export const frMessages = {
     "joinmeeting.error.invalid": "Format de lien ou d'ID de salle invalide",
     "joinmeeting.description": "Pour rejoindre une réunion, entrez le lien de la réunion ou son ID",
 
+    // ROOM_BOARD_TEXTS - TOOLTIPS
+    "roomBoard.tooltips.micOn": "Couper le microphone",
+    "roomBoard.tooltips.micOff": "Activer le microphone",
+    "roomBoard.tooltips.cameraOn": "Éteindre la caméra",
+    "roomBoard.tooltips.cameraOff": "Allumer la caméra",
+    "roomBoard.tooltips.copyLink": "Copier le lien de la salle",
+    "roomBoard.tooltips.leaveRoom": "Quitter la salle",
+    "roomBoard.tooltips.screenShareStart": "Commencer le partage d'écran",
+    "roomBoard.tooltips.screenShareStop": "Arrêter le partage d'écran",
+
+    // ROOM_BOARD_TEXTS - MESSAGES
+    "roomBoard.messages.micEnabled": "Microphone activé",
+    "roomBoard.messages.micDisabled": "Microphone désactivé",
+    "roomBoard.messages.cameraEnabled": "Caméra activée",
+    "roomBoard.messages.cameraDisabled": "Caméra désactivée",
+    "roomBoard.messages.linkCopied": "Lien de la salle copié !",
+    "roomBoard.messages.linkCopyError": "Échec de la copie du lien",
+    "roomBoard.messages.screenShareStarted": "Partage d'écran démarré",
+    "roomBoard.messages.screenShareStopped": "Partage d'écran arrêté",
+
+    // ROOM_BOARD_TEXTS - MODAL
+    "roomBoard.modal.title": "Quitter la salle ?",
+    "roomBoard.modal.description": "Êtes-vous sûr de vouloir quitter la vidéoconférence ?",
+    "roomBoard.modal.confirm": "Oui, quitter",
+    "roomBoard.modal.cancel": "Annuler",
+
+    // ROOM_BOARD_TEXTS - SHARE
+    "roomBoard.share.message": "Salut ! Rejoignez ma vidéoconférence sur VizorLite, voici le lien :",
+
     "home.hero.title": "VizorLite — communiquer, planifier, décider",
     "home.install.title": "VizorLite",
     "home.install.description": "Téléchargez l'application pour une meilleure expérience sur votre appareil",
@@ -173,27 +202,6 @@ export const frMessages = {
     "about.bottomLinks.items.about.icon": "question.svg",
     "about.bottomLinks.items.contacts.label": "Contacts",
     "about.bottomLinks.items.contacts.icon": "send.svg",
-
-    "roomBoard.tooltips.micOn": "Couper le microphone",
-    "roomBoard.tooltips.micOff": "Activer le microphone",
-    "roomBoard.tooltips.cameraOn": "Éteindre la caméra",
-    "roomBoard.tooltips.cameraOff": "Allumer la caméra",
-    "roomBoard.tooltips.copyLink": "Copier le lien de la salle",
-    "roomBoard.tooltips.leaveRoom": "Quitter la salle",
-
-    "roomBoard.messages.micEnabled": "Microphone activé",
-    "roomBoard.messages.micDisabled": "Microphone désactivé",
-    "roomBoard.messages.cameraEnabled": "Caméra activée",
-    "roomBoard.messages.cameraDisabled": "Caméra désactivée",
-    "roomBoard.messages.linkCopied": "Lien de la salle copié !",
-    "roomBoard.messages.linkCopyError": "Échec de la copie du lien",
-
-    "roomBoard.modal.title": "Quitter la salle ?",
-    "roomBoard.modal.description": "Êtes-vous sûr de vouloir quitter la vidéoconférence ?",
-    "roomBoard.modal.confirm": "Oui, quitter",
-    "roomBoard.modal.cancel": "Annuler",
-
-    "roomBoard.share.message": "Salut ! Rejoignez ma vidéoconférence sur VizorLite, voici le lien :",
 
     "pricing.title": "Tarifs",
     "pricing.subtitle": "Choisissez le plan adapté à vos réunions vidéo",

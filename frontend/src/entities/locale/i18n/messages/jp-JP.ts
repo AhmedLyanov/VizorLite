@@ -94,6 +94,34 @@ export const jpMessages = {
     "authentication.subtitles.fillDetails": "詳細情報を入力してください",
     "authentication.subtitles.enterEmailReset": "パスワードをリセットするメールアドレスを入力",
 
+    // ROOM_BOARD_TEXTS - TOOLTIPS
+    "roomBoard.tooltips.micOn": "マイクをミュート",
+    "roomBoard.tooltips.micOff": "ミュートを解除",
+    "roomBoard.tooltips.cameraOn": "カメラをオフ",
+    "roomBoard.tooltips.cameraOff": "カメラをオン",
+    "roomBoard.tooltips.copyLink": "ルームリンクをコピー",
+    "roomBoard.tooltips.leaveRoom": "ルームを退出",
+    "roomBoard.tooltips.screenShareStart": "画面共有を開始",
+    "roomBoard.tooltips.screenShareStop": "画面共有を停止",
+
+    // ROOM_BOARD_TEXTS - MESSAGES
+    "roomBoard.messages.micEnabled": "マイクが有効になりました",
+    "roomBoard.messages.micDisabled": "マイクが無効になりました",
+    "roomBoard.messages.cameraEnabled": "カメラが有効になりました",
+    "roomBoard.messages.cameraDisabled": "カメラが無効になりました",
+    "roomBoard.messages.linkCopied": "ルームリンクをコピーしました！",
+    "roomBoard.messages.linkCopyError": "リンクのコピーに失敗しました",
+    "roomBoard.messages.screenShareStarted": "画面共有を開始しました",
+    "roomBoard.messages.screenShareStopped": "画面共有を停止しました",
+
+    // ROOM_BOARD_TEXTS - MODAL
+    "roomBoard.modal.title": "ルームを退出しますか？",
+    "roomBoard.modal.description": "ビデオ会議から退出してもよろしいですか？",
+    "roomBoard.modal.confirm": "はい、退出する",
+    "roomBoard.modal.cancel": "キャンセル",
+
+    // ROOM_BOARD_TEXTS - SHARE
+    "roomBoard.share.message": "こんにちは！VizorLiteでビデオ会議に参加してください。リンクはこちら：",
 
     "joinmeeting.main.title": "ミーティングに参加",
     "joinmeeting.input.placeholder": "リンクまたはルームIDを貼り付け",
@@ -176,27 +204,6 @@ export const jpMessages = {
     "about.bottomLinks.items.about.icon": "question.svg",
     "about.bottomLinks.items.contacts.label": "お問い合わせ",
     "about.bottomLinks.items.contacts.icon": "send.svg",
-
-    "roomBoard.tooltips.micOn": "マイクをミュート",
-    "roomBoard.tooltips.micOff": "ミュートを解除",
-    "roomBoard.tooltips.cameraOn": "カメラをオフ",
-    "roomBoard.tooltips.cameraOff": "カメラをオン",
-    "roomBoard.tooltips.copyLink": "ルームリンクをコピー",
-    "roomBoard.tooltips.leaveRoom": "ルームを退出",
-
-    "roomBoard.messages.micEnabled": "マイクが有効になりました",
-    "roomBoard.messages.micDisabled": "マイクが無効になりました",
-    "roomBoard.messages.cameraEnabled": "カメラが有効になりました",
-    "roomBoard.messages.cameraDisabled": "カメラが無効になりました",
-    "roomBoard.messages.linkCopied": "ルームリンクをコピーしました！",
-    "roomBoard.messages.linkCopyError": "リンクのコピーに失敗しました",
-
-    "roomBoard.modal.title": "ルームを退出しますか？",
-    "roomBoard.modal.description": "ビデオ会議から退出してもよろしいですか？",
-    "roomBoard.modal.confirm": "はい、退出する",
-    "roomBoard.modal.cancel": "キャンセル",
-
-    "roomBoard.share.message": "こんにちは！VizorLiteでビデオ会議に参加してください。リンクはこちら：",
 
     "pricing.title": "料金プラン",
     "pricing.subtitle": "あなたのビデオ会議に合ったプランをお選びください",
