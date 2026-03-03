@@ -1,43 +1,30 @@
 import type { ReactNode } from 'react';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
-import { AuthContext } from '../../entities/user/AuthContext';
-import { useEffect, useState } from 'react';
+import { AuthContext, type User } from '../../entities/user/AuthContext';
+import { useState } from 'react';
+import { profileApi } from '../../shared/api/profileApi';
 
 interface AuthProviderProps {
   children: ReactNode;
 }
 
-type User = {
-  id: string;
-  username: string;
-  email: string;
-  createdAt?: string,
-};
-
 export const AuthProvider = ({ children }: AuthProviderProps) => {
   const queryClient = useQueryClient();
   const [token, setToken] = useState<string | null>(() => localStorage.getItem('token'));
 
-  useEffect(() => {
-    const handleAuthChange = () => {
-      console.log('🔄 Auth change detected - refreshing token from localStorage');
-      const newToken = localStorage.getItem('token');
-      setToken(newToken);
-      queryClient.invalidateQueries({ queryKey: ['currentUser'] });
-    };
-    
-    window.addEventListener('auth-change', handleAuthChange);
-    return () => window.removeEventListener('auth-change', handleAuthChange);
-  }, [queryClient]);
-
   const { data: user, isLoading } = useQuery<User>({
     queryKey: ['currentUser'],
     queryFn: async () => {
-      const userStr = localStorage.getItem('user');
-      if (!userStr) {
-        throw new Error('No user data');
-      }
-      return JSON.parse(userStr);
+      const profileData = await profileApi.getProfile();
+      console.log('Profile from server:', profileData);
+      
+      return {
+        id: profileData.user._id,
+        username: profileData.user.username,
+        email: profileData.user.email,
+        createdAt: profileData.user.createdAt,
+        avatar: profileData.user.avatar || null
+      };
     },
     enabled: !!token,
     staleTime: 0,
@@ -45,13 +32,24 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   });
 
   const logout = () => {
-    console.log('🚪 Logout initiated');
     localStorage.removeItem('token');
     localStorage.removeItem('user');
     setToken(null);
     queryClient.removeQueries({ queryKey: ['currentUser'] });
+    window.dispatchEvent(new Event('auth-change'));
+  };
+
+  const updateUser = (updatedUser: User) => {
+    localStorage.setItem('user', JSON.stringify(updatedUser));
     queryClient.invalidateQueries({ queryKey: ['currentUser'] });
     window.dispatchEvent(new Event('auth-change'));
+  };
+
+  const updateUserAvatar = (avatarUrl: string) => {
+    if (user) {
+      const updatedUser = { ...user, avatar: avatarUrl };
+      updateUser(updatedUser);
+    }
   };
 
   const value = {
@@ -60,6 +58,8 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     isLoading,
     isAuthenticated: !!token && !!user, 
     logout,
+    updateUser,
+    updateUserAvatar,
   };
 
   return (
