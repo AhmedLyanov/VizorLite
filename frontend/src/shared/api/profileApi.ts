@@ -8,21 +8,51 @@ export interface ProfileData {
     createdAt: string
     updatedAt: string
     __v: number
+    avatar?: string | null
   }
 }
 
-export const getProfile = async (): Promise<ProfileData> => {
+export interface AvatarUploadResponse {
+  success: boolean
+  message: string
+  data: {
+    avatarUrl: string
+    avatarPath: string
+  }
+}
+
+const api = axios.create({
+  baseURL: 'http://localhost:3000/api',
+})
+
+api.interceptors.request.use((config) => {
   const token = localStorage.getItem('token')
-  
-  if (!token) {
-    throw new Error('No token found')
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`
   }
+  return config
+})
 
-  const response = await axios.get('/api/auth/profile', {
-    headers: {
-      'Authorization': `Bearer ${token}`
-    }
-  })
-  
-  return response.data
+export const profileApi = {
+  getProfile: async (): Promise<ProfileData> => {
+    const response = await api.get('/auth/profile')
+    return response.data
+  },
+
+  uploadAvatar: async (formData: FormData): Promise<AvatarUploadResponse> => {
+    const response = await api.post('/profile/avatar', formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    })
+    return response.data
+  },
+
+  deleteAvatar: async (): Promise<{ success: boolean; message: string }> => {
+    const response = await api.delete('/profile/avatar')
+    return response.data
+  },
 }
+
+export const getProfile = profileApi.getProfile
+export default api

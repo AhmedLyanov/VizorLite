@@ -100,6 +100,35 @@ export const arMessages = {
     "joinmeeting.error.invalid": "تنسيق الرابط أو معرف الغرفة غير صالح",
     "joinmeeting.description": "للانضمام إلى اجتماع، أدخل رابط الاجتماع أو معرفه",
 
+    // ROOM_BOARD_TEXTS - TOOLTIPS
+    "roomBoard.tooltips.micOn": "كتم الميكروفون",
+    "roomBoard.tooltips.micOff": "إلغاء كتم الميكروفون",
+    "roomBoard.tooltips.cameraOn": "إيقاف الكاميرا",
+    "roomBoard.tooltips.cameraOff": "تشغيل الكاميرا",
+    "roomBoard.tooltips.copyLink": "نسخ رابط الغرفة",
+    "roomBoard.tooltips.leaveRoom": "مغادرة الغرفة",
+    "roomBoard.tooltips.screenShareStart": "بدء مشاركة الشاشة",
+    "roomBoard.tooltips.screenShareStop": "إيقاف مشاركة الشاشة",
+
+    // ROOM_BOARD_TEXTS - MESSAGES
+    "roomBoard.messages.micEnabled": "تم تفعيل الميكروفون",
+    "roomBoard.messages.micDisabled": "تم إلغاء تفعيل الميكروفون",
+    "roomBoard.messages.cameraEnabled": "تم تفعيل الكاميرا",
+    "roomBoard.messages.cameraDisabled": "تم إلغاء تفعيل الكاميرا",
+    "roomBoard.messages.linkCopied": "تم نسخ رابط الغرفة!",
+    "roomBoard.messages.linkCopyError": "فشل نسخ الرابط",
+    "roomBoard.messages.screenShareStarted": "بدأت مشاركة الشاشة",
+    "roomBoard.messages.screenShareStopped": "تم إيقاف مشاركة الشاشة",
+
+    // ROOM_BOARD_TEXTS - MODAL
+    "roomBoard.modal.title": "مغادرة الغرفة؟",
+    "roomBoard.modal.description": "هل أنت متأكد من رغبتك في مغادرة اجتماع الفيديو؟",
+    "roomBoard.modal.confirm": "نعم، اخرج",
+    "roomBoard.modal.cancel": "إلغاء",
+
+    // ROOM_BOARD_TEXTS - SHARE
+    "roomBoard.share.message": "مرحبًا! انضم إلى اجتماع الفيديو الخاص بي على VizorLite، إليك الرابط:",
+
     "home.hero.title": "VizorLite — تواصل، خطط، قرر",
     "home.install.title": "VizorLite",
     "home.install.description": "قم بتنزيل التطبيق لتجربة أفضل للخدمة على جهازك",
@@ -173,27 +202,6 @@ export const arMessages = {
     "about.bottomLinks.items.about.icon": "question.svg",
     "about.bottomLinks.items.contacts.label": "اتصل بنا",
     "about.bottomLinks.items.contacts.icon": "send.svg",
-
-    "roomBoard.tooltips.micOn": "كتم الميكروفون",
-    "roomBoard.tooltips.micOff": "إلغاء كتم الميكروفون",
-    "roomBoard.tooltips.cameraOn": "إيقاف الكاميرا",
-    "roomBoard.tooltips.cameraOff": "تشغيل الكاميرا",
-    "roomBoard.tooltips.copyLink": "نسخ رابط الغرفة",
-    "roomBoard.tooltips.leaveRoom": "مغادرة الغرفة",
-
-    "roomBoard.messages.micEnabled": "تم تفعيل الميكروفون",
-    "roomBoard.messages.micDisabled": "تم إلغاء تفعيل الميكروفون",
-    "roomBoard.messages.cameraEnabled": "تم تفعيل الكاميرا",
-    "roomBoard.messages.cameraDisabled": "تم إلغاء تفعيل الكاميرا",
-    "roomBoard.messages.linkCopied": "تم نسخ رابط الغرفة!",
-    "roomBoard.messages.linkCopyError": "فشل نسخ الرابط",
-
-    "roomBoard.modal.title": "مغادرة الغرفة؟",
-    "roomBoard.modal.description": "هل أنت متأكد من رغبتك في مغادرة اجتماع الفيديو؟",
-    "roomBoard.modal.confirm": "نعم، اخرج",
-    "roomBoard.modal.cancel": "إلغاء",
-
-    "roomBoard.share.message": "مرحبًا! انضم إلى اجتماع الفيديو الخاص بي على VizorLite، إليك الرابط:",
 
     "pricing.title": "الأسعار",
     "pricing.subtitle": "اختر الخطة المناسبة لاجتماعات الفيديو الخاصة بك",

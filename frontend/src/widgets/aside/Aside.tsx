@@ -14,7 +14,15 @@ export default function Aside() {
             <Tooltip placement="right" title="Профиль">
               <a href="/profile" className={styles.navLink}>
                 <div className={styles.asideAvatar}>
-                  {user.username?.charAt(0).toUpperCase() || "?"}
+                  {user.avatar ? (
+                    <img
+                      src={user.avatar.startsWith('http') ? user.avatar : `http://localhost:3000${user.avatar}`}
+                      alt={user.username}
+                      className={styles.avatarImage}
+                    />
+                  ) : (
+                    user.username?.charAt(0).toUpperCase() || '?'
+                  )}
                 </div>              </a>
             </Tooltip>
           )}

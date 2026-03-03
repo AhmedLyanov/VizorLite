@@ -92,6 +92,35 @@ export const zhMessages = {
     "authentication.subtitles.fillDetails": "填写您的信息",
     "authentication.subtitles.enterEmailReset": "输入重置密码的邮箱",
 
+    // ROOM_BOARD_TEXTS - TOOLTIPS
+    "roomBoard.tooltips.micOn": "静音麦克风",
+    "roomBoard.tooltips.micOff": "取消静音",
+    "roomBoard.tooltips.cameraOn": "关闭摄像头",
+    "roomBoard.tooltips.cameraOff": "开启摄像头",
+    "roomBoard.tooltips.copyLink": "复制房间链接",
+    "roomBoard.tooltips.leaveRoom": "离开房间",
+    "roomBoard.tooltips.screenShareStart": "开始屏幕共享",
+    "roomBoard.tooltips.screenShareStop": "停止屏幕共享",
+
+    // ROOM_BOARD_TEXTS - MESSAGES
+    "roomBoard.messages.micEnabled": "麦克风已启用",
+    "roomBoard.messages.micDisabled": "麦克风已禁用",
+    "roomBoard.messages.cameraEnabled": "摄像头已启用",
+    "roomBoard.messages.cameraDisabled": "摄像头已禁用",
+    "roomBoard.messages.linkCopied": "房间链接已复制！",
+    "roomBoard.messages.linkCopyError": "复制链接失败",
+    "roomBoard.messages.screenShareStarted": "屏幕共享已开始",
+    "roomBoard.messages.screenShareStopped": "屏幕共享已停止",
+
+    // ROOM_BOARD_TEXTS - MODAL
+    "roomBoard.modal.title": "离开房间？",
+    "roomBoard.modal.description": "您确定要离开视频会议吗？",
+    "roomBoard.modal.confirm": "确认离开",
+    "roomBoard.modal.cancel": "取消",
+
+    // ROOM_BOARD_TEXTS - SHARE
+    "roomBoard.share.message": "嘿，你好！加入我的VizorLite视频会议，这是链接：",
+
     "joinmeeting.main.title": "加入会议",
     "joinmeeting.input.placeholder": "粘贴链接或房间ID",
     "joinmeeting.button.cancel": "取消",
@@ -173,27 +202,6 @@ export const zhMessages = {
     "about.bottomLinks.items.about.icon": "question.svg",
     "about.bottomLinks.items.contacts.label": "联系方式",
     "about.bottomLinks.items.contacts.icon": "send.svg",
-
-    "roomBoard.tooltips.micOn": "静音麦克风",
-    "roomBoard.tooltips.micOff": "取消静音",
-    "roomBoard.tooltips.cameraOn": "关闭摄像头",
-    "roomBoard.tooltips.cameraOff": "开启摄像头",
-    "roomBoard.tooltips.copyLink": "复制房间链接",
-    "roomBoard.tooltips.leaveRoom": "离开房间",
-
-    "roomBoard.messages.micEnabled": "麦克风已启用",
-    "roomBoard.messages.micDisabled": "麦克风已禁用",
-    "roomBoard.messages.cameraEnabled": "摄像头已启用",
-    "roomBoard.messages.cameraDisabled": "摄像头已禁用",
-    "roomBoard.messages.linkCopied": "房间链接已复制！",
-    "roomBoard.messages.linkCopyError": "复制链接失败",
-
-    "roomBoard.modal.title": "离开房间？",
-    "roomBoard.modal.description": "您确定要离开视频会议吗？",
-    "roomBoard.modal.confirm": "确认离开",
-    "roomBoard.modal.cancel": "取消",
-
-    "roomBoard.share.message": "嘿，你好！加入我的VizorLite视频会议，这是链接：",
 
     "pricing.title": "价格",
     "pricing.subtitle": "选择适合您视频会议的计划",

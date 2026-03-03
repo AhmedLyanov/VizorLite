@@ -6,6 +6,8 @@ export const ROOM_BOARD_TEXTS = {
     CAMERA_OFF: "roomBoard.tooltips.cameraOff",
     COPY_LINK: "roomBoard.tooltips.copyLink",
     LEAVE_ROOM: "roomBoard.tooltips.leaveRoom",
+    SCREEN_SHARE_START: "roomBoard.tooltips.screenShareStart",
+    SCREEN_SHARE_STOP: "roomBoard.tooltips.screenShareStop",
   },
   MESSAGES: {
     MIC_ENABLED: "roomBoard.messages.micEnabled",
@@ -14,6 +16,8 @@ export const ROOM_BOARD_TEXTS = {
     CAMERA_DISABLED: "roomBoard.messages.cameraDisabled",
     LINK_COPIED: "roomBoard.messages.linkCopied",
     LINK_COPY_ERROR: "roomBoard.messages.linkCopyError",
+    SCREEN_SHARE_STARTED: "roomBoard.messages.screenShareStarted",
+    SCREEN_SHARE_STOPPED: "roomBoard.messages.screenShareStopped",
   },
   MODAL: {
     TITLE: "roomBoard.modal.title",

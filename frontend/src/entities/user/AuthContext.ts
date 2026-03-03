@@ -1,13 +1,21 @@
 import { createContext, useContext } from 'react';
-import type { AuthResponse } from '../../shared/api/authApi';
-import type { ProfileData } from '../../shared/api/profileApi';
+
+export interface User {
+  id: string;
+  username: string;
+  email: string;
+  createdAt?: string;
+  avatar?: string | null;
+}
 
 export interface AuthContextType {
-  user: AuthResponse['user'] | null;
-  profile: ProfileData | null;
+  user: User | null;
+  profile: null;
   isLoading: boolean;
   isAuthenticated: boolean;
   logout: () => void;
+  updateUser: (updatedUser: User) => void;
+  updateUserAvatar: (avatarUrl: string) => void;
 }
 
 export const AuthContext = createContext<AuthContextType | undefined>(undefined);
