@@ -15,9 +15,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   const { data: user, isLoading } = useQuery<User>({
     queryKey: ['currentUser'],
     queryFn: async () => {
-      const profileData = await profileApi.getProfile();
-      console.log('Profile from server:', profileData);
-      
+      const profileData = await profileApi.getProfile();      
       return {
         id: profileData.user._id,
         username: profileData.user.username,
