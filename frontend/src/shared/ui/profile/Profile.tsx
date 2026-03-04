@@ -44,19 +44,16 @@ export default function Profile() {
       formData.append('avatar', file);
 
       const response = await profileApi.uploadAvatar(formData);
-      
+
       if (response.data?.avatarUrl) {
         updateUserAvatar(response.data.avatarUrl);
       }
-      
-      console.log('Avatar uploaded successfully:', response.data);
-      
+
       if (fileInputRef.current) {
         fileInputRef.current.value = '';
       }
-      
+
     } catch (error: unknown) {
-      console.error('Error uploading avatar:', error);
       const apiError = error as ApiError;
       setUploadError(apiError.response?.data?.message || 'Ошибка при загрузке аватара');
     } finally {
@@ -70,16 +67,16 @@ export default function Profile() {
     }
 
     setIsUploading(true);
+
     try {
       await profileApi.deleteAvatar();
       updateUserAvatar('');
-      
+
       if (fileInputRef.current) {
         fileInputRef.current.value = '';
       }
-      
+
     } catch (error: unknown) {
-      console.error('Error deleting avatar:', error);
       const apiError = error as ApiError;
       setUploadError(apiError.response?.data?.message || 'Ошибка при удалении аватара');
     } finally {
@@ -91,6 +88,7 @@ export default function Profile() {
     const target = e.target as HTMLImageElement;
     target.style.display = 'none';
     const parent = target.parentElement;
+
     if (parent && user) {
       parent.innerHTML = user.username?.charAt(0).toUpperCase() || '?';
     }
@@ -98,8 +96,7 @@ export default function Profile() {
 
   const getAvatarUrl = (avatar: string | null | undefined) => {
     if (!avatar) return '';
-    if (avatar.startsWith('http')) return avatar;
-    return `http://localhost:3000${avatar}`;
+    return avatar;
   };
 
   if (isLoading) {
@@ -120,21 +117,23 @@ export default function Profile() {
         <div className={styles.avatarContainer}>
           <div className={styles.profileAvatar}>
             {user.avatar ? (
-              <img 
-                src={getAvatarUrl(user.avatar)} 
-                alt={user.username} 
+              <img
+                src={getAvatarUrl(user.avatar)}
+                alt={user.username}
                 className={styles.avatarImage}
                 onError={handleImageError}
               />
             ) : (
               user.username?.charAt(0).toUpperCase() || '?'
             )}
+
             {isUploading && (
               <div className={styles.avatarOverlay}>
                 <LoadingSpinner size="small" />
               </div>
             )}
           </div>
+
           <div className={styles.avatarActions}>
             <label className={styles.avatarUploadLabel}>
               <input
@@ -144,14 +143,15 @@ export default function Profile() {
                 onChange={handleAvatarUpload}
                 disabled={isUploading}
                 className={styles.avatarInput}
-                key={user.avatar ? 'has-avatar' : 'no-avatar'} 
+                key={user.avatar ? 'has-avatar' : 'no-avatar'}
               />
               <span className={styles.avatarUploadIcon} title="Загрузить аватар">
                 📷
               </span>
             </label>
+
             {user.avatar && (
-              <button 
+              <button
                 onClick={handleDeleteAvatar}
                 className={styles.avatarDeleteButton}
                 disabled={isUploading}
@@ -162,35 +162,39 @@ export default function Profile() {
             )}
           </div>
         </div>
+
         <div className={styles.profileInfo}>
           <h3 className={styles.profileUsername}>{user.username}</h3>
           <p className={styles.profileEmail}>{user.email}</p>
         </div>
       </div>
-      
+
       {uploadError && (
         <div className={styles.errorMessage}>
           {uploadError}
         </div>
       )}
-      
+
       <div className={styles.profileDetails}>
         <div className={styles.detailItem}>
           <span className={styles.detailLabel}>User ID:</span>
           <span className={styles.detailValue}>{user.id}</span>
         </div>
+
         <div className={styles.detailItem}>
           <span className={styles.detailLabel}>Joined:</span>
           <span className={styles.detailValue}>
-            {user.createdAt ? new Date(user.createdAt).toLocaleDateString('ru-RU', {
-              year: 'numeric',
-              month: 'long',
-              day: 'numeric'
-            }) : 'N/A'}
+            {user.createdAt
+              ? new Date(user.createdAt).toLocaleDateString('ru-RU', {
+                  year: 'numeric',
+                  month: 'long',
+                  day: 'numeric'
+                })
+              : 'N/A'}
           </span>
         </div>
       </div>
-      
+
       <button onClick={logout} className={styles.logoutButton}>
         Logout
       </button>
