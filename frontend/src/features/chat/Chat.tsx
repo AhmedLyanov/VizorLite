@@ -13,7 +13,7 @@ interface ChatProps {
 }
 
 export default function Chat({ socket, roomId, userId, userName }: ChatProps) {
-  const intl = useIntl();
+  const _intl = useIntl();
   const [messageText, setMessageText] = useState('');
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const chatBodyRef = useRef<HTMLDivElement>(null);
@@ -29,7 +29,7 @@ export default function Chat({ socket, roomId, userId, userName }: ChatProps) {
     resetUnreadCount
   } = useChatStore();
 
-  const scrollToBottom = (behavior = 'smooth') => {
+  const scrollToBottom = (_behavior = 'smooth') => {
     if (messagesEndRef.current) {
       messagesEndRef.current.scrollIntoView({ behavior: 'smooth' as ScrollBehavior });
     }
