@@ -6,11 +6,12 @@ import {
   updateProfile,
   deleteAccount,
 } from "../controllers/user.controller.js";
+import { validateRecaptcha } from "../middleware/recaptcha.js";
 import { auth } from "../middleware/auth.js";
 
 const router = express.Router();
 
-router.post("/register", register);
+router.post("/register", validateRecaptcha, register);
 router.post("/login", login);
 router.get("/profile", auth, getProfile);
 router.put("/profile", auth, updateProfile);

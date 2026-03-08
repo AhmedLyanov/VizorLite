@@ -1,9 +1,11 @@
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 import { useRegister, useLogin } from '../../entities/user/useAuth'
 import { useIntl } from "react-intl"
 import { AUTHENTICATION_TEXTS } from '../../shared/constants/authentication'
 import eyeOn from "../../shared/assets/eye-on.svg";
 import eyeOff from "../../shared/assets/eye-off.svg";
+
+import { RecaptchaWidget, type RecaptchaWidgetRef } from '../../shared/ui/recaptcha/RecaptchaWidget'
 import styles from './Authentication.module.css'
 
 type FormMode = 'login' | 'register'
@@ -26,6 +28,13 @@ export default function Authentication() {
     password: '',
   })
 
+
+  const [recaptchaToken, setRecaptchaToken] = useState<string>('')
+  const [recaptchaError, setRecaptchaError] = useState<string>('')
+  
+
+  const recaptchaRef = useRef<RecaptchaWidgetRef>(null)
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({
       ...formData,
@@ -33,22 +42,55 @@ export default function Authentication() {
     })
   }
 
+
+  const handleRecaptchaVerify = (token: string) => {
+    setRecaptchaToken(token)
+    setRecaptchaError('')
+  }
+
+  const handleRecaptchaExpire = () => {
+    setRecaptchaToken('')
+    setRecaptchaError('reCAPTCHA expired. Please verify again.')
+  }
+
+  const handleRecaptchaError = () => {
+    setRecaptchaToken('')
+    setRecaptchaError('reCAPTCHA error. Please try again.')
+  }
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setRecaptchaError('') 
 
     try {
       if (mode === 'register') {
         if (!formData.username.trim() || !formData.email.trim() || !formData.password.trim()) {
           return;
         }
-        await register(formData);
+        
+
+        if (!recaptchaToken) {
+          setRecaptchaError('Please complete the reCAPTCHA verification')
+          return;
+        }
+
+
+        await register({ 
+          ...formData, 
+          recaptchaToken 
+        });
       } else {
         if (!formData.email.trim() || !formData.password.trim()) {
           return;
         }
         await login({ email: formData.email, password: formData.password });
       }
-    } catch (err) {
+    } catch (err: any) {
+      if (err?.response?.data?.error === 'RECAPTCHA_FAILED') {
+        setRecaptchaError('reCAPTCHA verification failed. Please try again.')
+        recaptchaRef.current?.reset() 
+        setRecaptchaToken('')
+      }
     }
   };
 
@@ -59,6 +101,10 @@ export default function Authentication() {
       email: '',
       password: '',
     })
+
+    setRecaptchaToken('')
+    setRecaptchaError('')
+    recaptchaRef.current?.reset()
   }
 
   return (
@@ -152,6 +198,25 @@ export default function Authentication() {
             </button>
           </div>
         </div>
+
+
+        {mode === 'register' && (
+          <div className={styles.recaptchaContainer}>
+            <RecaptchaWidget
+              ref={recaptchaRef}
+              onVerify={handleRecaptchaVerify}
+              onExpire={handleRecaptchaExpire}
+              onError={handleRecaptchaError}
+              theme="light"
+              size="normal"
+            />
+            {recaptchaError && (
+              <span className={styles.recaptchaError} role="alert">
+                {recaptchaError}
+              </span>
+            )}
+          </div>
+        )}
 
         {isError && (
           <div className={styles.errorMessage}>
