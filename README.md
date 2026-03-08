@@ -3,8 +3,8 @@
 # VizorLite
 
 <div align="center">
-  <img src="https://raw.githubusercontent.com/AhmedLyanov/VizorLite/dev/docs/cover.png" alt="VizorLite Cover" width="800">
-
+  <img src="docs/cover.png" alt="VizorLite Cover" width="800">
+  
   [English](#en) | [Русский](#ru)
 </div>
 
