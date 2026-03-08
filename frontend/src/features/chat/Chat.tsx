@@ -1,5 +1,4 @@
 import { useState, useEffect, useRef } from 'react';
-import { useIntl } from 'react-intl';
 import { useChatStore } from '../../entities/chat/useChatStore';
 import type { ChatMessage } from '../../entities/chat/types';
 import styles from './Chat.module.css';
@@ -13,7 +12,6 @@ interface ChatProps {
 }
 
 export default function Chat({ socket, roomId, userId, userName }: ChatProps) {
-  const _intl = useIntl();
   const [messageText, setMessageText] = useState('');
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const chatBodyRef = useRef<HTMLDivElement>(null);
