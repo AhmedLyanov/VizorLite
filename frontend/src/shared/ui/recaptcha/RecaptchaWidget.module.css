@@ -1,0 +1,13 @@
+.recaptchaWidget {
+  display: flex;
+  justify-content: center;
+  margin: 1rem 0;
+  transform: scale(0.95);
+  transform-origin: center;
+}
+
+@media (max-width: 480px) {
+  .recaptchaWidget {
+    transform: scale(0.9);
+  }
+}
