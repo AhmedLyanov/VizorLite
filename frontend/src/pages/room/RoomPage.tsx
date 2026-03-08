@@ -4,9 +4,10 @@ import { io, Socket } from "socket.io-client";
 import Peer from "simple-peer";
 import { message } from "antd";
 import RoomBoard from "../../features/roomBoard/RoomBoard";
+import Chat from "../../features/chat/Chat";
 import style from "./RoomPage.module.css";
+import { useAuth } from "../../entities/user/AuthContext";
 
-/* ✅ simple-peer polyfill */
 if (typeof window !== "undefined" && !(window as any).process) {
   (window as any).process = {
     env: {},
@@ -18,6 +19,7 @@ if (typeof window !== "undefined" && !(window as any).process) {
 export default function RoomPage() {
   const { roomId } = useParams<{ roomId: string }>();
   const navigate = useNavigate();
+  const { user } = useAuth();
 
   if (!roomId) return <div>Room not found</div>;
 
@@ -35,6 +37,7 @@ export default function RoomPage() {
   const [participants, setParticipants] = useState<
     Map<string, { userName: string }>
   >(new Map());
+  const [userName, setUserName] = useState<string>('');
 
   const [isCameraOn, setIsCameraOn] = useState(true);
   const [isScreenSharing, setIsScreenSharing] = useState(false);
@@ -42,9 +45,6 @@ export default function RoomPage() {
   const screenStreamRef = useRef<MediaStream | null>(null);
   const originalTrackRef = useRef<MediaStreamTrack | null>(null);
 
-  // ======================
-  // GET USER MEDIA
-  // ======================
   useEffect(() => {
     navigator.mediaDevices
       .getUserMedia({ video: true, audio: true })
@@ -59,9 +59,6 @@ export default function RoomPage() {
       });
   }, []);
 
-  // ======================
-  // CREATE PEER
-  // ======================
   const createPeer = (
     socketId: string,
     initiator: boolean
@@ -106,12 +103,12 @@ export default function RoomPage() {
     setRemoteVideos(new Map(remoteStreamsRef.current));
   };
 
-  // ======================
-  // SOCKET
-  // ======================
   useEffect(() => {
     if (!stream || joinedRef.current) return;
     joinedRef.current = true;
+
+    const currentUserName = user?.username || `User ${Math.floor(Math.random() * 1000)}`;
+    setUserName(currentUserName);
 
     const socket = io(import.meta.env.VITE_API_URL, {
       path: "/ws",
@@ -124,8 +121,8 @@ export default function RoomPage() {
     socket.on("connect", () => {
       socket.emit("join-room", {
         roomId,
-        userId: socket.id,
-        userName: `User ${Math.floor(Math.random() * 1000)}`,
+        userId: user?.id || socket.id,
+        userName: currentUserName,
       });
     });
 
@@ -166,18 +163,12 @@ export default function RoomPage() {
     };
   }, [stream]);
 
-  // ======================
-  // CAMERA
-  // ======================
   const toggleCamera = () => {
     if (!stream) return;
     stream.getVideoTracks().forEach((t) => (t.enabled = !t.enabled));
     setIsCameraOn((p) => !p);
   };
 
-  // ======================
-  // SCREEN SHARE
-  // ======================
   const toggleScreenShare = async () => {
     if (!stream) return;
 
@@ -288,6 +279,13 @@ export default function RoomPage() {
         isCameraOn={isCameraOn}
         onToggleScreenShare={toggleScreenShare}
         isScreenSharing={isScreenSharing}
+      />
+
+      <Chat
+        socket={socketRef.current}
+        roomId={roomId}
+        userId={user?.id || null}
+        userName={userName}
       />
     </div>
   );

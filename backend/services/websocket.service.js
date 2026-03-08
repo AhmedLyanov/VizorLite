@@ -1,10 +1,11 @@
 import { Server } from "socket.io";
+import { saveMessage, getRoomMessages } from "./chat.service.js";
 
 class SocketService {
   constructor() {
     this.io = null;
-    this.rooms = new Map(); 
-    this.users = new Map(); 
+    this.rooms = new Map();
+    this.users = new Map();
   }
 
   initialize(server) {
@@ -22,7 +23,6 @@ class SocketService {
 
   setupEventHandlers() {
     this.io.on("connection", (socket) => {
-
       socket.on("join-room", ({ roomId, userId, userName }) => {
         socket.join(roomId);
 
@@ -33,7 +33,6 @@ class SocketService {
         const room = this.rooms.get(roomId);
         room.add(socket.id);
         this.users.set(socket.id, { userId, userName, roomId });
-
 
         const existingUsers = Array.from(room)
           .filter(id => id !== socket.id)
@@ -51,6 +50,8 @@ class SocketService {
           userId,
           userName,
         });
+
+        this.saveSystemMessage(roomId, `${userName} присоединился к конференции`);
       });
 
       socket.on("offer", ({ offer, to }) => {
@@ -74,6 +75,33 @@ class SocketService {
         });
       });
 
+      socket.on("chat-message", async ({ roomId, userId, userName, content }) => {
+        try {
+          const savedMessage = await saveMessage(roomId, userId, userName, content, 'text');
+          
+          this.io.to(roomId).emit("chat-message", {
+            _id: savedMessage._id,
+            userId,
+            userName,
+            content,
+            type: 'text',
+            timestamp: savedMessage.timestamp
+          });
+        } catch (error) {
+          console.error('Error sending chat message:', error);
+        }
+      });
+
+      socket.on("get-chat-history", async ({ roomId }, callback) => {
+        try {
+          const messages = await getRoomMessages(roomId);
+          if (callback) callback(messages);
+        } catch (error) {
+          console.error('Error getting chat history:', error);
+          if (callback) callback([]);
+        }
+      });
+
       socket.on("disconnect", () => {
         const user = this.users.get(socket.id);
         if (!user) {
@@ -89,11 +117,30 @@ class SocketService {
           socket.to(roomId).emit("user-disconnected", {
             socketId: socket.id,
           });
+
+          this.saveSystemMessage(roomId, `${userName} покинул конференцию`);
         }
 
         this.users.delete(socket.id);
       });
     });
+  }
+
+  async saveSystemMessage(roomId, content) {
+    try {
+      await saveMessage(roomId, null, 'System', content, 'system');
+      
+      this.io.to(roomId).emit("chat-message", {
+        _id: Date.now().toString(),
+        userId: null,
+        userName: 'System',
+        content,
+        type: 'system',
+        timestamp: new Date()
+      });
+    } catch (error) {
+      console.error('Error saving system message:', error);
+    }
   }
 }
 

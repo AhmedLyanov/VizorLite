@@ -67,32 +67,3 @@
 .roomBoardButton {
     background: var(--roomboard-button-bg);
 }
-
-.roomBoardChatButton {
-    position: fixed;
-    bottom: var(--roomboard-container-bottom);
-    right: calc(50% + var(--roomboard-container-width)/2 + 12px);
-    width: 80px;
-    height: var(--roomboard-container-height);
-    background-color: var(--roomboard-container-bg);
-    border: none;
-    border-radius: var(--roomboard-container-border-radius);
-    box-shadow: var(--roomboard-container-box-shadow);
-    z-index: var(--roomboard-container-z-index);
-    cursor: pointer;
-}
-
-
-@media (min-width: 768px) {
-    .roomBoardContainer {
-        width: var(--roomboard-container-width-768);
-    }
-    
-    .roomBoardWaveformContainer {
-        left: calc(44% - var(--roomboard-container-width-768)/2 - 12px - 80px - 10px);
-    }
-    
-    .roomBoardChatButton {
-        right: calc(50% + var(--roomboard-container-width-768)/2 + 12px);
-    }
-}
