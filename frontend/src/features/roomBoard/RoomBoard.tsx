@@ -112,10 +112,6 @@ export default function RoomBoard({
     <>
       {contextHolder}
 
-      <button className={styles.roomBoardChatButton}>
-        <Icon name="send" />
-      </button>
-
       <div className={styles.roomBoardWaveformContainer}>
         <div className={styles.roomBoardWaveform}>
           <MicLevelVisualizer stream={stream} />
