@@ -11,7 +11,7 @@
   --primary-bigbutton-active-shadow: 1px 1px 10px rgba(51, 51, 51, 0.2);
 
   --primary-navigation-links: #333;
-  
+
   /*fonts*/
   --primary-font: "Inter", sans-serif;
 
@@ -47,7 +47,7 @@
   --video-container-height-1024: 350px;
   --video-container-height-1440: 400px;
   --video-container-height-1920: 450px;
-  
+
   /* RoomPage - VideoContainer Flex Basis */
   --video-container-flex-mobile: 1 0 100%;
   --video-container-flex-480: 1 0 calc(50% - 10px);
@@ -55,13 +55,13 @@
   --video-container-flex-1024: 1 0 calc(25% - 20px);
   --video-container-flex-1440: 1 0 calc(20% - 25px);
   --video-container-flex-1920: 1 0 calc(16.666% - 30px);
-  
+
   /* RoomPage - VideoContainer Max Width */
   --video-container-maxwidth-768: calc(33.333% - 15px);
   --video-container-maxwidth-1024: calc(50% - 50px);
   --video-container-maxwidth-1440: calc(50% - 50px);
   --video-container-maxwidth-1920: calc(16.666% - 30px);
-  
+
   /* RoomPage - VideoContainer Min Width */
   --video-container-minwidth-1024: 300px;
   --video-container-minwidth-1440: 320px;
@@ -306,14 +306,14 @@
   --joinmeeting-input-font-size-768: 17px;
   --joinmeeting-input-color: var(--primary-title-color);
   --joinmeeting-input-bg: var(--primary-white);
-  --joinmeeting-input-focus-border: var(--primary-accent-color, #007AFF);
+  --joinmeeting-input-focus-border: var(--primary-accent-color, #007aff);
   --joinmeeting-input-focus-shadow: 0 0 0 3px rgba(0, 122, 255, 0.1);
   --joinmeeting-input-placeholder-color: rgba(0, 0, 0, 0.4);
   --joinmeeting-input-placeholder-font-size: 15px;
   --joinmeeting-input-placeholder-font-size-768: 16px;
 
   /* JoinMeeting - Error */
-  --joinmeeting-error-color: #FF3B30;
+  --joinmeeting-error-color: #ff3b30;
   --joinmeeting-error-font-size: 14px;
 
   /* JoinMeeting - Actions */
@@ -332,9 +332,9 @@
   --joinmeeting-cancel-button-bg: rgba(0, 0, 0, 0.05);
   --joinmeeting-cancel-button-color: var(--primary-title-color);
   --joinmeeting-cancel-button-hover-bg: rgba(0, 0, 0, 0.1);
-  --joinmeeting-confirm-button-bg: var(--primary-accent-color, #007AFF);
+  --joinmeeting-confirm-button-bg: var(--primary-accent-color, #007aff);
   --joinmeeting-confirm-button-color: white;
-  --joinmeeting-confirm-button-hover-bg: var(--primary-accent-hover, #0056CC);
+  --joinmeeting-confirm-button-hover-bg: var(--primary-accent-hover, #0056cc);
 
   /* LeaveRoom - Overlay */
   --leaveroom-overlay-bg: rgba(0, 0, 0, 0.7);
@@ -354,7 +354,8 @@
 
   /* LeaveRoom - Title */
   --leaveroom-title-color: #ffffff;
-  --leaveroom-title-font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --leaveroom-title-font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   --leaveroom-title-font-size: 20px;
   --leaveroom-title-font-size-768: 22px;
   --leaveroom-title-font-size-1024: 24px;
@@ -364,7 +365,8 @@
 
   /* LeaveRoom - Description */
   --leaveroom-description-color: #b0b0b0;
-  --leaveroom-description-font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --leaveroom-description-font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   --leaveroom-description-font-size: 16px;
   --leaveroom-description-font-size-768: 17px;
   --leaveroom-description-line-height: 1.5;
@@ -380,7 +382,8 @@
   --leaveroom-button-padding-768: 16px 24px;
   --leaveroom-button-padding-1024: 16px 28px;
   --leaveroom-button-border-radius: 12px;
-  --leaveroom-button-font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --leaveroom-button-font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   --leaveroom-button-font-size: 16px;
   --leaveroom-button-font-size-768: 17px;
   --leaveroom-button-font-weight: 500;
@@ -393,7 +396,7 @@
 
   /* RoomBoard - Container */
   --roomboard-container-bottom: 20px;
-  --roomboard-container-width: 80%;
+  --roomboard-container-width: 40%;
   --roomboard-container-width-768: 40%;
   --roomboard-container-max-width: 1200px;
   --roomboard-container-padding: 20px;

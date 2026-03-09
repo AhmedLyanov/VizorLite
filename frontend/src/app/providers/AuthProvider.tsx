@@ -1,8 +1,8 @@
-import type { ReactNode } from 'react';
-import { useQuery, useQueryClient } from '@tanstack/react-query';
-import { AuthContext, type User } from '../../entities/user/AuthContext';
-import { useState } from 'react';
-import { profileApi } from '../../shared/api/profileApi';
+import type { ReactNode } from "react";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { AuthContext, type User } from "../../entities/user/AuthContext";
+import { useState, useEffect } from "react";
+import { profileApi } from "../../shared/api/profileApi";
 
 interface AuthProviderProps {
   children: ReactNode;
@@ -10,18 +10,29 @@ interface AuthProviderProps {
 
 export const AuthProvider = ({ children }: AuthProviderProps) => {
   const queryClient = useQueryClient();
-  const [token, setToken] = useState<string | null>(() => localStorage.getItem('token'));
+  const [token, setToken] = useState<string | null>(() =>
+    localStorage.getItem("token"),
+  );
+
+  useEffect(() => {
+    const handleAuthChange = () => {
+      setToken(localStorage.getItem("token"));
+    };
+
+    window.addEventListener("auth-change", handleAuthChange);
+    return () => window.removeEventListener("auth-change", handleAuthChange);
+  }, []);
 
   const { data: user, isLoading } = useQuery<User>({
-    queryKey: ['currentUser'],
+    queryKey: ["currentUser"],
     queryFn: async () => {
-      const profileData = await profileApi.getProfile();      
+      const profileData = await profileApi.getProfile();
       return {
         id: profileData.user._id,
         username: profileData.user.username,
         email: profileData.user.email,
         createdAt: profileData.user.createdAt,
-        avatar: profileData.user.avatar || null
+        avatar: profileData.user.avatar || null,
       };
     },
     enabled: !!token,
@@ -30,17 +41,17 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   });
 
   const logout = () => {
-    localStorage.removeItem('token');
-    localStorage.removeItem('user');
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
     setToken(null);
-    queryClient.removeQueries({ queryKey: ['currentUser'] });
-    window.dispatchEvent(new Event('auth-change'));
+    queryClient.removeQueries({ queryKey: ["currentUser"] });
+    window.dispatchEvent(new Event("auth-change"));
   };
 
   const updateUser = (updatedUser: User) => {
-    localStorage.setItem('user', JSON.stringify(updatedUser));
-    queryClient.invalidateQueries({ queryKey: ['currentUser'] });
-    window.dispatchEvent(new Event('auth-change'));
+    localStorage.setItem("user", JSON.stringify(updatedUser));
+    queryClient.invalidateQueries({ queryKey: ["currentUser"] });
+    window.dispatchEvent(new Event("auth-change"));
   };
 
   const updateUserAvatar = (avatarUrl: string) => {
@@ -54,15 +65,11 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     user: user || null,
     profile: null,
     isLoading,
-    isAuthenticated: !!token && !!user, 
+    isAuthenticated: !!token && !!user,
     logout,
     updateUser,
     updateUserAvatar,
   };
 
-  return (
-    <AuthContext.Provider value={value}>
-      {children}
-    </AuthContext.Provider>
-  );
+  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };

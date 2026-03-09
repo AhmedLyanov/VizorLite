@@ -11,6 +11,7 @@ import roomRoutes from "./routes/room.routes.js";
 import aiRoutes from "./routes/ai.routes.js";
 import profileRoutes from "./routes/profile.routes.js"; 
 import socketService from "./services/websocket.service.js";
+import verificationRoutes from "./routes/verification.routes.js";
 
 dotenv.config();
 
@@ -41,6 +42,7 @@ app.use("/api/auth", userRoutes);
 app.use("/api/room", roomRoutes);
 app.use('/api/ai', aiRoutes);
 app.use('/api/profile', profileRoutes); 
+app.use("/api/verification", verificationRoutes);
 
 app.get("/", (req, res) => {
   res.json({ message: "Welcome Universe!" });

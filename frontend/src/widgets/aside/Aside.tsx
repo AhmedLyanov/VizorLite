@@ -1,7 +1,8 @@
 import styles from "./Aside.module.css";
 import { useAuth } from "../../entities/user/AuthContext";
 import { Icon } from "../../shared/assets/icons/Icon";
-import { Tooltip } from 'antd';
+import { Tooltip } from "antd";
+import { Link } from "react-router-dom";
 
 export default function Aside() {
   const { isAuthenticated, user } = useAuth();
@@ -12,7 +13,7 @@ export default function Aside() {
         <div className={styles.asideContentTop}>
           {isAuthenticated && user && (
             <Tooltip placement="right" title="Профиль">
-              <a href="/profile" className={styles.navLink}>
+              <Link to="/profile" className={styles.navLink}>
                 <div className={styles.asideAvatar}>
                   {user.avatar ? (
                     <img
@@ -21,12 +22,17 @@ export default function Aside() {
                       className={styles.avatarImage}
                     />
                   ) : (
-                    user.username?.charAt(0).toUpperCase() || '?'
+                    user.username?.charAt(0).toUpperCase() || "?"
                   )}
                 </div>
-              </a>
+              </Link>
             </Tooltip>
           )}
+          <Tooltip placement="right" title="Главная">
+            <Link to="/" className={styles.asideNavigationButton}>
+              <Icon name="home" />
+            </Link>
+          </Tooltip>
 
           <Tooltip placement="right" title="Сообщения">
             <button className={styles.asideNavigationButton}>
