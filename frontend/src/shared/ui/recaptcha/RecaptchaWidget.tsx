@@ -1,5 +1,5 @@
-// frontend/src/shared/ui/recaptcha/RecaptchaWidget.tsx
 import { useEffect, useRef, forwardRef, useImperativeHandle } from 'react';
+import styles from "./RecaptchaWidget.module.css"
 
 export interface RecaptchaWidgetRef {
   getValue: () => string | undefined;
@@ -39,7 +39,6 @@ export const RecaptchaWidget = forwardRef<RecaptchaWidgetRef, RecaptchaWidgetPro
         return;
       }
 
-      // Если скрипт уже загружен глобально — не грузим повторно
       if (document.querySelector('script[src*="recaptcha/api.js"]')) {
         scriptLoaded.current = true;
         return;
@@ -57,14 +56,13 @@ export const RecaptchaWidget = forwardRef<RecaptchaWidgetRef, RecaptchaWidgetPro
       document.body.appendChild(script);
 
       return () => {
-        // Не удаляем скрипт — он может использоваться другими виджетами
       };
     }, []);
 
     return (
       <div 
         ref={containerRef}
-        className="g-recaptcha"
+        className={styles.gRecaptcha}
         data-sitekey={import.meta.env.VITE_RECAPTCHA_SITE_KEY}
         data-callback={onVerify}
         data-expired-callback={onExpire}

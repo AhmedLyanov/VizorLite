@@ -1,4 +1,4 @@
-.recaptchaWidget {
+.gRecaptcha {
   display: flex;
   justify-content: center;
   margin: 1rem 0;
@@ -7,7 +7,7 @@
 }
 
 @media (max-width: 480px) {
-  .recaptchaWidget {
+  .gRecaptcha {
     transform: scale(0.9);
   }
 }
