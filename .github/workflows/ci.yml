@@ -8,7 +8,7 @@ jobs:
   deploy:
     name: Deploy Application
     runs-on: ubuntu-latest
-    
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -21,16 +21,31 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: 22
           script: |
+            # Use absolute paths for nvm/node
+            export NVM_DIR="$HOME/.nvm"
+            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+            
+            # Get node version from nvm
+            NODE_VERSION=$(cat "$NVM_DIR/VERSION_FILE" 2>/dev/null || echo "v24.11.1")
+            export PATH="$NVM_DIR/versions/node/$NODE_VERSION/bin:$PATH"
+            
+            # Verify node/npm available
+            echo "Node version: $(node -v 2>&1 || echo 'not found')"
+            echo "NPM version: $(npm -v 2>&1 || echo 'not found')"
+            echo "PM2 version: $(pm2 -v 2>&1 || echo 'not found')"
+            
             cd /var/www/projects/VizorLite
-            
-            git pull origin main
-            
+
+            git fetch origin
+            git reset --hard origin/main
+
             cd backend
             npm install
-            pm2 restart backend || pm2 start index.js --name backend
-            
+            pm2 restart backend || pm2 start backend --name backend
+
             cd ../frontend
             npm install
             npm run build
-            
+
             sudo systemctl reload nginx
+            
