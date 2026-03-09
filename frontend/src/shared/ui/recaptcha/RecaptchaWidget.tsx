@@ -1,77 +1,78 @@
+// frontend/src/shared/ui/recaptcha/RecaptchaWidget.tsx
 import { useEffect, useRef, forwardRef, useImperativeHandle } from 'react';
-import { useRecaptcha } from '../../../entities/recaptcha/useRecaptcha';
-import styles from "./RecaptchaWidget.module.css"
 
 export interface RecaptchaWidgetRef {
-  reset: () => void;
   getValue: () => string | undefined;
+  reset: () => void;
 }
 
 interface RecaptchaWidgetProps {
   onVerify?: (token: string) => void;
-  onError?: (error: string) => void;
   onExpire?: () => void;
   theme?: 'light' | 'dark';
   size?: 'normal' | 'compact';
 }
 
 export const RecaptchaWidget = forwardRef<RecaptchaWidgetRef, RecaptchaWidgetProps>(
-  ({ onVerify, onError, onExpire, theme = 'light', size = 'normal' }, ref) => {
+  ({ onVerify, onExpire, theme = 'light', size = 'normal' }, ref) => {
     const containerRef = useRef<HTMLDivElement>(null);
-
-    const widgetId = useRef<number | null>(null);
-    const { loadScript } = useRecaptcha();
+    const scriptLoaded = useRef(false);
 
     useImperativeHandle(ref, () => ({
-      reset: () => {
-        if (widgetId.current !== null) {
-          window.grecaptcha?.reset(widgetId.current);
-        }
-      },
       getValue: () => {
-        if (widgetId.current !== null) {
-          return window.grecaptcha?.getResponse(widgetId.current);
+        const inputs = containerRef.current?.querySelectorAll('textarea');
+        return inputs?.[0]?.value;
+      },
+      reset: () => {
+        if (window.grecaptcha) {
+          window.grecaptcha.reset();
         }
-        return undefined;
       },
     }));
 
     useEffect(() => {
-      let mounted = true;
+      if (scriptLoaded.current) return;
+      
+      const siteKey = import.meta.env.VITE_RECAPTCHA_SITE_KEY;
+      if (!siteKey) {
+        console.warn('[RecaptchaWidget] Site key not set');
+        return;
+      }
 
-      const initRecaptcha = async () => {
-        await loadScript();
-        
-        if (!mounted || !containerRef.current) return;
+      // Если скрипт уже загружен глобально — не грузим повторно
+      if (document.querySelector('script[src*="recaptcha/api.js"]')) {
+        scriptLoaded.current = true;
+        return;
+      }
 
-        const siteKey = import.meta.env.VITE_RECAPTCHA_SITE_KEY;
-        if (!siteKey) {
-          console.warn('[RecaptchaWidget] VITE_RECAPTCHA_SITE_KEY is not set');
-          return;
-        }
-
-
-        widgetId.current = window.grecaptcha!.render(containerRef.current, {
-          sitekey: siteKey,
-          callback: onVerify,
-          'error-callback': onError,
-          'expired-callback': onExpire,
-          theme,
-          size,
-        });
+      const script = document.createElement('script');
+      script.src = `https://www.google.com/recaptcha/api.js?hl=ru`;
+      script.async = true;
+      script.defer = true;
+      
+      script.onload = () => {
+        scriptLoaded.current = true;
       };
 
-      initRecaptcha();
+      document.body.appendChild(script);
 
       return () => {
-        mounted = false;
-        if (widgetId.current !== null) {
-          window.grecaptcha?.reset(widgetId.current);
-        }
+        // Не удаляем скрипт — он может использоваться другими виджетами
       };
-    }, [loadScript, onVerify, onError, onExpire, theme, size]);
+    }, []);
 
-    return <div ref={containerRef} className={styles.recaptchaWidget} />;
+    return (
+      <div 
+        ref={containerRef}
+        className="g-recaptcha"
+        data-sitekey={import.meta.env.VITE_RECAPTCHA_SITE_KEY}
+        data-callback={onVerify}
+        data-expired-callback={onExpire}
+        data-theme={theme}
+        data-size={size}
+      />
+    );
   }
 );
 
+RecaptchaWidget.displayName = 'RecaptchaWidget';
