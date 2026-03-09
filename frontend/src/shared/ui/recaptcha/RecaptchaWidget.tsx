@@ -1,4 +1,3 @@
-// frontend/src/shared/ui/recaptcha/RecaptchaWidget.tsx
 import { useEffect, useRef, forwardRef, useImperativeHandle } from 'react';
 
 export interface RecaptchaWidgetRef {
@@ -9,12 +8,13 @@ export interface RecaptchaWidgetRef {
 interface RecaptchaWidgetProps {
   onVerify?: (token: string) => void;
   onExpire?: () => void;
+  onError?: (error: string) => void; 
   theme?: 'light' | 'dark';
   size?: 'normal' | 'compact';
 }
 
 export const RecaptchaWidget = forwardRef<RecaptchaWidgetRef, RecaptchaWidgetProps>(
-  ({ onVerify, onExpire, theme = 'light', size = 'normal' }, ref) => {
+  ({ onVerify, onExpire, onError, theme = 'light', size = 'normal' }, ref) => {
     const containerRef = useRef<HTMLDivElement>(null);
     const scriptLoaded = useRef(false);
 
@@ -39,7 +39,7 @@ export const RecaptchaWidget = forwardRef<RecaptchaWidgetRef, RecaptchaWidgetPro
         return;
       }
 
-      // Если скрипт уже загружен глобально — не грузим повторно
+
       if (document.querySelector('script[src*="recaptcha/api.js"]')) {
         scriptLoaded.current = true;
         return;
@@ -54,12 +54,16 @@ export const RecaptchaWidget = forwardRef<RecaptchaWidgetRef, RecaptchaWidgetPro
         scriptLoaded.current = true;
       };
 
+      script.onerror = () => {
+        onError?.('Failed to load reCAPTCHA script');
+      };
+
       document.body.appendChild(script);
 
       return () => {
-        // Не удаляем скрипт — он может использоваться другими виджетами
+
       };
-    }, []);
+    }, [onError]);
 
     return (
       <div 
@@ -68,6 +72,7 @@ export const RecaptchaWidget = forwardRef<RecaptchaWidgetRef, RecaptchaWidgetPro
         data-sitekey={import.meta.env.VITE_RECAPTCHA_SITE_KEY}
         data-callback={onVerify}
         data-expired-callback={onExpire}
+        data-error-callback={onError} 
         data-theme={theme}
         data-size={size}
       />
