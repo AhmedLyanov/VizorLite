@@ -1,0 +1,132 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  background-color: var(--modal-overlay-bg, var(--joinmeeting-overlay-bg));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--modal-overlay-padding, var(--joinmeeting-overlay-padding));
+  z-index: var(--modal-overlay-z-index, 1000);
+  animation: var(--animation-fadein);
+}
+
+.modal {
+  background: var(--modal-bg, var(--joinmeeting-modal-bg));
+  border-radius: var(
+    --modal-border-radius,
+    var(--joinmeeting-modal-border-radius)
+  );
+  padding: var(--modal-padding, var(--joinmeeting-modal-padding));
+  width: 100%;
+  max-width: var(--modal-max-width, var(--joinmeeting-modal-max-width));
+  box-shadow: var(--modal-shadow, var(--joinmeeting-modal-box-shadow));
+  animation: var(--animation-slideup);
+}
+
+.title {
+  color: var(--primary-title-color);
+  font-family: var(--primary-font);
+  font-size: var(--modal-title-font-size, var(--joinmeeting-title-font-size));
+  font-weight: var(
+    --modal-title-font-weight,
+    var(--joinmeeting-title-font-weight)
+  );
+  margin: 0 0
+    var(--modal-title-margin-bottom, var(--joinmeeting-title-margin-bottom)) 0;
+  text-align: center;
+  line-height: 1.4;
+}
+
+.content {
+  margin-bottom: 8px;
+}
+
+.actions {
+  display: flex;
+  gap: var(--modal-actions-gap, var(--joinmeeting-actions-gap));
+  margin-top: var(
+    --modal-actions-margin-top,
+    var(--joinmeeting-actions-margin-top)
+  );
+}
+
+.actions button {
+  flex: 1;
+  padding: var(--modal-button-padding, var(--joinmeeting-button-padding));
+  border-radius: var(
+    --modal-button-border-radius,
+    var(--joinmeeting-button-border-radius)
+  );
+  font-family: var(--primary-font);
+  font-size: var(--modal-button-font-size, var(--joinmeeting-button-font-size));
+  font-weight: var(
+    --modal-button-font-weight,
+    var(--joinmeeting-button-font-weight)
+  );
+  border: none;
+  cursor: pointer;
+  transition: var(--transition-normal);
+}
+
+.actions button:active {
+  transform: translateY(0);
+}
+
+@media (min-width: 768px) {
+  .modal {
+    padding: var(--modal-padding-768, var(--joinmeeting-modal-padding-768));
+    max-width: var(
+      --modal-max-width-768,
+      var(--joinmeeting-modal-max-width-768)
+    );
+  }
+
+  .title {
+    font-size: var(
+      --modal-title-font-size-768,
+      var(--joinmeeting-title-font-size-768)
+    );
+    margin-bottom: var(
+      --modal-title-margin-bottom-768,
+      var(--joinmeeting-title-margin-bottom-768)
+    );
+  }
+
+  .actions {
+    gap: var(--modal-actions-gap-768, var(--joinmeeting-actions-gap-768));
+  }
+
+  .actions button {
+    padding: var(
+      --modal-button-padding-768,
+      var(--joinmeeting-button-padding-768)
+    );
+    font-size: var(
+      --modal-button-font-size-768,
+      var(--joinmeeting-button-font-size-768)
+    );
+  }
+}
+
+@media (min-width: 1024px) {
+  .modal {
+    max-width: var(
+      --modal-max-width-1024,
+      var(--joinmeeting-modal-max-width-1024)
+    );
+  }
+
+  .title {
+    font-size: var(
+      --modal-title-font-size-1024,
+      var(--joinmeeting-title-font-size-1024)
+    );
+  }
+
+  .actions button {
+    padding: var(
+      --modal-button-padding-1024,
+      var(--joinmeeting-button-padding-1024)
+    );
+  }
+}

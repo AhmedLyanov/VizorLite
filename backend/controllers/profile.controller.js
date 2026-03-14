@@ -3,7 +3,7 @@ import multer from 'multer';
 import path from 'path';
 import fs from 'fs';
 import { fileURLToPath } from 'url';
-import sharp from 'sharp';
+import { saveAvatar } from '../services/avatar.service.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -14,7 +14,6 @@ if (!fs.existsSync(uploadDir)) {
 }
 
 const storage = multer.memoryStorage();
-
 const fileFilter = (req, file, cb) => {
   const allowedTypes = /jpeg|jpg|png|gif|webp/;
   const extname = allowedTypes.test(path.extname(file.originalname).toLowerCase());
@@ -59,62 +58,43 @@ export const uploadAvatar = async (req, res) => {
     if (!req.file) {
       return res.status(400).json({
         success: false,
-        message: 'Пожалуйста, выберите файл для загрузки'
+        message: "No file uploaded"
       });
     }
 
-    const userId = req.userId;
-    const user = await User.findById(userId);
+    const user = await User.findById(req.userId);
 
     if (!user) {
       return res.status(404).json({
         success: false,
-        message: 'Пользователь не найден'
+        message: "User not found"
       });
     }
 
-    const fileName = `avatar_${userId}_${Date.now()}.webp`;
-    const filePath = path.join(uploadDir, fileName);
-        await sharp(req.file.buffer)
-      .resize(200, 200, {
-        fit: 'cover',
-        position: 'center'
-      })
-      .webp({ quality: 80 })
-      .toFile(filePath);
-
     if (user.avatar) {
-      const oldAvatarPath = path.join(__dirname, '..', user.avatar);
-      if (fs.existsSync(oldAvatarPath)) {
-        fs.unlinkSync(oldAvatarPath);
-      }
+      deleteAvatarFile(user.avatar);
     }
 
-    const avatarPath = `/uploads/avatars/${fileName}`;
+    const avatarPath = await saveAvatar(req.file.buffer, req.userId);
 
     user.avatar = avatarPath;
     await user.save();
 
-    const baseUrl = `${req.protocol}://${req.get('host')}`;
-    const avatarUrl = `${baseUrl}${avatarPath}`;
-
-    console.log('Avatar saved:', avatarUrl);
+    const baseUrl = `${req.protocol}://${req.get("host")}`;
 
     res.json({
       success: true,
-      message: 'Аватар успешно загружен',
       data: {
-        avatarUrl: avatarUrl,
-        avatarPath: avatarPath
+        avatarUrl: `${baseUrl}${avatarPath}`
       }
     });
 
   } catch (error) {
-    console.error('Ошибка загрузки аватара:', error);
+    console.error(error);
+
     res.status(500).json({
       success: false,
-      message: 'Ошибка при загрузке аватара',
-      error: error.message
+      message: "Avatar upload failed"
     });
   }
 };
