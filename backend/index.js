@@ -12,6 +12,7 @@ import aiRoutes from "./routes/ai.routes.js";
 import profileRoutes from "./routes/profile.routes.js"; 
 import socketService from "./services/websocket.service.js";
 import verificationRoutes from "./routes/verification.routes.js";
+import stripeRoutes from "./routes/stripe.routes.js"
 
 dotenv.config();
 
@@ -28,6 +29,7 @@ app.use(cors({
   allowedHeaders: ['Content-Type', 'Authorization']
 }));
 
+app.use("/api/stripe/webhook", express.raw({ type: "application/json" }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -42,6 +44,7 @@ app.use("/api/auth", userRoutes);
 app.use("/api/room", roomRoutes);
 app.use('/api/ai', aiRoutes);
 app.use('/api/profile', profileRoutes); 
+app.use("/api/stripe", stripeRoutes);
 app.use("/api/verification", verificationRoutes);
 
 app.get("/", (req, res) => {

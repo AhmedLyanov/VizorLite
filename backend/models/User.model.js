@@ -25,6 +25,20 @@ const userSchema = new mongoose.Schema({
     type: Boolean,
     default: false
   },
+  plan: {
+    type: String,
+    default: "free"
+  },
+
+  stripeCustomerId: {
+    type: String,
+    default: null
+  },
+
+  stripeSubscriptionId: {
+    type: String,
+    default: null
+  },
   createdAt: {
     type: Date,
     default: Date.now
