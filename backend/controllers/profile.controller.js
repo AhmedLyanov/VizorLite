@@ -13,6 +13,18 @@ if (!fs.existsSync(uploadDir)) {
   fs.mkdirSync(uploadDir, { recursive: true });
 }
 
+const deleteAvatarFile = (avatarPath) => {
+  try {
+    const fullPath = path.join(__dirname, '..', avatarPath);
+
+    if (fs.existsSync(fullPath)) {
+      fs.unlinkSync(fullPath);
+    }
+  } catch (error) {
+    console.error("Ошибка удаления старого аватара:", error);
+  }
+};
+
 const storage = multer.memoryStorage();
 const fileFilter = (req, file, cb) => {
   const allowedTypes = /jpeg|jpg|png|gif|webp/;
