@@ -50,11 +50,21 @@ router.post("/webhook", async (req, res) => {
       return res.json({ received: true });
     }
     user.plan = "business";
+
+    user.subscriptionStatus = "active";
+
+    user.subscriptionStart = new Date();
+
+    // тест: подписка 2 минуты
+    user.subscriptionEnd = new Date(Date.now() + 2 * 60 * 1000);
+
     await user.save();
+
+    console.log("TEST subscription end:", user.subscriptionEnd);
   }
 
 
- 
+
 
   if (event.type === "customer.subscription.deleted") {
 

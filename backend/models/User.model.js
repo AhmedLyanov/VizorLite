@@ -39,6 +39,21 @@ const userSchema = new mongoose.Schema({
     type: String,
     default: null
   },
+
+  subscriptionStatus: {
+    type: String,
+    default: "inactive"
+  },
+
+  subscriptionStart: {
+    type: Date,
+    default: null
+  },
+
+  subscriptionEnd: {
+    type: Date,
+    default: null
+  },
   createdAt: {
     type: Date,
     default: Date.now

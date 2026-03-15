@@ -8,9 +8,10 @@ import {
   leaveRoom
 } from '../controllers/room.controller.js';
 import { auth } from '../middleware/auth.js';
+import { checkSubscription } from '../middleware/checkSubscription.js';
 
 const router = express.Router();
-router.post('/create', auth, createRoom);
+router.post('/create', auth, checkSubscription, createRoom);
 router.post('/join/:roomId', auth, joinRoom);
 router.get('/:roomId', auth, getRoomDetails);
 router.delete('/:roomId/end', auth, endRoom);
