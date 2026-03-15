@@ -47,18 +47,10 @@ router.post("/webhook", async (req, res) => {
     });
 
     if (!user) {
-
-      console.log("User not found for customer:", customerId);
       return res.json({ received: true });
-
     }
-
-    user.plan = "pro";
-
+    user.plan = "business";
     await user.save();
-
-    console.log("User upgraded:", user.email);
-
   }
 
 
