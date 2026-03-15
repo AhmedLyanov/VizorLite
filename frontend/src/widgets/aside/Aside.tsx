@@ -47,9 +47,9 @@ export default function Aside() {
           </Tooltip>
 
           <Tooltip placement="right" title="Сообщество">
-            <button className={styles.asideNavigationButton}>
+            <Link to="/community" className={styles.asideNavigationButton}>
               <Icon name="community" />
-            </button>
+            </Link>
           </Tooltip>
 
           <Tooltip placement="right" title="История">
