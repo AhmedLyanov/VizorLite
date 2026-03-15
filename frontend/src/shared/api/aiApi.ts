@@ -10,7 +10,7 @@ export const aiApi = {
     const token = localStorage.getItem("token");
 
     const response = await axios.post(
-      `${API_URL}/ai/chat`,
+      `${API_URL}/api/ai/chat`,
       {
         message,
         messages,
