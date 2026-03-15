@@ -1,8 +1,7 @@
 import express from 'express';
 import { auth } from '../middleware/auth.js';
+import { avatarUpload } from "../middleware/upload.middleware.js";
 import {
-  upload,
-  handleUploadError,
   uploadAvatar,
   deleteAvatar,
   getAvatar
@@ -12,17 +11,7 @@ const router = express.Router();
 
 router.use(auth);
 
-router.post('/avatar', 
-  (req, res, next) => {
-    upload(req, res, (err) => {
-      if (err) {
-        return handleUploadError(err, req, res, next);
-      }
-      next();
-    });
-  },
-  uploadAvatar
-);
+router.post('/avatar', auth, avatarUpload, uploadAvatar);
 
 router.delete('/avatar', deleteAvatar);
 

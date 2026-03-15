@@ -17,13 +17,51 @@ export const icons = {
   ),
 
   home: (props: SVGProps<SVGSVGElement>) => (
-    <svg viewBox="0 0 24 24" fill="currentColor" {...props}>
-      <path d="M3 12l9-9 9 9v9H3z" />
+    <svg
+      width="30"
+      height="22"
+      viewBox="0 0 30 22"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      {...props}
+    >
+      <rect y="1.5" width="30" height="18.5" fill="#6D7882" />
+      <path
+        d="M11.6591 0L18.8182 0.000332491L20.25 1.5H9.75L11.6591 0Z"
+        fill="#6D7882"
+      />
+      <ellipse cx="27" cy="5.8" rx="1.5" ry="1.4" fill="white" />
+      <path
+        d="M15.1318 5C18.4342 5 21.2635 7.5 21.2637 10.8C21.2637 14.1 18.4343 16.6 15.1318 16.6C11.8293 16.6 9 14.1 9 10.8C9.00016 7.5 11.8294 5 15.1318 5Z"
+        fill="url(#paint0_linear_2009_11)"
+        stroke="#FFF7F7"
+        strokeWidth="3"
+      />
+      <rect y="20" width="30" height="1.5" fill="#45494D" />
+      <rect x="1.5" y="0.5" width="4.5" height="1.4" fill="#0076D7" />
+      <defs>
+        <linearGradient
+          id="paint0_linear_2009_11"
+          x1="15.1318"
+          y1="3.5"
+          x2="15.1318"
+          y2="17.8"
+          gradientUnits="userSpaceOnUse"
+        >
+          <stop stopColor="#B88BF5" />
+          <stop offset="1" stopColor="#669FEF" />
+        </linearGradient>
+      </defs>
     </svg>
   ),
 
   community: (props: SVGProps<SVGSVGElement>) => (
-    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      {...props}
+    >
       <path
         d="M13 13C15.2091 13 17 14.7909 17 17V18.5C17 19.3284 16.3284 20 15.5 20H3.5C2.67157 20 2 19.3284 2 18.5V17C2 14.7909 3.79086 13 6 13H13Z"
         fill="#09244B"
@@ -99,7 +137,6 @@ export const icons = {
     </svg>
   ),
 
-  // Bottom menu buttons
   translate: (props: SVGProps<SVGSVGElement>) => (
     <svg viewBox="0 0 32 32" fill="currentColor" {...props}>
       <path d="M27.85,29H30L24,14H21.65l-6,15H17.8l1.6-4h6.85ZM20.2,23l2.62-6.56L25.45,23Z" />

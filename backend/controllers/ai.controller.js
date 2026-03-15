@@ -1,134 +1,161 @@
-import axios from 'axios';
+import axios from "axios";
+import crypto from "crypto";
+import https from "https";
+
+let cachedToken = null;
+
+const httpsAgent = new https.Agent({
+  rejectUnauthorized: false
+});
+
+async function getAccessToken() {
+  const authKey = process.env.GIGACHAT_AUTH_KEY;
+
+  if (!authKey) {
+    throw new Error("GigaChat authorization key not configured");
+  }
+  if (cachedToken && cachedToken.expiresAt > Date.now() + 60000) {
+    return cachedToken.value;
+  }
+
+  const response = await axios.post(
+    "https://ngw.devices.sberbank.ru:9443/api/v2/oauth",
+    new URLSearchParams({
+      scope: "GIGACHAT_API_PERS"
+    }),
+    {
+      headers: {
+        Authorization: `Basic ${authKey}`,
+        "Content-Type": "application/x-www-form-urlencoded",
+        Accept: "application/json",
+        RqUID: crypto.randomUUID()
+      },
+      httpsAgent
+    }
+  );
+
+  cachedToken = {
+    value: response.data.access_token,
+    expiresAt: response.data.expires_at
+  };
+
+  return cachedToken.value;
+}
 
 class AIController {
+
   async chat(req, res) {
     try {
+
       const { message, messages } = req.body;
-      const apiKey = process.env.OPENROUTER_API_KEY;
 
-      if (!apiKey) {
-        return res.status(500).json({
-          error: 'API key not configured'
-        });
-      }
-
-      if (!message || typeof message !== 'string' || !Array.isArray(messages)) {
+      if (!message || typeof message !== "string" || !Array.isArray(messages)) {
         return res.status(400).json({
-          error: 'Invalid request format: message must be string and messages must be array',
+          error: "Invalid request format",
           success: false
         });
       }
+
+      const accessToken = await getAccessToken();
 
       const contextMessages = [
         {
           role: "system",
-          content: `Ты строгий ассистент видеоконференции VizorLite. Твои правила:
+          content: `Ты строгий ассистент видеоконференции VizorLite.
 
-1. ОТВЕЧАЙ ТОЛЬКО на вопросы, связанные с платформой VizorLite:
-   - Настройки конференций и встреч
-   - Технические вопросы по платформе
-   - Функционал видеосвязи, чатов, демонстрации экрана
-   - Проблемы с подключением и качеством связи
+Правила:
 
-2. ЗАПРЕЩЕНО:
-   - Отвечать на вопросы не по теме VizorLite
-   - Обсуждать посторонние темы
-   - Давать рекомендации вне контекста платформы
-   - Поддерживать светские беседы
+1. Отвечай только на вопросы о платформе VizorLite:
+- создание комнат
+- видеоконференции
+- демонстрация экрана
+- проблемы подключения
+- микрофон и камера
+- работа платформы
 
-3. ЕСЛИ вопрос не о VizorLite:
-   - Четко скажи: "Я могу отвечать только на вопросы о платформе VizorLite"
-   - Не продолжай диалог на посторонние темы
-   - Не объясняй причины отказа
+2. Если вопрос не о VizorLite отвечай:
+"Я могу отвечать только на вопросы о платформе VizorLite"
 
-4. СТИЛЬ ОБЩЕНИЯ:
-   - Кратко и по делу
-   - Без лишних слов и эмоций
-   - Только факты и инструкции
-   - Без приветствий и прощаний, если не задан вопрос о них
+3. Отвечай кратко и по делу.
 
-5. ЯЗЫК: Отвечай на том же языке, на котором задан вопрос.
+4. Не поддерживай разговор на другие темы.
 
-Пример правильного ответа на посторонний вопрос: 
-Вопрос: "Какая сегодня погода?"
-Ответ: "Я могу отвечать только на вопросы о платформе VizorLite"
-
-Пример правильного ответа на тему VizorLite:
-Вопрос: "Как настроить демонстрацию экрана?"
-Ответ: "В правом нижнем углу нажмите иконку 'Поделиться экраном'. Выберите окно или весь экран."
-
-НИКАКИХ ИСКЛЮЧЕНИЙ. СТРОГО СОБЛЮДАЙ ЭТИ ПРАВИЛА.`
+5. Язык ответа должен совпадать с языком пользователя.`
         },
         ...messages,
-        { role: "user", content: message.trim() }
+        {
+          role: "user",
+          content: message.trim()
+        }
       ];
 
-
       const response = await axios.post(
-        'https://openrouter.ai/api/v1/chat/completions',
+        "https://gigachat.devices.sberbank.ru/api/v1/chat/completions",
         {
-          model: "tngtech/deepseek-r1t2-chimera:free",
-          messages: contextMessages
+          model: "GigaChat",
+          messages: contextMessages,
+          temperature: 0.7,
+          max_tokens: 1000
         },
         {
           headers: {
-            'Authorization': `Bearer ${apiKey}`,
-            'Content-Type': 'application/json',
-            'HTTP-Referer': process.env.FRONTEND_URL || 'http://localhost:5173',
-            'X-Title': 'VizorLite'
+            Authorization: `Bearer ${accessToken}`,
+            "Content-Type": "application/json"
           },
+          httpsAgent,
           timeout: 30000
         }
       );
 
-
-      const assistantReply = response.data.choices?.[0]?.message?.content?.trim() || '';
+      const assistantReply =
+        response.data.choices?.[0]?.message?.content?.trim() || "";
 
       if (!assistantReply) {
-        console.warn('⚠️ Empty response from AI');
         return res.status(502).json({
-          error: 'AI returned empty response',
+          error: "AI returned empty response",
           success: false
         });
       }
+
       res.json({
         reply: assistantReply,
         success: true
       });
 
     } catch (error) {
-      console.error('❌ AI API error:', {
-        message: error.message,
-        response: error.response?.data,
-        status: error.response?.status
-      });
+
+      console.error("❌ GigaChat error:", error.response?.data || error.message);
 
       if (error.response) {
-        res.status(error.response.status).json({
-          error: error.response.data.error?.message || `AI service error (${error.response.status})`,
-          success: false
-        });
-      } else if (error.code === 'ECONNABORTED') {
-        res.status(504).json({
-          error: 'Request timeout. Please try again.',
-          success: false
-        });
-      } else {
-        res.status(500).json({
-          error: 'Internal server error: ' + error.message,
+        return res.status(error.response.status).json({
+          error: error.response.data.message || "GigaChat API error",
           success: false
         });
       }
+
+      if (error.code === "ECONNABORTED") {
+        return res.status(504).json({
+          error: "AI request timeout",
+          success: false
+        });
+      }
+
+      res.status(500).json({
+        error: "AI service error",
+        success: false
+      });
+
     }
   }
 
   async status(req, res) {
     res.json({
-      status: 'ok',
-      service: 'AI Assistant',
-      connected: !!process.env.OPENROUTER_API_KEY
+      status: "ok",
+      service: "GigaChat",
+      connected: !!process.env.GIGACHAT_AUTH_KEY
     });
   }
+
 }
 
 export default new AIController();

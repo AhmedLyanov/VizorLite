@@ -21,6 +21,10 @@ const userSchema = new mongoose.Schema({
     type: String,
     default: null
   },
+  emailVerified: {
+    type: Boolean,
+    default: false
+  },
   createdAt: {
     type: Date,
     default: Date.now
@@ -35,7 +39,7 @@ userSchema.pre("save", async function () {
 });
 
 
-userSchema.methods.comparePassword = async function(candidatePassword) {
+userSchema.methods.comparePassword = async function (candidatePassword) {
   return bcrypt.compare(candidatePassword, this.password);
 };
 

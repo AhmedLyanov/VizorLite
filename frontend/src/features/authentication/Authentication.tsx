@@ -1,161 +1,209 @@
-import { useState } from 'react'
-import { useRegister, useLogin } from '../../entities/user/useAuth'
-import { useIntl } from "react-intl"
-import { AUTHENTICATION_TEXTS } from '../../shared/constants/authentication'
+import { useState } from "react";
+import {
+  useRegister,
+  useLogin,
+  useVerifyEmail,
+} from "../../entities/user/useAuth";
+import { useIntl } from "react-intl";
+import { AUTHENTICATION_TEXTS } from "../../shared/constants/authentication";
 import eyeOn from "../../shared/assets/eye-on.svg";
 import eyeOff from "../../shared/assets/eye-off.svg";
-import styles from './Authentication.module.css'
+import styles from "./Authentication.module.css";
 
-type FormMode = 'login' | 'register'
+type FormMode = "login" | "register" | "verify";
 
 export default function Authentication() {
-  const intl = useIntl()
+  const intl = useIntl();
+
+  const [mode, setMode] = useState<FormMode>("login");
   const [showPassword, setShowPassword] = useState(false);
-  const [mode, setMode] = useState<FormMode>('login')
 
-  const { mutateAsync: register, isPending: isRegisterPending, isError: isRegisterError, error: registerError } = useRegister()
-  const { mutateAsync: login, isPending: isLoginPending, isError: isLoginError, error: loginError } = useLogin()
+  const [userId, setUserId] = useState<string | null>(null);
+  const [code, setCode] = useState("");
 
-  const isPending = isRegisterPending || isLoginPending
-  const isError = isRegisterError || isLoginError
-  const error = registerError || loginError
+  const { mutateAsync: register, isPending: registerPending } = useRegister();
+  const { mutateAsync: login, isPending: loginPending } = useLogin();
+  const { mutateAsync: verify, isPending: verifyPending } = useVerifyEmail();
+
+  const isPending = registerPending || loginPending || verifyPending;
 
   const [formData, setFormData] = useState({
-    username: '',
-    email: '',
-    password: '',
-  })
+    username: "",
+    email: "",
+    password: "",
+  });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value,
-    })
-  }
+    });
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     try {
-      if (mode === 'register') {
-        if (!formData.username.trim() || !formData.email.trim() || !formData.password.trim()) {
-          return;
-        }
-        await register(formData);
-      } else {
-        if (!formData.email.trim() || !formData.password.trim()) {
-          return;
-        }
-        await login({ email: formData.email, password: formData.password });
+      if (mode === "register") {
+        const res = await register(formData);
+
+        setUserId(res.userId);
+
+        setMode("verify");
+
+        return;
+      }
+
+      if (mode === "verify") {
+        if (!code.trim() || !userId) return;
+
+        await verify({
+          userId,
+          code,
+        });
+
+        return;
+      }
+
+      if (mode === "login") {
+        await login({
+          email: formData.email,
+          password: formData.password,
+        });
       }
     } catch (err) {
+      console.error(err);
     }
   };
 
   const toggleMode = () => {
-    setMode(mode === 'login' ? 'register' : 'login')
+    setMode(mode === "login" ? "register" : "login");
+
     setFormData({
-      username: '',
-      email: '',
-      password: '',
-    })
-  }
+      username: "",
+      email: "",
+      password: "",
+    });
+
+    setCode("");
+  };
 
   return (
     <div className={styles.authenticationContainer}>
-      <div className={styles.modeSelector}>
-        <button
-          type="button"
-          className={`${styles.modeButton} ${mode === 'login' ? styles.active : ''}`}
-          onClick={() => setMode('login')}
-        >
-          {intl.formatMessage({ id: AUTHENTICATION_TEXTS.FORM.LOGIN_BUTTON })}
-        </button>
-        <button
-          type="button"
-          className={`${styles.modeButton} ${mode === 'register' ? styles.active : ''}`}
-          onClick={() => setMode('register')}
-        >
-          {intl.formatMessage({ id: AUTHENTICATION_TEXTS.FORM.REGISTER_BUTTON })}
-        </button>
-      </div>
+      {mode !== "verify" && (
+        <div className={styles.modeSelector}>
+          <button
+            type="button"
+            className={`${styles.modeButton} ${mode === "login" ? styles.active : ""}`}
+            onClick={() => setMode("login")}
+          >
+            {intl.formatMessage({ id: AUTHENTICATION_TEXTS.FORM.LOGIN_BUTTON })}
+          </button>
+
+          <button
+            type="button"
+            className={`${styles.modeButton} ${mode === "register" ? styles.active : ""}`}
+            onClick={() => setMode("register")}
+          >
+            {intl.formatMessage({
+              id: AUTHENTICATION_TEXTS.FORM.REGISTER_BUTTON,
+            })}
+          </button>
+        </div>
+      )}
 
       <form className={styles.authForm} onSubmit={handleSubmit}>
         <h2 className={styles.formTitle}>
-          {mode === 'login'
-            ? intl.formatMessage({ id: AUTHENTICATION_TEXTS.FORM.LOGIN_TITLE })
-            : intl.formatMessage({ id: AUTHENTICATION_TEXTS.FORM.REGISTER_TITLE })
-          }
+          {mode === "login" &&
+            intl.formatMessage({ id: AUTHENTICATION_TEXTS.FORM.LOGIN_TITLE })}
+
+          {mode === "register" &&
+            intl.formatMessage({
+              id: AUTHENTICATION_TEXTS.FORM.REGISTER_TITLE,
+            })}
+
+          {mode === "verify" && "Verify Email"}
         </h2>
 
-        {mode === 'register' && (
+        {mode === "register" && (
           <div className={styles.formGroup}>
-            <label htmlFor="username" className={styles.formLabel}>
-              {intl.formatMessage({ id: AUTHENTICATION_TEXTS.FORM.USERNAME_LABEL })}
+            <label className={styles.formLabel}>
+              {intl.formatMessage({
+                id: AUTHENTICATION_TEXTS.FORM.USERNAME_LABEL,
+              })}
             </label>
+
             <input
               type="text"
-              id="username"
               name="username"
               value={formData.username}
               onChange={handleChange}
               className={styles.formInput}
-              placeholder={intl.formatMessage({ id: AUTHENTICATION_TEXTS.FORM.USERNAME_PLACEHOLDER })}
-              required={mode === 'register'}
-              disabled={isPending}
+              required
             />
           </div>
         )}
 
-        <div className={styles.formGroup}>
-          <label htmlFor="email" className={styles.formLabel}>
-            {intl.formatMessage({ id: AUTHENTICATION_TEXTS.FORM.EMAIL_LABEL })}
-          </label>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
-            className={styles.formInput}
-            placeholder={intl.formatMessage({ id: AUTHENTICATION_TEXTS.FORM.EMAIL_PLACEHOLDER })}
-            required
-            disabled={isPending}
-          />
-        </div>
+        {mode !== "verify" && (
+          <>
+            <div className={styles.formGroup}>
+              <label className={styles.formLabel}>
+                {intl.formatMessage({
+                  id: AUTHENTICATION_TEXTS.FORM.EMAIL_LABEL,
+                })}
+              </label>
 
-        <div className={styles.formGroup}>
-          <label htmlFor="password" className={styles.formLabel}>
-            {intl.formatMessage({ id: AUTHENTICATION_TEXTS.FORM.PASSWORD_LABEL })}
-          </label>
-          <div className={styles.passwordInputWrapper}>
+              <input
+                type="email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                className={styles.formInput}
+                required
+              />
+            </div>
+
+            <div className={styles.formGroup}>
+              <label className={styles.formLabel}>
+                {intl.formatMessage({
+                  id: AUTHENTICATION_TEXTS.FORM.PASSWORD_LABEL,
+                })}
+              </label>
+
+              <div className={styles.passwordInputWrapper}>
+                <input
+                  type={showPassword ? "text" : "password"}
+                  name="password"
+                  value={formData.password}
+                  onChange={handleChange}
+                  className={styles.formInput}
+                  required
+                />
+
+                <button
+                  type="button"
+                  className={styles.showPasswordButton}
+                  onClick={() => setShowPassword((prev) => !prev)}
+                >
+                  <img src={showPassword ? eyeOn : eyeOff} alt="" />
+                </button>
+              </div>
+            </div>
+          </>
+        )}
+
+        {mode === "verify" && (
+          <div className={styles.formGroup}>
+            <label className={styles.formLabel}>Enter verification code</label>
+
             <input
-              type={showPassword ? "text" : "password"}
-              id="password"
-              name="password"
-              value={formData.password}
-              onChange={handleChange}
+              type="text"
+              value={code}
+              onChange={(e) => setCode(e.target.value)}
               className={styles.formInput}
-              placeholder={intl.formatMessage({ id: AUTHENTICATION_TEXTS.FORM.PASSWORD_PLACEHOLDER })}
+              placeholder="123456"
               required
-              disabled={isPending}
-              minLength={6}
             />
-            <button
-              type="button"
-              className={styles.showPasswordButton}
-              onClick={() => setShowPassword(prev => !prev)}
-              aria-label={showPassword ? "Hide password" : "Show password"}
-              disabled={isPending}
-            >
-              <img src={showPassword ? eyeOn : eyeOff} alt="" />
-            </button>
-          </div>
-        </div>
-
-        {isError && (
-          <div className={styles.errorMessage}>
-            {error instanceof Error ? error.message : `${mode === 'login' ? 'Login' : 'Registration'} failed`}
           </div>
         )}
 
@@ -164,35 +212,39 @@ export default function Authentication() {
           className={styles.submitButton}
           disabled={isPending}
         >
-          {isPending ? (
-            mode === 'login' ? 'Logging in...' : 'Creating account...'
-          ) : (
-            mode === 'login'
-              ? intl.formatMessage({ id: AUTHENTICATION_TEXTS.FORM.LOGIN_SUBMIT })
-              : intl.formatMessage({ id: AUTHENTICATION_TEXTS.FORM.REGISTER_SUBMIT })
-          )}
+          {mode === "login" && "Login"}
+          {mode === "register" && "Create account"}
+          {mode === "verify" && "Verify"}
         </button>
 
-        <div className={styles.switchMode}>
-          <p className={styles.switchText}>
-            {mode === 'login'
-              ? intl.formatMessage({ id: AUTHENTICATION_TEXTS.FORM.NO_ACCOUNT })
-              : intl.formatMessage({ id: AUTHENTICATION_TEXTS.FORM.HAVE_ACCOUNT })
-            }
-          </p>
-          <button
-            type="button"
-            className={styles.switchButton}
-            onClick={toggleMode}
-            disabled={isPending}
-          >
-            {mode === 'login'
-              ? intl.formatMessage({ id: AUTHENTICATION_TEXTS.FORM.CREATE_ACCOUNT })
-              : intl.formatMessage({ id: AUTHENTICATION_TEXTS.FORM.GO_TO_LOGIN })
-            }
-          </button>
-        </div>
+        {mode !== "verify" && (
+          <div className={styles.switchMode}>
+            <p className={styles.switchText}>
+              {mode === "login"
+                ? intl.formatMessage({
+                    id: AUTHENTICATION_TEXTS.FORM.NO_ACCOUNT,
+                  })
+                : intl.formatMessage({
+                    id: AUTHENTICATION_TEXTS.FORM.HAVE_ACCOUNT,
+                  })}
+            </p>
+
+            <button
+              type="button"
+              className={styles.switchButton}
+              onClick={toggleMode}
+            >
+              {mode === "login"
+                ? intl.formatMessage({
+                    id: AUTHENTICATION_TEXTS.FORM.CREATE_ACCOUNT,
+                  })
+                : intl.formatMessage({
+                    id: AUTHENTICATION_TEXTS.FORM.GO_TO_LOGIN,
+                  })}
+            </button>
+          </div>
+        )}
       </form>
     </div>
-  )
+  );
 }

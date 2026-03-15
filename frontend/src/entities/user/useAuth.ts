@@ -1,6 +1,6 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { useNavigate } from 'react-router-dom';
-import { registerUser, loginUser } from '../../shared/api/authApi';
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useNavigate } from "react-router-dom";
+import { registerUser, loginUser, verifyEmail } from "../../shared/api/authApi";
 
 export const useLogin = () => {
   const queryClient = useQueryClient();
@@ -8,45 +8,42 @@ export const useLogin = () => {
 
   return useMutation({
     mutationFn: loginUser,
+
     onSuccess: (data) => {
-      
-      localStorage.setItem('token', data.token);
-      localStorage.setItem('user', JSON.stringify(data.user));
-      
-      queryClient.removeQueries({ queryKey: ['currentUser'] });
-      queryClient.setQueryData(['currentUser'], data.user);
-      queryClient.invalidateQueries({ queryKey: ['currentUser'] });
-      
-      window.dispatchEvent(new Event('auth-change'));
-            navigate('/profile', { replace: true });
-    },
-    onError: (error) => {
-      console.error('Login failed:', error);
+      localStorage.setItem("token", data.token);
+      localStorage.setItem("user", JSON.stringify(data.user));
+
+      queryClient.setQueryData(["currentUser"], data.user);
+
+      window.dispatchEvent(new Event("auth-change"));
+
+      navigate("/profile", { replace: true });
     },
   });
 };
 
 export const useRegister = () => {
+  return useMutation({
+    mutationFn: registerUser,
+  });
+};
+
+export const useVerifyEmail = () => {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
 
   return useMutation({
-    mutationFn: registerUser,
+    mutationFn: verifyEmail,
+
     onSuccess: (data) => {
-      
-      localStorage.setItem('token', data.token);
-      localStorage.setItem('user', JSON.stringify(data.user));
-      
-      queryClient.removeQueries({ queryKey: ['currentUser'] });
-      queryClient.setQueryData(['currentUser'], data.user);
-      queryClient.invalidateQueries({ queryKey: ['currentUser'] });
-      
-      window.dispatchEvent(new Event('auth-change'));
-      
-      navigate('/profile', { replace: true });
-    },
-    onError: (error) => {
-      console.error('Registration failed:', error);
+      localStorage.setItem("token", data.token);
+      localStorage.setItem("user", JSON.stringify(data.user));
+
+      queryClient.setQueryData(["currentUser"], data.user);
+
+      window.dispatchEvent(new Event("auth-change"));
+
+      navigate("/profile", { replace: true });
     },
   });
 };
