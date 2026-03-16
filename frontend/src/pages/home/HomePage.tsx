@@ -12,6 +12,7 @@ import LanguageSwitcher from "../../features/LanguageSwitcher/LanguageSwitcher";
 import JoinMeetingModal from "../../features/joinMeetModal/joinMeeting";
 import webcamIcon from "../../shared/assets/webcamera.svg";
 import joinIcon from "../../shared/assets/join.svg";
+import shceduleMetting from "../../shared/assets/schedulemeeting.svg";
 import dollarIcon from "../../shared/assets/dollar.svg";
 import questionIcon from "../../shared/assets/question.svg";
 
@@ -30,26 +31,36 @@ export default function HomePage() {
         </h1>
 
         <div className={styles.containerBigbuttons}>
-          <BigButton
-            title={intl.formatMessage({
-              id: HOME_TEXTS.BUTTONS.CREATE_MEETING,
-            })}
-            image={webcamIcon}
-            onClick={() => createMeetingMutation.mutate()}
-          />
+          <div className={styles.bigButtonsBox}>
+            <BigButton
+              title={intl.formatMessage({
+                id: HOME_TEXTS.BUTTONS.CREATE_MEETING,
+              })}
+              image={webcamIcon}
+              onClick={() => createMeetingMutation.mutate()}
+            />
+
+            <BigButton
+              title={intl.formatMessage({
+                id: HOME_TEXTS.BUTTONS.JOIN_MEETING,
+              })}
+              image={joinIcon}
+              onClick={() => setIsJoinOpen(true)}
+            />
+          </div>
 
           <BigButton
             title={intl.formatMessage({
-              id: HOME_TEXTS.BUTTONS.JOIN_MEETING,
+              id: HOME_TEXTS.BUTTONS.SCHEDULE_MEETING,
             })}
-            image={joinIcon}
-            onClick={() => setIsJoinOpen(true)}
-          />
-          <JoinMeetingModal
-            isOpen={isJoinOpen}
-            onClose={() => setIsJoinOpen(false)}
+            image={shceduleMetting}
           />
         </div>
+
+        <JoinMeetingModal
+          isOpen={isJoinOpen}
+          onClose={() => setIsJoinOpen(false)}
+        />
       </div>
 
       <div className={styles.bottomContent}>

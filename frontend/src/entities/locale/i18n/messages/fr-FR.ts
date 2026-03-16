@@ -151,6 +151,7 @@ export const frMessages = {
   "home.install.button": "Installer",
   "home.button.create": "Créer une vidéoconférence",
   "home.button.join": "Rejoindre",
+  "home.button.schedulemeeting": "Planifier une réunion",
   "home.bottom.pricing": "Tarifs",
   "home.bottom.translate": "Traduction",
   "home.bottom.faq": "FAQ",

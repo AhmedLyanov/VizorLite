@@ -144,6 +144,7 @@ export const arMessages = {
   "home.install.button": "تثبيت",
   "home.button.create": "إنشاء اجتماع فيديو",
   "home.button.join": "انضم",
+  "home.button.schedulemeeting": "جدولة اجتماع",
   "home.bottom.pricing": "الأسعار",
   "home.bottom.translate": "ترجمة",
   "home.bottom.faq": "الأسئلة الشائعة",

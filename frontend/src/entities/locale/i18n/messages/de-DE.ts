@@ -150,6 +150,7 @@ export const deMessages = {
   "home.install.button": "Installieren",
   "home.button.create": "Video-Meeting erstellen",
   "home.button.join": "Verbinden",
+  "home.button.schedulemeeting": "Meeting planen",
   "home.bottom.pricing": "Preise",
   "home.bottom.translate": "Übersetzung",
   "home.bottom.faq": "FAQ",

@@ -135,6 +135,7 @@ export const zhMessages = {
   "home.install.button": "安装",
   "home.button.create": "创建视频会议",
   "home.button.join": "加入",
+  "home.button.schedulemeeting": "安排会议",
   "home.bottom.pricing": "价格",
   "home.bottom.translate": "翻译",
   "home.bottom.faq": "常见问题",

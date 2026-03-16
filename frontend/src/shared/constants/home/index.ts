@@ -12,6 +12,7 @@ export const HOME_TEXTS = {
   BUTTONS: {
     CREATE_MEETING: "home.button.create",
     JOIN_MEETING: "home.button.join",
+    SCHEDULE_MEETING: "home.button.schedulemeeting",
   },
 
   BOTTOM: {

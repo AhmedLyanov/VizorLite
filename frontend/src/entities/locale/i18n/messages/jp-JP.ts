@@ -149,6 +149,7 @@ export const jpMessages = {
   "home.install.button": "インストール",
   "home.button.create": "ビデオ会議を作成",
   "home.button.join": "接続する",
+  "home.button.schedulemeeting": "ミーティングをスケジュール",
   "home.bottom.pricing": "料金プラン",
   "home.bottom.translate": "翻訳",
   "home.bottom.faq": "よくある質問",

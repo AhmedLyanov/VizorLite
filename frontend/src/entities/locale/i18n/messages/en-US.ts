@@ -146,6 +146,7 @@ export const enMessages = {
   "home.install.button": "Install",
   "home.button.create": "Create meeting",
   "home.button.join": "Join meeting",
+  "home.button.schedulemeeting": "Schedule meeting",
   "home.bottom.pricing": "Pricing",
   "home.bottom.translate": "Translate",
   "home.bottom.faq": "FAQ",
