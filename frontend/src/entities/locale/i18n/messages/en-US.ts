@@ -158,6 +158,8 @@ export const enMessages = {
   "ai.message.welcome":
     "Hi, I'm Markus. If you need help with the site — I'm here.",
   "ai.message.placeholder": "Type your question...",
+  "ai.notification.chatCleared.title": "Chat successfully cleared",
+  "ai.notification.chatCleared.description": "All messages deleted",
 
   "about.hero.title": "About VizorLite",
   "about.hero.subtitle":

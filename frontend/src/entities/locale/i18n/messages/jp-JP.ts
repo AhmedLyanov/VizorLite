@@ -161,6 +161,9 @@ export const jpMessages = {
   "ai.message.welcome":
     "こんにちは、私はマーカスです。サイトに関するご質問があれば、いつでもお手伝いします。",
   "ai.message.placeholder": "質問を入力してください...",
+  "ai.notification.chatCleared.title": "チャットを正常にクリアしました",
+  "ai.notification.chatCleared.description":
+    "すべてのメッセージが削除されました",
 
   "about.hero.title": "VizorLiteについて",
   "about.hero.subtitle":

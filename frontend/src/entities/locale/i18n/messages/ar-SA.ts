@@ -156,6 +156,8 @@ export const arMessages = {
   "ai.message.welcome":
     "مرحبًا، أنا ماركوس. إذا كنت بحاجة إلى مساعدة في الموقع — فأنا هنا دائمًا.",
   "ai.message.placeholder": "أدخل سؤالك...",
+  "ai.notification.chatCleared.title": "تم مسح الدردشة بنجاح",
+  "ai.notification.chatCleared.description": "تم حذف جميع الرسائل",
 
   "about.hero.title": "حول VizorLite",
   "about.hero.subtitle":

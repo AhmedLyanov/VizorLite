@@ -157,6 +157,8 @@ export const ruMessages = {
   "ai.message.welcome":
     "Привет, я Маркус. Если вам нужна помощь по сайту — я всегда здесь.",
   "ai.message.placeholder": "Введите ваш вопрос...",
+  "ai.notification.chatCleared.title": "Чат успешно очищен",
+  "ai.notification.chatCleared.description": "Все сообщения удалены",
 
   "about.hero.title": "О VizorLite",
   "about.hero.subtitle":

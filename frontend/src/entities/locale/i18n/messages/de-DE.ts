@@ -162,6 +162,8 @@ export const deMessages = {
   "ai.message.welcome":
     "Hallo, ich bin Markus. Wenn Sie Hilfe mit der Website benötigen – ich bin immer hier.",
   "ai.message.placeholder": "Geben Sie Ihre Frage ein...",
+  "ai.notification.chatCleared.title": "Chat erfolgreich gelöscht",
+  "ai.notification.chatCleared.description": "Alle Nachrichten gelöscht",
 
   "about.hero.title": "Über VizorLite",
   "about.hero.subtitle":

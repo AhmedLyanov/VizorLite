@@ -73,9 +73,7 @@ const startServer = async () => {
     socketService.initialize(server);
 
     server.listen(PORT, () => {
-      console.log(`Server + WebSocket running on port ${PORT}`);
-      console.log(`🤖 AI Service: ${process.env.OPENROUTER_API_KEY ? '✅ Enabled' : '❌ Disabled'}`);
-      console.log(`📁 Uploads directory: ${path.join(__dirname, 'uploads')}`);
+      console.log(`Server active ${PORT}`);
     });
   } catch (error) {
     console.error("Connection error:", error.message);

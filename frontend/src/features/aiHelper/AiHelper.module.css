@@ -37,7 +37,7 @@
 }
 
 .assistantModal {
-  position: relative; 
+  position: relative;
   bottom: auto;
   right: auto;
   min-width: var(--aihelper-modal-min-width);
@@ -246,6 +246,23 @@
   margin-left: var(--aihelper-send-btn-margin-left);
   border: none;
 }
+.clearChat {
+  padding: var(--aihelper-send-btn-padding);
+  width: var(--aihelper-send-btn-width);
+  height: var(--aihelper-send-btn-height);
+  background: var(--aihelper-send-btn-bg);
+  border-radius: var(--aihelper-send-btn-border-radius);
+  cursor: pointer;
+  transition: var(--transition-normal);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+  outline: none;
+  flex-shrink: 0;
+  margin-left: var(--aihelper-send-btn-margin-left);
+  border: none;
+}
 
 .sendButton:not(:disabled):hover {
   background: var(--aihelper-send-btn-hover-bg);
@@ -330,13 +347,13 @@
     bottom: var(--aihelper-container-bottom-mobile);
     right: var(--aihelper-container-right-mobile);
   }
-  
+
   .assistantToggleBtn {
     width: var(--aihelper-toggle-btn-width-mobile);
     height: var(--aihelper-toggle-btn-height-mobile);
     font-size: var(--aihelper-toggle-btn-font-size-mobile);
   }
-  
+
   .assistantModal {
     width: var(--aihelper-modal-width-mobile);
     max-width: var(--aihelper-modal-max-width-mobile);
@@ -345,60 +362,60 @@
     max-height: var(--aihelper-modal-max-height-mobile);
     border-radius: var(--aihelper-modal-border-radius-mobile);
   }
-  
+
   .assistantHeader {
     padding: var(--aihelper-header-padding-mobile);
   }
-  
+
   .assistantTitle {
     font-size: var(--aihelper-title-font-size-mobile);
   }
-  
+
   .closeBtn {
     width: var(--aihelper-close-btn-width-mobile);
     height: var(--aihelper-close-btn-height-mobile);
     font-size: var(--aihelper-close-btn-font-size-mobile);
   }
-  
+
   .assistantBody {
     padding: var(--aihelper-body-padding-mobile);
   }
-  
+
   .welcomeMessage {
     padding: var(--aihelper-welcome-padding-mobile);
     font-size: var(--aihelper-welcome-font-size-mobile);
   }
-  
+
   .message {
     padding: var(--aihelper-message-padding-mobile);
     font-size: var(--aihelper-message-font-size-mobile);
     max-width: var(--aihelper-message-max-width-mobile);
   }
-  
+
   .messageContent {
     font-size: var(--aihelper-message-font-size-mobile);
   }
-  
+
   .inputContainer {
     padding: var(--aihelper-input-container-padding-mobile);
   }
-  
+
   .textarea {
     font-size: var(--aihelper-textarea-font-size-mobile);
     min-height: var(--aihelper-textarea-min-height-mobile);
   }
-  
+
   .sendButton {
     width: var(--aihelper-send-btn-width-mobile);
     height: var(--aihelper-send-btn-height-mobile);
     padding: var(--aihelper-send-btn-padding-mobile);
   }
-  
+
   .sendIcon {
     width: var(--aihelper-send-icon-width-mobile);
     height: var(--aihelper-send-icon-height-mobile);
   }
-  
+
   .badge .ant-badge-count {
     min-width: var(--aihelper-badge-count-min-width-mobile);
     height: var(--aihelper-badge-count-height-mobile);
@@ -412,20 +429,20 @@
     bottom: var(--aihelper-container-bottom-480);
     right: var(--aihelper-container-right-480);
   }
-  
+
   .assistantToggleBtn {
     width: var(--aihelper-toggle-btn-width-480);
     height: var(--aihelper-toggle-btn-height-480);
     font-size: var(--aihelper-toggle-btn-font-size-480);
   }
-  
+
   .assistantModal {
     width: var(--aihelper-modal-width-480);
     height: var(--aihelper-modal-height-480);
     min-height: var(--aihelper-modal-min-height-480);
     border-radius: var(--aihelper-modal-border-radius-480);
   }
-  
+
   .message {
     max-width: var(--aihelper-message-max-width-480);
   }
@@ -437,7 +454,7 @@
     max-width: var(--aihelper-modal-max-width-768);
     height: var(--aihelper-modal-height-768);
   }
-  
+
   .message {
     max-width: var(--aihelper-user-message-max-width-768);
   }
@@ -449,20 +466,20 @@
     max-width: var(--aihelper-modal-max-width-1024);
     height: var(--aihelper-modal-height-1024);
   }
-  
+
   .message {
     max-width: var(--aihelper-user-message-max-width-1024);
   }
-  
+
   .messageContent {
     font-size: var(--aihelper-message-font-size-1024);
   }
-  
+
   .userMessage {
     background: var(--aihelper-user-message-bg);
     border-color: var(--aihelper-user-message-border-1024);
   }
-  
+
   .assistantMessage {
     background: var(--aihelper-assistant-message-bg);
     border-color: var(--aihelper-assistant-message-border-1024);

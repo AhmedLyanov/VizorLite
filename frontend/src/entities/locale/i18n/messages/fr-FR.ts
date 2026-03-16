@@ -163,6 +163,8 @@ export const frMessages = {
   "ai.message.welcome":
     "Bonjour, je suis Markus. Si vous avez besoin d'aide avec le site — je suis toujours là.",
   "ai.message.placeholder": "Tapez votre question...",
+  "ai.notification.chatCleared.title": "Chat effacé avec succès",
+  "ai.notification.chatCleared.description": "Tous les messages supprimés",
 
   "about.hero.title": "À propos de VizorLite",
   "about.hero.subtitle":

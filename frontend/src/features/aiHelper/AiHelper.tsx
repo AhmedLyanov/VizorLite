@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
 import type { KeyboardEvent } from "react";
 import { useIntl } from "react-intl";
-import { Popover, Badge, Spin, Alert } from "antd";
+import { Popover, Badge, Spin, Alert, notification } from "antd";
 import { useAiStore } from "../../entities/ai/useAi";
 import sendIcon from "../../shared/assets/send.svg";
+import clearIcon from "../../shared/assets/trashIcon.svg";
 import { AI_TEXT } from "../../shared/constants/common/ai";
 import styles from "./AiHelper.module.css";
 
@@ -11,6 +12,7 @@ export default function AiHelperAntd() {
   const intl = useIntl();
   const [popoverOpen, setPopoverOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const [notificationApi, contextHolder] = notification.useNotification();
 
   const {
     message,
@@ -21,11 +23,9 @@ export default function AiHelperAntd() {
     closeAi,
     setMessage,
     sendMessage,
-    
     setError,
+    clearMessages,
   } = useAiStore();
-
-  
 
   useEffect(() => {
     const checkMobile = () => {
@@ -33,16 +33,35 @@ export default function AiHelperAntd() {
     };
 
     checkMobile();
-    window.addEventListener('resize', checkMobile);
+    window.addEventListener("resize", checkMobile);
 
     return () => {
-      window.removeEventListener('resize', checkMobile);
+      window.removeEventListener("resize", checkMobile);
     };
   }, []);
 
   const handleSendMessage = async () => {
     if (!message.trim()) return;
     await sendMessage();
+  };
+
+  const handleClearChat = () => {
+    clearMessages();
+    localStorage.removeItem("ai-storage");
+    setTimeout(() => {
+      notificationApi.success({
+        message: intl.formatMessage({
+          id: AI_TEXT.NOTIFICATIONS.CHAT_CLEARED_TITLE,
+        }),
+        description: intl.formatMessage({
+          id: AI_TEXT.NOTIFICATIONS.CHAT_CLEARED_DESCRIPTION,
+        }),
+        duration: 3,
+      });
+    }, 0);
+
+    setPopoverOpen(false);
+    setTimeout(() => setPopoverOpen(true), 50);
   };
 
   const handleKeyPress = (e: KeyboardEvent<HTMLTextAreaElement>) => {
@@ -83,7 +102,6 @@ export default function AiHelperAntd() {
       </div>
 
       <div className={styles.assistantBody}>
-
         {error && (
           <div className={styles.alertWrapper}>
             <Alert
@@ -110,16 +128,17 @@ export default function AiHelperAntd() {
             messages.map((msg, index) => (
               <div
                 key={index}
-                className={`${styles.message} ${msg.role === 'user' ? styles.userMessage : styles.assistantMessage
-                  }`}
+                className={`${styles.message} ${
+                  msg.role === "user"
+                    ? styles.userMessage
+                    : styles.assistantMessage
+                }`}
               >
-                <div className={styles.messageContent}>
-                  {msg.content}
-                </div>
+                <div className={styles.messageContent}>{msg.content}</div>
                 <span className={styles.messageTime}>
                   {new Date(msg.timestamp).toLocaleTimeString([], {
-                    hour: '2-digit',
-                    minute: '2-digit'
+                    hour: "2-digit",
+                    minute: "2-digit",
                   })}
                 </span>
               </div>
@@ -170,8 +189,22 @@ export default function AiHelperAntd() {
               />
             )}
           </button>
+
+          <button
+            className={styles.clearChat}
+            onClick={handleClearChat}
+            aria-label="Clear chat"
+            title="Clear chat"
+          >
+            <img
+              src={clearIcon}
+              alt="clear AI chat"
+              className={styles.sendIcon}
+            />
+          </button>
         </div>
       </div>
+      {contextHolder}
     </div>
   );
 
@@ -187,14 +220,16 @@ export default function AiHelperAntd() {
         arrow={false}
         destroyTooltipOnHide
         overlayStyle={{
-          width: isMobile ? 'calc(100vw - 32px)' : 'auto',
-          maxWidth: isMobile ? '100%' : '500px'
+          width: isMobile ? "calc(100vw - 32px)" : "auto",
+          maxWidth: isMobile ? "100%" : "500px",
         }}
       >
         <Badge
-          count={messages.filter(m => m.role === 'assistant').length > 0
-            ? messages.filter(m => m.role === 'assistant').length
-            : null}
+          count={
+            messages.filter((m) => m.role === "assistant").length > 0
+              ? messages.filter((m) => m.role === "assistant").length
+              : null
+          }
           size="small"
           offset={isMobile ? [-3, 3] : [-5, 5]}
           color="#108ee9"

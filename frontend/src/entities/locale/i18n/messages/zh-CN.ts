@@ -147,6 +147,8 @@ export const zhMessages = {
   "ai.message.welcome":
     "你好，我是马库斯。如果您需要网站方面的帮助 — 我随时在这里。",
   "ai.message.placeholder": "输入您的问题...",
+  "ai.notification.chatCleared.title": "聊天已成功清除",
+  "ai.notification.chatCleared.description": "所有消息已删除",
 
   "about.hero.title": "关于 VizorLite",
   "about.hero.subtitle": "我们为每个人提供简单、可访问且安全的视频会议",
