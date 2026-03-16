@@ -134,9 +134,8 @@ router.post("/create-checkout", auth, async (req, res) => {
         }
       ],
 
-      success_url: "http://localhost:5173/success",
-      cancel_url: "http://localhost:5173/cancel"
-
+      success_url: `${process.env.FRONTEND_URL}/`,
+      cancel_url: `${process.env.FRONTEND_URL}/`
     });
 
 
