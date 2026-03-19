@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useCallback } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { io, Socket } from "socket.io-client";
 import Peer from "simple-peer";
@@ -7,23 +7,16 @@ import RoomBoard from "../../features/roomBoard/RoomBoard";
 import Chat from "../../features/chat/Chat";
 import style from "./RoomPage.module.css";
 import { useAuth } from "../../entities/user/AuthContext";
-
-if (typeof window !== "undefined" && !(window as any).process) {
-  (window as any).process = {
-    env: {},
-    nextTick: (fn: any, ...args: any[]) =>
-      Promise.resolve().then(() => fn(...args)),
-  };
-}
+import { useGridLayout } from "../../entities/grid/gridLayout";
 
 export default function RoomPage() {
   const { roomId } = useParams<{ roomId: string }>();
   const navigate = useNavigate();
   const { user } = useAuth();
 
-  if (!roomId) return <div>Room not found</div>;
-
   const socketRef = useRef<Socket | null>(null);
+  const [socket, setSocket] = useState<Socket | null>(null);
+
   const peersRef = useRef<Map<string, Peer.Instance>>(new Map());
   const remoteStreamsRef = useRef<Map<string, MediaStream>>(new Map());
   const joinedRef = useRef(false);
@@ -32,18 +25,26 @@ export default function RoomPage() {
 
   const [stream, setStream] = useState<MediaStream | null>(null);
   const [remoteVideos, setRemoteVideos] = useState<Map<string, MediaStream>>(
-    new Map()
+    new Map(),
   );
   const [participants, setParticipants] = useState<
     Map<string, { userName: string }>
   >(new Map());
-  const [userName, setUserName] = useState<string>('');
+  const [userName, setUserName] = useState<string>("");
 
   const [isCameraOn, setIsCameraOn] = useState(true);
   const [isScreenSharing, setIsScreenSharing] = useState(false);
 
   const screenStreamRef = useRef<MediaStream | null>(null);
   const originalTrackRef = useRef<MediaStreamTrack | null>(null);
+
+  const [participantCount, setParticipantCount] = useState(1);
+  const gridRef = useRef<HTMLDivElement>(null);
+  const { layout, videoSize } = useGridLayout(gridRef, participantCount);
+
+  useEffect(() => {
+    setParticipantCount(1 + remoteVideos.size);
+  }, [remoteVideos]);
 
   useEffect(() => {
     navigator.mediaDevices
@@ -59,55 +60,68 @@ export default function RoomPage() {
       });
   }, []);
 
-  const createPeer = (
-    socketId: string,
-    initiator: boolean
-  ): Peer.Instance => {
-    const peer = new Peer({
-      initiator,
-      trickle: true,
-      stream: stream!,
-    });
-
-    peer.on("signal", (data: any) => {
-      if (!socketRef.current) return;
-
-      if (data.type === "offer") {
-        socketRef.current.emit("offer", { offer: data, to: socketId });
-      } else if (data.type === "answer") {
-        socketRef.current.emit("answer", { answer: data, to: socketId });
-      } else {
-        socketRef.current.emit("ice-candidate", {
-          candidate: data,
-          to: socketId,
-        });
-      }
-    });
-
-    peer.on("stream", (remoteStream: MediaStream) => {
-      remoteStreamsRef.current.set(socketId, remoteStream);
-      setRemoteVideos(new Map(remoteStreamsRef.current));
-    });
-
-    peer.on("close", () => removePeer(socketId));
-    peer.on("error", () => removePeer(socketId));
-
-    peersRef.current.set(socketId, peer);
-    return peer;
-  };
-
-  const removePeer = (socketId: string) => {
+  const removePeer = useCallback((socketId: string) => {
     peersRef.current.get(socketId)?.destroy();
     peersRef.current.delete(socketId);
     remoteStreamsRef.current.delete(socketId);
     setRemoteVideos(new Map(remoteStreamsRef.current));
-  };
+    setParticipants((prev) => {
+      const map = new Map(prev);
+      map.delete(socketId);
+      return map;
+    });
+  }, []);
+
+  const createPeer = useCallback(
+    (socketId: string, initiator: boolean): Peer.Instance => {
+      const peer = new Peer({
+        initiator,
+        trickle: true,
+        stream: stream!,
+      });
+
+      peer.on(
+        "signal",
+        (data: {
+          type: string;
+          sdp?: string;
+          candidate?: RTCIceCandidateInit;
+        }) => {
+          if (!socketRef.current) return;
+
+          if (data.type === "offer") {
+            socketRef.current.emit("offer", { offer: data, to: socketId });
+          } else if (data.type === "answer") {
+            socketRef.current.emit("answer", { answer: data, to: socketId });
+          } else {
+            socketRef.current.emit("ice-candidate", {
+              candidate: data,
+              to: socketId,
+            });
+          }
+        },
+      );
+
+      peer.on("stream", (remoteStream: MediaStream) => {
+        remoteStreamsRef.current.set(socketId, remoteStream);
+        setRemoteVideos(new Map(remoteStreamsRef.current));
+      });
+
+      peer.on("close", () => removePeer(socketId));
+      peer.on("error", () => removePeer(socketId));
+
+      peersRef.current.set(socketId, peer);
+      return peer;
+    },
+    [stream, removePeer],
+  );
 
   useEffect(() => {
     if (!stream || joinedRef.current) return;
     joinedRef.current = true;
 
-    const currentUserName = user?.username || `User ${Math.floor(Math.random() * 1000)}`;
+    const currentUserName =
+      user?.username || `User ${Math.floor(Math.random() * 1000)}`;
     setUserName(currentUserName);
 
     const socket = io(import.meta.env.VITE_API_URL, {
@@ -117,6 +131,7 @@ export default function RoomPage() {
     });
 
     socketRef.current = socket;
+    setSocket(socket);
 
     socket.on("connect", () => {
       socket.emit("join-room", {
@@ -157,11 +172,13 @@ export default function RoomPage() {
     });
 
     return () => {
+      const currentPeers = new Map(peersRef.current);
       socket.disconnect();
-      peersRef.current.forEach((p) => p.destroy());
+      currentPeers.forEach((p) => p.destroy());
       peersRef.current.clear();
+      setSocket(null);
     };
-  }, [stream]);
+  }, [stream, roomId, user?.id, user?.username, createPeer, removePeer]);
 
   const toggleCamera = () => {
     if (!stream) return;
@@ -173,32 +190,38 @@ export default function RoomPage() {
     if (!stream) return;
 
     if (!isScreenSharing) {
-      const screenStream = await navigator.mediaDevices.getDisplayMedia({
-        video: true,
-      });
+      try {
+        const screenStream = await navigator.mediaDevices.getDisplayMedia({
+          video: true,
+        });
 
-      const screenTrack = screenStream.getVideoTracks()[0];
-      const cameraTrack = stream.getVideoTracks()[0];
+        const screenTrack = screenStream.getVideoTracks()[0];
+        const cameraTrack = stream.getVideoTracks()[0];
 
-      originalTrackRef.current = cameraTrack;
-      screenStreamRef.current = screenStream;
+        originalTrackRef.current = cameraTrack;
+        screenStreamRef.current = screenStream;
 
-      peersRef.current.forEach((peer) => {
-        const sender = (peer as any)._pc
-          ?.getSenders()
-          .find((s: RTCRtpSender) => s.track === cameraTrack);
-        sender?.replaceTrack(screenTrack);
-      });
+        peersRef.current.forEach((peer) => {
+          const sender = (
+            peer as Peer.Instance & { _pc: RTCPeerConnection }
+          )._pc
+            ?.getSenders()
+            .find((s: RTCRtpSender) => s.track === cameraTrack);
+          sender?.replaceTrack(screenTrack);
+        });
 
-      stream.removeTrack(cameraTrack);
-      stream.addTrack(screenTrack);
+        stream.removeTrack(cameraTrack);
+        stream.addTrack(screenTrack);
 
-      if (localVideoRef.current) {
-        localVideoRef.current.srcObject = stream;
+        if (localVideoRef.current) {
+          localVideoRef.current.srcObject = stream;
+        }
+
+        screenTrack.onended = stopScreenShare;
+        setIsScreenSharing(true);
+      } catch {
+        message.error("Не удалось начать демонстрацию экрана");
       }
-
-      screenTrack.onended = stopScreenShare;
-      setIsScreenSharing(true);
     } else {
       stopScreenShare();
     }
@@ -211,7 +234,7 @@ export default function RoomPage() {
     const cameraTrack = originalTrackRef.current;
 
     peersRef.current.forEach((peer) => {
-      const sender = (peer as any)._pc
+      const sender = (peer as Peer.Instance & { _pc: RTCPeerConnection })._pc
         ?.getSenders()
         .find((s: RTCRtpSender) => s.track === screenTrack);
       sender?.replaceTrack(cameraTrack);
@@ -231,7 +254,6 @@ export default function RoomPage() {
     originalTrackRef.current = null;
   };
 
-  
   const handleLeaveRoom = () => {
     peersRef.current.forEach((p) => p.destroy());
     peersRef.current.clear();
@@ -240,11 +262,32 @@ export default function RoomPage() {
     navigate("/");
   };
 
+  if (!roomId) return <div>Room not found</div>;
+
+  const remoteVideosArray = Array.from(remoteVideos.entries());
 
   return (
     <div className={style.containerRoom}>
-      <div className={style.roomBox}>
-        <div className={style.videoContainer}>
+      <div
+        ref={gridRef}
+        className={style.roomBox}
+        style={{
+          display: "grid",
+          gridTemplateColumns: `repeat(${layout.columns}, 0fr)`,
+          gridTemplateRows: `repeat(${layout.rows}, 0fr)`,
+          gap: "var(--room-box-gap-mobile)",
+          width: "100%",
+          height: "calc(100vh - 120px)",
+          placeItems: "center",
+        }}
+      >
+        <div
+          className={style.videoContainer}
+          style={{
+            width: videoSize.width,
+            height: videoSize.height,
+          }}
+        >
           <video
             ref={localVideoRef}
             autoPlay
@@ -252,10 +295,18 @@ export default function RoomPage() {
             playsInline
             className={style.roomParticipant}
           />
+          <div className={style.videoLabel}>{userName || "Вы"}</div>
         </div>
 
-        {Array.from(remoteVideos.entries()).map(([id, remoteStream]) => (
-          <div key={id} className={style.videoContainer}>
+        {remoteVideosArray.map(([id, remoteStream]) => (
+          <div
+            key={id}
+            className={style.videoContainer}
+            style={{
+              width: videoSize.width,
+              height: videoSize.height,
+            }}
+          >
             <video
               autoPlay
               playsInline
@@ -265,8 +316,7 @@ export default function RoomPage() {
               }}
             />
             <div className={style.videoLabel}>
-              {participants.get(id)?.userName ||
-                `User ${id.slice(0, 5)}`}
+              {participants.get(id)?.userName || `User ${id.slice(0, 5)}`}
             </div>
           </div>
         ))}
@@ -282,7 +332,7 @@ export default function RoomPage() {
       />
 
       <Chat
-        socket={socketRef.current}
+        socket={socket}
         roomId={roomId}
         userId={user?.id || null}
         userName={userName}
