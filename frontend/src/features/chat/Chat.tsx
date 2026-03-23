@@ -5,7 +5,6 @@ import { message } from 'antd';
 import styles from './Chat.module.css';
 import sendIcon from '../../shared/assets/send.svg';
 import sendBinaryFile from "../../shared/assets/clip.svg";
-import fileIcon from '../../shared/assets/clip.svg';  
 
 interface ChatProps {
   socket: any;
