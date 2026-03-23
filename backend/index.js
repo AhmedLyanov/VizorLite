@@ -13,6 +13,7 @@ import profileRoutes from "./routes/profile.routes.js";
 import socketService from "./services/websocket.service.js";
 import verificationRoutes from "./routes/verification.routes.js";
 import stripeRoutes from "./routes/stripe.routes.js"
+import chatRoutes from "./routes/chat.routes.js";  
 
 dotenv.config();
 
@@ -46,6 +47,7 @@ app.use('/api/ai', aiRoutes);
 app.use('/api/profile', profileRoutes); 
 app.use("/api/stripe", stripeRoutes);
 app.use("/api/verification", verificationRoutes);
+app.use("/api/chat", chatRoutes);  
 
 app.get("/", (req, res) => {
   res.json({ message: "Welcome Universe!" });
@@ -71,6 +73,8 @@ const startServer = async () => {
     const server = http.createServer(app);
 
     socketService.initialize(server);
+
+    app.set('io', socketService.io);
 
     server.listen(PORT, () => {
       console.log(`Server active ${PORT}`);

@@ -23,8 +23,19 @@ const messageSchema = new mongoose.Schema({
   },
   type: {
     type: String,
-    enum: ['text', 'system'],
+    enum: ['text', 'system', 'file'],  
     default: 'text'
+  },
+  file: {
+    url: String,
+    name: String,
+    size: Number,
+    mimeType: String,
+    fileType: {                   
+      type: String,
+      enum: ['image', 'document', 'video', 'audio', 'other'],
+      default: 'other'
+    }
   },
   timestamp: {
     type: Date,

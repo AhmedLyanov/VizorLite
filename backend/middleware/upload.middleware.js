@@ -13,7 +13,6 @@ const fileFilter = (req, file, cb) => {
     cb(new Error("Only images (jpeg, jpg, png, gif, webp) are allowed"));
 };
 
-
 export const avatarUpload = multer({
     storage,
     limits: {
@@ -23,3 +22,36 @@ export const avatarUpload = multer({
 }).single("avatar");
 
 
+
+const chatStorage = multer.memoryStorage();
+
+const chatFileFilter = (req, file, cb) => {
+
+  const allowedTypes = [
+
+    'image/jpeg',
+    'image/png',
+    'image/gif',
+    'image/webp',
+    'application/pdf',
+    'text/plain',
+    'application/msword',
+    'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+    'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+    'application/vnd.ms-excel'
+  ];
+  
+  if (allowedTypes.includes(file.mimetype)) {
+    cb(null, true);
+  } else {
+    cb(new Error('Недопустимый тип файла. Разрешены: изображения, PDF, TXT, DOC, DOCX, XLS, XLSX'));
+  }
+};
+
+export const chatFileUpload = multer({
+  storage: chatStorage,
+  limits: {
+    fileSize: 10 * 1024 * 1024  
+  },
+  fileFilter: chatFileFilter
+}).single('file');
