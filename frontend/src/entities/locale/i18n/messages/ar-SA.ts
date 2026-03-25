@@ -278,7 +278,8 @@ export const arMessages = {
   "notfound.return": "العودة إلى الرئيسية",
 
 
-  // FAQ "faq.hero.title": "الأسئلة الشائعة",
+  // FAQ 
+  "faq.hero.title": "الأسئلة الشائعة",
   "faq.hero.subtitle": "اعثر على إجابات للأسئلة الشائعة حول VizorLite",
   "faq.categories.general": "أسئلة عامة",
   "faq.categories.technical": "أسئلة تقنية",
