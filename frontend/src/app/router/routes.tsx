@@ -14,6 +14,7 @@ const AuthPage = lazy(() => import("../../pages/auth/AuthPage"));
 const AboutPage = lazy(() => import("../../pages/about/AboutPage"));
 const PricingPage = lazy(() => import("../../pages/pricing/PricingPage"));
 const NotFound = lazy(() => import("../../pages/notfound/Notfound"));
+const FAQPage = lazy(() => import("../../pages/faq/FAQPage"));
 
 export const routes: RouteObject[] = [
   {
@@ -21,6 +22,7 @@ export const routes: RouteObject[] = [
     children: [
       { path: "/pricing", element: <PricingPage /> },
       { path: "/about", element: <AboutPage /> },
+      { path: "/faq", element: <FAQPage /> },
     ],
   },
 
