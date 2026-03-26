@@ -233,6 +233,14 @@
   white-space: nowrap;
 }
 
+.messageLink {
+  color: #1890ff;
+  text-decoration: underline;
+  word-break: break-all;
+  transition: color 0.3s ease;
+  cursor: pointer;
+}
+
 .textMessage {
   line-height: 1.5;
   color: white;
@@ -697,7 +705,7 @@
   max-height: 100px;
   transition: all 0.2s;
   -webkit-appearance: none;
-  appearance: none; 
+  appearance: none;
   background: rgba(35, 35, 40, 0.6);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);

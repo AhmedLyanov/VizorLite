@@ -1,13 +1,24 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useRef } from 'react';
 import { useChatStore } from '../../entities/chat/useChatStore';
-import type { ChatMessage } from '../../entities/chat/types';
 import { message } from 'antd';
 import styles from './Chat.module.css';
 import sendIcon from '../../shared/assets/send.svg';
-import sendBinaryFile from "../../shared/assets/clip.svg";
+import sendBinaryFile from '../../shared/assets/clip.svg';
 import downloadIcon from '../../shared/assets/download.svg';
 import zoomIcon from '../../shared/assets/zoom.svg';
 import ImagePreviewModal from './ImagePreview';
+import {
+  CHAT_CONFIG,
+  ALLOWED_FILE_TYPES,
+  FILE_ACCEPT_EXTENSIONS,
+} from '../../shared/constants/chat';
+import {
+  formatFileSize,
+  isImageFile,
+  isDocumentFile,
+  formatMessageWithLinks,
+} from '../../shared/lib/chat/index.tsx';
+import { useChatSocket, useChatScroll, useFileInput } from '../../shared/hooks/chat';
 
 interface ChatProps {
   socket: any;
@@ -33,44 +44,11 @@ export default function Chat({ socket, roomId, userId, userName }: ChatProps) {
     addMessage,
     setMessages,
     toggleChat,
-    resetUnreadCount
+    resetUnreadCount,
   } = useChatStore();
-
-  const scrollToBottom = (_behavior = 'smooth') => {
-    if (messagesEndRef.current) {
-      messagesEndRef.current.scrollIntoView({ behavior: 'smooth' as ScrollBehavior });
-    }
-  };
-
-  useEffect(() => {
-    if (isOpen) {
-      setTimeout(() => scrollToBottom('auto'), 200);
-    }
-  }, [isOpen]);
-
-  useEffect(() => {
-    if (isOpen && messages.length > 0) {
-      setTimeout(() => scrollToBottom('smooth'), 100);
-    }
-  }, [messages, isOpen]);
-
-  useEffect(() => {
-    if (!socket || !roomId) return;
-
-    const handleChatMessage = (message: ChatMessage) => {
-      addMessage(message);
-    };
-
-    socket.on('chat-message', handleChatMessage);
-
-    socket.emit('get-chat-history', { roomId }, (history: ChatMessage[]) => {
-      setMessages(history);
-    });
-
-    return () => {
-      socket.off('chat-message', handleChatMessage);
-    };
-  }, [socket, roomId, addMessage, setMessages]);
+  useChatSocket({ socket, roomId, addMessage, setMessages });
+  useChatScroll({ isOpen, messages, messagesEndRef });
+  const { resetFileInput } = useFileInput({ fileInputRef });
 
   const sendMessage = (e?: React.FormEvent) => {
     e?.preventDefault();
@@ -81,7 +59,7 @@ export default function Chat({ socket, roomId, userId, userName }: ChatProps) {
       roomId,
       userId,
       userName: userName || 'Аноним',
-      content: messageText.trim()
+      content: messageText.trim(),
     };
 
     socket.emit('chat-message', messageData);
@@ -92,22 +70,15 @@ export default function Chat({ socket, roomId, userId, userName }: ChatProps) {
     const file = e.target.files?.[0];
     if (!file || !roomId) return;
 
-    if (file.size > 10 * 1024 * 1024) {
+    if (file.size > CHAT_CONFIG.MAX_FILE_SIZE) {
       message.error('Файл слишком большой (макс. 10MB)');
-      if (fileInputRef.current) fileInputRef.current.value = '';
+      resetFileInput();
       return;
     }
 
-    const allowedTypes = [
-      'image/jpeg', 'image/png', 'image/gif', 'image/webp',
-      'application/pdf', 'text/plain',
-      'application/msword',
-      'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
-    ];
-
-    if (!allowedTypes.includes(file.type)) {
+    if (!ALLOWED_FILE_TYPES.includes(file.type as (typeof ALLOWED_FILE_TYPES)[number])) {
       message.error('Недопустимый тип файла');
-      if (fileInputRef.current) fileInputRef.current.value = '';
+      resetFileInput();
       return;
     }
 
@@ -125,9 +96,9 @@ export default function Chat({ socket, roomId, userId, userName }: ChatProps) {
       const response = await fetch(`${import.meta.env.VITE_API_URL}/api/chat/upload`, {
         method: 'POST',
         headers: {
-          'Authorization': `Bearer ${token}`
+          Authorization: `Bearer ${token}`,
         },
-        body: formData
+        body: formData,
       });
 
       const result = await response.json();
@@ -142,7 +113,7 @@ export default function Chat({ socket, roomId, userId, userName }: ChatProps) {
       message.error('Ошибка загрузки файла');
     } finally {
       setIsUploading(false);
-      if (fileInputRef.current) fileInputRef.current.value = '';
+      resetFileInput();
     }
   };
 
@@ -153,22 +124,9 @@ export default function Chat({ socket, roomId, userId, userName }: ChatProps) {
     }
   };
 
-  const formatTime = (timestamp: string) => {
-    return new Date(timestamp).toLocaleTimeString([], {
-      hour: '2-digit',
-      minute: '2-digit'
-    });
-  };
-
   const handleToggleChat = () => {
     toggleChat();
     resetUnreadCount();
-  };
-
-  const formatFileSize = (bytes: number) => {
-    if (bytes < 1024) return bytes + ' B';
-    if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + ' KB';
-    return (bytes / (1024 * 1024)).toFixed(1) + ' MB';
   };
 
   const handleDownload = (url: string, fileName: string) => {
@@ -190,25 +148,13 @@ export default function Chat({ socket, roomId, userId, userName }: ChatProps) {
     setPreviewImage(null);
   };
 
-  const isImageFile = (file: any) => {
-    return file?.fileType === 'image' ||
-      file?.mimeType?.startsWith('image/') ||
-      /\.(jpg|jpeg|png|gif|webp)$/i.test(file?.name || '');
-  };
-
-  const isDocumentFile = (file: any) => {
-    return file?.fileType === 'document' ||
-      file?.mimeType?.startsWith('application/') ||
-      /\.(pdf|doc|docx|txt|xls|xlsx)$/i.test(file?.name || '');
-  };
-
   return (
     <>
       <div className={styles.chatToggleContainer}>
         <button
           className={styles.chatToggleButton}
           onClick={handleToggleChat}
-          aria-label={isOpen ? "Закрыть чат" : "Открыть чат"}
+          aria-label={isOpen ? 'Закрыть чат' : 'Открыть чат'}
         >
           <img src={sendIcon} alt="Чат" />
           {!isOpen && unreadCount > 0 && (
@@ -243,12 +189,13 @@ export default function Chat({ socket, roomId, userId, userName }: ChatProps) {
                 return (
                   <div
                     key={message._id || index}
-                    className={`${styles.message} ${isSystem
+                    className={`${styles.message} ${
+                      isSystem
                         ? styles.messageSystem
                         : isUser
                           ? styles.messageUser
                           : styles.messageOther
-                      }`}
+                    }`}
                   >
                     {!isSystem && (
                       <div className={styles.messageHeader}>
@@ -256,7 +203,10 @@ export default function Chat({ socket, roomId, userId, userName }: ChatProps) {
                           {message.userName}
                         </span>
                         <span className={styles.messageTime}>
-                          {formatTime(message.timestamp)}
+                          {new Date(message.timestamp).toLocaleTimeString([], {
+                            hour: '2-digit',
+                            minute: '2-digit',
+                          })}
                         </span>
                       </div>
                     )}
@@ -275,7 +225,9 @@ export default function Chat({ socket, roomId, userId, userName }: ChatProps) {
                               <div className={styles.imageInfo}>
                                 <div className={styles.fileInfoText}>
                                   <span className={styles.fileName}>{file.name}</span>
-                                  <span className={styles.fileSize}>{formatFileSize(file.size)}</span>
+                                  <span className={styles.fileSize}>
+                                    {formatFileSize(file.size)}
+                                  </span>
                                 </div>
                               </div>
                             </div>
@@ -285,7 +237,9 @@ export default function Chat({ socket, roomId, userId, userName }: ChatProps) {
                                 <div className={styles.fileIconLarge}>📄</div>
                                 <div className={styles.documentInfo}>
                                   <div className={styles.fileName}>{file.name}</div>
-                                  <div className={styles.fileSize}>{formatFileSize(file.size)}</div>
+                                  <div className={styles.fileSize}>
+                                    {formatFileSize(file.size)}
+                                  </div>
                                 </div>
                               </div>
                             </div>
@@ -294,14 +248,16 @@ export default function Chat({ socket, roomId, userId, userName }: ChatProps) {
                               <div className={styles.fileWrapper}>
                                 <span className={styles.fileIcon}>📎</span>
                                 <span className={styles.fileName}>{file.name}</span>
-                                <span className={styles.fileSize}>{formatFileSize(file.size)}</span>
+                                <span className={styles.fileSize}>
+                                  {formatFileSize(file.size)}
+                                </span>
                               </div>
                             </div>
                           )}
                         </div>
                       ) : (
                         <div className={styles.textMessage}>
-                          {message.content}
+                          {formatMessageWithLinks(message.content, styles.messageLink)}
                         </div>
                       )}
                     </div>
@@ -340,7 +296,7 @@ export default function Chat({ socket, roomId, userId, userName }: ChatProps) {
                 type="file"
                 style={{ display: 'none' }}
                 onChange={handleFileSelect}
-                accept="image/*,.pdf,.txt,.doc,.docx,.xls,.xlsx"
+                accept={FILE_ACCEPT_EXTENSIONS}
                 disabled={isUploading}
               />
 
@@ -360,9 +316,9 @@ export default function Chat({ socket, roomId, userId, userName }: ChatProps) {
                 value={messageText}
                 onChange={(e) => setMessageText(e.target.value)}
                 onKeyPress={handleKeyPress}
-                placeholder={isUploading ? "Загрузка файла..." : "Введите сообщение..."}
+                placeholder={isUploading ? 'Загрузка файла...' : 'Введите сообщение...'}
                 rows={1}
-                maxLength={1000}
+                maxLength={CHAT_CONFIG.MAX_MESSAGE_LENGTH}
                 disabled={isLoading || isUploading}
               />
 

@@ -277,8 +277,7 @@ export const arMessages = {
   "notfound.description": "عذرًا، الصفحة المطلوبة غير موجودة أو تم نقلها",
   "notfound.return": "العودة إلى الرئيسية",
 
-
-  // FAQ 
+  // FAQ
   "faq.hero.title": "الأسئلة الشائعة",
   "faq.hero.subtitle": "اعثر على إجابات للأسئلة الشائعة حول VizorLite",
   "faq.categories.general": "أسئلة عامة",
