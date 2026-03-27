@@ -1,14 +1,14 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
 import { message } from 'antd';
 
-interface UseFullscreenOptions {
+export interface UseFullscreenOptions {
 
   onFullscreenChange?: (isFullscreen: boolean, targetId: string | null) => void;
 
   autoEnterOnScreenShare?: boolean;
 }
 
-interface UseFullscreenReturn {
+export interface UseFullscreenReturn {
 
   fullscreenTarget: string | null;
 

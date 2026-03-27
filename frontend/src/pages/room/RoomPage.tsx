@@ -43,7 +43,7 @@ export default function RoomPage() {
   const gridContainerRef = useRef<HTMLDivElement>(null);
   const videoRefs = useRef<Map<string, HTMLVideoElement>>(new Map());
 
-  const { fullscreenTarget, isFullscreen, enterFullscreen, exitFullscreen, toggleFullscreen } = useFullscreen({
+  const { fullscreenTarget, exitFullscreen, toggleFullscreen } = useFullscreen({
     autoEnterOnScreenShare: true,
   });
 
