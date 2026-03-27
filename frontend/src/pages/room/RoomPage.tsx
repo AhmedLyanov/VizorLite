@@ -6,8 +6,11 @@ import { message } from "antd";
 import RoomBoard from "../../features/roomBoard/RoomBoard";
 import Chat from "../../features/chat/Chat";
 import style from "./RoomPage.module.css";
+import fullscreenOff from "../../shared/assets/fullscreenOff.svg"
+import fullscreenOn from "../../shared/assets/fullscreenOn.svg"
 import { useAuth } from "../../entities/user/AuthContext";
 import { useGridLayout } from "../../entities/grid/gridLayout";
+import { useFullscreen } from "../../shared/hooks/useFullscreen";
 
 export default function RoomPage() {
   const { roomId } = useParams<{ roomId: string }>();
@@ -37,10 +40,22 @@ export default function RoomPage() {
 
   const screenStreamRef = useRef<MediaStream | null>(null);
   const originalTrackRef = useRef<MediaStreamTrack | null>(null);
+  const gridContainerRef = useRef<HTMLDivElement>(null);
+  const videoRefs = useRef<Map<string, HTMLVideoElement>>(new Map());
+
+  const { fullscreenTarget, isFullscreen, enterFullscreen, exitFullscreen, toggleFullscreen } = useFullscreen({
+    autoEnterOnScreenShare: true,
+  });
 
   const [participantCount, setParticipantCount] = useState(1);
   const gridRef = useRef<HTMLDivElement>(null);
   const { layout, videoSize } = useGridLayout(gridRef, participantCount);
+
+  useEffect(() => {
+    if (isScreenSharing && gridContainerRef.current && !document.fullscreenElement) {
+      gridContainerRef.current.requestFullscreen().catch(() => { });
+    }
+  }, [isScreenSharing]);
 
   useEffect(() => {
     setParticipantCount(1 + remoteVideos.size);
@@ -252,6 +267,7 @@ export default function RoomPage() {
     setIsScreenSharing(false);
     screenStreamRef.current = null;
     originalTrackRef.current = null;
+    exitFullscreen();
   };
 
   const handleLeaveRoom = () => {
@@ -270,6 +286,7 @@ export default function RoomPage() {
     <div className={style.containerRoom}>
       <div
         ref={gridRef}
+        id="video-grid-container"
         className={style.roomBox}
         style={{
           display: "grid",
@@ -296,6 +313,19 @@ export default function RoomPage() {
             className={style.roomParticipant}
           />
           <div className={style.videoLabel}>{userName || "Вы"}</div>
+          <button
+            className={style.fullscreenBtn}
+            onClick={() => toggleFullscreen(localVideoRef.current?.parentElement || null, "local")}
+            title={document.fullscreenElement && fullscreenTarget === "local" ? "Выйти" : "На весь экран"}
+          >
+            {document.fullscreenElement && fullscreenTarget === "local" ? (
+              <img src={fullscreenOff} alt="fullscreen on" />
+
+            ) : (
+              <img src={fullscreenOn} alt="fullscreen on" />
+
+            )}
+          </button>
         </div>
 
         {remoteVideosArray.map(([id, remoteStream]) => (
@@ -312,12 +342,27 @@ export default function RoomPage() {
               playsInline
               className={style.roomParticipant}
               ref={(el) => {
-                if (el) el.srcObject = remoteStream;
+                if (el) {
+                  el.srcObject = remoteStream;
+                  videoRefs.current.set(id, el);
+                }
               }}
             />
             <div className={style.videoLabel}>
               {participants.get(id)?.userName || `User ${id.slice(0, 5)}`}
             </div>
+            <button
+              className={style.fullscreenBtn}
+              onClick={() => toggleFullscreen(videoRefs.current.get(id)?.parentElement || null, id)}
+              title={document.fullscreenElement && fullscreenTarget === id ? "Выйти" : "На весь экран"}
+            >
+              {document.fullscreenElement && fullscreenTarget === id ? (
+                <img src={fullscreenOff} alt="fullscreen on" />
+              ) : (
+                <img src={fullscreenOn} alt="fullscreen on" />
+
+              )}
+            </button>
           </div>
         ))}
       </div>
