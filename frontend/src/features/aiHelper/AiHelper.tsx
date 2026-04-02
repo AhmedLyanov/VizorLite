@@ -194,6 +194,7 @@ export default function AiHelperAntd() {
             className={styles.clearChat}
             onClick={handleClearChat}
             aria-label="Clear chat"
+            disabled={messages.length === 0}
             title="Clear chat"
           >
             <img

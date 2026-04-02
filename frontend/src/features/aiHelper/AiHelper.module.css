@@ -264,6 +264,12 @@
   border: none;
 }
 
+.clearChat:disabled {
+  background: var(--aihelper-send-btn-disabled-bg);
+  cursor: not-allowed;
+}
+
+
 .sendButton:not(:disabled):hover {
   background: var(--aihelper-send-btn-hover-bg);
 }
