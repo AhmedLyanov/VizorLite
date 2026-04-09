@@ -158,6 +158,28 @@ export const arMessages = {
   "ai.message.placeholder": "أدخل سؤالك...",
   "ai.notification.chatCleared.title": "تم مسح الدردشة بنجاح",
   "ai.notification.chatCleared.description": "تم حذف جميع الرسائل",
+  "ai.message.thinking": "جاري التفكير...",
+  "ai.error.title": "خطأ",
+  "ai.error.default": "فشل الحصول على رد من الذكاء الاصطناعي",
+  "ai.error.timeout": "انتهت مهلة الطلب. يرجى المحاولة مرة أخرى.",
+  "ai.error.emptyResponse": "أعاد الذكاء الاصطناعي ردًا فارغًا. يرجى المحاولة مرة أخرى.",
+  "ai.hint.text": "تحتاج مساعدة؟ أنا هنا",
+
+  // CHAT_TEXTS
+  "chat.title": "الدردشة",
+  "chat.close": "إغلاق الدردشة",
+  "chat.open": "فتح الدردشة",
+  "chat.anonymous": "مجهول",
+  "chat.file.tooLarge": "الملف كبير جدًا (الحد الأقصى 10 ميجابايت)",
+  "chat.file.invalidType": "نوع ملف غير صالح",
+  "chat.file.sent": "تم إرسال الملف",
+  "chat.file.uploadError": "خطأ في تحميل الملف",
+  "chat.file.uploading": "جاري تحميل الملف...",
+  "chat.message.placeholder": "اكتب رسالة...",
+  "chat.file.attach": "إرفاق ملف",
+  "chat.message.send": "إرسال الرسالة",
+  "chat.file.preview": "معاينة",
+  "chat.file.download": "تنزيل",
 
   "about.hero.title": "حول VizorLite",
   "about.hero.subtitle":

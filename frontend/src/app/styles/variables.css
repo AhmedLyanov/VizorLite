@@ -20,7 +20,7 @@
   --transition-normal: 0.25s ease;
 
   /* RoomPage - Container */
-  --room-container-bg: #282828;
+  --room-container-bg: #000000;
   --room-container-padding-mobile: 10px;
   --room-container-padding-480: 15px;
   --room-container-padding-768: 20px;
@@ -404,7 +404,7 @@
   --roomboard-container-bottom: 20px;
   --roomboard-container-width: 40%;
   --roomboard-container-width-768: 40%;
-  --roomboard-container-max-width: 1200px;
+  --roomboard-container-max-width: 100%;
   --roomboard-container-padding: 20px;
   --roomboard-container-height: 70px;
   --roomboard-container-bg: rgba(0, 0, 0, 0.51);

@@ -1,4 +1,5 @@
 import { useState, useRef } from 'react';
+import { useIntl } from 'react-intl';
 import { useChatStore } from '../../entities/chat/useChatStore';
 import { message } from 'antd';
 import styles from './Chat.module.css';
@@ -28,6 +29,7 @@ interface ChatProps {
 }
 
 export default function Chat({ socket, roomId, userId, userName }: ChatProps) {
+  const intl = useIntl();
   const [messageText, setMessageText] = useState('');
   const [isUploading, setIsUploading] = useState(false);
   const [previewImage, setPreviewImage] = useState<string | null>(null);
@@ -58,7 +60,7 @@ export default function Chat({ socket, roomId, userId, userName }: ChatProps) {
     const messageData = {
       roomId,
       userId,
-      userName: userName || 'Аноним',
+      userName: userName || intl.formatMessage({ id: "chat.anonymous" }),
       content: messageText.trim(),
     };
 
@@ -71,13 +73,13 @@ export default function Chat({ socket, roomId, userId, userName }: ChatProps) {
     if (!file || !roomId) return;
 
     if (file.size > CHAT_CONFIG.MAX_FILE_SIZE) {
-      message.error('Файл слишком большой (макс. 10MB)');
+      message.error(intl.formatMessage({ id: "chat.file.tooLarge" }));
       resetFileInput();
       return;
     }
 
     if (!ALLOWED_FILE_TYPES.includes(file.type as (typeof ALLOWED_FILE_TYPES)[number])) {
-      message.error('Недопустимый тип файла');
+      message.error(intl.formatMessage({ id: "chat.file.invalidType" }));
       resetFileInput();
       return;
     }
@@ -91,7 +93,7 @@ export default function Chat({ socket, roomId, userId, userName }: ChatProps) {
       formData.append('file', file);
       formData.append('roomId', roomId);
       formData.append('userId', userId || '');
-      formData.append('userName', userName || 'Аноним');
+      formData.append('userName', userName || intl.formatMessage({ id: "chat.anonymous" }));
 
       const response = await fetch(`${import.meta.env.VITE_API_URL}/api/chat/upload`, {
         method: 'POST',
@@ -104,13 +106,13 @@ export default function Chat({ socket, roomId, userId, userName }: ChatProps) {
       const result = await response.json();
 
       if (result.success) {
-        message.success('Файл отправлен');
+        message.success(intl.formatMessage({ id: "chat.file.sent" }));
       } else {
-        message.error(result.message || 'Ошибка загрузки файла');
+        message.error(result.message || intl.formatMessage({ id: "chat.file.uploadError" }));
       }
     } catch (error) {
       console.error('File upload error:', error);
-      message.error('Ошибка загрузки файла');
+      message.error(intl.formatMessage({ id: "chat.file.uploadError" }));
     } finally {
       setIsUploading(false);
       resetFileInput();
@@ -154,9 +156,9 @@ export default function Chat({ socket, roomId, userId, userName }: ChatProps) {
         <button
           className={styles.chatToggleButton}
           onClick={handleToggleChat}
-          aria-label={isOpen ? 'Закрыть чат' : 'Открыть чат'}
+          aria-label={isOpen ? intl.formatMessage({ id: "chat.close" }) : intl.formatMessage({ id: "chat.open" })}
         >
-          <img src={sendIcon} alt="Чат" />
+          <img src={sendIcon} alt={intl.formatMessage({ id: "chat.title" })} />
           {!isOpen && unreadCount > 0 && (
             <span className={styles.chatUnreadBadge}>
               {unreadCount > 99 ? '99+' : unreadCount}
@@ -168,11 +170,11 @@ export default function Chat({ socket, roomId, userId, userName }: ChatProps) {
       <div className={`${styles.chatSidebar} ${isOpen ? styles.chatSidebarOpen : ''}`}>
         <div className={styles.chatSidebarInner}>
           <div className={styles.chatHeader}>
-            <h3 className={styles.chatTitle}>Чат</h3>
+            <h3 className={styles.chatTitle}>{intl.formatMessage({ id: "chat.title" })}</h3>
             <button
               className={styles.chatCloseButton}
               onClick={handleToggleChat}
-              aria-label="Закрыть чат"
+              aria-label={intl.formatMessage({ id: "chat.close" })}
             >
               ✕
             </button>
@@ -268,17 +270,17 @@ export default function Chat({ socket, roomId, userId, userName }: ChatProps) {
                           <button
                             className={styles.navigationButton}
                             onClick={() => handlePreviewImage(file.url)}
-                            title="Просмотреть"
+                            title={intl.formatMessage({ id: "chat.file.preview" })}
                           >
-                            <img src={zoomIcon} alt="Просмотр" />
+                            <img src={zoomIcon} alt={intl.formatMessage({ id: "chat.file.preview" })} />
                           </button>
                         )}
                         <button
                           className={styles.navigationButton}
                           onClick={() => handleDownload(file.url, file.name)}
-                          title="Скачать"
+                          title={intl.formatMessage({ id: "chat.file.download" })}
                         >
-                          <img src={downloadIcon} alt="Скачать" />
+                          <img src={downloadIcon} alt={intl.formatMessage({ id: "chat.file.download" })} />
                         </button>
                       </div>
                     )}
@@ -305,10 +307,10 @@ export default function Chat({ socket, roomId, userId, userName }: ChatProps) {
                 className={styles.chatSendFileButton}
                 onClick={() => fileInputRef.current?.click()}
                 disabled={isUploading}
-                aria-label="Прикрепить файл"
-                title="Прикрепить файл"
+                aria-label={intl.formatMessage({ id: "chat.file.attach" })}
+                title={intl.formatMessage({ id: "chat.file.attach" })}
               >
-                <img src={sendBinaryFile} alt="Прикрепить" />
+                <img src={sendBinaryFile} alt={intl.formatMessage({ id: "chat.file.attach" })} />
               </button>
 
               <textarea
@@ -316,7 +318,7 @@ export default function Chat({ socket, roomId, userId, userName }: ChatProps) {
                 value={messageText}
                 onChange={(e) => setMessageText(e.target.value)}
                 onKeyPress={handleKeyPress}
-                placeholder={isUploading ? 'Загрузка файла...' : 'Введите сообщение...'}
+                placeholder={isUploading ? intl.formatMessage({ id: "chat.file.uploading" }) : intl.formatMessage({ id: "chat.message.placeholder" })}
                 rows={1}
                 maxLength={CHAT_CONFIG.MAX_MESSAGE_LENGTH}
                 disabled={isLoading || isUploading}
@@ -326,9 +328,9 @@ export default function Chat({ socket, roomId, userId, userName }: ChatProps) {
                 type="submit"
                 className={styles.chatSendButton}
                 disabled={!messageText.trim() || isLoading || isUploading}
-                aria-label="Отправить сообщение"
+                aria-label={intl.formatMessage({ id: "chat.message.send" })}
               >
-                <img src={sendIcon} alt="Отправить" />
+                <img src={sendIcon} alt={intl.formatMessage({ id: "chat.message.send" })} />
               </button>
             </form>
           </div>

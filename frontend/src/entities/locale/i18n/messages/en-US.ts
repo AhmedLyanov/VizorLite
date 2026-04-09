@@ -160,6 +160,28 @@ export const enMessages = {
   "ai.message.placeholder": "Type your question...",
   "ai.notification.chatCleared.title": "Chat successfully cleared",
   "ai.notification.chatCleared.description": "All messages deleted",
+  "ai.message.thinking": "Thinking...",
+  "ai.error.title": "Error",
+  "ai.error.default": "Failed to get response from AI",
+  "ai.error.timeout": "Request timeout. Please try again.",
+  "ai.error.emptyResponse": "AI returned empty response. Please try again.",
+  "ai.hint.text": "Need help? I'm here",
+
+  // CHAT_TEXTS
+  "chat.title": "Chat",
+  "chat.close": "Close chat",
+  "chat.open": "Open chat",
+  "chat.anonymous": "Anonymous",
+  "chat.file.tooLarge": "File is too large (max. 10MB)",
+  "chat.file.invalidType": "Invalid file type",
+  "chat.file.sent": "File sent",
+  "chat.file.uploadError": "File upload error",
+  "chat.file.uploading": "Uploading file...",
+  "chat.message.placeholder": "Type a message...",
+  "chat.file.attach": "Attach file",
+  "chat.message.send": "Send message",
+  "chat.file.preview": "Preview",
+  "chat.file.download": "Download",
 
   "about.hero.title": "About VizorLite",
   "about.hero.subtitle":

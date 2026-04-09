@@ -165,6 +165,28 @@ export const frMessages = {
   "ai.message.placeholder": "Tapez votre question...",
   "ai.notification.chatCleared.title": "Chat effacé avec succès",
   "ai.notification.chatCleared.description": "Tous les messages supprimés",
+  "ai.message.thinking": "Réflexion...",
+  "ai.error.title": "Erreur",
+  "ai.error.default": "Échec de l'obtention d'une réponse de l'IA",
+  "ai.error.timeout": "Délai de la requête dépassé. Veuillez réessayer.",
+  "ai.error.emptyResponse": "L'IA a retourné une réponse vide. Veuillez réessayer.",
+  "ai.hint.text": "Besoin d'aide ? Je suis là",
+
+  // CHAT_TEXTS
+  "chat.title": "Chat",
+  "chat.close": "Fermer le chat",
+  "chat.open": "Ouvrir le chat",
+  "chat.anonymous": "Anonyme",
+  "chat.file.tooLarge": "Fichier trop volumineux (max. 10 Mo)",
+  "chat.file.invalidType": "Type de fichier non valide",
+  "chat.file.sent": "Fichier envoyé",
+  "chat.file.uploadError": "Erreur de téléchargement",
+  "chat.file.uploading": "Téléchargement du fichier...",
+  "chat.message.placeholder": "Écrivez un message...",
+  "chat.file.attach": "Joindre un fichier",
+  "chat.message.send": "Envoyer le message",
+  "chat.file.preview": "Aperçu",
+  "chat.file.download": "Télécharger",
 
   "about.hero.title": "À propos de VizorLite",
   "about.hero.subtitle":

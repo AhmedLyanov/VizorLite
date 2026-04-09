@@ -164,6 +164,28 @@ export const jpMessages = {
   "ai.notification.chatCleared.title": "チャットを正常にクリアしました",
   "ai.notification.chatCleared.description":
     "すべてのメッセージが削除されました",
+  "ai.message.thinking": "考え中...",
+  "ai.error.title": "エラー",
+  "ai.error.default": "AIからの応答に失敗しました",
+  "ai.error.timeout": "リクエストがタイムアウトしました。もう一度お試しください。",
+  "ai.error.emptyResponse": "AIが空の応答を返しました。もう一度お試しください。",
+  "ai.hint.text": "お手伝いしましょうか？ここにいます",
+
+  // CHAT_TEXTS
+  "chat.title": "チャット",
+  "chat.close": "チャットを閉じる",
+  "chat.open": "チャットを開く",
+  "chat.anonymous": "匿名",
+  "chat.file.tooLarge": "ファイルが大きすぎます（最大10MB）",
+  "chat.file.invalidType": "無効なファイル形式",
+  "chat.file.sent": "ファイルを送信しました",
+  "chat.file.uploadError": "ファイルのアップロードエラー",
+  "chat.file.uploading": "ファイルをアップロード中...",
+  "chat.message.placeholder": "メッセージを入力...",
+  "chat.file.attach": "ファイルを添付",
+  "chat.message.send": "メッセージを送信",
+  "chat.file.preview": "プレビュー",
+  "chat.file.download": "ダウンロード",
 
   "about.hero.title": "VizorLiteについて",
   "about.hero.subtitle":

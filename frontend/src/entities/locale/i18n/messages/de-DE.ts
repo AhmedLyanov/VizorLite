@@ -164,6 +164,28 @@ export const deMessages = {
   "ai.message.placeholder": "Geben Sie Ihre Frage ein...",
   "ai.notification.chatCleared.title": "Chat erfolgreich gelöscht",
   "ai.notification.chatCleared.description": "Alle Nachrichten gelöscht",
+  "ai.message.thinking": "Denke nach...",
+  "ai.error.title": "Fehler",
+  "ai.error.default": "Keine Antwort von der KI erhalten",
+  "ai.error.timeout": "Zeitüberschreitung der Anfrage. Bitte versuchen Sie es erneut.",
+  "ai.error.emptyResponse": "KI hat eine leere Antwort zurückgegeben. Bitte versuchen Sie es erneut.",
+  "ai.hint.text": "Brauchen Sie Hilfe? Ich bin da",
+
+  // CHAT_TEXTS
+  "chat.title": "Chat",
+  "chat.close": "Chat schließen",
+  "chat.open": "Chat öffnen",
+  "chat.anonymous": "Anonym",
+  "chat.file.tooLarge": "Datei ist zu groß (max. 10MB)",
+  "chat.file.invalidType": "Ungültiger Dateityp",
+  "chat.file.sent": "Datei gesendet",
+  "chat.file.uploadError": "Fehler beim Hochladen",
+  "chat.file.uploading": "Datei wird hochgeladen...",
+  "chat.message.placeholder": "Nachricht eingeben...",
+  "chat.file.attach": "Datei anhängen",
+  "chat.message.send": "Nachricht senden",
+  "chat.file.preview": "Vorschau",
+  "chat.file.download": "Herunterladen",
 
   "about.hero.title": "Über VizorLite",
   "about.hero.subtitle":

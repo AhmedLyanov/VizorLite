@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { useIntl } from 'react-intl';
 import styles from './ImagePreview.module.css';
 import downloadIcon from '../../shared/assets/download.svg';
 
@@ -9,12 +10,13 @@ interface ImagePreviewModalProps {
   onDownload: (url: string, fileName: string) => void;
 }
 
-export default function ImagePreviewModal({ 
-  isOpen, 
-  imageUrl, 
-  onClose, 
-  onDownload 
+export default function ImagePreviewModal({
+  isOpen,
+  imageUrl,
+  onClose,
+  onDownload
 }: ImagePreviewModalProps) {
+  const intl = useIntl();
   
   const handleDownload = () => {
     if (imageUrl) {
@@ -66,8 +68,8 @@ export default function ImagePreviewModal({
             className={styles.previewDownloadButton}
             onClick={handleDownload}
           >
-            <img src={downloadIcon} alt="Скачать" />
-            <span>Скачать</span>
+            <img src={downloadIcon} alt={intl.formatMessage({ id: "chat.file.download" })} />
+            <span>{intl.formatMessage({ id: "chat.file.download" })}</span>
           </button>
         </div>
       </div>

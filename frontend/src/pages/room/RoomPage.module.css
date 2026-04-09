@@ -49,7 +49,6 @@
 }
 
 .roomParticipant {
-  border: var(--room-participant-border);
   border-radius: var(--room-participant-border-radius);
   width: 100%;
   height: 100%;

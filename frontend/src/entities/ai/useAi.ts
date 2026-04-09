@@ -1,6 +1,7 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 import { aiApi } from "../../shared/api/aiApi";
+import { useLocaleStore } from "../locale/uselocaleStore";
 
 interface Message {
   role: "user" | "assistant";
@@ -35,9 +36,7 @@ interface AiState {
   setError: (error: string | null) => void;
 }
 
-/**
- * Type Guard для ошибок API
- */
+
 function isApiError(error: unknown): error is ApiError {
   return typeof error === "object" && error !== null;
 }
@@ -79,6 +78,7 @@ export const useAiStore = create<AiState>()(
 
       sendMessage: async () => {
         const { message, messages, addMessage, setMessage, setError } = get();
+        const getMessage = useLocaleStore.getState().getMessage;
 
         if (!message.trim()) return;
 
@@ -113,15 +113,15 @@ export const useAiStore = create<AiState>()(
         } catch (error: unknown) {
           console.error("AI chat error:", error);
 
-          let errorMessage = "Failed to get response from AI";
+          let errorMessage = getMessage("ai.error.default" as any) || "Failed to get response from AI";
 
           if (isApiError(error)) {
             if (error.response?.data?.error) {
               errorMessage = error.response.data.error;
             } else if (error.message?.includes("timeout")) {
-              errorMessage = "Request timeout. Please try again.";
+              errorMessage = getMessage("ai.error.timeout" as any) || "Request timeout. Please try again.";
             } else if (error.message?.includes("empty response")) {
-              errorMessage = "AI returned empty response. Please try again.";
+              errorMessage = getMessage("ai.error.emptyResponse" as any) || "AI returned empty response. Please try again.";
             }
           }
 

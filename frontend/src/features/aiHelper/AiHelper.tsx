@@ -1,7 +1,7 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import type { KeyboardEvent } from "react";
 import { useIntl } from "react-intl";
-import { Popover, Badge, Spin, Alert, notification } from "antd";
+import { Popover, Badge, Spin, Alert } from "antd";
 import { useAiStore } from "../../entities/ai/useAi";
 import sendIcon from "../../shared/assets/send.svg";
 import clearIcon from "../../shared/assets/trashIcon.svg";
@@ -12,7 +12,9 @@ export default function AiHelperAntd() {
   const intl = useIntl();
   const [popoverOpen, setPopoverOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
-  const [notificationApi, contextHolder] = notification.useNotification();
+  const [showHint, setShowHint] = useState(false);
+  const messagesEndRef = useRef<HTMLDivElement>(null);
+  const AI_HINT_KEY = "ai-hint-seen";
 
   const {
     message,
@@ -31,13 +33,20 @@ export default function AiHelperAntd() {
     const checkMobile = () => {
       setIsMobile(window.innerWidth <= 768);
     };
-
     checkMobile();
     window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
 
-    return () => {
-      window.removeEventListener("resize", checkMobile);
-    };
+  useEffect(() => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [messages]);
+
+  useEffect(() => {
+    const hasSeenHint = localStorage.getItem(AI_HINT_KEY);
+    if (hasSeenHint) return;
+    const timer = setTimeout(() => setShowHint(true), 2500);
+    return () => clearTimeout(timer);
   }, []);
 
   const handleSendMessage = async () => {
@@ -48,18 +57,6 @@ export default function AiHelperAntd() {
   const handleClearChat = () => {
     clearMessages();
     localStorage.removeItem("ai-storage");
-    setTimeout(() => {
-      notificationApi.success({
-        message: intl.formatMessage({
-          id: AI_TEXT.NOTIFICATIONS.CHAT_CLEARED_TITLE,
-        }),
-        description: intl.formatMessage({
-          id: AI_TEXT.NOTIFICATIONS.CHAT_CLEARED_DESCRIPTION,
-        }),
-        duration: 3,
-      });
-    }, 0);
-
     setPopoverOpen(false);
     setTimeout(() => setPopoverOpen(true), 50);
   };
@@ -75,28 +72,20 @@ export default function AiHelperAntd() {
     setPopoverOpen(open);
     if (open) {
       openAi();
+      localStorage.setItem(AI_HINT_KEY, "true");
+      setShowHint(false);
     } else {
       closeAi();
     }
   };
 
   const renderOriginalContent = () => (
-    <div
-      className={styles.assistantModal}
-      role="dialog"
-      aria-modal="true"
-      aria-label={intl.formatMessage({ id: AI_TEXT.TITLE.MAIN })}
-    >
+    <div className={styles.assistantModal}>
       <div className={styles.assistantHeader}>
         <h3 className={styles.assistantTitle}>
           {intl.formatMessage({ id: AI_TEXT.TITLE.MAIN })}
         </h3>
-
-        <button
-          className={styles.closeBtn}
-          onClick={() => setPopoverOpen(false)}
-          aria-label={intl.formatMessage({ id: AI_TEXT.BUTTONS.CLOSE })}
-        >
+        <button className={styles.closeBtn} onClick={() => setPopoverOpen(false)}>
           ✕
         </button>
       </div>
@@ -108,7 +97,7 @@ export default function AiHelperAntd() {
               type="error"
               showIcon
               closable
-              message="Error"
+              message={intl.formatMessage({ id: "ai.error.title" })}
               description={error}
               onClose={() => setError(null)}
             />
@@ -118,37 +107,34 @@ export default function AiHelperAntd() {
         <div className={styles.messagesContainer}>
           {messages.length === 0 ? (
             <div className={styles.welcomeMessage}>
-              <p>
-                {intl.formatMessage({
-                  id: AI_TEXT.MESSAGES.WELCOME,
-                })}
-              </p>
+              <p>{intl.formatMessage({ id: AI_TEXT.MESSAGES.WELCOME })}</p>
             </div>
           ) : (
-            messages.map((msg, index) => (
-              <div
-                key={index}
-                className={`${styles.message} ${
-                  msg.role === "user"
-                    ? styles.userMessage
-                    : styles.assistantMessage
-                }`}
-              >
-                <div className={styles.messageContent}>{msg.content}</div>
-                <span className={styles.messageTime}>
-                  {new Date(msg.timestamp).toLocaleTimeString([], {
-                    hour: "2-digit",
-                    minute: "2-digit",
-                  })}
-                </span>
-              </div>
-            ))
+            <>
+              {messages.map((msg, index) => (
+                <div
+                  key={index}
+                  className={`${styles.message} ${
+                    msg.role === "user" ? styles.userMessage : styles.assistantMessage
+                  }`}
+                >
+                  <div className={styles.messageContent}>{msg.content}</div>
+                  <span className={styles.messageTime}>
+                    {new Date(msg.timestamp).toLocaleTimeString([], {
+                      hour: "2-digit",
+                      minute: "2-digit",
+                    })}
+                  </span>
+                </div>
+              ))}
+              <div ref={messagesEndRef} />
+            </>
           )}
 
           {isLoading && (
             <div className={styles.loadingIndicator}>
               <Spin size="small" />
-              <span>Thinking...</span>
+              <span>{intl.formatMessage({ id: "ai.message.thinking" })}</span>
             </div>
           )}
         </div>
@@ -158,12 +144,9 @@ export default function AiHelperAntd() {
             value={message}
             onChange={(e) => setMessage(e.target.value)}
             onKeyPress={handleKeyPress}
-            placeholder={intl.formatMessage({
-              id: AI_TEXT.MESSAGES.PLACEHOLDER,
-            })}
+            placeholder={intl.formatMessage({ id: AI_TEXT.MESSAGES.PLACEHOLDER })}
             rows={isMobile ? 1 : 2}
             maxLength={500}
-            aria-label="message for AI assistant"
             disabled={isLoading}
             className={styles.textarea}
           />
@@ -172,45 +155,30 @@ export default function AiHelperAntd() {
             className={styles.sendButton}
             onClick={handleSendMessage}
             disabled={!message.trim() || isLoading}
-            aria-label={intl.formatMessage({
-              id: AI_TEXT.BUTTONS.SEND,
-            })}
-            title={intl.formatMessage({
-              id: AI_TEXT.BUTTONS.SEND,
-            })}
           >
-            {isLoading ? (
-              <Spin size="small" />
-            ) : (
-              <img
-                src={sendIcon}
-                alt="send message"
-                className={styles.sendIcon}
-              />
-            )}
+            {isLoading ? <Spin size="small" /> : <img src={sendIcon} alt="send" />}
           </button>
 
           <button
             className={styles.clearChat}
             onClick={handleClearChat}
-            aria-label="Clear chat"
             disabled={messages.length === 0}
-            title="Clear chat"
           >
-            <img
-              src={clearIcon}
-              alt="clear AI chat"
-              className={styles.sendIcon}
-            />
+            <img src={clearIcon} alt="clear" />
           </button>
         </div>
       </div>
-      {contextHolder}
     </div>
   );
 
   return (
     <div className={styles.assistantContainer}>
+      {showHint && !popoverOpen && (
+        <div className={styles.aiHint} onClick={() => setPopoverOpen(true)}>
+          {intl.formatMessage({ id: "ai.hint.text" })}
+        </div>
+      )}
+
       <Popover
         content={renderOriginalContent}
         trigger="click"
@@ -220,29 +188,10 @@ export default function AiHelperAntd() {
         overlayClassName={styles.aiPopover}
         arrow={false}
         destroyTooltipOnHide
-        overlayStyle={{
-          width: isMobile ? "calc(100vw - 32px)" : "auto",
-          maxWidth: isMobile ? "100%" : "500px",
-        }}
       >
-        <Badge
-          count={
-            messages.filter((m) => m.role === "assistant").length > 0
-              ? messages.filter((m) => m.role === "assistant").length
-              : null
-          }
-          size="small"
-          offset={isMobile ? [-3, 3] : [-5, 5]}
-          color="#108ee9"
-          className={styles.badge}
-        >
-          <button
-            className={styles.assistantToggleBtn}
-            onClick={() => setPopoverOpen(!popoverOpen)}
-            aria-label={intl.formatMessage({ id: AI_TEXT.BUTTONS.TOGGLE })}
-            aria-expanded={popoverOpen}
-          >
-            {intl.formatMessage({ id: AI_TEXT.BUTTONS.TOGGLE })}
+        <Badge count={messages.filter((m) => m.role === "assistant").length || null}>
+          <button className={styles.assistantToggleBtn} onClick={() => setPopoverOpen(!popoverOpen)}>
+            AI
           </button>
         </Badge>
       </Popover>

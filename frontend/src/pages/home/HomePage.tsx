@@ -36,6 +36,8 @@ export default function HomePage() {
               title={intl.formatMessage({
                 id: HOME_TEXTS.BUTTONS.CREATE_MEETING,
               })}
+              active={true}
+
               image={webcamIcon}
               onClick={() => createMeetingMutation.mutate()}
             />
@@ -44,6 +46,8 @@ export default function HomePage() {
               title={intl.formatMessage({
                 id: HOME_TEXTS.BUTTONS.JOIN_MEETING,
               })}
+              active={true}
+
               image={joinIcon}
               onClick={() => setIsJoinOpen(true)}
             />
@@ -53,6 +57,8 @@ export default function HomePage() {
             title={intl.formatMessage({
               id: HOME_TEXTS.BUTTONS.SCHEDULE_MEETING,
             })}
+            active={false}
+
             image={shceduleMetting}
           />
         </div>

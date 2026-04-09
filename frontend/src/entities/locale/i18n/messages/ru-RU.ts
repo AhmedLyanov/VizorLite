@@ -159,6 +159,28 @@ export const ruMessages = {
   "ai.message.placeholder": "Введите ваш вопрос...",
   "ai.notification.chatCleared.title": "Чат успешно очищен",
   "ai.notification.chatCleared.description": "Все сообщения удалены",
+  "ai.message.thinking": "Думаю...",
+  "ai.error.title": "Ошибка",
+  "ai.error.default": "Не удалось получить ответ от ИИ",
+  "ai.error.timeout": "Время запроса истекло. Попробуйте снова.",
+  "ai.error.emptyResponse": "ИИ вернул пустой ответ. Попробуйте снова.",
+  "ai.hint.text": "Нужна помощь? Я тут",
+
+  // CHAT_TEXTS
+  "chat.title": "Чат",
+  "chat.close": "Закрыть чат",
+  "chat.open": "Открыть чат",
+  "chat.anonymous": "Аноним",
+  "chat.file.tooLarge": "Файл слишком большой (макс. 10МБ)",
+  "chat.file.invalidType": "Недопустимый тип файла",
+  "chat.file.sent": "Файл отправлен",
+  "chat.file.uploadError": "Ошибка загрузки файла",
+  "chat.file.uploading": "Загрузка файла...",
+  "chat.message.placeholder": "Введите сообщение...",
+  "chat.file.attach": "Прикрепить файл",
+  "chat.message.send": "Отправить сообщение",
+  "chat.file.preview": "Просмотреть",
+  "chat.file.download": "Скачать",
 
   "about.hero.title": "О VizorLite",
   "about.hero.subtitle":
