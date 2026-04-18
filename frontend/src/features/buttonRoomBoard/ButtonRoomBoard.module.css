@@ -1,0 +1,181 @@
+.container {
+    height: 36px;
+    min-width: 36px;
+
+    display: flex;
+    align-items: center;
+
+    border-radius: 8px;
+    overflow: hidden;
+
+    transition: all 0.2s ease;
+}
+
+.default {
+    background: transparent;
+    border: 1px solid #2E3038;
+}
+
+.active {
+    background: #2E3038;
+    border: none;
+}
+
+.main {
+    width: 36px;
+    height: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.options {
+    width: 28px;
+    height: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.divider {
+    width: 1px;
+    height: 50%;
+    background: #2E3038;
+}
+
+.dots {
+    width: 3px;
+    height: 3px;
+    background: #D1D5DB;
+    border-radius: 50%;
+    position: relative;
+}
+
+.dots::before,
+.dots::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    width: 3px;
+    height: 3px;
+    background: #D1D5DB;
+    border-radius: 50%;
+}
+
+.dots::before {
+    top: -6px;
+}
+
+.dots::after {
+    top: 6px;
+}
+
+.main span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.main svg {
+    width: 16px;
+    height: 16px;
+}
+
+.main img {
+    width: 16px;
+    height: 16px;
+}
+
+@media (min-width: 640px) {
+    .container {
+        height: 38px;
+        min-width: 38px;
+    }
+
+    .main {
+        width: 38px;
+    }
+
+    .options {
+        width: 30px;
+    }
+
+    .main svg,
+    .main img {
+        width: 17px;
+        height: 17px;
+    }
+}
+
+@media (min-width: 768px) {
+    .container {
+        height: 40px;
+        min-width: 40px;
+    }
+
+    .main {
+        width: 40px;
+    }
+
+    .options {
+        width: 32px;
+    }
+
+    .main svg,
+    .main img {
+        width: 18px;
+        height: 18px;
+    }
+}
+
+@media (min-width: 1024px) {
+    .container {
+        height: 42px;
+        min-width: 42px;
+    }
+
+    .main {
+        width: 42px;
+    }
+
+    .options {
+        width: 34px;
+    }
+
+    .main svg,
+    .main img {
+        width: 19px;
+        height: 19px;
+    }
+}
+
+@media (min-width: 1280px) {
+    .container {
+        height: 44px;
+        min-width: 44px;
+    }
+
+    .main {
+        width: 44px;
+    }
+
+    .options {
+        width: 36px;
+    }
+
+    .main svg,
+    .main img {
+        width: 20px;
+        height: 20px;
+    }
+}

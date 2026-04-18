@@ -3,7 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { io, Socket } from "socket.io-client";
 import Peer from "simple-peer";
 import { message } from "antd";
-import RoomBoard from "../../features/roomBoard/RoomBoard";
+import RoomControlPanel from "../../features/roomControlPanel/RoomControlPanel";
 import Chat from "../../features/chat/Chat";
 import style from "./RoomPage.module.css";
 import fullscreenOff from "../../shared/assets/fullscreenOff.svg"
@@ -363,11 +363,12 @@ export default function RoomPage() {
 
               )}
             </button>
+
           </div>
         ))}
       </div>
 
-      <RoomBoard
+      <RoomControlPanel
         stream={stream}
         onLeaveRoom={handleLeaveRoom}
         onToggleCamera={toggleCamera}

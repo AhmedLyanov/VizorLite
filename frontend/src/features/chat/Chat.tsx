@@ -41,7 +41,6 @@ export default function Chat({ socket, roomId, userId, userName }: ChatProps) {
   const {
     messages,
     isOpen,
-    unreadCount,
     isLoading,
     addMessage,
     setMessages,
@@ -126,11 +125,6 @@ export default function Chat({ socket, roomId, userId, userName }: ChatProps) {
     }
   };
 
-  const handleToggleChat = () => {
-    toggleChat();
-    resetUnreadCount();
-  };
-
   const handleDownload = (url: string, fileName: string) => {
     const link = document.createElement('a');
     link.href = `${import.meta.env.VITE_API_URL}${url}`;
@@ -150,23 +144,13 @@ export default function Chat({ socket, roomId, userId, userName }: ChatProps) {
     setPreviewImage(null);
   };
 
+  const handleToggleChat = () => {
+    toggleChat();
+    resetUnreadCount();
+  };
+
   return (
     <>
-      <div className={styles.chatToggleContainer}>
-        <button
-          className={styles.chatToggleButton}
-          onClick={handleToggleChat}
-          aria-label={isOpen ? intl.formatMessage({ id: "chat.close" }) : intl.formatMessage({ id: "chat.open" })}
-        >
-          <img src={sendIcon} alt={intl.formatMessage({ id: "chat.title" })} />
-          {!isOpen && unreadCount > 0 && (
-            <span className={styles.chatUnreadBadge}>
-              {unreadCount > 99 ? '99+' : unreadCount}
-            </span>
-          )}
-        </button>
-      </div>
-
       <div className={`${styles.chatSidebar} ${isOpen ? styles.chatSidebarOpen : ''}`}>
         <div className={styles.chatSidebarInner}>
           <div className={styles.chatHeader}>
