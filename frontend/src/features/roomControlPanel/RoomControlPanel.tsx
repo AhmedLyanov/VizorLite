@@ -8,7 +8,7 @@ import { ROOM_BOARD_TEXTS } from "../../shared/constants/roomBoard";
 import MicLevelVisualizer from "../../shared/ui/waveform/MicLevelVisualizer";
 import sendIcon from "../../shared/assets/send.svg";
 import { useChatStore } from "../../entities/chat/useChatStore";
-import RoomBoardControl from "../buttonRoomBoard/buttonRoomBoard";
+import RoomBoardControl from "../buttonRoomBoard/ButtonRoomBoard";
 
 interface RoomControlPanelProps {
   stream: MediaStream | null;
