@@ -11,6 +11,16 @@
     transition: all 0.2s ease;
 }
 
+.displayBlock {
+  cursor: default;
+}
+
+.displayText {
+  font-size: 14px;
+  font-weight: 500;
+  color: #fff;
+}
+
 .default {
     background: transparent;
     border: 1px solid #2E3038;

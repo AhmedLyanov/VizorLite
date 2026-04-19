@@ -375,6 +375,7 @@ export default function RoomPage() {
         isCameraOn={isCameraOn}
         onToggleScreenShare={toggleScreenShare}
         isScreenSharing={isScreenSharing}
+        participantCount={participantCount}
       />
 
       <Chat
