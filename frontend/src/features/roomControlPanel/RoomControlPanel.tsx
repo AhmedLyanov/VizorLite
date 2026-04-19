@@ -10,6 +10,9 @@ import sendIcon from "../../shared/assets/send.svg";
 import { useChatStore } from "../../entities/chat/useChatStore";
 import RoomBoardControl from "../buttonRoomBoard/ButtonRoomBoard";
 
+// options: mic settings, camera settings, screen share settings, leave room confirmation
+import { MicSettings } from "../deviceSettings/ui/MicSettings";
+
 interface RoomControlPanelProps {
   stream: MediaStream | null;
   onLeaveRoom: () => void;
@@ -109,21 +112,15 @@ export default function RoomControlPanel({
                 icon={<Icon name={isMicOn ? "micOn" : "micOff"} />}
                 onClick={toggleMicrophone}
                 active={!isMicOn}
-                modalTitle={intl.formatMessage({ id: 'modal.mic.title', defaultMessage: 'Настройки микрофона' })}
-                modalContent={
-                  <>
-                    <p>Выбор микрофона</p>
-                    <p>Подавление шума</p>
-                    <p>Громкость</p>
-                  </>
-                }
-                onModalSave={() => messageApi.success('Настройки микрофона сохранены')}
+                modalTitle="Настройки микрофона"
+                 modalContent={<MicSettings />}
               />
             </Tooltip>
             <Tooltip placement="top" title={intl.formatMessage({ id: isCameraOn ? ROOM_BOARD_TEXTS.TOOLTIPS.CAMERA_ON : ROOM_BOARD_TEXTS.TOOLTIPS.CAMERA_OFF })}>
               <RoomBoardControl
                 icon={<Icon name={isCameraOn ? "cameraOn" : "cameraOff"} />}
                 onClick={handleToggleCamera}
+
                 active={!isCameraOn}
                 modalTitle={intl.formatMessage({ id: 'modal.camera.title', defaultMessage: 'Настройки камеры' })}
                 modalContent={
@@ -132,7 +129,6 @@ export default function RoomControlPanel({
                     <p>HD качество</p>
                   </>
                 }
-                onModalSave={() => messageApi.success('Настройки камеры сохранены')}
               />
             </Tooltip>
           </div>
@@ -145,10 +141,18 @@ export default function RoomControlPanel({
                 icon={<Icon name={isScreenSharing ? "screenShareOn" : "screenShareOff"} />}
                 onClick={handleToggleScreenShare}
                 active={isScreenSharing}
+                  modalTitle="Настройки микрофона"
+                modalContent={
+                  <>
+                    <p>разрешить звук</p>
+                    <p>бла</p>
+                    <p>бла</p>
+                  </>
+                }
               />
             </Tooltip>
             <Tooltip placement="top" title={intl.formatMessage({ id: ROOM_BOARD_TEXTS.TOOLTIPS.LEAVE_ROOM })}>
-              <RoomBoardControl icon={<Icon name="hangUp" />} variant="danger" onClick={handleLeaveRoom} />
+              <RoomBoardControl icon={<Icon name="hangUp" />} variant="danger" onClick={handleLeaveRoom}  />
             </Tooltip>
           </div>
         </div>

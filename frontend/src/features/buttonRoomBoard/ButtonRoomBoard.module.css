@@ -11,6 +11,20 @@
     transition: all 0.2s ease;
 }
 
+.popoverContent {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 200px;
+}
+
+.popoverTitle {
+  font-size: 14px;
+  font-weight: 600;
+  color: #fff;
+  margin-bottom: 4px;
+}
+
 .displayBlock {
   cursor: default;
 }
@@ -62,6 +76,8 @@
     height: 50%;
     background: #2E3038;
 }
+
+
 
 .dots {
     width: 3px;
