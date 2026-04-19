@@ -12,6 +12,7 @@ import RoomBoardControl from "../buttonRoomBoard/ButtonRoomBoard";
 
 // options: mic settings, camera settings, screen share settings, leave room confirmation
 import { MicSettings } from "../deviceSettings/ui/MicSettings";
+import { CameraSettings } from "../deviceSettings";
 
 interface RoomControlPanelProps {
   stream: MediaStream | null;
@@ -113,7 +114,7 @@ export default function RoomControlPanel({
                 onClick={toggleMicrophone}
                 active={!isMicOn}
                 modalTitle="Настройки микрофона"
-                 modalContent={<MicSettings />}
+                modalContent={<MicSettings />}
               />
             </Tooltip>
             <Tooltip placement="top" title={intl.formatMessage({ id: isCameraOn ? ROOM_BOARD_TEXTS.TOOLTIPS.CAMERA_ON : ROOM_BOARD_TEXTS.TOOLTIPS.CAMERA_OFF })}>
@@ -123,12 +124,7 @@ export default function RoomControlPanel({
 
                 active={!isCameraOn}
                 modalTitle={intl.formatMessage({ id: 'modal.camera.title', defaultMessage: 'Настройки камеры' })}
-                modalContent={
-                  <>
-                    <p>Выбор камеры</p>
-                    <p>HD качество</p>
-                  </>
-                }
+                modalContent={<CameraSettings />}
               />
             </Tooltip>
           </div>

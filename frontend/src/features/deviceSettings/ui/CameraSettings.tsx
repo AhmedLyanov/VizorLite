@@ -3,25 +3,30 @@ import { useDeviceStore } from "../../../entities/device/model/store";
 
 export function CameraSettings() {
   const {
-    noiseSuppression,
-    micVolume,
-    setNoiseSuppression,
-    setMicVolume,
+    cameraEnabled,    
+    cameraBrightness, 
+    setCameraEnabled,
+    setCameraBrightness,
   } = useDeviceStore();
 
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
       <div style={{ display: "flex", justifyContent: "space-between" }}>
-        <span>Шумоподавление</span>
+        <span>Включить камеру</span>
         <Switch
-          checked={noiseSuppression}
-          onChange={setNoiseSuppression}
+          checked={cameraEnabled}
+          onChange={setCameraEnabled}
         />
       </div>
 
       <div>
-        <span>Громкость: {micVolume}</span>
-        <Slider value={micVolume} onChange={setMicVolume} />
+        <span>Яркость: {cameraBrightness}</span>
+        <Slider
+          value={cameraBrightness}
+          onChange={setCameraBrightness}
+          min={0}
+          max={100}
+        />
       </div>
     </div>
   );
