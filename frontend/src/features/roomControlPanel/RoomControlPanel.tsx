@@ -10,9 +10,11 @@ import sendIcon from "../../shared/assets/send.svg";
 import { useChatStore } from "../../entities/chat/useChatStore";
 import RoomBoardControl from "../buttonRoomBoard/ButtonRoomBoard";
 
-// options: mic settings, camera settings, screen share settings, leave room confirmation
 import { MicSettings } from "../deviceSettings/ui/MicSettings";
 import { CameraSettings } from "../deviceSettings";
+
+import { useDeviceStore } from "../../entities/device/model/store";
+import { useAutoMute } from "../../entities/device/useAutoMute";
 
 interface RoomControlPanelProps {
   stream: MediaStream | null;
@@ -34,35 +36,71 @@ export default function RoomControlPanel({
   participantCount = 0,
 }: RoomControlPanelProps) {
   const intl = useIntl();
+
   const [isMicOn, setIsMicOn] = useState(true);
   const [isLeaveModalOpen, setIsLeaveModalOpen] = useState(false);
   const [messageApi, contextHolder] = message.useMessage();
 
-  const { isOpen: isChatOpen, unreadCount, toggleChat, resetUnreadCount } = useChatStore();
+  const { isOpen: isChatOpen, unreadCount, toggleChat, resetUnreadCount } =
+    useChatStore();
+
+  const {
+    autoMute,
+    autoMuteThreshold,
+    autoMuteDelay,
+  } = useDeviceStore();
 
   const toggleMicrophone = useCallback(() => {
     if (!stream) return;
+
     const audioTracks = stream.getAudioTracks();
     audioTracks.forEach((track) => (track.enabled = !track.enabled));
-    const newMicState = !isMicOn;
-    setIsMicOn(newMicState);
+
+    const newState = !isMicOn;
+    setIsMicOn(newState);
+
     messageApi.open({
-      type: newMicState ? "success" : "warning",
-      content: newMicState
+      type: newState ? "success" : "warning",
+      content: newState
         ? intl.formatMessage({ id: ROOM_BOARD_TEXTS.MESSAGES.MIC_ENABLED })
         : intl.formatMessage({ id: ROOM_BOARD_TEXTS.MESSAGES.MIC_DISABLED }),
       duration: 2,
     });
   }, [stream, isMicOn, messageApi, intl]);
 
+
+  useAutoMute({
+    stream,
+    enabled: autoMute,
+    threshold: autoMuteThreshold,
+    delay: autoMuteDelay,
+    onMute: () => {
+      if (!stream) return;
+
+      stream.getAudioTracks().forEach((t) => (t.enabled = false));
+      setIsMicOn(false);
+    },
+    onUnmute: () => {
+      if (!stream) return;
+
+      stream.getAudioTracks().forEach((t) => (t.enabled = true));
+      setIsMicOn(true);
+    },
+  });
+
   const handleToggleCamera = useCallback(() => {
     if (onToggleCamera) {
       onToggleCamera();
+
       messageApi.open({
         type: !isCameraOn ? "success" : "warning",
         content: !isCameraOn
-          ? intl.formatMessage({ id: ROOM_BOARD_TEXTS.MESSAGES.CAMERA_ENABLED })
-          : intl.formatMessage({ id: ROOM_BOARD_TEXTS.MESSAGES.CAMERA_DISABLED }),
+          ? intl.formatMessage({
+              id: ROOM_BOARD_TEXTS.MESSAGES.CAMERA_ENABLED,
+            })
+          : intl.formatMessage({
+              id: ROOM_BOARD_TEXTS.MESSAGES.CAMERA_DISABLED,
+            }),
         duration: 2,
       });
     }
@@ -71,29 +109,58 @@ export default function RoomControlPanel({
   const handleToggleScreenShare = useCallback(() => {
     if (onToggleScreenShare) {
       onToggleScreenShare();
+
       messageApi.open({
         type: !isScreenSharing ? "success" : "warning",
         content: !isScreenSharing
-          ? intl.formatMessage({ id: ROOM_BOARD_TEXTS.MESSAGES.SCREEN_SHARE_STARTED })
-          : intl.formatMessage({ id: ROOM_BOARD_TEXTS.MESSAGES.SCREEN_SHARE_STOPPED }),
+          ? intl.formatMessage({
+              id: ROOM_BOARD_TEXTS.MESSAGES.SCREEN_SHARE_STARTED,
+            })
+          : intl.formatMessage({
+              id: ROOM_BOARD_TEXTS.MESSAGES.SCREEN_SHARE_STOPPED,
+            }),
         duration: 2,
       });
     }
   }, [onToggleScreenShare, isScreenSharing, messageApi, intl]);
 
   const handleLeaveRoom = useCallback(() => setIsLeaveModalOpen(true), []);
+
   const confirmLeaveRoom = useCallback(() => {
     setIsLeaveModalOpen(false);
     onLeaveRoom();
   }, [onLeaveRoom]);
-  const cancelLeaveRoom = useCallback(() => setIsLeaveModalOpen(false), []);
+
+  const cancelLeaveRoom = useCallback(
+    () => setIsLeaveModalOpen(false),
+    [],
+  );
 
   const copyRoomLink = useCallback(() => {
-    const shareMessage = intl.formatMessage({ id: ROOM_BOARD_TEXTS.SHARE.MESSAGE });
+    const shareMessage = intl.formatMessage({
+      id: ROOM_BOARD_TEXTS.SHARE.MESSAGE,
+    });
+
     const roomLink = `${shareMessage}\n${window.location.href}`;
-    navigator.clipboard.writeText(roomLink)
-      .then(() => messageApi.success(intl.formatMessage({ id: ROOM_BOARD_TEXTS.MESSAGES.LINK_COPIED }), 2))
-      .catch(() => messageApi.error(intl.formatMessage({ id: ROOM_BOARD_TEXTS.MESSAGES.LINK_COPY_ERROR }), 2));
+
+    navigator.clipboard
+      .writeText(roomLink)
+      .then(() =>
+        messageApi.success(
+          intl.formatMessage({
+            id: ROOM_BOARD_TEXTS.MESSAGES.LINK_COPIED,
+          }),
+          2,
+        ),
+      )
+      .catch(() =>
+        messageApi.error(
+          intl.formatMessage({
+            id: ROOM_BOARD_TEXTS.MESSAGES.LINK_COPY_ERROR,
+          }),
+          2,
+        ),
+      );
   }, [messageApi, intl]);
 
   const handleToggleChat = () => {
@@ -104,11 +171,21 @@ export default function RoomControlPanel({
   return (
     <>
       {contextHolder}
+
       <div className={styles.controlPanel}>
+        {/* LEFT */}
         <div className={styles.panelSection}>
           <MicLevelVisualizer stream={stream} />
+
           <div className={styles.leftGroup}>
-            <Tooltip placement="top" title={intl.formatMessage({ id: isMicOn ? ROOM_BOARD_TEXTS.TOOLTIPS.MIC_ON : ROOM_BOARD_TEXTS.TOOLTIPS.MIC_OFF })}>
+            <Tooltip
+              placement="top"
+              title={intl.formatMessage({
+                id: isMicOn
+                  ? ROOM_BOARD_TEXTS.TOOLTIPS.MIC_ON
+                  : ROOM_BOARD_TEXTS.TOOLTIPS.MIC_OFF,
+              })}
+            >
               <RoomBoardControl
                 icon={<Icon name={isMicOn ? "micOn" : "micOff"} />}
                 onClick={toggleMicrophone}
@@ -117,61 +194,126 @@ export default function RoomControlPanel({
                 modalContent={<MicSettings />}
               />
             </Tooltip>
-            <Tooltip placement="top" title={intl.formatMessage({ id: isCameraOn ? ROOM_BOARD_TEXTS.TOOLTIPS.CAMERA_ON : ROOM_BOARD_TEXTS.TOOLTIPS.CAMERA_OFF })}>
-              <RoomBoardControl
-                icon={<Icon name={isCameraOn ? "cameraOn" : "cameraOff"} />}
-                onClick={handleToggleCamera}
 
+            <Tooltip
+              placement="top"
+              title={intl.formatMessage({
+                id: isCameraOn
+                  ? ROOM_BOARD_TEXTS.TOOLTIPS.CAMERA_ON
+                  : ROOM_BOARD_TEXTS.TOOLTIPS.CAMERA_OFF,
+              })}
+            >
+              <RoomBoardControl
+                icon={
+                  <Icon name={isCameraOn ? "cameraOn" : "cameraOff"} />
+                }
+                onClick={handleToggleCamera}
                 active={!isCameraOn}
-                modalTitle={intl.formatMessage({ id: 'modal.camera.title', defaultMessage: 'Настройки камеры' })}
+                modalTitle={intl.formatMessage({
+                  id: "modal.camera.title",
+                  defaultMessage: "Настройки камеры",
+                })}
                 modalContent={<CameraSettings />}
               />
             </Tooltip>
           </div>
         </div>
 
+        {/* CENTER */}
         <div className={styles.panelSection}>
           <div className={styles.centerControls}>
-            <Tooltip placement="top" title={intl.formatMessage({ id: isScreenSharing ? ROOM_BOARD_TEXTS.TOOLTIPS.SCREEN_SHARE_STOP : ROOM_BOARD_TEXTS.TOOLTIPS.SCREEN_SHARE_START })}>
+            <Tooltip
+              placement="top"
+              title={intl.formatMessage({
+                id: isScreenSharing
+                  ? ROOM_BOARD_TEXTS.TOOLTIPS.SCREEN_SHARE_STOP
+                  : ROOM_BOARD_TEXTS.TOOLTIPS.SCREEN_SHARE_START,
+              })}
+            >
               <RoomBoardControl
-                icon={<Icon name={isScreenSharing ? "screenShareOn" : "screenShareOff"} />}
+                icon={
+                  <Icon
+                    name={
+                      isScreenSharing
+                        ? "screenShareOn"
+                        : "screenShareOff"
+                    }
+                  />
+                }
                 onClick={handleToggleScreenShare}
                 active={isScreenSharing}
-                  modalTitle="Настройки микрофона"
-                modalContent={
-                  <>
-                    <p>разрешить звук</p>
-                    <p>бла</p>
-                    <p>бла</p>
-                  </>
-                }
+                modalTitle="Настройки шаринга"
+                modalContent={<p>Тут потом настройки</p>}
               />
             </Tooltip>
-            <Tooltip placement="top" title={intl.formatMessage({ id: ROOM_BOARD_TEXTS.TOOLTIPS.LEAVE_ROOM })}>
-              <RoomBoardControl icon={<Icon name="hangUp" />} variant="danger" onClick={handleLeaveRoom}  />
+
+            <Tooltip
+              placement="top"
+              title={intl.formatMessage({
+                id: ROOM_BOARD_TEXTS.TOOLTIPS.LEAVE_ROOM,
+              })}
+            >
+              <RoomBoardControl
+                icon={<Icon name="hangUp" />}
+                variant="danger"
+                onClick={handleLeaveRoom}
+              />
             </Tooltip>
           </div>
         </div>
 
+        {/* RIGHT */}
         <div className={styles.panelSection}>
           <div className={styles.rightControls}>
-            <Tooltip placement="top" title={intl.formatMessage({ id: ROOM_BOARD_TEXTS.TOOLTIPS.COPY_LINK })}>
-              <RoomBoardControl icon={<Icon name="link" />} onClick={copyRoomLink} />
+            <Tooltip
+              placement="top"
+              title={intl.formatMessage({
+                id: ROOM_BOARD_TEXTS.TOOLTIPS.COPY_LINK,
+              })}
+            >
+              <RoomBoardControl
+                icon={<Icon name="link" />}
+                onClick={copyRoomLink}
+              />
             </Tooltip>
-            <Tooltip placement="top" title={intl.formatMessage({ id: isScreenSharing ? ROOM_BOARD_TEXTS.TOOLTIPS.SCREEN_SHARE_STOP : ROOM_BOARD_TEXTS.TOOLTIPS.SCREEN_SHARE_START })}>
-              <RoomBoardControl mode="display" icon={<Icon name="users" />} text={`${participantCount}`} variant="default" bg="#2E3038" />
-            </Tooltip>
+
+            <RoomBoardControl
+              mode="display"
+              icon={<Icon name="users" />}
+              text={`${participantCount}`}
+              variant="default"
+              bg="#2E3038"
+            />
+
             <div className={styles.chatWrapper}>
-              <Tooltip placement="top" title={intl.formatMessage({ id: isChatOpen ? "chat.close" : "chat.open" })}>
-                <RoomBoardControl icon={<img src={sendIcon} alt="Chat" />} onClick={handleToggleChat} active={isChatOpen} />
+              <Tooltip
+                placement="top"
+                title={intl.formatMessage({
+                  id: isChatOpen ? "chat.close" : "chat.open",
+                })}
+              >
+                <RoomBoardControl
+                  icon={<img src={sendIcon} alt="Chat" />}
+                  onClick={handleToggleChat}
+                  active={isChatOpen}
+                />
               </Tooltip>
-              {unreadCount > 0 && !isChatOpen && <span className={styles.unreadBadge}>{unreadCount > 99 ? "99+" : unreadCount}</span>}
+
+              {unreadCount > 0 && !isChatOpen && (
+                <span className={styles.unreadBadge}>
+                  {unreadCount > 99 ? "99+" : unreadCount}
+                </span>
+              )}
             </div>
           </div>
         </div>
       </div>
 
-      <LeaveRoomModal isOpen={isLeaveModalOpen} onClose={cancelLeaveRoom} onConfirm={confirmLeaveRoom} />
+      <LeaveRoomModal
+        isOpen={isLeaveModalOpen}
+        onClose={cancelLeaveRoom}
+        onConfirm={confirmLeaveRoom}
+      />
     </>
   );
 }
