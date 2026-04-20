@@ -118,6 +118,12 @@ export const zhMessages = {
   "roomBoard.modal.confirm": "确认离开",
   "roomBoard.modal.cancel": "取消",
 
+  // ROOM_BOARD_TEXTS - SETTINGS
+  "roomBoard.settings.microphone": "麦克风设置",
+  "roomBoard.settings.camera": "摄像头设置",
+  "roomBoard.settings.screenShare": "屏幕共享设置",
+  "roomBoard.settings.applied": "设置已应用",
+
   // ROOM_BOARD_TEXTS - SHARE
   "roomBoard.share.message": "嘿，你好！加入我的VizorLite视频会议，这是链接：",
 

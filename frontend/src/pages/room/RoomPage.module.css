@@ -82,6 +82,7 @@
 .videoLabel {
   position: absolute;
   bottom: 8px;
+  font-family: sans-serif;
   left: 8px;
   background: var(--video-label-bg);
   color: var(--video-label-color);

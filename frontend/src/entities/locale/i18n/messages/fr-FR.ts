@@ -140,6 +140,12 @@ export const frMessages = {
   "roomBoard.modal.confirm": "Oui, quitter",
   "roomBoard.modal.cancel": "Annuler",
 
+  // ROOM_BOARD_TEXTS - SETTINGS
+  "roomBoard.settings.microphone": "Paramètres du microphone",
+  "roomBoard.settings.camera": "Paramètres de la caméra",
+  "roomBoard.settings.screenShare": "Paramètres de partage d'écran",
+  "roomBoard.settings.applied": "Paramètres appliqués",
+
   // ROOM_BOARD_TEXTS - SHARE
   "roomBoard.share.message":
     "Salut ! Rejoignez ma vidéoconférence sur VizorLite, voici le lien :",

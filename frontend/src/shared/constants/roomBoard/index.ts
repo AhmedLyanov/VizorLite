@@ -19,6 +19,12 @@ export const ROOM_BOARD_TEXTS = {
     SCREEN_SHARE_STARTED: "roomBoard.messages.screenShareStarted",
     SCREEN_SHARE_STOPPED: "roomBoard.messages.screenShareStopped",
   },
+  SETTINGS: {
+    MICROPHONE: "roomBoard.settings.microphone",
+    CAMERA: "roomBoard.settings.camera",
+    SCREEN_SHARE: "roomBoard.settings.screenShare",
+    APPLIED: "roomBoard.settings.applied",
+  },
   MODAL: {
     TITLE: "roomBoard.modal.title",
     DESCRIPTION: "roomBoard.modal.description",

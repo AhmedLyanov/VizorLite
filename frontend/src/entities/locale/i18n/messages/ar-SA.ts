@@ -134,6 +134,12 @@ export const arMessages = {
   "roomBoard.modal.confirm": "نعم، اخرج",
   "roomBoard.modal.cancel": "إلغاء",
 
+  // ROOM_BOARD_TEXTS - SETTINGS
+  "roomBoard.settings.microphone": "إعدادات الميكروفون",
+  "roomBoard.settings.camera": "إعدادات الكاميرا",
+  "roomBoard.settings.screenShare": "إعدادات مشاركة الشاشة",
+  "roomBoard.settings.applied": "تم تطبيق الإعدادات",
+
   // ROOM_BOARD_TEXTS - SHARE
   "roomBoard.share.message":
     "مرحبًا! انضم إلى اجتماع الفيديو الخاص بي على VizorLite، إليك الرابط:",

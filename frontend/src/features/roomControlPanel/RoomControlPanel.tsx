@@ -191,7 +191,9 @@ export default function RoomControlPanel({
                 icon={<Icon name={isMicOn ? "micOn" : "micOff"} />}
                 onClick={toggleMicrophone}
                 active={!isMicOn}
-                modalTitle="Настройки микрофона"
+                modalTitle={intl.formatMessage({
+                  id: ROOM_BOARD_TEXTS.SETTINGS.MICROPHONE,
+                })}
                 modalContent={<MicSettings />}
               />
             </Tooltip>
@@ -211,8 +213,7 @@ export default function RoomControlPanel({
                 onClick={handleToggleCamera}
                 active={!isCameraOn}
                 modalTitle={intl.formatMessage({
-                  id: "modal.camera.title",
-                  defaultMessage: "Настройки камеры",
+                  id: ROOM_BOARD_TEXTS.SETTINGS.CAMERA,
                 })}
                 modalContent={<CameraSettings />}
               />
@@ -243,7 +244,9 @@ export default function RoomControlPanel({
                 }
                 onClick={handleToggleScreenShare}
                 active={isScreenSharing}
-                modalTitle="Настройки шаринга"
+                modalTitle={intl.formatMessage({
+                  id: ROOM_BOARD_TEXTS.SETTINGS.SCREEN_SHARE,
+                })}
                 modalContent={<ShareSettings/>}
               />
             </Tooltip>

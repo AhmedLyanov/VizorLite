@@ -139,6 +139,12 @@ export const deMessages = {
   "roomBoard.modal.confirm": "Ja, verlassen",
   "roomBoard.modal.cancel": "Abbrechen",
 
+  // ROOM_BOARD_TEXTS - SETTINGS
+  "roomBoard.settings.microphone": "Mikrofoneinstellungen",
+  "roomBoard.settings.camera": "Kameraeinstellungen",
+  "roomBoard.settings.screenShare": "Bildschirmfreigabeeinstellungen",
+  "roomBoard.settings.applied": "Einstellungen angewendet",
+
   // ROOM_BOARD_TEXTS - SHARE
   "roomBoard.share.message":
     "Hallo! Komm zu meinem Video-Meeting auf VizorLite, hier ist der Link:",

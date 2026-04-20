@@ -126,6 +126,12 @@ export const enMessages = {
   "roomBoard.modal.confirm": "Yes, leave",
   "roomBoard.modal.cancel": "Cancel",
 
+  // ROOM_BOARD_TEXTS - SETTINGS
+  "roomBoard.settings.microphone": "Microphone Settings",
+  "roomBoard.settings.camera": "Camera Settings",
+  "roomBoard.settings.screenShare": "Screen Sharing Settings",
+  "roomBoard.settings.applied": "Settings applied",
+
   // ROOM_BOARD_TEXTS - SHARE
   "roomBoard.share.message":
     "Hey there! Join my video meeting on VizorLite, here's the link:",

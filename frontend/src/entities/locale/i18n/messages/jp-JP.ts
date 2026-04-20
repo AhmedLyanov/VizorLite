@@ -129,6 +129,12 @@ export const jpMessages = {
   "roomBoard.modal.confirm": "はい、退出する",
   "roomBoard.modal.cancel": "キャンセル",
 
+  // ROOM_BOARD_TEXTS - SETTINGS
+  "roomBoard.settings.microphone": "マイク設定",
+  "roomBoard.settings.camera": "カメラ設定",
+  "roomBoard.settings.screenShare": "画面共有設定",
+  "roomBoard.settings.applied": "設定が適用されました",
+
   // ROOM_BOARD_TEXTS - SHARE
   "roomBoard.share.message":
     "こんにちは！VizorLiteでビデオ会議に参加してください。リンクはこちら：",

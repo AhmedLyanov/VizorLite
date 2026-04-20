@@ -134,6 +134,12 @@ export const ruMessages = {
   "roomBoard.modal.confirm": "Выйти",
   "roomBoard.modal.cancel": "Отмена",
 
+  // ROOM_BOARD_TEXTS - SETTINGS
+  "roomBoard.settings.microphone": "Настройки микрофона",
+  "roomBoard.settings.camera": "Настройки камеры",
+  "roomBoard.settings.screenShare": "Настройки экрана",
+  "roomBoard.settings.applied": "Настройки применены",
+
   // ROOM_BOARD_TEXTS - SHARE
   "roomBoard.share.message":
     "Хей, привет! Присоединяйся к видеовстрече в VizorLite, вот ссылка:",
