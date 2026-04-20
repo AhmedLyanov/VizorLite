@@ -10,8 +10,9 @@ import sendIcon from "../../shared/assets/send.svg";
 import { useChatStore } from "../../entities/chat/useChatStore";
 import RoomBoardControl from "../buttonRoomBoard/ButtonRoomBoard";
 
-import { MicSettings } from "../deviceSettings/ui/MicSettings";
+import { MicSettings } from "../deviceSettings/";
 import { CameraSettings } from "../deviceSettings";
+import { ShareSettings } from "../deviceSettings";
 
 import { useDeviceStore } from "../../entities/device/model/store";
 import { useAutoMute } from "../../entities/device/useAutoMute";
@@ -219,7 +220,7 @@ export default function RoomControlPanel({
           </div>
         </div>
 
-        {/* CENTER */}
+
         <div className={styles.panelSection}>
           <div className={styles.centerControls}>
             <Tooltip
@@ -243,7 +244,7 @@ export default function RoomControlPanel({
                 onClick={handleToggleScreenShare}
                 active={isScreenSharing}
                 modalTitle="Настройки шаринга"
-                modalContent={<p>Тут потом настройки</p>}
+                modalContent={<ShareSettings/>}
               />
             </Tooltip>
 
@@ -262,7 +263,6 @@ export default function RoomControlPanel({
           </div>
         </div>
 
-        {/* RIGHT */}
         <div className={styles.panelSection}>
           <div className={styles.rightControls}>
             <Tooltip
