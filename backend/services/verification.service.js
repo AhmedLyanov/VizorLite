@@ -1,4 +1,4 @@
-import {VerificationCode} from "../models/Verification.model.js"
+import { VerificationCode } from "../models/Verification.model.js";
 import crypto from "crypto";
 
 export const generateVerificationCode = async (userId, type) => {

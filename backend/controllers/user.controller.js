@@ -1,13 +1,10 @@
 import { User } from "../models/User.model.js";
 import { generateToken } from "../utils/jwt.js";
 import { generateVerificationCode } from "../services/verification.service.js";
-import { sendEmail } from "../services/email.service.js";
+import { sendEmailByType, EmailType } from "../services/email.service.js";
 
 export const register = async (req, res) => {
   try {
-
-    console.log("🚀 Register request received");
-
     const { email, password, username } = req.body;
 
     const exists = await User.findOne({
@@ -26,42 +23,32 @@ export const register = async (req, res) => {
       username,
     });
 
-    console.log("👤 User created:", user._id);
-
     const code = await generateVerificationCode(
       user._id,
       "email_verification"
     );
 
-    console.log("🔑 Verification code:", code);
 
-    // отправляем email
-    sendEmail({
-      to: user.email,
-      subject: "VizorLite Email Verification",
-      html: `
-        <div style="font-family:sans-serif">
-          <h2>VizorLite Email Verification</h2>
-          <p>Your verification code:</p>
-          <h1 style="font-size:40px">${code}</h1>
-          <p>This code expires in 10 minutes.</p>
-        </div>
-      `,
-    });
+
+    try {
+      await sendEmailByType({
+        to: user.email,
+        type: EmailType.VERIFICATION,
+        data: { code },
+      });
+    } catch (emailError) {
+      console.error("❌ Email sending failed (but user created):", emailError);
+    }
 
     res.status(201).json({
       message: "Код отправлен на email",
       userId: user._id,
     });
-
   } catch (error) {
-
     console.error("❌ REGISTER ERROR:", error);
-
     res.status(500).json({
       error: "Ошибка регистрации",
     });
-
   }
 };
 

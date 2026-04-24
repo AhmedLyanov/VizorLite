@@ -1,6 +1,7 @@
 import { verifyCode } from "../services/verification.service.js";
 import { User } from "../models/User.model.js";
 import { generateToken } from "../utils/jwt.js";
+import { sendEmailByType, EmailType } from "../services/email.service.js";
 
 export const verifyEmail = async (req, res) => {
   try {
@@ -13,11 +14,18 @@ export const verifyEmail = async (req, res) => {
         error: "Неверный код",
       });
     }
+
     const user = await User.findByIdAndUpdate(
       userId,
       { emailVerified: true },
       { new: true }
     );
+
+    await sendEmailByType({
+      to: user.email,
+      type: EmailType.WELCOME,
+      data: { username: user.username },
+    }).catch(err => console.error("Welcome email error:", err));
 
     const token = generateToken(user._id);
 
@@ -27,6 +35,7 @@ export const verifyEmail = async (req, res) => {
       user,
     });
   } catch (err) {
+    console.error(err);
     res.status(500).json({ error: "Ошибка подтверждения" });
   }
 };
