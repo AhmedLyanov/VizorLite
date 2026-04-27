@@ -2,13 +2,16 @@ import { create } from "zustand";
 import { persist } from "zustand/middleware";
 import { LOCALES, messages, type MessageKey } from "./i18n";
 import type { Locale } from "./i18n";
+import { getCountryByCode, COUNTRIES, type CountryOption } from "../../shared/constants/phoneFormats";
 
 interface LocaleStore {
   locale: Locale;
+  selectedCountry: CountryOption | null;
   isChanging: boolean;
   isLanguageSwitcherOpen: boolean;
 
   setLocale: (locale: Locale) => void;
+  setCountry: (countryCode: string) => void;
   toggleLocale: () => void;
   getCurrentMessages: () => typeof messages[keyof typeof messages];
   getMessage: (key: MessageKey) => string;
@@ -27,6 +30,7 @@ export const useLocaleStore = create<LocaleStore>()(
   persist(
     (set, get) => ({
       locale: LOCALES.ENGLISH,
+      selectedCountry: COUNTRIES[0], // Default to US
       isChanging: false,
       isLanguageSwitcherOpen: false,
 
@@ -38,6 +42,20 @@ export const useLocaleStore = create<LocaleStore>()(
         });
 
         setTimeout(() => set({ isChanging: false }), 300);
+      },
+
+      setCountry: (countryCode) => {
+        const country = getCountryByCode(countryCode);
+        if (country) {
+          set({
+            selectedCountry: country,
+            locale: country.locale as Locale,
+            isChanging: true,
+            isLanguageSwitcherOpen: false,
+          });
+
+          setTimeout(() => set({ isChanging: false }), 300);
+        }
       },
 
       toggleLocale: () => {

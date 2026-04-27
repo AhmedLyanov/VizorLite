@@ -11,6 +11,8 @@ import {
 
 import { useIntl } from "react-intl";
 import { AUTHENTICATION_TEXTS } from "../../shared/constants/authentication";
+import { COUNTRIES, type CountryOption } from "../../shared/constants/phoneFormats";
+import { useLocaleStore } from "../../entities/locale";
 
 import eyeOn from "../../shared/assets/eye-on.svg";
 import eyeOff from "../../shared/assets/eye-off.svg";
@@ -19,40 +21,7 @@ import styles from "./Authentication.module.css";
 
 type FormMode = "login" | "register" | "verify";
 
-// 🔥 regex
-const phoneRegex = /^0 \(\d{3}\) \d{3} \d{2}-\d{2}$/;
-
-// 🔥 маска
-const formatPhone = (value: string) => {
-  const digits = value.replace(/\D/g, "").slice(0, 11);
-
-  let result = "0";
-
-  if (digits.length > 1) {
-    result += " (" + digits.slice(1, 4);
-  }
-  if (digits.length >= 4) {
-    result += ") " + digits.slice(4, 7);
-  }
-  if (digits.length >= 7) {
-    result += " " + digits.slice(7, 9);
-  }
-  if (digits.length >= 9) {
-    result += "-" + digits.slice(9, 11);
-  }
-
-  return result;
-};
-
-// 🔥 схемы
 const loginSchema = z.object({
-  email: z.string().email("Invalid email"),
-  password: z.string().min(6, "Min 6 characters"),
-});
-
-const registerSchema = z.object({
-  username: z.string().min(2, "Min 2 characters"),
-  phone: z.string().regex(phoneRegex, "Format: 0 (000) 000 00-00"),
   email: z.string().email("Invalid email"),
   password: z.string().min(6, "Min 6 characters"),
 });
@@ -61,8 +30,19 @@ const verifySchema = z.object({
   code: z.string().min(4, "Code required"),
 });
 
+const createRegisterSchema = (phoneFormat: CountryOption["phoneFormat"]) =>
+  z.object({
+    username: z.string().min(2, "Min 2 characters"),
+    phone: z.string().regex(phoneFormat.pattern, phoneFormat.errorMessage),
+    email: z.string().email("Invalid email"),
+    password: z.string().min(6, "Min 6 characters"),
+  });
+
 export default function Authentication() {
   const intl = useIntl();
+  const { selectedCountry, setCountry } = useLocaleStore();
+  
+  const phoneFormat = selectedCountry?.phoneFormat || COUNTRIES[0].phoneFormat;
 
   const [mode, setMode] = useState<FormMode>("login");
   const [showPassword, setShowPassword] = useState(false);
@@ -73,6 +53,8 @@ export default function Authentication() {
   const { mutateAsync: verifyUser, isPending: verifyPending } = useVerifyEmail();
 
   const isPending = registerPending || loginPending || verifyPending;
+
+  const registerSchema = createRegisterSchema(phoneFormat);
 
   const schema =
     mode === "login"
@@ -89,8 +71,12 @@ export default function Authentication() {
     formState: { errors, isValid },
   } = useForm<any>({
     resolver: zodResolver(schema),
-    mode: "onChange", // 🔥 важно
+    mode: "onChange", 
   });
+
+  const handleCountryChange = (countryCode: string) => {
+    setCountry(countryCode);
+  };
 
   const onSubmit = async (data: any) => {
     try {
@@ -179,14 +165,31 @@ export default function Authentication() {
         )}
         {mode === "register" && (
           <div className={styles.formGroup}>
+            <label className={styles.formLabel}>Country</label>
+            
+            <select
+              className={styles.formInput}
+              value={selectedCountry?.code || "US"}
+              onChange={(e) => handleCountryChange(e.target.value)}
+            >
+              {COUNTRIES.map((country) => (
+                <option key={country.code} value={country.code}>
+                  {country.flag} {country.name} ({country.nameNative})
+                </option>
+              ))}
+            </select>
+          </div>
+        )}
+        {mode === "register" && (
+          <div className={styles.formGroup}>
             <label className={styles.formLabel}>Phone</label>
 
             <input
               className={styles.formInput}
-              placeholder="0 (000) 000 00-00"
+              placeholder={phoneFormat.placeholder}
               {...register("phone")}
               onChange={(e) => {
-                const formatted = formatPhone(e.target.value);
+                const formatted = phoneFormat.mask(e.target.value);
                 setValue("phone", formatted, { shouldValidate: true });
               }}
             />
