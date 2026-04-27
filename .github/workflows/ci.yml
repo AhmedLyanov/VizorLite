@@ -9,10 +9,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-
       - name: Checkout
         uses: actions/checkout@v4
-
 
       - name: Setup Node
         uses: actions/setup-node@v4
@@ -29,7 +27,6 @@ jobs:
           cd frontend
           npm run build
 
-
       - name: Upload dist to server
         uses: appleboy/scp-action@v0.1.7
         with:
@@ -37,8 +34,8 @@ jobs:
           username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           source: "frontend/dist/*"
-          target: "/var/www/projects/VizorLite/frontend/dist"
-
+          target: "/var/www/projects/VizorLite/frontend"
+          strip_components: 2
 
       - name: SSH deploy backend
         uses: appleboy/ssh-action@v1.2.0
@@ -47,6 +44,10 @@ jobs:
           username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
+            export NVM_DIR="$HOME/.nvm"
+            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+            export PATH="$NVM_DIR/versions/node/$(ls $NVM_DIR/versions/node)/bin:$PATH"
+
             cd /var/www/projects/VizorLite
 
             git fetch origin
