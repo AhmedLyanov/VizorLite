@@ -5,52 +5,60 @@ on:
     branches: [main]
 
 jobs:
-  deploy:
-    name: Deploy Application
+  build-and-deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
+
+      - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Deploy to server via SSH
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      # 3. Устанавливаем зависимости фронта
+      - name: Install frontend deps
+        run: |
+          cd frontend
+          npm install
+
+      - name: Build frontend
+        run: |
+          cd frontend
+          npm run build
+
+
+      - name: Upload dist to server
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          source: "frontend/dist/*"
+          target: "/var/www/projects/VizorLite/frontend/dist"
+
+
+      - name: SSH deploy backend
         uses: appleboy/ssh-action@v1.2.0
         with:
           host: ${{ secrets.SERVER_HOST }}
           username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
-          port: 22
           script: |
-            # Use absolute paths for nvm/node
-            export NVM_DIR="$HOME/.nvm"
-            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-            
-            # Get node version from nvm
-            NODE_VERSION=$(cat "$NVM_DIR/VERSION_FILE" 2>/dev/null || echo "v24.11.1")
-            export PATH="$NVM_DIR/versions/node/$NODE_VERSION/bin:$PATH"
-            
-            # Verify node/npm available
-            echo "Node version: $(node -v 2>&1 || echo 'not found')"
-            echo "NPM version: $(npm -v 2>&1 || echo 'not found')"
-            echo "PM2 version: $(pm2 -v 2>&1 || echo 'not found')"
-            
             cd /var/www/projects/VizorLite
 
-            # Clean git state
             git fetch origin
             git reset --hard origin/main
-            git clean -fd
 
             cd backend
             npm install
+
             pm2 delete backend 2>/dev/null || true
             pm2 start index.js --name backend
             pm2 save
             pm2 restart backend
 
-            cd ../frontend
-            npm install
-            npm run build
-
             sudo systemctl reload nginx
-            

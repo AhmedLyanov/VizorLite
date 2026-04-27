@@ -35,19 +35,19 @@ const enUSFormat: PhoneFormat = {
 
 
 const ruRUFormat: PhoneFormat = {
-  pattern: /^0 \(\d{3}\) \d{3} \d{2}-\d{2}$/,
-  placeholder: "0 (999) 123 45-67",
+  pattern: /^7 \(\d{3}\) \d{3} \d{2}-\d{2}$/,
+  placeholder: "7 (999) 123 45-67",
   mask: (value: string) => {
     const digits = value.replace(/\D/g, "").slice(0, 11);
-    let result = "0";
+    let result = "7";
     if (digits.length > 1) result += " (" + digits.slice(1, 4);
     if (digits.length >= 4) result += ") " + digits.slice(4, 7);
     if (digits.length >= 7) result += " " + digits.slice(7, 9);
     if (digits.length >= 9) result += "-" + digits.slice(9, 11);
     return result;
   },
-  example: "0 (999) 123 45-67",
-  errorMessage: "Формат: 0 (999) 123 45-67",
+  example: "7 (999) 123 45-67",
+  errorMessage: "Формат: 7 (999) 123 45-67",
 };
 
 const jpJPFormat: PhoneFormat = {
