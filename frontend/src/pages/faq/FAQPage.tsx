@@ -5,7 +5,6 @@ import styles from "./FAQPage.module.css";
 import InstallBanner from "../../widgets/installBanner/InstallBanner";
 import { FAQ_TEXTS } from "../../shared/constants/faq";
 
-// Тип для вопроса из констант
 type FAQItemType = typeof FAQ_TEXTS.QUESTIONS[number];
 
 const FAQPage: React.FC = () => {
@@ -24,7 +23,7 @@ const FAQPage: React.FC = () => {
     });
   };
 
-  // Группировка вопросов по категориям без мутации
+
   const questionsByCategory = FAQ_TEXTS.QUESTIONS.reduce<Record<string, FAQItemType[]>>(
     (acc, item) => {
       const category = item.category;
@@ -50,7 +49,6 @@ const FAQPage: React.FC = () => {
   return (
     <div className={styles.faqPage}>
       <div className={styles.contentContainer}>
-        {/* Hero Section */}
         <h1 className={styles.mainTitle}>
           {intl.formatMessage({ id: FAQ_TEXTS.HERO.TITLE })}
         </h1>
@@ -58,7 +56,6 @@ const FAQPage: React.FC = () => {
           {intl.formatMessage({ id: FAQ_TEXTS.HERO.SUBTITLE })}
         </p>
 
-        {/* FAQ Accordion */}
         {Object.entries(questionsByCategory).map(([category, questions]) => (
           <section key={category} className={styles.faqSection}>
             <h2 className={styles.sectionTitle}>{getCategoryTitle(category)}</h2>
@@ -93,11 +90,8 @@ const FAQPage: React.FC = () => {
           </section>
         ))}
 
-        {/* InstallBanner */}
         <InstallBanner />
       </div>
-
-      {/* Bottom Navigation */}
       <div className={styles.bottomContent}>
         <div className={styles.bottomLinks}>
           <Link to="/" className={styles.bottomLink}>

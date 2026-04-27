@@ -3,7 +3,7 @@ import styles from "./BigButton.module.css"
 type Props = {
     title: string;
     image: string;
-    active?: Boolean;
+    active?: boolean;
     onClick?: () => void;
 }
 

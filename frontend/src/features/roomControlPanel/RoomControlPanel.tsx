@@ -174,7 +174,6 @@ export default function RoomControlPanel({
       {contextHolder}
 
       <div className={styles.controlPanel}>
-        {/* LEFT */}
         <div className={styles.panelSection}>
           <MicLevelVisualizer stream={stream} />
 

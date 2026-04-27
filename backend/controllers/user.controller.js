@@ -5,7 +5,7 @@ import { sendEmailByType, EmailType } from "../services/email.service.js";
 
 export const register = async (req, res) => {
   try {
-    const { email, password, username } = req.body;
+    const { email, phone, password, username } = req.body;
 
     const exists = await User.findOne({
       $or: [{ email }, { username }],
@@ -19,6 +19,7 @@ export const register = async (req, res) => {
 
     const user = await User.create({
       email,
+      phone,
       password,
       username,
     });

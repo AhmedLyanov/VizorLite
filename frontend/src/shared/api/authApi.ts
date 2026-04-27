@@ -19,6 +19,7 @@ export interface RegisterResponse {
 export interface AuthResponse {
   user: {
     id: string;
+    phone: string,
     username: string;
     email: string;
     createdAt?: string;
@@ -28,7 +29,7 @@ export interface AuthResponse {
 
 export const registerUser = async (
   data: RegisterData,
-): Promise<RegisterResponse> => {
+): Promise<RegisterResponse> => {  
   const response = await axios.post("/api/auth/register", data);
   return response.data;
 };

@@ -20,12 +20,11 @@ export default function MicLevelVisualizer({ stream }: MicLevelVisualizerProps) 
     const audioTracks = stream.getAudioTracks();
     if (audioTracks.length === 0) return;
 
-    if (!audioTracks[0].enabled) {
-      setIsSpeaking(false);
-      return;
-    }
+    if (!audioTracks[0].enabled) return;
 
-    const AudioContextClass = window.AudioContext || (window as any).webkitAudioContext;
+    const AudioContextClass =
+      window.AudioContext || (window as any).webkitAudioContext;
+
     const audioContext = new AudioContextClass();
     audioContextRef.current = audioContext;
 
@@ -49,7 +48,9 @@ export default function MicLevelVisualizer({ stream }: MicLevelVisualizerProps) 
       for (let i = 0; i < bufferLength; i++) {
         sum += dataArray[i];
       }
+
       const average = sum / bufferLength;
+
       setAudioLevel(average);
       setIsSpeaking(average > 10);
 
@@ -59,12 +60,14 @@ export default function MicLevelVisualizer({ stream }: MicLevelVisualizerProps) 
     detectSound();
 
     return () => {
-      if (animationFrameRef.current) cancelAnimationFrame(animationFrameRef.current);
+      if (animationFrameRef.current)
+        cancelAnimationFrame(animationFrameRef.current);
+
       if (sourceRef.current) sourceRef.current.disconnect();
+
       if (audioContextRef.current) audioContextRef.current.close();
     };
   }, [stream]);
-
   const activeColor = "#10B981";
   const inactiveColor = "#9CA3AF";
   const currentColor = isSpeaking ? activeColor : inactiveColor;

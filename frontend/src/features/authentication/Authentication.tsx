@@ -1,91 +1,131 @@
 import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+
 import {
   useRegister,
   useLogin,
   useVerifyEmail,
 } from "../../entities/user/useAuth";
+
 import { useIntl } from "react-intl";
 import { AUTHENTICATION_TEXTS } from "../../shared/constants/authentication";
+
 import eyeOn from "../../shared/assets/eye-on.svg";
 import eyeOff from "../../shared/assets/eye-off.svg";
+
 import styles from "./Authentication.module.css";
 
 type FormMode = "login" | "register" | "verify";
+
+// 🔥 regex
+const phoneRegex = /^0 \(\d{3}\) \d{3} \d{2}-\d{2}$/;
+
+// 🔥 маска
+const formatPhone = (value: string) => {
+  const digits = value.replace(/\D/g, "").slice(0, 11);
+
+  let result = "0";
+
+  if (digits.length > 1) {
+    result += " (" + digits.slice(1, 4);
+  }
+  if (digits.length >= 4) {
+    result += ") " + digits.slice(4, 7);
+  }
+  if (digits.length >= 7) {
+    result += " " + digits.slice(7, 9);
+  }
+  if (digits.length >= 9) {
+    result += "-" + digits.slice(9, 11);
+  }
+
+  return result;
+};
+
+// 🔥 схемы
+const loginSchema = z.object({
+  email: z.string().email("Invalid email"),
+  password: z.string().min(6, "Min 6 characters"),
+});
+
+const registerSchema = z.object({
+  username: z.string().min(2, "Min 2 characters"),
+  phone: z.string().regex(phoneRegex, "Format: 0 (000) 000 00-00"),
+  email: z.string().email("Invalid email"),
+  password: z.string().min(6, "Min 6 characters"),
+});
+
+const verifySchema = z.object({
+  code: z.string().min(4, "Code required"),
+});
 
 export default function Authentication() {
   const intl = useIntl();
 
   const [mode, setMode] = useState<FormMode>("login");
   const [showPassword, setShowPassword] = useState(false);
-
   const [userId, setUserId] = useState<string | null>(null);
-  const [code, setCode] = useState("");
 
-  const { mutateAsync: register, isPending: registerPending } = useRegister();
-  const { mutateAsync: login, isPending: loginPending } = useLogin();
-  const { mutateAsync: verify, isPending: verifyPending } = useVerifyEmail();
+  const { mutateAsync: registerUser, isPending: registerPending } = useRegister();
+  const { mutateAsync: loginUser, isPending: loginPending } = useLogin();
+  const { mutateAsync: verifyUser, isPending: verifyPending } = useVerifyEmail();
 
   const isPending = registerPending || loginPending || verifyPending;
 
-  const [formData, setFormData] = useState({
-    username: "",
-    email: "",
-    password: "",
+  const schema =
+    mode === "login"
+      ? loginSchema
+      : mode === "register"
+      ? registerSchema
+      : verifySchema;
+
+  const {
+    register,
+    handleSubmit,
+    reset,
+    setValue,
+    formState: { errors, isValid },
+  } = useForm<any>({
+    resolver: zodResolver(schema),
+    mode: "onChange", // 🔥 важно
   });
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-
+  const onSubmit = async (data: any) => {
     try {
       if (mode === "register") {
-        const res = await register(formData);
+        console.log("REGISTER DATA:", data);
 
+        const res = await registerUser(data);
         setUserId(res.userId);
-
         setMode("verify");
-
+        reset();
         return;
       }
 
       if (mode === "verify") {
-        if (!code.trim() || !userId) return;
+        if (!userId) return;
 
-        await verify({
+        await verifyUser({
           userId,
-          code,
+          code: data.code,
         });
 
         return;
       }
 
       if (mode === "login") {
-        await login({
-          email: formData.email,
-          password: formData.password,
-        });
+        await loginUser(data);
       }
     } catch (err) {
-      console.error(err);
+      console.error("AUTH ERROR:", err);
     }
   };
 
   const toggleMode = () => {
     setMode(mode === "login" ? "register" : "login");
-
-    setFormData({
-      username: "",
-      email: "",
-      password: "",
-    });
-
-    setCode("");
+    reset();
   };
 
   return (
@@ -112,7 +152,7 @@ export default function Authentication() {
         </div>
       )}
 
-      <form className={styles.authForm} onSubmit={handleSubmit}>
+      <form className={styles.authForm} onSubmit={handleSubmit(onSubmit)}>
         <h2 className={styles.formTitle}>
           {mode === "login" &&
             intl.formatMessage({ id: AUTHENTICATION_TEXTS.FORM.LOGIN_TITLE })}
@@ -124,93 +164,106 @@ export default function Authentication() {
 
           {mode === "verify" && "Verify Email"}
         </h2>
-
         {mode === "register" && (
           <div className={styles.formGroup}>
-            <label className={styles.formLabel}>
-              {intl.formatMessage({
-                id: AUTHENTICATION_TEXTS.FORM.USERNAME_LABEL,
-              })}
-            </label>
+            <label className={styles.formLabel}>Username</label>
 
-            <input
-              type="text"
-              name="username"
-              value={formData.username}
-              onChange={handleChange}
-              className={styles.formInput}
-              required
-            />
+            <input {...register("username")} className={styles.formInput} />
+
+            {errors.username && (
+              <span className={styles.error}>
+                {errors.username.message as string}
+              </span>
+            )}
           </div>
         )}
-
-        {mode !== "verify" && (
-          <>
-            <div className={styles.formGroup}>
-              <label className={styles.formLabel}>
-                {intl.formatMessage({
-                  id: AUTHENTICATION_TEXTS.FORM.EMAIL_LABEL,
-                })}
-              </label>
-
-              <input
-                type="email"
-                name="email"
-                value={formData.email}
-                onChange={handleChange}
-                className={styles.formInput}
-                required
-              />
-            </div>
-
-            <div className={styles.formGroup}>
-              <label className={styles.formLabel}>
-                {intl.formatMessage({
-                  id: AUTHENTICATION_TEXTS.FORM.PASSWORD_LABEL,
-                })}
-              </label>
-
-              <div className={styles.passwordInputWrapper}>
-                <input
-                  type={showPassword ? "text" : "password"}
-                  name="password"
-                  value={formData.password}
-                  onChange={handleChange}
-                  className={styles.formInput}
-                  required
-                />
-
-                <button
-                  type="button"
-                  className={styles.showPasswordButton}
-                  onClick={() => setShowPassword((prev) => !prev)}
-                >
-                  <img src={showPassword ? eyeOn : eyeOff} alt="" />
-                </button>
-              </div>
-            </div>
-          </>
-        )}
-
-        {mode === "verify" && (
+        {mode === "register" && (
           <div className={styles.formGroup}>
-            <label className={styles.formLabel}>Enter verification code</label>
+            <label className={styles.formLabel}>Phone</label>
 
             <input
-              type="text"
-              value={code}
-              onChange={(e) => setCode(e.target.value)}
+              className={styles.formInput}
+              placeholder="0 (000) 000 00-00"
+              {...register("phone")}
+              onChange={(e) => {
+                const formatted = formatPhone(e.target.value);
+                setValue("phone", formatted, { shouldValidate: true });
+              }}
+            />
+
+            {errors.phone && (
+              <span className={styles.error}>
+                {errors.phone.message as string}
+              </span>
+            )}
+          </div>
+        )}
+        {mode !== "verify" && (
+          <div className={styles.formGroup}>
+            <label className={styles.formLabel}>Email</label>
+
+            <input
+              type="email"
+              {...register("email")}
+              className={styles.formInput}
+            />
+
+            {errors.email && (
+              <span className={styles.error}>
+                {errors.email.message as string}
+              </span>
+            )}
+          </div>
+        )}
+        {mode !== "verify" && (
+          <div className={styles.formGroup}>
+            <label className={styles.formLabel}>Password</label>
+
+            <div className={styles.passwordInputWrapper}>
+              <input
+                type={showPassword ? "text" : "password"}
+                {...register("password")}
+                className={styles.formInput}
+              />
+
+              <button
+                type="button"
+                className={styles.showPasswordButton}
+                onClick={() => setShowPassword((prev) => !prev)}
+              >
+                <img src={showPassword ? eyeOn : eyeOff} alt="" />
+              </button>
+            </div>
+
+            {errors.password && (
+              <span className={styles.error}>
+                {errors.password.message as string}
+              </span>
+            )}
+          </div>
+        )}
+        {mode === "verify" && (
+          <div className={styles.formGroup}>
+            <label className={styles.formLabel}>Code</label>
+
+            <input
+              {...register("code")}
               className={styles.formInput}
               placeholder="123456"
-              required
             />
+
+            {errors.code && (
+              <span className={styles.error}>
+                {errors.code.message as string}
+              </span>
+            )}
           </div>
         )}
 
         <button
           type="submit"
           className={styles.submitButton}
-          disabled={isPending}
+          disabled={!isValid || isPending}
         >
           {mode === "login" && "Login"}
           {mode === "register" && "Create account"}
