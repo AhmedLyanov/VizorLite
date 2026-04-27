@@ -19,7 +19,6 @@ jobs:
         with:
           node-version: 20
 
-      # 3. Устанавливаем зависимости фронта
       - name: Install frontend deps
         run: |
           cd frontend
