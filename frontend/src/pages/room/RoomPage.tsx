@@ -320,9 +320,10 @@ export default function RoomPage() {
             videoRef={localVideoRef}
             socket={socket}
             roomId={roomId}
-            userId={user?.id || socket?.id || "local"}
+            userId={socket?.id || "local"}
             isLocal={true}
             enabled={fingerDrawingEnabled}
+            mirrorHorizontally={false}
           />
           <div className={style.videoLabel}>{userName || "Вы"}</div>
           <button
@@ -337,53 +338,54 @@ export default function RoomPage() {
             )}
           </button>
         </div>
-        
+
         {/* eslint-disable-next-line react-hooks/refs*/}
         {remoteVideosArray.map(([id, remoteStream]) => (
-            <div
-              key={id}
-              className={style.videoContainer}
-              style={{
-                position: "relative",
-                width: videoSize.width,
-                height: videoSize.height,
+          <div
+            key={id}
+            className={style.videoContainer}
+            style={{
+              position: "relative",
+              width: videoSize.width,
+              height: videoSize.height,
+            }}
+          >
+            <video
+              autoPlay
+              playsInline
+              className={style.roomParticipant}
+              ref={(el) => {
+                if (el) {
+                  el.srcObject = remoteStream;
+                  videoRefs.current.set(id, el);
+                }
               }}
-            >
-              <video
-                autoPlay
-                playsInline
-                className={style.roomParticipant}
-                ref={(el) => {
-                  if (el) {
-                    el.srcObject = remoteStream;
-                    videoRefs.current.set(id, el);
-                  }
-                }}
-              />
-              <FingerDrawingOverlay
-                videoRef={{ current: videoRefs.current.get(id) || null }}
-                socket={socket}
-                roomId={roomId}
-                userId={id}
-                isLocal={false}
-                enabled={true}
-              />
-              <div className={style.videoLabel}>
-                {participants.get(id)?.userName || `User ${id.slice(0, 5)}`}
-              </div>
-              <button
-                className={style.fullscreenBtn}
-                onClick={() => toggleFullscreen(videoRefs.current.get(id)?.parentElement || null, id)}
-                title={document.fullscreenElement && fullscreenTarget === id ? "Выйти" : "На весь экран"}
-              >
-                {document.fullscreenElement && fullscreenTarget === id ? (
-                  <img src={fullscreenOff} alt="fullscreen off" />
-                ) : (
-                  <img src={fullscreenOn} alt="fullscreen on" />
-                )}
-              </button>
+            />
+            <FingerDrawingOverlay
+              videoRef={{ current: videoRefs.current.get(id) || null }}
+              socket={socket}
+              roomId={roomId}
+              userId={id}
+              isLocal={false}
+              enabled={true}
+              mirrorHorizontally={false}
+            />
+            <div className={style.videoLabel}>
+              {participants.get(id)?.userName || `User ${id.slice(0, 5)}`}
             </div>
-          ))
+            <button
+              className={style.fullscreenBtn}
+              onClick={() => toggleFullscreen(videoRefs.current.get(id)?.parentElement || null, id)}
+              title={document.fullscreenElement && fullscreenTarget === id ? "Выйти" : "На весь экран"}
+            >
+              {document.fullscreenElement && fullscreenTarget === id ? (
+                <img src={fullscreenOff} alt="fullscreen off" />
+              ) : (
+                <img src={fullscreenOn} alt="fullscreen on" />
+              )}
+            </button>
+          </div>
+        ))
         }
       </div>
 
