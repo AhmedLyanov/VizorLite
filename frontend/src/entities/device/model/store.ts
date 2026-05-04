@@ -4,6 +4,7 @@ type DeviceState = {
   micEnabled: boolean;
   cameraEnabled: boolean;
   screenEnabled: boolean;
+  fingerDrawingEnabled: boolean;
 
   micVolume: number;
   noiseSuppression: boolean;
@@ -17,7 +18,7 @@ type DeviceState = {
   setAutoMuteThreshold: (v: number) => void;
   setAutoMuteDelay: (v: number) => void;
 
-
+  setFingerDrawingEnabled: (v: boolean) => void;
   setMicEnabled: (v: boolean) => void;
   setCameraEnabled: (v: boolean) => void;
   setScreenEnabled: (v: boolean) => void;
@@ -31,6 +32,7 @@ export const useDeviceStore = create<DeviceState>((set) => ({
   micEnabled: true,
   cameraEnabled: true,
   screenEnabled: false,
+  fingerDrawingEnabled: false,
 
   micVolume: 70,
   noiseSuppression: true,
@@ -38,8 +40,8 @@ export const useDeviceStore = create<DeviceState>((set) => ({
   cameraBrightness: 50,
 
   autoMute: false,
-  autoMuteThreshold: 0.02, 
-  autoMuteDelay: 2000, 
+  autoMuteThreshold: 0.02,
+  autoMuteDelay: 2000,
 
   setAutoMute: (v) => set({ autoMute: v }),
   setAutoMuteThreshold: (v) => set({ autoMuteThreshold: v }),
@@ -47,6 +49,7 @@ export const useDeviceStore = create<DeviceState>((set) => ({
   setMicEnabled: (v) => set({ micEnabled: v }),
   setCameraEnabled: (v) => set({ cameraEnabled: v }),
   setScreenEnabled: (v) => set({ screenEnabled: v }),
+  setFingerDrawingEnabled: (v) => set({ fingerDrawingEnabled: v }),
 
   setMicVolume: (v) => set({ micVolume: v }),
   setNoiseSuppression: (v) => set({ noiseSuppression: v }),

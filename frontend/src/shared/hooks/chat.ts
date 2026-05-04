@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useCallback } from 'react';
 import type { ChatMessage } from '../../entities/chat/types';
 
 interface UseChatSocketOptions {
@@ -35,25 +35,25 @@ interface UseChatScrollOptions {
 }
 
 export function useChatScroll({ isOpen, messages, messagesEndRef }: UseChatScrollOptions) {
-  const scrollToBottom = (behavior: ScrollBehavior = 'smooth') => {
+  const scrollToBottom = useCallback((behavior: ScrollBehavior = 'smooth') => {
     if (messagesEndRef.current) {
       messagesEndRef.current.scrollIntoView({ behavior });
     }
-  };
+  }, [messagesEndRef]);
 
   useEffect(() => {
     if (isOpen) {
       const timer = setTimeout(() => scrollToBottom('auto'), 200);
       return () => clearTimeout(timer);
     }
-  }, [isOpen]);
+  }, [isOpen, scrollToBottom]);
 
   useEffect(() => {
     if (isOpen && messages.length > 0) {
       const timer = setTimeout(() => scrollToBottom('smooth'), 100);
       return () => clearTimeout(timer);
     }
-  }, [messages, isOpen]);
+  }, [messages, isOpen, scrollToBottom]);
 }
 
 interface UseFileInputOptions {

@@ -4,7 +4,6 @@ import { saveMessage, getRoomMessages } from "./chat.service.js";
 
 dotenv.config();
 
-
 class SocketService {
   constructor() {
     this.io = null;
@@ -57,6 +56,7 @@ class SocketService {
 
         this.saveSystemMessage(roomId, `${userName} присоединился к конференции`);
       });
+
       socket.on("file-message", async ({ roomId, userId, userName, fileData }) => {
         try {
           const savedMessage = await saveMessage(
@@ -81,6 +81,7 @@ class SocketService {
           console.error('Error sending file message:', error);
         }
       });
+
       socket.on("offer", ({ offer, to }) => {
         this.io.to(to).emit("offer", {
           offer,
@@ -127,6 +128,26 @@ class SocketService {
           console.error('Error getting chat history:', error);
           if (callback) callback([]);
         }
+      });
+
+      socket.on("draw-start", ({ roomId, userId, x, y, color, size, isEraser }) => {
+        socket.to(roomId).emit("draw-start", { userId, x, y, color, size, isEraser });
+      });
+
+      socket.on("draw-move", ({ roomId, userId, x, y }) => {
+        socket.to(roomId).emit("draw-move", { userId, x, y });
+      });
+
+      socket.on("draw-end", ({ roomId, userId }) => {
+        socket.to(roomId).emit("draw-end", { userId });
+      });
+
+      socket.on("draw-sticker", ({ roomId, userId, stickerId, x, y }) => {
+        socket.to(roomId).emit("draw-sticker", { userId, stickerId, x, y });
+      });
+
+      socket.on("draw-clear", ({ roomId, userId }) => {
+        socket.to(roomId).emit("draw-clear", { userId });
       });
 
       socket.on("disconnect", () => {
