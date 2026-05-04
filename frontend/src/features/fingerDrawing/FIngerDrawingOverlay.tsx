@@ -30,10 +30,13 @@ export function FingerDrawingOverlay({
   const cameraRef = useRef<Camera | null>(null);
   const isDrawingRef = useRef(false);
   const lastPointRef = useRef<{ x: number; y: number } | null>(null);
-  const brushColorRef = useRef("#000000");
-  const brushSizeRef = useRef(5);
-  const isEraserRef = useRef(false);
   const throttleTimerRef = useRef<number | null>(null);
+  const processingEnabledRef = useRef(false);
+  const initializedRef = useRef(false);
+
+  const brushColor = "#000000";
+  const brushSize = 5;
+  const isEraser = false;
 
   useEffect(() => {
     if (!containerRef.current) return;
@@ -51,20 +54,12 @@ export function FingerDrawingOverlay({
   }, []);
 
   useEffect(() => {
-    if (!isLocal || !enabled || !videoRef.current) {
-      if (handsRef.current) {
-        handsRef.current.close();
-        handsRef.current = null;
-      }
-      if (cameraRef.current) {
-        cameraRef.current.stop();
-        cameraRef.current = null;
-      }
-      return;
-    }
+    if (!isLocal) return;
+    if (initializedRef.current) return;
+    if (!videoRef.current) return;
 
     const video = videoRef.current;
-    if (!video) return;
+    initializedRef.current = true;
 
     const hands = new Hands({
       locateFile: (file) => `https://cdn.jsdelivr.net/npm/@mediapipe/hands/${file}`,
@@ -77,7 +72,7 @@ export function FingerDrawingOverlay({
     });
 
     hands.onResults((results: Results) => {
-      if (!canvasRef.current || !skeletonCanvasRef.current) return;
+      if (!processingEnabledRef.current || !canvasRef.current || !skeletonCanvasRef.current) return;
       const ctx = canvasRef.current.getContext("2d");
       const skeletonCtx = skeletonCanvasRef.current.getContext("2d");
       if (!ctx || !skeletonCtx) return;
@@ -121,22 +116,22 @@ export function FingerDrawingOverlay({
         }
 
         const indexTip = points[8];
-        const indexMCP = points[5];
+        const indexMcp = points[5];
         const middleTip = points[12];
-        const middleMCP = points[9];
+        const middleMcp = points[9];
         const ringTip = points[16];
-        const ringMCP = points[13];
+        const ringMcp = points[13];
         const pinkyTip = points[20];
-        const pinkyMCP = points[17];
+        const pinkyMcp = points[17];
 
-        const isIndexExtended = indexTip.y < indexMCP.y;
-        const isMiddleBent = middleTip.y > middleMCP.y;
-        const isRingBent = ringTip.y > ringMCP.y;
-        const isPinkyBent = pinkyTip.y > pinkyMCP.y;
+        const indexUp = indexTip.y < indexMcp.y;
+        const middleDown = middleTip.y > middleMcp.y;
+        const ringDown = ringTip.y > ringMcp.y;
+        const pinkyDown = pinkyTip.y > pinkyMcp.y;
 
-        const isDrawingGesture = isIndexExtended && isMiddleBent && isRingBent && isPinkyBent;
+        const isDrawingGesture = indexUp && middleDown && ringDown && pinkyDown;
 
-        if (isDrawingGesture) {
+        if (isDrawingGesture && enabled) {
           const normX = mirrorHorizontally ? 1 - landmarks[8].x : landmarks[8].x;
           const normY = landmarks[8].y;
           const canvasX = normX * canvasRef.current.width;
@@ -146,49 +141,53 @@ export function FingerDrawingOverlay({
             ctx.beginPath();
             ctx.moveTo(lastPointRef.current.x, lastPointRef.current.y);
             ctx.lineTo(canvasX, canvasY);
-            ctx.strokeStyle = isEraserRef.current ? "rgba(0,0,0,0)" : brushColorRef.current;
-            ctx.globalCompositeOperation = isEraserRef.current ? "destination-out" : "source-over";
-            ctx.lineWidth = brushSizeRef.current;
+            ctx.strokeStyle = isEraser ? "rgba(0,0,0,0)" : brushColor;
+            ctx.globalCompositeOperation = isEraser ? "destination-out" : "source-over";
+            ctx.lineWidth = brushSize;
             ctx.stroke();
 
-            if (!throttleTimerRef.current) {
-              socket?.emit("draw-move", { roomId, userId, x: normX, y: normY });
+            if (!throttleTimerRef.current && socket) {
+              socket.emit("draw-move", { roomId, userId, x: normX, y: normY });
               throttleTimerRef.current = window.setTimeout(() => {
                 throttleTimerRef.current = null;
               }, 30);
             }
           } else {
             isDrawingRef.current = true;
-            socket?.emit("draw-start", {
-              roomId,
-              userId,
-              x: normX,
-              y: normY,
-              color: brushColorRef.current,
-              size: brushSizeRef.current,
-              isEraser: isEraserRef.current,
-            });
+            if (socket) {
+              socket.emit("draw-start", {
+                roomId,
+                userId,
+                x: normX,
+                y: normY,
+                color: brushColor,
+                size: brushSize,
+                isEraser: false,
+              });
+            }
           }
           lastPointRef.current = { x: canvasX, y: canvasY };
         } else {
           if (isDrawingRef.current) {
             isDrawingRef.current = false;
             lastPointRef.current = null;
-            socket?.emit("draw-end", { roomId, userId });
+            if (socket) socket.emit("draw-end", { roomId, userId });
           }
         }
       } else {
         if (isDrawingRef.current) {
           isDrawingRef.current = false;
           lastPointRef.current = null;
-          socket?.emit("draw-end", { roomId, userId });
+          if (socket) socket.emit("draw-end", { roomId, userId });
         }
       }
     });
 
     const camera = new Camera(video, {
       onFrame: async () => {
-        await hands.send({ image: video });
+        if (handsRef.current) {
+          await hands.send({ image: video });
+        }
       },
       width: 640,
       height: 480,
@@ -199,11 +198,38 @@ export function FingerDrawingOverlay({
     cameraRef.current = camera;
 
     return () => {
-      camera.stop();
-      hands.close();
       if (throttleTimerRef.current) clearTimeout(throttleTimerRef.current);
+      if (handsRef.current) {
+        try {
+          handsRef.current.close();
+        } catch {
+          console.warn("Hands close error");
+        }
+        handsRef.current = null;
+      }
+      if (cameraRef.current) {
+        try {
+          cameraRef.current.stop();
+        } catch {
+          console.warn("Camera stop error");
+        }
+        cameraRef.current = null;
+      }
+      initializedRef.current = false;
     };
-  }, [isLocal, enabled, videoRef, socket, roomId, userId, mirrorHorizontally]);
+  }, [isLocal, videoRef, mirrorHorizontally, roomId, userId, socket, enabled, isEraser]);
+
+  useEffect(() => {
+    processingEnabledRef.current = enabled;
+    if (!enabled) {
+      isDrawingRef.current = false;
+      lastPointRef.current = null;
+      if (skeletonCanvasRef.current) {
+        const skeletonCtx = skeletonCanvasRef.current.getContext("2d");
+        skeletonCtx?.clearRect(0, 0, skeletonCanvasRef.current.width, skeletonCanvasRef.current.height);
+      }
+    }
+  }, [enabled]);
 
   useEffect(() => {
     if (isLocal || !socket) return;
