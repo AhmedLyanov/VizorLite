@@ -5,7 +5,7 @@ const generateUniqueRoomId = async () => {
   let roomExists;
   
   do {
-    roomId = nanoid(12); 
+    roomId = nanoid(100); 
     roomExists = await Room.findOne({ roomId });
   } while (roomExists); 
   
