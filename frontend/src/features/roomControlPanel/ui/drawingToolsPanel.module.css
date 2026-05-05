@@ -1,0 +1,52 @@
+.panel {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  background: rgba(30, 30, 35, 0.9);
+  backdrop-filter: blur(10px);
+  padding: 8px 20px;
+  border-radius: 40px;
+  animation: fadeIn 0.3s ease;
+}
+
+.colors {
+  display: flex;
+  gap: 12px;
+}
+
+.colorBtn {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.colorBtn:hover {
+  transform: scale(1.1);
+}
+
+.colorBtn.active {
+  border-color: white;
+  box-shadow: 0 0 0 2px #2e3038;
+}
+
+.sizeControl {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  color: white;
+  font-size: 14px;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
