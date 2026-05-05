@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { Switch, Slider, Select } from "antd";
-import { useDeviceStore } from "../../../../entities/device/model/store";
+
+import { useDeviceStore } from "@/entities/device";
+
 import styles from "./MicSettings.module.css";
 
 export function MicSettings() {

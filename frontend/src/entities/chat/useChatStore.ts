@@ -1,4 +1,5 @@
 import { create } from 'zustand';
+
 import type { ChatMessage } from './types';
 
 interface ChatStore {

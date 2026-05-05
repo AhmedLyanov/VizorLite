@@ -1,9 +1,11 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useIntl } from "react-intl";
-import { PRICING_TEXTS } from "../../shared/constants";
-import { useAuth } from "../../entities/user/AuthContext";
-import { stripeApi } from "../../shared/api/stripeApi";
-import questionIcon from "../../shared/assets/question.svg";
+
+import { PRICING_TEXTS } from "@/shared/constants";
+import { useAuth } from "@/entities/user/AuthContext";
+import { stripeApi } from "@/shared/api/stripeApi";
+import questionIcon from "@/shared/assets/question.svg";
+
 import styles from "./Pricing.module.css";
 
 export default function PricingPage() {

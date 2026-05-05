@@ -1,7 +1,10 @@
 import { useEffect } from 'react';
 import { useIntl } from 'react-intl';
+
+import downloadIcon from '@/shared/assets/download.svg';
+
 import styles from './ImagePreview.module.css';
-import downloadIcon from '../../shared/assets/download.svg';
+
 
 interface ImagePreviewModalProps {
   isOpen: boolean;

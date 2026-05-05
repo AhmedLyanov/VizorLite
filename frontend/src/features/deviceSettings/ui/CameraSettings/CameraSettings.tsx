@@ -1,5 +1,7 @@
 import { Switch} from "antd";
-import { useDeviceStore } from "../../../../entities/device/model/store";
+
+import { useDeviceStore } from "@/entities/device";
+
 import styles from "./CameraSettings.module.css";
 
 export function CameraSettings() {

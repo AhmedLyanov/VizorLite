@@ -1,9 +1,9 @@
 import { BrowserRouter, useRoutes } from "react-router-dom";
 import { Suspense } from "react";
 
-import { routes } from "./routes";
-import LoadingSpinner from "../../shared/ui/loading/LoadingSpinner";
+import LoadingSpinner from "@/shared/ui/loading/LoadingSpinner";
 
+import { routes } from "./routes";
 function AppRoutes() {
   return useRoutes(routes);
 }

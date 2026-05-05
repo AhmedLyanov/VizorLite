@@ -1,8 +1,11 @@
-import styles from "./Aside.module.css";
-import { useAuth } from "../../entities/user/AuthContext";
-import { Icon } from "../../shared/assets/icons/Icon";
-import { Tooltip } from "antd";
+
 import { Link } from "react-router-dom";
+import { Tooltip } from "antd";
+
+import { useAuth } from "@/entities/user/AuthContext";
+import { Icon } from "@/shared/assets/icons/Icon";
+
+import styles from "./Aside.module.css";
 
 export default function Aside() {
   const { isAuthenticated, user } = useAuth();

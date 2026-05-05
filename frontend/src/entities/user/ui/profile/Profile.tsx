@@ -1,12 +1,14 @@
-import { useAuth } from "../../../entities/user/AuthContext";
-import LoadingSpinner from "../loading/LoadingSpinner";
-import { notification } from "antd";
-import styles from "./Profile.module.css";
 import { useState, useRef } from "react";
-import { profileApi } from "../../../shared/api/profileApi";
-import { validateImageFile } from "../../../shared/lib/validators/fileValidator";
+import { notification } from "antd";
 import { useIntl } from "react-intl";
 
+import { profileApi } from "@/shared/api/profileApi";
+import { validateImageFile } from "@/shared/lib/validators/fileValidator";
+import LoadingSpinner from "@/shared/ui/loading/LoadingSpinner";
+
+import { useAuth } from "../../AuthContext";
+
+import styles from "./Profile.module.css";
 type ChangeEvent = React.ChangeEvent<HTMLInputElement>;
 
 interface ApiError {

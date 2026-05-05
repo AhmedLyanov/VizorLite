@@ -1,6 +1,7 @@
 import { IntlProvider } from "react-intl";
-import { useLocaleStore } from "../../entities/locale";
-import { LOCALES, messages } from "../../entities/locale/i18n";
+
+import { useLocaleStore } from "@/entities/locale";
+import { LOCALES, messages } from "@/entities/locale/i18n";
 
 interface IntlProviderWrapperProps {
   children: React.ReactNode;
@@ -8,7 +9,7 @@ interface IntlProviderWrapperProps {
 
 export default function IntlProviderWrapper({ children }: IntlProviderWrapperProps) {
   const locale = useLocaleStore(state => state.locale);
-  
+
   return (
     <IntlProvider
       locale={locale}
@@ -17,5 +18,6 @@ export default function IntlProviderWrapper({ children }: IntlProviderWrapperPro
     >
       {children}
     </IntlProvider>
+
   );
 }

@@ -1,5 +1,7 @@
 import React from 'react';
-import { useDeviceStore } from '../../../entities/device/model/store';
+
+import { useDeviceStore } from '@/entities/device';
+
 import styles from './DrawingToolsPanel.module.css';
 
 const colors = [

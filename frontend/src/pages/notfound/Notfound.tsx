@@ -1,8 +1,9 @@
-import styles from './Notfound.module.css';
 import { Link } from 'react-router-dom';
-import { COMMON_TEXTS } from '../../shared/constants/notfound';
 import { useIntl } from "react-intl";
 
+import { COMMON_TEXTS } from '@/shared/constants/notfound';
+
+import styles from './Notfound.module.css';
 
 export default function Notfound() {
     const intl = useIntl();

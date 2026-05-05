@@ -1,9 +1,10 @@
 import { useEffect } from "react";
 import { useIntl } from "react-intl";
 
+import { HOME_TEXTS } from "@/shared/constants";
+import { useAppStore } from "@/entities/device/useAppStore";
+
 import styles from "./installBanner.module.css";
-import { HOME_TEXTS } from "../../shared/constants";
-import { useAppStore } from "../../entities/device/useAppStore";
 
 export default function InstallBanner() {
   const intl = useIntl();

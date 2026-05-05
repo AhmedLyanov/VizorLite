@@ -1,5 +1,6 @@
+import Post from "@/shared/ui/post/Post";
+
 import styles from "./Community.module.css";
-import Post from "../../shared/ui/post/Post";
 
 export default function CommunityPage() {
   return (

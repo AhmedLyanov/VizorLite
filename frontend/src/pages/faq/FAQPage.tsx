@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import { useIntl } from "react-intl";
 import { Link } from "react-router-dom";
+
+import InstallBanner from "@/widgets/installBanner/InstallBanner";
+import { FAQ_TEXTS } from "@/shared/constants";
+
 import styles from "./FAQPage.module.css";
-import InstallBanner from "../../widgets/installBanner/InstallBanner";
-import { FAQ_TEXTS } from "../../shared/constants/faq";
 
 type FAQItemType = typeof FAQ_TEXTS.QUESTIONS[number];
 

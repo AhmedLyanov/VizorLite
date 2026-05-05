@@ -1,13 +1,20 @@
 {
   "eslint.useFlatConfig": true,
-
   "eslint.workingDirectories": [
-    { "directory": "./frontend", "changeProcessCWD": true }
+    {
+      "directory": "./frontend",
+      "changeProcessCWD": true
+    }
   ],
-
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": "always"
   },
-
-  "eslint.validate": ["javascript", "typescript", "typescriptreact"]
+  "eslint.validate": [
+    "javascript",
+    "typescript",
+    "typescriptreact"
+  ]
 }

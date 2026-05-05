@@ -2,8 +2,10 @@ import { useRef } from "react";
 import { useIntl } from "react-intl";
 import { Dropdown } from "antd";
 import type { MenuProps } from "antd";
-import { useLocaleStore } from "../../entities/locale";
-import { Icon } from "../../shared/assets/icons/Icon";
+
+import { Icon } from "@/shared/assets/icons/Icon";
+import { useLocaleStore } from "@/shared/locale";
+
 import styles from "./LanguageSwitcher.module.css";
 
 interface LanguageSwitcherProps {

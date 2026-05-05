@@ -1,25 +1,35 @@
-import { useState, useRef } from 'react';
-import { useIntl } from 'react-intl';
-import { useChatStore } from '../../entities/chat/useChatStore';
-import { message } from 'antd';
-import styles from './Chat.module.css';
-import sendIcon from '../../shared/assets/send.svg';
-import sendBinaryFile from '../../shared/assets/clip.svg';
-import downloadIcon from '../../shared/assets/download.svg';
-import zoomIcon from '../../shared/assets/zoom.svg';
-import ImagePreviewModal from './ImagePreview';
+import { useState, useRef } from "react";
+import { useIntl } from "react-intl";
+import { message } from "antd";
+
+import { useChatStore } from "@/entities/chat/useChatStore";
+
+import {
+  useChatSocket,
+  useChatScroll,
+  useFileInput,
+} from "@/shared/hooks/chat";
+
 import {
   CHAT_CONFIG,
   ALLOWED_FILE_TYPES,
   FILE_ACCEPT_EXTENSIONS,
-} from '../../shared/constants/chat';
+} from "@/shared/constants/chat";
+
 import {
   formatFileSize,
   isImageFile,
   isDocumentFile,
   formatMessageWithLinks,
-} from '../../shared/lib/chat/index.tsx';
-import { useChatSocket, useChatScroll, useFileInput } from '../../shared/hooks/chat';
+} from "@/shared/lib/chat";
+
+import sendIcon from "@/shared/assets/send.svg";
+import sendBinaryFile from "@/shared/assets/clip.svg";
+import downloadIcon from "@/shared/assets/download.svg";
+import zoomIcon from "@/shared/assets/zoom.svg";
+
+import ImagePreviewModal from "./ImagePreview";
+import styles from "./Chat.module.css";
 
 interface ChatProps {
   socket: any;

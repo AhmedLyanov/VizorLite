@@ -1,9 +1,12 @@
 import React from "react";
 import { useIntl } from "react-intl";
 import { Link } from "react-router-dom";
+
+import InstallBanner from "@/widgets/installBanner/InstallBanner";
+import { ABOUT_TEXTS } from "@/shared/constants";
+
 import styles from "./AboutPage.module.css";
-import InstallBanner from "../../widgets/installBanner/InstallBanner";
-import { ABOUT_TEXTS } from "../../shared/constants";
+
 
 const AboutPage: React.FC = () => {
   const intl = useIntl();

@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+
 import { Icon } from "../../assets/icons/Icon";
 
 interface MicLevelVisualizerProps {

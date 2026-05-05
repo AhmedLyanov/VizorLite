@@ -2,10 +2,13 @@ import { useState, useEffect, useRef } from "react";
 import type { KeyboardEvent } from "react";
 import { useIntl } from "react-intl";
 import { Popover, Badge, Spin, Alert } from "antd";
-import { useAiStore } from "../../entities/ai/useAi";
-import sendIcon from "../../shared/assets/send.svg";
-import clearIcon from "../../shared/assets/trashIcon.svg";
-import { AI_TEXT } from "../../shared/constants/common/ai";
+
+import sendIcon from "@/shared/assets/send.svg";
+import clearIcon from "@/shared/assets/trashIcon.svg";
+import { AI_TEXT } from "@/shared/constants/common/ai";
+
+import { useAiStore } from "../model/useAi";
+
 import styles from "./AiHelper.module.css";
 
 export default function AiHelperAntd() {

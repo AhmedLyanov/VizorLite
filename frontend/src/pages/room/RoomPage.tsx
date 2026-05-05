@@ -3,16 +3,21 @@ import { useParams, useNavigate } from "react-router-dom";
 import { io, Socket } from "socket.io-client";
 import Peer from "simple-peer";
 import { message } from "antd";
-import RoomControlPanel from "../../features/roomControlPanel/RoomControlPanel";
-import Chat from "../../features/chat/Chat";
+
+import { RoomControlPanel } from "@/widgets/roomControlPanel";
+import { Chat } from "@/features/chat";
+import { FingerDrawingOverlay } from "@/features/fingerDrawing";
+
+import { useAuth } from "@/entities/user";
+import { useGridLayout } from "@/entities/grid";
+import { useDeviceStore } from "@/entities/device";
+
+import { useFullscreen } from "@/shared/hooks";
+
+import fullscreenOff from "@/shared/assets/fullscreenOff.svg";
+import fullscreenOn from "@/shared/assets/fullscreenOn.svg";
+
 import style from "./RoomPage.module.css";
-import fullscreenOff from "../../shared/assets/fullscreenOff.svg";
-import fullscreenOn from "../../shared/assets/fullscreenOn.svg";
-import { useAuth } from "../../entities/user/AuthContext";
-import { useGridLayout } from "../../entities/grid/gridLayout";
-import { useFullscreen } from "../../shared/hooks/useFullscreen";
-import { FingerDrawingOverlay } from "../../features/fingerDrawing/FIngerDrawingOverlay";
-import { useDeviceStore } from "../../entities/device/model/store";
 
 export default function RoomPage() {
   const { roomId } = useParams<{ roomId: string }>();

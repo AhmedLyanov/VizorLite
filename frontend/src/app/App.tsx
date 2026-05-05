@@ -1,5 +1,6 @@
+import { LocaleProvider } from "@/entities/locale/i18n/LocaleContext";
+
 import IntlProviderWrapper from "./providers/IntlProviderWrapper";
-import { LocaleProvider } from "../entities/locale/i18n/LocaleContext";
 import { QueryProvider } from "./providers/QueryProvider";
 import { AuthProvider } from "./providers/AuthProvider";
 import Router from "./router/Router";

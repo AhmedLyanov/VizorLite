@@ -1,4 +1,5 @@
 import React from "react";
+
 import styles from "./CustomModal.module.css";
 
 interface Props {

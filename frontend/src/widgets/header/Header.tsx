@@ -1,8 +1,9 @@
 import { FormattedMessage } from "react-intl";
 import { Link } from "react-router-dom";
 
-import Logo from "../../shared/ui/logo/Logotype";
-import { NAVIGATION_TEXT } from "../../shared/constants";
+import Logo from "@/shared/ui/logo/Logotype";
+import { NAVIGATION_TEXT } from "@/shared/constants";
+
 import styles from "./Header.module.css";
 
 export default function Header() {

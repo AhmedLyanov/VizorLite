@@ -1,20 +1,23 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useIntl } from "react-intl";
-import { useCreateMeeting } from "../../entities/room/useCreatintMeeting";
 
-import { HOME_TEXTS } from "../../shared/constants";
+import { HOME_TEXTS } from "@/shared/constants";
+
+import BigButton from "@/shared/ui/button/BigButton/BigButton";
+import { useCreateMeeting } from "@/features/room";
+import LanguageSwitcher from "@/features/LanguageSwitcher/LanguageSwitcher";
+import JoinMeetingModal from "@/features/joinMeetModal/joinMeeting";
+import InstallBanner from "@/widgets/installBanner/InstallBanner";
+
+import webcamIcon from "@/shared/assets/webcamera.svg";
+import joinIcon from "@/shared/assets/join.svg";
+import scheduleMeeting from "@/shared/assets/schedulemeeting.svg";
+import dollarIcon from "@/shared/assets/dollar.svg";
+import questionIcon from "@/shared/assets/question.svg";
+
 import styles from "./HomePage.module.css";
 
-import InstallBanner from "../../widgets/installBanner/InstallBanner";
-import BigButton from "../../shared/ui/button/BigButton/BigButton";
-import LanguageSwitcher from "../../features/LanguageSwitcher/LanguageSwitcher";
-import JoinMeetingModal from "../../features/joinMeetModal/joinMeeting";
-import webcamIcon from "../../shared/assets/webcamera.svg";
-import joinIcon from "../../shared/assets/join.svg";
-import shceduleMetting from "../../shared/assets/schedulemeeting.svg";
-import dollarIcon from "../../shared/assets/dollar.svg";
-import questionIcon from "../../shared/assets/question.svg";
 
 export default function HomePage() {
   const [isJoinOpen, setIsJoinOpen] = useState(false);
@@ -59,7 +62,7 @@ export default function HomePage() {
             })}
             active={false}
 
-            image={shceduleMetting}
+            image={scheduleMeeting}
           />
         </div>
 

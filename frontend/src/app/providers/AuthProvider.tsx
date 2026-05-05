@@ -1,8 +1,8 @@
-import type { ReactNode } from "react";
+import { useState, useEffect, type ReactNode } from "react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { AuthContext, type User } from "../../entities/user/AuthContext";
-import { useState, useEffect } from "react";
-import { profileApi } from "../../shared/api/profileApi";
+
+import { AuthContext, type User } from "@/entities/user/AuthContext";
+import { profileApi } from "@/shared/api/profileApi";
 
 interface AuthProviderProps {
   children: ReactNode;

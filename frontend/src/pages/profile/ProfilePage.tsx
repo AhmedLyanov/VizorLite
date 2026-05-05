@@ -1,4 +1,5 @@
-import Profile from '../../shared/ui/profile/Profile';
+import { Profile } from '@/entities/user';
+
 import styles from './Profile.module.css';
 
 export default function ProfilePage() {

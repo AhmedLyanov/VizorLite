@@ -2,20 +2,15 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-
-import {
-  useRegister,
-  useLogin,
-  useVerifyEmail,
-} from "../../entities/user/useAuth";
-
 import { useIntl } from "react-intl";
-import { AUTHENTICATION_TEXTS } from "../../shared/constants/authentication";
-import { COUNTRIES, type CountryOption } from "../../shared/constants/phoneFormats";
-import { useLocaleStore } from "../../entities/locale";
 
-import eyeOn from "../../shared/assets/eye-on.svg";
-import eyeOff from "../../shared/assets/eye-off.svg";
+import { useRegister, useLogin, useVerifyEmail } from "@/entities/user";
+
+import { AUTHENTICATION_TEXTS } from "@/shared/constants/authentication";
+import { COUNTRIES, type CountryOption } from "@/shared/constants/phoneFormats";
+import { useLocaleStore } from "@/shared/locale";
+import eyeOn from "@/shared/assets/eye-on.svg";
+import eyeOff from "@/shared/assets/eye-off.svg";
 
 import styles from "./Authentication.module.css";
 

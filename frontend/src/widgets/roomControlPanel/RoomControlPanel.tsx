@@ -1,20 +1,21 @@
-import styles from "./RoomControlPanel.module.css";
-import { Icon } from "../../shared/assets/icons/Icon";
 import { useState, useCallback } from "react";
 import { Tooltip, message } from "antd";
-import LeaveRoomModal from "../leaveRoom/LeaveRoom";
 import { useIntl } from "react-intl";
-import { ROOM_BOARD_TEXTS } from "../../shared/constants/roomBoard";
-import MicLevelVisualizer from "../../shared/ui/waveform/MicLevelVisualizer";
-import sendIcon from "../../shared/assets/send.svg";
-import { useChatStore } from "../../entities/chat/useChatStore";
-import RoomBoardControl from "../buttonRoomBoard/ButtonRoomBoard";
-import { MicSettings } from "../deviceSettings/";
-import { CameraSettings } from "../deviceSettings";
-import { ShareSettings } from "../deviceSettings";
+
+import { Icon } from "@/shared/assets/icons/Icon";
+import { ROOM_BOARD_TEXTS } from "@/shared/constants/roomBoard";
+import MicLevelVisualizer from "@/shared/ui/waveform/MicLevelVisualizer";
+import sendIcon from "@/shared/assets/send.svg";
+
+import { useChatStore } from "@/entities/chat";
+import { useDeviceStore, useAutoMute } from "@/entities/device";
+
+import { LeaveRoomModal } from "@/features/leaveRoom";
+import { RoomBoardControl } from "@/features/buttonRoomBoard";
+import { MicSettings, CameraSettings, ShareSettings } from "@/features/deviceSettings";
+
 import { DrawingToolsPanel } from "./ui/drawingToolsPanel";
-import { useDeviceStore } from "../../entities/device/model/store";
-import { useAutoMute } from "../../entities/device/useAutoMute";
+import styles from "./RoomControlPanel.module.css";
 
 interface RoomControlPanelProps {
   stream: MediaStream | null;

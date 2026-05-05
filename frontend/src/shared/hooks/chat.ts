@@ -1,5 +1,6 @@
 import { useEffect, useCallback } from 'react';
-import type { ChatMessage } from '../../entities/chat/types';
+
+import type { ChatMessage } from '@/entities/chat/types';
 
 interface UseChatSocketOptions {
   socket: any;

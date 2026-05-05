@@ -1,7 +1,10 @@
 import { useIntl } from "react-intl";
-import { ROOM_BOARD_TEXTS } from "../../shared/constants/roomBoard";
-import CustomModal from "../customModal/CustomModal";
+
+import { ROOM_BOARD_TEXTS } from "@/shared/constants/roomBoard";
+
 import styles from "./LeaveRoom.module.css";
+
+import { CustomModal } from "@/shared/ui/customModal";
 
 interface Props {
   isOpen: boolean;

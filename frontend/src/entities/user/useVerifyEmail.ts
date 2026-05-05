@@ -1,6 +1,7 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
-import { verifyEmail } from "../../shared/api/verificationApi";
+
+import { verifyEmail } from "@/shared/api/verificationApi";
 
 export const useVerifyEmail = () => {
   const queryClient = useQueryClient();

@@ -3,7 +3,8 @@ import { Hands } from "@mediapipe/hands";
 import type { Results } from "@mediapipe/hands";
 import { Camera } from "@mediapipe/camera_utils";
 import { Socket } from "socket.io-client";
-import { useDeviceStore } from "../../entities/device/model/store";
+
+import { useDeviceStore } from "@/entities/device";
 
 interface Props {
   videoRef: React.RefObject<HTMLVideoElement | null>;
@@ -35,15 +36,10 @@ export function FingerDrawingOverlay({
   const processingEnabledRef = useRef(false);
   const initializedRef = useRef(false);
   const isEraser = false;
-
-  // Получаем текущие настройки из стора
   const { drawingColor, drawingSize } = useDeviceStore();
-
-  // Рефы для динамических настроек (чтобы обновлялись без пересоздания MediaPipe)
   const drawingColorRef = useRef(drawingColor);
   const drawingSizeRef = useRef(drawingSize);
 
-  // Синхронизация рефов с актуальными значениями из стора
   useEffect(() => {
     drawingColorRef.current = drawingColor;
   }, [drawingColor]);
@@ -52,7 +48,6 @@ export function FingerDrawingOverlay({
     drawingSizeRef.current = drawingSize;
   }, [drawingSize]);
 
-  // Обновление размеров canvas
   useEffect(() => {
     if (!containerRef.current) return;
     const updateCanvasSize = () => {
@@ -68,7 +63,6 @@ export function FingerDrawingOverlay({
     return () => window.removeEventListener("resize", updateCanvasSize);
   }, []);
 
-  // Инициализация MediaPipe (один раз)
   useEffect(() => {
     if (!isLocal) return;
     if (initializedRef.current) return;
@@ -106,7 +100,6 @@ export function FingerDrawingOverlay({
           };
         });
 
-        // Отрисовка скелета
         const connections = [
           [0,1], [1,2], [2,3], [3,4], [0,5], [5,6], [6,7], [7,8],
           [0,9], [9,10], [10,11], [11,12], [0,13], [13,14], [14,15], [15,16],
@@ -132,7 +125,6 @@ export function FingerDrawingOverlay({
           skeletonCtx.fill();
         }
 
-        // Распознавание жеста
         const indexTip = points[8];
         const indexMcp = points[5];
         const middleTip = points[12];
@@ -156,7 +148,6 @@ export function FingerDrawingOverlay({
           const canvasY = normY * canvasRef.current.height;
 
           if (isDrawingRef.current && lastPointRef.current) {
-            // Используем текущие значения из рефов (а не из замыкания)
             const currentColor = drawingColorRef.current;
             const currentSize = drawingSizeRef.current;
 
@@ -241,7 +232,6 @@ export function FingerDrawingOverlay({
     };
   }, [isLocal, videoRef, mirrorHorizontally, roomId, userId, socket, enabled]);
 
-  // Включение/выключение обработки жестов
   useEffect(() => {
     processingEnabledRef.current = enabled;
     if (!enabled) {
@@ -253,8 +243,6 @@ export function FingerDrawingOverlay({
       }
     }
   }, [enabled]);
-
-  // Обработка удалённых событий
   useEffect(() => {
     if (isLocal || !socket) return;
 

@@ -1,7 +1,8 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
-import { aiApi } from "../../shared/api/aiApi";
-import { useLocaleStore } from "../locale/uselocaleStore";
+
+import { aiApi } from "@/shared/api/aiApi";
+import { useLocaleStore } from "@/shared/locale";
 
 interface Message {
   role: "user" | "assistant";
