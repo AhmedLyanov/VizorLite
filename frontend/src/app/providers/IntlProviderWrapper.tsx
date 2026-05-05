@@ -1,7 +1,8 @@
 import { IntlProvider } from "react-intl";
 
-import { useLocaleStore } from "@/entities/locale";
-import { LOCALES, messages } from "@/entities/locale/i18n";
+import { useLocaleStore } from "@/shared/locale";
+import { LOCALES, messages } from "@/shared/locale/i18n";
+
 
 interface IntlProviderWrapperProps {
   children: React.ReactNode;

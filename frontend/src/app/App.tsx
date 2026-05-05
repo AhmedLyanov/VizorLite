@@ -1,4 +1,4 @@
-import { LocaleProvider } from "@/entities/locale/i18n/LocaleContext";
+import { LocaleProvider } from "@/shared/locale/i18n/LocaleContext";
 
 import IntlProviderWrapper from "./providers/IntlProviderWrapper";
 import { QueryProvider } from "./providers/QueryProvider";

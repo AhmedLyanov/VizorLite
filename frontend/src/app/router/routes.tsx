@@ -1,7 +1,7 @@
 import { lazy } from "react";
 import type { RouteObject } from "react-router-dom";
 
-import { ProtectedRoute } from "@/shared/ui/protected";
+import { ProtectedRoute } from "@/features/auth/protected";
 
 import DefaultLayout from "../layout/default/Default";
 import SecureLayout from "../layout/auth/Auth";

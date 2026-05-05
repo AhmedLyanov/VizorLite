@@ -1,6 +1,6 @@
 import { Outlet } from "react-router-dom";
 
-import AiHelperAntd from "@/features/aiHelper/AiHelper";
+import AiHelperAntd from "@/features/ai/ui/AiHelper";
 import Header from "@/widgets/header/Header";
 
 export default function DefaultLayout() {
