@@ -14,7 +14,7 @@ import { LeaveRoomModal } from "@/features/leaveRoom";
 import { RoomBoardControl } from "@/features/buttonRoomBoard";
 import { MicSettings, CameraSettings, ShareSettings } from "@/features/deviceSettings";
 
-import { DrawingToolsPanel } from "./ui/drawingToolsPanel";
+import { DrawingToolsPanel } from "./ui/DrawingToolsPanel";
 import styles from "./RoomControlPanel.module.css";
 
 interface RoomControlPanelProps {
