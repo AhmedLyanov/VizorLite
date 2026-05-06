@@ -6,11 +6,9 @@ import { message } from "antd";
 
 import { RoomControlPanel } from "@/widgets/roomControlPanel";
 import { Chat } from "@/features/chat";
-
 import { useAuth } from "@/entities/user";
 import { useGridLayout } from "@/entities/grid";
 import { useFullscreen } from "@/shared/hooks";
-
 import fullscreenOff from "@/shared/assets/fullscreenOff.svg";
 import fullscreenOn from "@/shared/assets/fullscreenOn.svg";
 
@@ -324,9 +322,9 @@ export default function RoomPage() {
           >
             {document.fullscreenElement && fullscreenTarget === "local" ? (
               <img src={fullscreenOff} alt="fullscreen on" />
-
             ) : (
               <img src={fullscreenOn} alt="fullscreen on" />
+
 
             )}
           </button>
@@ -365,8 +363,10 @@ export default function RoomPage() {
               ) : (
                 <img src={fullscreenOn} alt="fullscreen on" />
 
+
               )}
             </button>
+
 
           </div>
         ))}
