@@ -14,7 +14,6 @@ import { LeaveRoomModal } from "@/features/leaveRoom";
 import { RoomBoardControl } from "@/features/buttonRoomBoard";
 import { MicSettings, CameraSettings, ShareSettings } from "@/features/deviceSettings";
 
-import { DrawingToolsPanel } from "./ui/DrawingToolsPanel";
 import styles from "./RoomControlPanel.module.css";
 
 interface RoomControlPanelProps {
@@ -41,7 +40,6 @@ export default function RoomControlPanel({
   const [isLeaveModalOpen, setIsLeaveModalOpen] = useState(false);
   const [messageApi, contextHolder] = message.useMessage();
   const { isOpen: isChatOpen, unreadCount, toggleChat, resetUnreadCount } = useChatStore();
-  const { fingerDrawingEnabled } = useDeviceStore();
   const { autoMute, autoMuteThreshold, autoMuteDelay } = useDeviceStore();
 
   const toggleMicrophone = useCallback(() => {
@@ -163,34 +161,28 @@ export default function RoomControlPanel({
 
         <div className={styles.panelSection}>
           <div className={styles.centerControls}>
-            {fingerDrawingEnabled ? (
-              <DrawingToolsPanel />
-            ) : (
-              <>
-                <Tooltip
-                  placement="top"
-                  title={intl.formatMessage({
-                    id: isScreenSharing
-                      ? ROOM_BOARD_TEXTS.TOOLTIPS.SCREEN_SHARE_STOP
-                      : ROOM_BOARD_TEXTS.TOOLTIPS.SCREEN_SHARE_START,
-                  })}
-                >
-                  <RoomBoardControl
-                    icon={<Icon name={isScreenSharing ? "screenShareOn" : "screenShareOff"} />}
-                    onClick={handleToggleScreenShare}
-                    active={isScreenSharing}
-                    modalTitle={intl.formatMessage({ id: ROOM_BOARD_TEXTS.SETTINGS.SCREEN_SHARE })}
-                    modalContent={<ShareSettings />}
-                  />
-                </Tooltip>
-                <Tooltip
-                  placement="top"
-                  title={intl.formatMessage({ id: ROOM_BOARD_TEXTS.TOOLTIPS.LEAVE_ROOM })}
-                >
-                  <RoomBoardControl icon={<Icon name="hangUp" />} variant="danger" onClick={handleLeaveRoom} />
-                </Tooltip>
-              </>
-            )}
+            <Tooltip
+              placement="top"
+              title={intl.formatMessage({
+                id: isScreenSharing
+                  ? ROOM_BOARD_TEXTS.TOOLTIPS.SCREEN_SHARE_STOP
+                  : ROOM_BOARD_TEXTS.TOOLTIPS.SCREEN_SHARE_START,
+              })}
+            >
+              <RoomBoardControl
+                icon={<Icon name={isScreenSharing ? "screenShareOn" : "screenShareOff"} />}
+                onClick={handleToggleScreenShare}
+                active={isScreenSharing}
+                modalTitle={intl.formatMessage({ id: ROOM_BOARD_TEXTS.SETTINGS.SCREEN_SHARE })}
+                modalContent={<ShareSettings />}
+              />
+            </Tooltip>
+            <Tooltip
+              placement="top"
+              title={intl.formatMessage({ id: ROOM_BOARD_TEXTS.TOOLTIPS.LEAVE_ROOM })}
+            >
+              <RoomBoardControl icon={<Icon name="hangUp" />} variant="danger" onClick={handleLeaveRoom} />
+            </Tooltip>
           </div>
         </div>
 
