@@ -1,1 +1,0 @@
-export { FingerDrawingOverlay } from "./FIngerDrawingOverlay";

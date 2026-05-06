@@ -8,8 +8,6 @@ export function CameraSettings() {
   const {
     cameraEnabled,
     setCameraEnabled,
-    fingerDrawingEnabled,
-    setFingerDrawingEnabled,
   } = useDeviceStore();
   return (
     <div className={styles.container}>
@@ -17,12 +15,6 @@ export function CameraSettings() {
         <span>Включить камеру</span>
         <Switch checked={cameraEnabled} onChange={setCameraEnabled} />
       </div>
-
-      <div className={styles.row}>
-        <span>Рисование пальцем</span>
-        <Switch checked={fingerDrawingEnabled} onChange={setFingerDrawingEnabled} />
-      </div>
-
     </div>
   );
 }
