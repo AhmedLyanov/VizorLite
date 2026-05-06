@@ -6,12 +6,9 @@ import { message } from "antd";
 
 import { RoomControlPanel } from "@/widgets/roomControlPanel";
 import { Chat } from "@/features/chat";
-import { FingerDrawingOverlay } from "@/features/fingerDrawing";
 
 import { useAuth } from "@/entities/user";
 import { useGridLayout } from "@/entities/grid";
-import { useDeviceStore } from "@/entities/device";
-
 import { useFullscreen } from "@/shared/hooks";
 
 import fullscreenOff from "@/shared/assets/fullscreenOff.svg";
@@ -23,7 +20,6 @@ export default function RoomPage() {
   const { roomId } = useParams<{ roomId: string }>();
   const navigate = useNavigate();
   const { user } = useAuth();
-  const { fingerDrawingEnabled } = useDeviceStore();
 
   const socketRef = useRef<Socket | null>(null);
   const [socket, setSocket] = useState<Socket | null>(null);
@@ -309,7 +305,6 @@ export default function RoomPage() {
         <div
           className={style.videoContainer}
           style={{
-            position: "relative",
             width: videoSize.width,
             height: videoSize.height,
           }}
@@ -321,14 +316,6 @@ export default function RoomPage() {
             playsInline
             className={style.roomParticipant}
           />
-          <FingerDrawingOverlay
-            videoRef={localVideoRef}
-            socket={socket}
-            roomId={roomId}
-            userId={user?.id || socket?.id || "local"}
-            isLocal={true}
-            enabled={fingerDrawingEnabled}
-          />
           <div className={style.videoLabel}>{userName || "Вы"}</div>
           <button
             className={style.fullscreenBtn}
@@ -336,60 +323,53 @@ export default function RoomPage() {
             title={document.fullscreenElement && fullscreenTarget === "local" ? "Выйти" : "На весь экран"}
           >
             {document.fullscreenElement && fullscreenTarget === "local" ? (
-              <img src={fullscreenOff} alt="fullscreen off" />
+              <img src={fullscreenOff} alt="fullscreen on" />
+
             ) : (
               <img src={fullscreenOn} alt="fullscreen on" />
+
             )}
           </button>
         </div>
-        
-        {/* eslint-disable-next-line react-hooks/refs*/}
+
         {remoteVideosArray.map(([id, remoteStream]) => (
-            <div
-              key={id}
-              className={style.videoContainer}
-              style={{
-                position: "relative",
-                width: videoSize.width,
-                height: videoSize.height,
+          <div
+            key={id}
+            className={style.videoContainer}
+            style={{
+              width: videoSize.width,
+              height: videoSize.height,
+            }}
+          >
+            <video
+              autoPlay
+              playsInline
+              className={style.roomParticipant}
+              ref={(el) => {
+                if (el) {
+                  el.srcObject = remoteStream;
+                  videoRefs.current.set(id, el);
+                }
               }}
-            >
-              <video
-                autoPlay
-                playsInline
-                className={style.roomParticipant}
-                ref={(el) => {
-                  if (el) {
-                    el.srcObject = remoteStream;
-                    videoRefs.current.set(id, el);
-                  }
-                }}
-              />
-              <FingerDrawingOverlay
-                videoRef={{ current: videoRefs.current.get(id) || null }}
-                socket={socket}
-                roomId={roomId}
-                userId={id}
-                isLocal={false}
-                enabled={true}
-              />
-              <div className={style.videoLabel}>
-                {participants.get(id)?.userName || `User ${id.slice(0, 5)}`}
-              </div>
-              <button
-                className={style.fullscreenBtn}
-                onClick={() => toggleFullscreen(videoRefs.current.get(id)?.parentElement || null, id)}
-                title={document.fullscreenElement && fullscreenTarget === id ? "Выйти" : "На весь экран"}
-              >
-                {document.fullscreenElement && fullscreenTarget === id ? (
-                  <img src={fullscreenOff} alt="fullscreen off" />
-                ) : (
-                  <img src={fullscreenOn} alt="fullscreen on" />
-                )}
-              </button>
+            />
+            <div className={style.videoLabel}>
+              {participants.get(id)?.userName || `User ${id.slice(0, 5)}`}
             </div>
-          ))
-        }
+            <button
+              className={style.fullscreenBtn}
+              onClick={() => toggleFullscreen(videoRefs.current.get(id)?.parentElement || null, id)}
+              title={document.fullscreenElement && fullscreenTarget === id ? "Выйти" : "На весь экран"}
+            >
+              {document.fullscreenElement && fullscreenTarget === id ? (
+                <img src={fullscreenOff} alt="fullscreen on" />
+              ) : (
+                <img src={fullscreenOn} alt="fullscreen on" />
+
+              )}
+            </button>
+
+          </div>
+        ))}
       </div>
 
       <RoomControlPanel
