@@ -1,0 +1,12 @@
+@import "tailwindcss/theme.css" layer(theme);
+@import "tailwindcss/preflight.css" layer(base);
+@import "tailwindcss/utilities.css";
+
+@import "nativewind/theme";
+
+
+@theme {
+    --primary-background-color: #f8f9fa;
+    --primary-title-color: #2c3e50;
+    --primary-bigbutton-color: #ffffff;
+}
