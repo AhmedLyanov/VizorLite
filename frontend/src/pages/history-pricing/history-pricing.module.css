@@ -1,0 +1,265 @@
+/* frontend/src/pages/subscription-history/SubscriptionHistoryPage.module.css */
+
+.page {
+  width: 100%;
+  min-height: 100vh;
+  padding: 12px 8px;
+  background: var(--primary-background-color, linear-gradient(135deg, #f5f7ff 0%, #e6e9ff 100%));
+  overflow-x: hidden;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+}
+
+.contentContainer {
+  width: 100%;
+  margin: 0 auto;
+  flex: 1;
+}
+
+.mainTitle {
+  color: var(--primary-title-color, #333);
+  text-align: center;
+  font-family: var(--primary-font, "Inter", sans-serif);
+  font-size: 22px;
+  margin: 15px auto 12px;
+  padding: 0 12px;
+  line-height: 1.3;
+  font-weight: 600;
+}
+
+.subtitle {
+  color: rgba(0, 0, 0, 0.6);
+  text-align: center;
+  font-family: var(--primary-font, "Inter", sans-serif);
+  font-size: 14px;
+  max-width: 100%;
+  margin: 0 auto 40px;
+  padding: 0 12px;
+  line-height: 1.5;
+}
+
+.historySection {
+  background: var(--primary-white, #ffffff);
+  border-radius: 16px;
+  padding: 20px 16px;
+  margin: 0 12px 30px;
+  box-shadow: 0 4px 15px rgba(51, 51, 51, 0.06);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+/* Desktop table styles */
+.desktopTable {
+  display: none;
+  width: 100%;
+  overflow-x: auto;
+}
+
+.tableHeader {
+  display: grid;
+  grid-template-columns: 100px 1fr 100px 100px 60px;
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  font-weight: 600;
+  color: var(--primary-title-color, #333);
+  font-size: 14px;
+  font-family: var(--primary-font, "Inter", sans-serif);
+}
+
+.tableRow {
+  display: grid;
+  grid-template-columns: 100px 1fr 100px 100px 60px;
+  padding: 14px 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  align-items: center;
+  font-size: 14px;
+  font-family: var(--primary-font, "Inter", sans-serif);
+  color: rgba(0, 0, 0, 0.75);
+  transition: background 0.2s ease;
+}
+
+.tableRow:hover {
+  background: rgba(0, 0, 0, 0.02);
+}
+
+.colDate,
+.colDescription,
+.colAmount,
+.colStatus,
+.colAction {
+  padding: 0 8px;
+}
+
+.statusBadge {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 500;
+  text-align: center;
+}
+
+.statusPaid {
+  background: #e8f5e9;
+  color: #2e7d32;
+}
+
+.statusPending {
+  background: #fff3e0;
+  color: #ed6c02;
+}
+
+.statusExpired {
+  background: #ffebee;
+  color: #d32f2f;
+}
+
+.invoiceLink {
+  color: var(--primary-title-color, #333);
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 500;
+  opacity: 0.7;
+  transition: opacity 0.2s ease;
+}
+
+.invoiceLink:hover {
+  opacity: 1;
+  text-decoration: underline;
+}
+
+/* Mobile cards */
+.mobileCards {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.historyCard {
+  background: var(--primary-white, #ffffff);
+  border-radius: 12px;
+  padding: 16px;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+  transition: all 0.2s ease;
+}
+
+.historyCard:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  border-color: rgba(0, 0, 0, 0.1);
+}
+
+.cardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.cardDate {
+  font-size: 13px;
+  color: rgba(0, 0, 0, 0.5);
+  font-family: var(--primary-font, "Inter", sans-serif);
+}
+
+.cardStatus {
+  font-size: 12px;
+  font-weight: 500;
+  padding: 4px 10px;
+  border-radius: 20px;
+}
+
+.cardDescription {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--primary-title-color, #333);
+  margin-bottom: 12px;
+  font-family: var(--primary-font, "Inter", sans-serif);
+}
+
+.cardFooter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 8px;
+}
+
+.cardAmount {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--primary-title-color, #333);
+  font-family: var(--primary-font, "Inter", sans-serif);
+}
+
+/* Tablet and desktop */
+@media (min-width: 768px) {
+  .page {
+    padding: 15px 10px;
+  }
+
+  .contentContainer {
+    max-width: 800px;
+  }
+
+  .mainTitle {
+    font-size: 26px;
+    margin: 20px auto 15px;
+  }
+
+  .subtitle {
+    font-size: 16px;
+    max-width: 600px;
+    margin-bottom: 50px;
+  }
+
+  .historySection {
+    margin-left: 0;
+    margin-right: 0;
+    padding: 24px 20px;
+  }
+
+  .desktopTable {
+    display: block;
+  }
+
+  .mobileCards {
+    display: none;
+  }
+}
+
+@media (min-width: 1024px) {
+  .contentContainer {
+    max-width: 1000px;
+  }
+
+  .mainTitle {
+    font-size: 28px;
+  }
+
+  .tableHeader,
+  .tableRow {
+    grid-template-columns: 120px 1fr 120px 120px 80px;
+  }
+
+  .tableRow {
+    font-size: 15px;
+  }
+
+  .historyCard:hover {
+    transform: translateY(-2px);
+  }
+}
+
+/* RTL support */
+[dir="rtl"] .tableHeader,
+[dir="rtl"] .tableRow {
+  text-align: right;
+}
+
+[dir="rtl"] .cardHeader {
+  flex-direction: row-reverse;
+}
+
+[dir="rtl"] .cardFooter {
+  flex-direction: row-reverse;
+}

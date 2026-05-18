@@ -12,6 +12,7 @@ const HomePage = lazy(() => import("@/pages/home/HomePage"));
 const ProfilePage = lazy(() => import("@/pages/profile/ProfilePage"));
 const RoomPage = lazy(() => import("@/pages/room/RoomPage"));
 const CommunityPage = lazy(() => import("@/pages/community/CommunityPage"));
+const HistoryPricing = lazy(() => import("@/pages/history-pricing/history-pricing"));
 const AuthPage = lazy(() => import("@/pages/auth/AuthPage"));
 const AboutPage = lazy(() => import("@/pages/about/AboutPage"));
 const PricingPage = lazy(() => import("@/pages/pricing/PricingPage"));
@@ -25,6 +26,7 @@ export const routes: RouteObject[] = [
       { path: "/pricing", element: <PricingPage /> },
       { path: "/about", element: <AboutPage /> },
       { path: "/faq", element: <FAQPage /> },
+      { path: "/payments", element: <HistoryPricing /> },
     ],
   },
 

@@ -44,9 +44,9 @@ export default function Aside() {
           </Tooltip>
 
           <Tooltip placement="right" title="Платежи">
-            <button className={styles.asideNavigationButton}>
+            <Link to="/payments" className={styles.asideNavigationButton}>
               <Icon name="cardBank" />
-            </button>
+            </Link>
           </Tooltip>
 
           <Tooltip placement="right" title="Сообщество">
