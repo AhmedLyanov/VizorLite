@@ -31,9 +31,10 @@ export const useLocaleStore = create<LocaleStore>()(
   persist(
     (set, get) => ({
       locale: LOCALES.ENGLISH,
-      selectedCountry: COUNTRIES[0], // Default to US
+      selectedCountry: COUNTRIES[0], 
       isChanging: false,
       isLanguageSwitcherOpen: false,
+
 
       setLocale: (locale) => {
         set({

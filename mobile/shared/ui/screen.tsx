@@ -8,7 +8,7 @@ interface ScreenProps {
 }
 
 export function Screen({ children, className }: ScreenProps) {
-  return <SafeAreaView className={cn('flex-1', className)}>{children}</SafeAreaView>;
+  return <SafeAreaView className={cn('flex-1  p-4', className)}>{children}</SafeAreaView>;
 }
 
 export default Screen;   

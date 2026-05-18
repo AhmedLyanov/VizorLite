@@ -28,7 +28,6 @@ export const useCreateMeeting = () => {
     },
 
     onError: () => {
-      // можно пусто или toast
     },
   });
 };

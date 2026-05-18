@@ -1,17 +1,24 @@
 import * as React from "react";
+
 import {
   Pressable,
+  View,
   Text,
-  type PressableProps,
   ActivityIndicator,
+  type PressableProps,
 } from "react-native";
 
 import { cn } from "@/shared/lib/cn";
 
-type ButtonVariant = "primary" | "secondary" | "ghost" | "danger";
+type ButtonVariant =
+  | "primary"
+  | "secondary"
+  | "ghost"
+  | "danger";
 
 interface ButtonProps extends PressableProps {
   children: React.ReactNode;
+
   className?: string;
   textClassName?: string;
 
@@ -22,17 +29,17 @@ interface ButtonProps extends PressableProps {
 }
 
 const variants: Record<ButtonVariant, string> = {
-  primary: "bg-primary active:opacity-80",
-  secondary: "bg-secondary active:opacity-80",
-  ghost: "bg-transparent border border-neutral-200 active:opacity-70",
-  danger: "bg-red-500 active:opacity-80",
+  primary: "bg-primary",
+  secondary: "bg-secondary",
+  ghost: "border border-neutral-200 bg-transparent",
+  danger: "bg-red-500",
 };
 
 const textVariants: Record<ButtonVariant, string> = {
-  primary: "text-white",
-  secondary: "text-title",
-  ghost: "text-title",
-  danger: "text-white",
+  primary: "text-(--primary-background-color)",
+  secondary: "text-(--primary-background-color)",
+  ghost: "text-(--primary-background-color)",
+  danger: "text-(--primary-background-color)",
 };
 
 export function Button({
@@ -51,7 +58,7 @@ export function Button({
     <Pressable
       disabled={disabled || loading}
       className={cn(
-        "flex-row items-center justify-center rounded-2xl px-5 py-4",
+        "rounded-2xl px-5 py-4",
         disabled && "opacity-50",
         variants[variant],
         className
@@ -59,17 +66,27 @@ export function Button({
       {...props}
     >
       {loading ? (
-        <ActivityIndicator color="#ffffff" />
+        <ActivityIndicator color="#fff" />
       ) : (
-        <Text
-          className={cn(
-            "text-base font-semibold",
-            textVariants[variant],
-            textClassName
-          )}
-        >
-          {children}
-        </Text>
+        <View className="flex-row items-center justify-center gap-2">
+          {React.Children.map(children, (child) => {
+            if (typeof child === "string") {
+              return (
+                <Text
+                  className={cn(
+                    "text-base font-semibold",
+                    textVariants[variant],
+                    textClassName
+                  )}
+                >
+                  {child}
+                </Text>
+              );
+            }
+
+            return child;
+          })}
+        </View>
       )}
     </Pressable>
   );
