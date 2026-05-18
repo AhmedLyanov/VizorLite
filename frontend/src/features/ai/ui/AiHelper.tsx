@@ -117,9 +117,8 @@ export default function AiHelperAntd() {
               {messages.map((msg, index) => (
                 <div
                   key={index}
-                  className={`${styles.message} ${
-                    msg.role === "user" ? styles.userMessage : styles.assistantMessage
-                  }`}
+                  className={`${styles.message} ${msg.role === "user" ? styles.userMessage : styles.assistantMessage
+                    }`}
                 >
                   <div className={styles.messageContent}>{msg.content}</div>
                   <span className={styles.messageTime}>
@@ -140,6 +139,24 @@ export default function AiHelperAntd() {
               <span>{intl.formatMessage({ id: "ai.message.thinking" })}</span>
             </div>
           )}
+        </div>
+        <div className={styles.snippetsWords}>
+          {[
+            'ai.snippets.create_meeting',
+            'ai.snippets.share_screen',
+            'ai.snippets.mic_settings',
+            'ai.snippets.invite',
+            'ai.snippets.change_language',
+            'ai.snippets.record_meeting'
+          ].map((snippetId) => (
+            <span
+              key={snippetId}
+              className={styles.snippets}
+              onClick={() => setMessage(intl.formatMessage({ id: snippetId }))}
+            >
+              {intl.formatMessage({ id: snippetId })}
+            </span>
+          ))}
         </div>
 
         <div className={styles.inputContainer}>

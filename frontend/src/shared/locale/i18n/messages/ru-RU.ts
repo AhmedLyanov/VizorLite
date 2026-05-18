@@ -171,6 +171,12 @@ export const ruMessages = {
   "ai.error.timeout": "Время запроса истекло. Попробуйте снова.",
   "ai.error.emptyResponse": "ИИ вернул пустой ответ. Попробуйте снова.",
   "ai.hint.text": "Нужна помощь? Я тут",
+  "ai.snippets.create_meeting": "Как создать встречу?",
+  "ai.snippets.share_screen": "Как поделиться экраном?",
+  "ai.snippets.mic_settings": "Настроить микрофон",
+  "ai.snippets.invite": "Как пригласить участников?",
+  "ai.snippets.change_language": "Сменить язык интерфейса",
+  "ai.snippets.record_meeting": "Как записать встречу?",
 
   // CHAT_TEXTS
   "chat.title": "Чат",

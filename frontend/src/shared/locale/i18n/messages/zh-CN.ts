@@ -161,6 +161,12 @@ export const zhMessages = {
   "ai.error.timeout": "请求超时。请重试。",
   "ai.error.emptyResponse": "AI返回空响应。请重试。",
   "ai.hint.text": "需要帮助吗？我在这里",
+  "ai.snippets.create_meeting": "如何创建会议？",
+  "ai.snippets.share_screen": "如何共享屏幕？",
+  "ai.snippets.mic_settings": "设置麦克风",
+  "ai.snippets.invite": "如何邀请参与者？",
+  "ai.snippets.change_language": "更改界面语言",
+  "ai.snippets.record_meeting": "如何录制会议？",
 
   // CHAT_TEXTS
   "chat.title": "聊天",

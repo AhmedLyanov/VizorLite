@@ -176,6 +176,12 @@ export const deMessages = {
   "ai.error.timeout": "Zeitüberschreitung der Anfrage. Bitte versuchen Sie es erneut.",
   "ai.error.emptyResponse": "KI hat eine leere Antwort zurückgegeben. Bitte versuchen Sie es erneut.",
   "ai.hint.text": "Brauchen Sie Hilfe? Ich bin da",
+  "ai.snippets.create_meeting": "Wie erstelle ich einen Termin?",
+  "ai.snippets.share_screen": "Wie teile ich den Bildschirm?",
+  "ai.snippets.mic_settings": "Mikrofon einstellen",
+  "ai.snippets.invite": "Wie lade ich Teilnehmer ein?",
+  "ai.snippets.change_language": "Sprache der Oberfläche ändern",
+  "ai.snippets.record_meeting": "Wie zeichne ich ein Meeting auf?",
 
   // CHAT_TEXTS
   "chat.title": "Chat",

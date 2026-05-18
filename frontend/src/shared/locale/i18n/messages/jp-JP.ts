@@ -176,6 +176,12 @@ export const jpMessages = {
   "ai.error.timeout": "リクエストがタイムアウトしました。もう一度お試しください。",
   "ai.error.emptyResponse": "AIが空の応答を返しました。もう一度お試しください。",
   "ai.hint.text": "お手伝いしましょうか？ここにいます",
+  "ai.snippets.create_meeting": "ミーティングを作成する方法は？",
+  "ai.snippets.share_screen": "画面共有する方法は？",
+  "ai.snippets.mic_settings": "マイクを設定する",
+  "ai.snippets.invite": "参加者を招待する方法は？",
+  "ai.snippets.change_language": "インターフェースの言語を変更する",
+  "ai.snippets.record_meeting": "ミーティングを録画する方法は？",
 
   // CHAT_TEXTS
   "chat.title": "チャット",

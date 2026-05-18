@@ -172,7 +172,13 @@ export const enMessages = {
   "ai.error.timeout": "Request timeout. Please try again.",
   "ai.error.emptyResponse": "AI returned empty response. Please try again.",
   "ai.hint.text": "Need help? I'm here",
-
+  "ai.snippets.create_meeting": "How to create a meeting?",
+  "ai.snippets.share_screen": "How to share screen?",
+  "ai.snippets.mic_settings": "Configure microphone",
+  "ai.snippets.invite": "How to invite participants?",
+  "ai.snippets.change_language": "Change UI language",
+  "ai.snippets.record_meeting": "How to record a meeting?",
+  
   // CHAT_TEXTS
   "chat.title": "Chat",
   "chat.close": "Close chat",

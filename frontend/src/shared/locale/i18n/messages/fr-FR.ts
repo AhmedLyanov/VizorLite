@@ -177,6 +177,12 @@ export const frMessages = {
   "ai.error.timeout": "Délai de la requête dépassé. Veuillez réessayer.",
   "ai.error.emptyResponse": "L'IA a retourné une réponse vide. Veuillez réessayer.",
   "ai.hint.text": "Besoin d'aide ? Je suis là",
+  "ai.snippets.create_meeting": "Comment créer une réunion ?",
+  "ai.snippets.share_screen": "Comment partager l'écran ?",
+  "ai.snippets.mic_settings": "Configurer le microphone",
+  "ai.snippets.invite": "Comment inviter des participants ?",
+  "ai.snippets.change_language": "Changer la langue de l'interface",
+  "ai.snippets.record_meeting": "Comment enregistrer une réunion ?",
 
   // CHAT_TEXTS
   "chat.title": "Chat",

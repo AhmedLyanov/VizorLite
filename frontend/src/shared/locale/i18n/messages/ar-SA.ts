@@ -170,7 +170,13 @@ export const arMessages = {
   "ai.error.timeout": "انتهت مهلة الطلب. يرجى المحاولة مرة أخرى.",
   "ai.error.emptyResponse": "أعاد الذكاء الاصطناعي ردًا فارغًا. يرجى المحاولة مرة أخرى.",
   "ai.hint.text": "تحتاج مساعدة؟ أنا هنا",
-
+  "ai.snippets.create_meeting": "كيفية إنشاء اجتماع؟",
+  "ai.snippets.share_screen": "كيفية مشاركة الشاشة؟",
+  "ai.snippets.mic_settings": "إعدادات الميكروفون",
+  "ai.snippets.invite": "كيفية دعوة المشاركين؟",
+  "ai.snippets.change_language": "تغيير لغة الواجهة",
+  "ai.snippets.record_meeting": "كيفية تسجيل الاجتماع؟",
+  
   // CHAT_TEXTS
   "chat.title": "الدردشة",
   "chat.close": "إغلاق الدردشة",

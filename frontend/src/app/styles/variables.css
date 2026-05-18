@@ -138,6 +138,21 @@
   --aihelper-modal-max-width-1024: 500px;
   --aihelper-modal-height-1024: 520px;
 
+  --aihelper-snippets-gap: 8px;
+  --aihelper-snippet-padding: 6px 12px;
+  --aihelper-snippet-bg: var(--aihelper-welcome-bg, #f0f0f0);
+  --aihelper-snippet-color: var(--aihelper-welcome-color, #333);
+  --aihelper-snippet-border-radius: 20px;
+  --aihelper-snippet-font-size: 13px;
+  --aihelper-snippet-hover-bg: #e0e0e0;
+  --aihelper-snippet-transition: all 0.2s ease;
+
+  --aihelper-snippet-padding-mobile: 4px 10px;
+  --aihelper-snippet-font-size-mobile: 12px;
+  --aihelper-snippets-gap-mobile: 6px;
+  --aihelper-snippet-padding-480: 4px 8px;
+  --aihelper-snippet-font-size-480: 11px;
+
   /* Chat */
   --primary-background-color: #f8f9fa;
   --primary-white: #ffffff;

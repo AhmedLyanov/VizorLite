@@ -176,6 +176,50 @@
   color: var(--aihelper-message-time-color);
 }
 
+.snippetsWords {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--aihelper-snippets-gap, 8px);
+  margin-bottom: 12px;
+  padding: 4px 0;
+  max-height: 100px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+}
+
+.snippets,
+.words {
+  display: inline-flex;
+  align-items: center;
+  background: var(--aihelper-snippet-bg, #f3f4f6);
+  color: var(--aihelper-snippet-color, #1f2937);
+  padding: var(--aihelper-snippet-padding, 6px 12px);
+  border-radius: var(--aihelper-snippet-border-radius, 20px);
+  font-size: var(--aihelper-snippet-font-size, 13px);
+  line-height: 1.2;
+  cursor: pointer;
+  transition: var(--aihelper-snippet-transition, all 0.2s ease);
+  user-select: none;
+  white-space: nowrap;
+}
+
+.words {
+  background: rgba(0, 0, 0, 0.05);
+  color: #4b5563;
+}
+
+.snippets:hover,
+.words:hover {
+  background: var(--aihelper-snippet-hover-bg, #e5e7eb);
+  transform: translateY(-1px);
+}
+
+.snippets:active,
+.words:active {
+  transform: translateY(0);
+}
+
 .loadingIndicator {
   display: flex;
   align-items: center;
@@ -372,7 +416,7 @@
   position: absolute;
   bottom: calc(var(--aihelper-toggle-btn-height) + 15px);
   right: 0;
-  background: #1f2937;  
+  background: #1f2937;
   color: white;
   padding: 12px 20px;
   border-radius: 20px;
@@ -405,6 +449,7 @@
     opacity: 0;
     transform: translateX(100px);
   }
+
   to {
     opacity: 1;
     transform: translateX(0);
@@ -453,6 +498,17 @@
   .welcomeMessage {
     padding: var(--aihelper-welcome-padding-mobile);
     font-size: var(--aihelper-welcome-font-size-mobile);
+  }
+
+  .snippetsWords {
+    gap: var(--aihelper-snippets-gap-mobile, 6px);
+    margin-bottom: 8px;
+  }
+
+  .snippets,
+  .words {
+    padding: var(--aihelper-snippet-padding-mobile, 4px 10px);
+    font-size: var(--aihelper-snippet-font-size-mobile, 12px);
   }
 
   .message {
@@ -541,6 +597,16 @@
   .aiHint {
     padding: 6px 12px;
     font-size: 11px;
+  }
+
+  .snippetsWords {
+    gap: 5px;
+  }
+
+  .snippets,
+  .words {
+    padding: var(--aihelper-snippet-padding-480, 4px 8px);
+    font-size: var(--aihelper-snippet-font-size-480, 11px);
   }
 }
 
