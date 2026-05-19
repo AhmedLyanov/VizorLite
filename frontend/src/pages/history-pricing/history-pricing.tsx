@@ -4,7 +4,6 @@ import { useIntl } from 'react-intl';
 import { stripeApi, type Transaction } from '@/shared/api/stripeApi';
 
 import styles from './history-pricing.module.css';
-import { int } from 'zod';
 
 const getStatusText = (status: Transaction['status'], intl: ReturnType<typeof useIntl>) => {
   switch (status) {
