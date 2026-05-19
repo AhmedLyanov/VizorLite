@@ -279,6 +279,22 @@ export const zhMessages = {
   "pricing.plans.premium.features.storage": "50GB云存储",
   "pricing.plans.premium.features.analytics": "高级分析",
 
+
+  "history.totalTransactions": "总共交易: ",
+  "history.title": "支付历史",
+  "history.subtitle": "您的订阅的所有交易 - 始终在控制之中",
+  "history.empty": "您还没有任何付款",
+  "history.loading": "加载中...",
+  "history.error": "无法加载支付历史记录",
+  "history.table.date": "日期",
+  "history.table.description": "描述",
+  "history.table.amount": "金额",
+  "history.table.status": "状态",
+  "history.invoice": "发票",
+  "status.paid": "已支付",
+  "status.pending": "待处理",
+  "status.expired": "已过期",
+
   "pricing.faq.title": "常见问题",
   "pricing.faq.items.0.question": "以后可以更改计划吗？",
   "pricing.faq.items.0.answer": "是的，您可以随时在个人账户中更改计划。",

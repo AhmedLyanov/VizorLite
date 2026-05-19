@@ -16,9 +16,22 @@ export interface CheckoutResponse {
   url: string;
 }
 
+export interface Transaction {
+  id: string;
+  date: string;
+  amount: string;
+  status: 'paid' | 'pending' | 'expired';
+  description: string;
+  invoiceUrl?: string;
+}
+
 export const stripeApi = {
   createCheckout: async (): Promise<CheckoutResponse> => {
     const response = await api.post("/stripe/create-checkout");
+    return response.data;
+  },
+  getTransactions: async (): Promise<Transaction[]> => {
+    const response = await api.get("/stripe/transactions");
     return response.data;
   },
 };

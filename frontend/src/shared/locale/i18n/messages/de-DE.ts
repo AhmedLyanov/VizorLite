@@ -303,6 +303,22 @@ export const deMessages = {
   "pricing.plans.premium.features.storage": "50GB Cloud-Speicher",
   "pricing.plans.premium.features.analytics": "Erweiterte Analytik",
 
+
+  "history.totalTransactions": "Insgesamt Transaktionen: ",
+  "history.title": "Zahlungshistorie",
+  "history.subtitle": "Alle Transaktionen Ihres Abonnements – immer unter Kontrolle",
+  "history.empty": "Sie haben noch keine Zahlungen",
+  "history.loading": "Laden...",
+  "history.error": "Fehler beim Laden der Zahlungshistorie",
+  "history.table.date": "Datum",
+  "history.table.description": "Beschreibung",
+  "history.table.amount": "Betrag",
+  "history.table.status": "Status",
+  "history.invoice": "Rechnung",
+  "status.paid": "Bezahlt",
+  "status.pending": "Ausstehend",
+  "status.expired": "Abgelaufen",
+
   "pricing.faq.title": "Häufig gestellte Fragen",
   "pricing.faq.items.0.question": "Kann ich den Tarif später wechseln?",
   "pricing.faq.items.0.answer":

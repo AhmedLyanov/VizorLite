@@ -294,6 +294,21 @@ export const ruMessages = {
   "pricing.plans.premium.features.storage": "Облачное хранилище 50ГБ",
   "pricing.plans.premium.features.analytics": "Расширенная аналитика",
 
+  "history.totalTransactions": "Всего транзакций: ",
+  "history.title": "История платежей",
+  "history.subtitle": "Все транзакции по вашей подписке — всегда под контролем",
+  "history.empty": "У вас пока нет платежей",
+  "history.loading": "Загрузка...",
+  "history.error": "Не удалось загрузить историю платежей",
+  "history.table.date": "Дата",
+  "history.table.description": "Описание",
+  "history.table.amount": "Сумма",
+  "history.table.status": "Статус",
+  "history.invoice": "Счёт",
+  "status.paid": "Оплачено",
+  "status.pending": "Ожидает",
+  "status.expired": "Истекла",
+
   "pricing.faq.title": "Частые вопросы",
   "pricing.faq.items.0.question": "Можно ли поменять тариф позже?",
   "pricing.faq.items.0.answer":

@@ -1,5 +1,3 @@
-/* frontend/src/pages/subscription-history/SubscriptionHistoryPage.module.css */
-
 .page {
   width: 100%;
   min-height: 100vh;
@@ -48,7 +46,6 @@
   border: 1px solid rgba(0, 0, 0, 0.06);
 }
 
-/* Desktop table styles */
 .desktopTable {
   display: none;
   width: 100%;
@@ -99,6 +96,30 @@
   text-align: center;
 }
 
+
+.lengthTransactions {
+  display: flex;
+  justify-content: flex-end;
+  align-items: baseline;
+  gap: 8px;
+  margin-bottom: 20px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  font-family: var(--primary-font, "Inter", sans-serif);
+  font-size: 14px;
+  color: rgba(0, 0, 0, 0.65);
+}
+
+.lengthTransactions span:last-child {
+  font-weight: 600;
+  color: var(--primary-title-color, #333);
+  background: rgba(0, 0, 0, 0.04);
+  padding: 2px 8px;
+  border-radius: 20px;
+  font-size: 13px;
+}
+
+
 .statusPaid {
   background: #e8f5e9;
   color: #2e7d32;
@@ -116,7 +137,7 @@
 
 .invoiceLink {
   color: var(--primary-title-color, #333);
-  text-decoration: none;
+  text-decoration: underline;
   font-size: 13px;
   font-weight: 500;
   opacity: 0.7;
@@ -128,7 +149,6 @@
   text-decoration: underline;
 }
 
-/* Mobile cards */
 .mobileCards {
   display: flex;
   flex-direction: column;
@@ -191,10 +211,37 @@
   font-family: var(--primary-font, "Inter", sans-serif);
 }
 
-/* Tablet and desktop */
+.loader,
+.error,
+.emptyState {
+  text-align: center;
+  padding: 3rem 1rem;
+  font-family: var(--primary-font, "Inter", sans-serif);
+}
+
+.error {
+  color: #d32f2f;
+}
+
+.emptyState {
+  color: #666;
+  font-size: 1rem;
+}
+
 @media (min-width: 768px) {
   .page {
     padding: 15px 10px;
+  }
+
+  .lengthTransactions {
+    justify-content: flex-start;
+    margin-bottom: 16px;
+    font-size: 13px;
+  }
+
+  .lengthTransactions span:last-child {
+    font-size: 12px;
+    padding: 2px 6px;
   }
 
   .contentContainer {
@@ -216,6 +263,17 @@
     margin-left: 0;
     margin-right: 0;
     padding: 24px 20px;
+  }
+
+  .lengthTransactions {
+    justify-content: flex-start;
+    margin-bottom: 16px;
+    font-size: 13px;
+  }
+
+  .lengthTransactions span:last-child {
+    font-size: 12px;
+    padding: 2px 6px;
   }
 
   .desktopTable {
@@ -250,7 +308,6 @@
   }
 }
 
-/* RTL support */
 [dir="rtl"] .tableHeader,
 [dir="rtl"] .tableRow {
   text-align: right;

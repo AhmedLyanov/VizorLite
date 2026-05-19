@@ -288,6 +288,23 @@ export const jpMessages = {
   "pricing.plans.business.features.support": "優先サポート",
   "pricing.plans.business.features.storage": "クラウドストレージ10GB",
 
+
+  "history.totalTransactions": "合計取引数: ",
+
+  "history.title": "支払い履歴",
+  "history.subtitle": "サブスクリプションのすべての取引 - 常に管理下",
+  "history.empty": "まだ支払いはありません",
+  "history.loading": "読み込み中...",
+  "history.error": "支払い履歴の読み込みに失敗しました",
+  "history.table.date": "日付",
+  "history.table.description": "説明",
+  "history.table.amount": "金額",
+  "history.table.status": "ステータス",
+  "history.invoice": "請求書",
+  "status.paid": "支払済み",
+  "status.pending": "保留中",
+  "status.expired": "期限切れ",
+
   "pricing.plans.premium.name": "プレミアム",
   "pricing.plans.premium.price": "¥3,000",
   "pricing.plans.premium.period": "/月",

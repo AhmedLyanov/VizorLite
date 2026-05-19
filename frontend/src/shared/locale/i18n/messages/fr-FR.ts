@@ -271,6 +271,22 @@ export const frMessages = {
   "pricing.recommended": "Recommandé",
   "pricing.selectButton": "Choisir le plan",
 
+
+  "history.totalTransactions": "Transactions totales: ",
+  "history.title": "Historique des paiements",
+  "history.subtitle": "Toutes les transactions de votre abonnement – toujours sous contrôle",
+  "history.empty": "Vous n'avez encore aucun paiement",
+  "history.loading": "Chargement...",
+  "history.error": "Échec du chargement de l'historique des paiements",
+  "history.table.date": "Date",
+  "history.table.description": "Description",
+  "history.table.amount": "Montant",
+  "history.table.status": "Statut",
+  "history.invoice": "Facture",
+  "status.paid": "Payé",
+  "status.pending": "En attente",
+  "status.expired": "Expiré",
+
   "pricing.plans.basic.name": "Basique",
   "pricing.plans.basic.price": "0€",
   "pricing.plans.basic.period": "/mois",

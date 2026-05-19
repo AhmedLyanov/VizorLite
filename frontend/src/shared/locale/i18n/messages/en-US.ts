@@ -178,7 +178,7 @@ export const enMessages = {
   "ai.snippets.invite": "How to invite participants?",
   "ai.snippets.change_language": "Change UI language",
   "ai.snippets.record_meeting": "How to record a meeting?",
-  
+
   // CHAT_TEXTS
   "chat.title": "Chat",
   "chat.close": "Close chat",
@@ -285,6 +285,21 @@ export const enMessages = {
   "pricing.plans.business.features.settings": "Advanced settings",
   "pricing.plans.business.features.support": "Priority support",
   "pricing.plans.business.features.storage": "10GB cloud storage",
+
+  "history.totalTransactions": "Total transactions: ",
+  "history.title": "Payment history",
+  "history.subtitle": "All transactions of your subscription — always under control",
+  "history.empty": "You have no payments yet",
+  "history.loading": "Loading...",
+  "history.error": "Failed to load payment history",
+  "history.table.date": "Date",
+  "history.table.description": "Description",
+  "history.table.amount": "Amount",
+  "history.table.status": "Status",
+  "history.invoice": "Invoice",
+  "status.paid": "Paid",
+  "status.pending": "Pending",
+  "status.expired": "Expired",
 
   "pricing.plans.premium.name": "Premium",
   "pricing.plans.premium.price": "$20",

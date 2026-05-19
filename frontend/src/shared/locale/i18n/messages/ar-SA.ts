@@ -176,7 +176,7 @@ export const arMessages = {
   "ai.snippets.invite": "كيفية دعوة المشاركين؟",
   "ai.snippets.change_language": "تغيير لغة الواجهة",
   "ai.snippets.record_meeting": "كيفية تسجيل الاجتماع؟",
-  
+
   // CHAT_TEXTS
   "chat.title": "الدردشة",
   "chat.close": "إغلاق الدردشة",
@@ -292,6 +292,22 @@ export const arMessages = {
   "pricing.plans.premium.features.manager": "مدير شخصي",
   "pricing.plans.premium.features.storage": "50 جيجابايت تخزين سحابي",
   "pricing.plans.premium.features.analytics": "تحليلات متقدمة",
+
+
+  "history.totalTransactions": "اجمالي المعاملات: ",
+  "history.title": "سجل المدفوعات",
+  "history.subtitle": "جميع معاملات اشتراكك - دائمًا تحت السيطرة",
+  "history.empty": "ليس لديك أي مدفوعات بعد",
+  "history.loading": "جار التحميل...",
+  "history.error": "فشل تحميل سجل المدفوعات",
+  "history.table.date": "التاريخ",
+  "history.table.description": "الوصف",
+  "history.table.amount": "المبلغ",
+  "history.table.status": "الحالة",
+  "history.invoice": "الفاتورة",
+  "status.paid": "مدفوع",
+  "status.pending": "قيد الانتظار",
+  "status.expired": "منتهي الصلاحية",
 
   "pricing.faq.title": "الأسئلة الشائعة",
   "pricing.faq.items.0.question": "هل يمكنني تغيير الخطة لاحقًا؟",

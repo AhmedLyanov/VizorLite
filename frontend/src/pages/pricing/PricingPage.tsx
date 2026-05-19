@@ -25,7 +25,6 @@ export default function PricingPage() {
         window.location.href = response.url;
       }
     } catch (error) {
-      console.error("Checkout error:", error);
       alert(intl.formatMessage({ id: "pricing.error.checkout" }));
     }
   };
