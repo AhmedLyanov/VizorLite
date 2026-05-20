@@ -16,6 +16,7 @@ const HistoryPricing = lazy(() => import("@/pages/history-pricing/history-pricin
 const AuthPage = lazy(() => import("@/pages/auth/AuthPage"));
 const AboutPage = lazy(() => import("@/pages/about/AboutPage"));
 const PricingPage = lazy(() => import("@/pages/pricing/PricingPage"));
+const ProFeaturesPage = lazy(() => import('@/pages/pro-features/ProFeaturesPage'));
 const NotFound = lazy(() => import("@/pages/notfound/Notfound"));
 const FAQPage = lazy(() => import("@/pages/faq/FAQPage"));
 
@@ -27,6 +28,7 @@ export const routes: RouteObject[] = [
       { path: "/about", element: <AboutPage /> },
       { path: "/faq", element: <FAQPage /> },
       { path: "/payments", element: <HistoryPricing /> },
+      { path: "/pro", element: <ProFeaturesPage /> },
     ],
   },
 
