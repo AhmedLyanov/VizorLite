@@ -148,15 +148,15 @@ export const jpMessages = {
   "joinmeeting.description":
     "ミーティングに参加するには、ミーティングリンクまたはそのIDを入力してください",
 
+
   "home.hero.title": "VizorLite — 話し合い、計画、決定",
   "home.install.title": "VizorLite",
-  "home.install.description":
-    "より便利なサービス利用のために、お使いのデバイスにアプリをダウンロードしてください",
+  "home.install.description": "より便利なサービス利用のために、お使いのデバイスにアプリをダウンロードしてください",
   "home.install.button": "インストール",
   "home.button.create": "ビデオ会議を作成",
   "home.button.join": "接続する",
   "home.button.schedulemeeting": "ミーティングをスケジュール",
-  "home.bottom.pricing": "料金プラン",
+  "home.bottom.pricing": "プロ",
   "home.bottom.translate": "翻訳",
   "home.bottom.faq": "よくある質問",
 

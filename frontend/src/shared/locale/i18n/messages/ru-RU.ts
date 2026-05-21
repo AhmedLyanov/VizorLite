@@ -152,7 +152,7 @@ export const ruMessages = {
   "home.button.create": "Создать видеовстречу",
   "home.button.join": "Подключиться",
   "home.button.schedulemeeting": "Запланировать встречу",
-  "home.bottom.pricing": "Тарифы",
+  "home.bottom.pricing": "Pro",
   "home.bottom.translate": "Перевод",
   "home.bottom.faq": "Вопросы",
 

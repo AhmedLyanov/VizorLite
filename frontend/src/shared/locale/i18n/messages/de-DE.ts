@@ -151,13 +151,12 @@ export const deMessages = {
 
   "home.hero.title": "VizorLite — kommunizieren, planen, entscheiden",
   "home.install.title": "VizorLite",
-  "home.install.description":
-    "Laden Sie die App herunter, um den Service komfortabler auf Ihrem Gerät zu nutzen",
+  "home.install.description": "Laden Sie die App herunter, um den Service komfortabler auf Ihrem Gerät zu nutzen",
   "home.install.button": "Installieren",
   "home.button.create": "Video-Meeting erstellen",
   "home.button.join": "Verbinden",
   "home.button.schedulemeeting": "Meeting planen",
-  "home.bottom.pricing": "Preise",
+  "home.bottom.pricing": "Pro",
   "home.bottom.translate": "Übersetzung",
   "home.bottom.faq": "FAQ",
 

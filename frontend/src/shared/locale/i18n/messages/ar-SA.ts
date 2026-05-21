@@ -143,7 +143,6 @@ export const arMessages = {
   // ROOM_BOARD_TEXTS - SHARE
   "roomBoard.share.message":
     "مرحبًا! انضم إلى اجتماع الفيديو الخاص بي على VizorLite، إليك الرابط:",
-
   "home.hero.title": "VizorLite — تواصل، خطط، قرر",
   "home.install.title": "VizorLite",
   "home.install.description": "قم بتنزيل التطبيق لتجربة أفضل للخدمة على جهازك",
@@ -151,7 +150,7 @@ export const arMessages = {
   "home.button.create": "إنشاء اجتماع فيديو",
   "home.button.join": "انضم",
   "home.button.schedulemeeting": "جدولة اجتماع",
-  "home.bottom.pricing": "الأسعار",
+  "home.bottom.pricing": "برو",
   "home.bottom.translate": "ترجمة",
   "home.bottom.faq": "الأسئلة الشائعة",
 

@@ -5,7 +5,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useIntl } from "react-intl";
 
 import { useRegister, useLogin, useVerifyEmail } from "@/entities/user";
-
 import { AUTHENTICATION_TEXTS } from "@/shared/constants/authentication";
 import { COUNTRIES, type CountryOption } from "@/shared/constants/phoneFormats";
 import { useLocaleStore } from "@/shared/locale";

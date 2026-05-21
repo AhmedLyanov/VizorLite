@@ -1,3 +1,4 @@
+// PricingPage.tsx
 import { Link, useNavigate } from "react-router-dom";
 import { useIntl } from "react-intl";
 
@@ -39,49 +40,14 @@ export default function PricingPage() {
           {intl.formatMessage({ id: PRICING_TEXTS.SUBTITLE })}
         </p>
 
-        <div className={styles.pricingCards}>
-          <div className={styles.pricingCard}>
+        <div className={styles.singleCardWrapper}>
+          <div className={`${styles.pricingCard} ${styles.proCard}`}>
             <div className={styles.cardHeader}>
               <h3 className={styles.planName}>
-                {intl.formatMessage({ id: PRICING_TEXTS.PLANS.BASIC.NAME })}
-              </h3>
-              <div className={styles.priceContainer}>
-                <span className={styles.price}>
-                  {intl.formatMessage({ id: PRICING_TEXTS.PLANS.BASIC.PRICE })}
-                </span>
-                <span className={styles.period}>
-                  {intl.formatMessage({ id: PRICING_TEXTS.PLANS.BASIC.PERIOD })}
-                </span>
-              </div>
-            </div>
-
-            <div className={styles.featuresList}>
-              {PRICING_TEXTS.PLANS.BASIC.FEATURES.map((feature, index) => (
-                <div key={index} className={styles.featureItem}>
-                  <img
-                    src="/images/check.svg"
-                    alt=""
-                    className={styles.featureIcon}
-                  />
-                  <span className={styles.featureText}>
-                    {intl.formatMessage({ id: feature })}
-                  </span>
-                </div>
-              ))}
-            </div>
-
-            <button className={styles.selectButton}>
-              {intl.formatMessage({ id: PRICING_TEXTS.SELECT_BUTTON })}
-            </button>
-          </div>
-
-          <div className={`${styles.pricingCard} ${styles.recommended}`}>
-            <div className={styles.recommendedBadge}>
-              {intl.formatMessage({ id: PRICING_TEXTS.RECOMMENDED })}
-            </div>
-            <div className={styles.cardHeader}>
-              <h3 className={styles.planName}>
-                {intl.formatMessage({ id: PRICING_TEXTS.PLANS.BUSINESS.NAME })}
+                {intl.formatMessage({
+                  id: "pricing.plans.pro.name",
+                  defaultMessage: "Pro",
+                })}
               </h3>
               <div className={styles.priceContainer}>
                 <span className={styles.price}>
@@ -113,48 +79,9 @@ export default function PricingPage() {
             </div>
 
             <button
-              className={`${styles.selectButton} ${styles.recommendedButton}`}
+              className={`${styles.selectButton} ${styles.proButton}`}
               onClick={handleSelectPlan}
             >
-              {intl.formatMessage({ id: PRICING_TEXTS.SELECT_BUTTON })}
-            </button>
-          </div>
-
-          <div className={styles.pricingCard}>
-            <div className={styles.cardHeader}>
-              <h3 className={styles.planName}>
-                {intl.formatMessage({ id: PRICING_TEXTS.PLANS.PREMIUM.NAME })}
-              </h3>
-              <div className={styles.priceContainer}>
-                <span className={styles.price}>
-                  {intl.formatMessage({
-                    id: PRICING_TEXTS.PLANS.PREMIUM.PRICE,
-                  })}
-                </span>
-                <span className={styles.period}>
-                  {intl.formatMessage({
-                    id: PRICING_TEXTS.PLANS.PREMIUM.PERIOD,
-                  })}
-                </span>
-              </div>
-            </div>
-
-            <div className={styles.featuresList}>
-              {PRICING_TEXTS.PLANS.PREMIUM.FEATURES.map((feature, index) => (
-                <div key={index} className={styles.featureItem}>
-                  <img
-                    src="/images/check.svg"
-                    alt=""
-                    className={styles.featureIcon}
-                  />
-                  <span className={styles.featureText}>
-                    {intl.formatMessage({ id: feature })}
-                  </span>
-                </div>
-              ))}
-            </div>
-
-            <button className={styles.selectButton}>
               {intl.formatMessage({ id: PRICING_TEXTS.SELECT_BUTTON })}
             </button>
           </div>
@@ -178,6 +105,7 @@ export default function PricingPage() {
           </div>
         </div>
       </div>
+
       <div className={styles.bottomContent}>
         <div className={styles.bottomLinks}>
           <Link to="/" className={styles.bottomLink}>

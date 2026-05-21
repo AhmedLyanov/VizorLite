@@ -150,19 +150,20 @@ export const frMessages = {
   "roomBoard.share.message":
     "Salut ! Rejoignez ma vidéoconférence sur VizorLite, voici le lien :",
 
+
   "home.hero.title": "VizorLite — communiquer, planifier, décider",
   "home.install.title": "VizorLite",
-  "home.install.description":
-    "Téléchargez l'application pour une meilleure expérience sur votre appareil",
+  "home.install.description": "Téléchargez l'application pour une meilleure expérience sur votre appareil",
   "home.install.button": "Installer",
   "home.button.create": "Créer une vidéoconférence",
   "home.button.join": "Rejoindre",
   "home.button.schedulemeeting": "Planifier une réunion",
-  "home.bottom.pricing": "Tarifs",
+  "home.bottom.pricing": "Pro",
   "home.bottom.translate": "Traduction",
   "home.bottom.faq": "FAQ",
 
-  "ai.title.main": "Assistant Markus",
+
+"ai.title.main": "Assistant Markus",
   "ai.button.toggle": "IA",
   "ai.button.send": "Envoyer",
   "ai.button.close": "✕",
