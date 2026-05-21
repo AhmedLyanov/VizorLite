@@ -158,16 +158,37 @@ export default function RoomPage() {
       });
     });
 
+    socket.on(
+      "existing-users",
+      ({
+        users,
+      }: {
+        users: Array<{
+          socketId: string;
+          userName: string;
+        }>;
+      },
+      ) => {
+        users.forEach(({ socketId, userName }) => {
+          setParticipants((prev) => {
+            const map = new Map(prev);
+            map.set(socketId, { userName });
+            return map;
+          });
+
+          if (!peersRef.current.has(socketId)) {
+            createPeer(socketId, true);
+          }
+        });
+      },
+    );
+
     socket.on("user-connected", ({ socketId, userName }) => {
       setParticipants((prev) => {
         const map = new Map(prev);
         map.set(socketId, { userName });
         return map;
       });
-
-      if (!peersRef.current.has(socketId)) {
-        createPeer(socketId, true);
-      }
     });
 
     socket.on("offer", ({ offer, from }) => {

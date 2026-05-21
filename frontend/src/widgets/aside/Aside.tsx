@@ -1,4 +1,3 @@
-
 import { Link } from "react-router-dom";
 import { Tooltip } from "antd";
 
@@ -14,7 +13,8 @@ export default function Aside() {
     <aside className={styles.aside}>
       <div className={styles.asideContent}>
         <div className={styles.asideContentTop}>
-          {isAuthenticated && user && (
+          {/* Авторизован — аватар / буква */}
+          {isAuthenticated && user ? (
             <Tooltip placement="right" title="Профиль">
               <Link to="/profile" className={styles.navLink}>
                 <div className={styles.asideAvatar}>
@@ -30,7 +30,17 @@ export default function Aside() {
                 </div>
               </Link>
             </Tooltip>
+          ) : (
+            /* Неавторизован — иконка плюса */
+            <Tooltip placement="right" title="Войти">
+              <Link to="/auth" className={styles.navLink}>
+                <div className={styles.asideAvatar}>
+                  <Icon name="plus" />
+                </div>
+              </Link>
+            </Tooltip>
           )}
+
           <Tooltip placement="right" title="Главная">
             <Link to="/" className={styles.asideNavigationButton}>
               <Icon name="home" />
