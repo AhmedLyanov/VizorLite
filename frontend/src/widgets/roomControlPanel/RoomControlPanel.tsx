@@ -9,8 +9,8 @@ import micOnIcon from "@/shared/assets/micOn.svg";
 import micOffIcon from "@/shared/assets/micOff.svg";
 import webcamOnIcon from "@/shared/assets/webcamOn.svg";
 import webcamOffIcon from "@/shared/assets/webcamOff.svg";
-import screenShareOnIcon from "@/shared/assets/screenShareOn.svg";
-import screenShareOffIcon from "@/shared/assets/screenShareOff.svg";
+import screenOnIcon from "@/shared/assets/screenOn.svg";
+import screenOffIcon from "@/shared/assets/screenOff.svg";
 import linkIcon from "@/shared/assets/link.svg";
 import participantsIcon from "@/shared/assets/participants.svg";
 import phoneOffIcon from "@/shared/assets/phone-off.svg";
@@ -190,7 +190,7 @@ export default function RoomControlPanel({
               })}
             >
               <RoomBoardControl
-                icon={<img src={isScreenSharing ? screenShareOnIcon : screenShareOffIcon} alt="screen share" />}
+                icon={<img src={isScreenSharing ? screenOnIcon : screenOffIcon} alt="screen share" />}
                 onClick={handleToggleScreenShare}
                 active={isScreenSharing}
                 modalTitle={intl.formatMessage({ id: ROOM_BOARD_TEXTS.SETTINGS.SCREEN_SHARE })}
