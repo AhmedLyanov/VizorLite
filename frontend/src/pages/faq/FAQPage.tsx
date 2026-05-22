@@ -4,10 +4,8 @@ import { Link } from "react-router-dom";
 
 import InstallBanner from "@/widgets/installBanner/InstallBanner";
 import { FAQ_TEXTS } from "@/shared/constants";
-
-// Импортируем иконки
 import homeIcon from "@/shared/assets/home.svg";
-import dollarIcon from "@/shared/assets/dollar.svg";
+import diamondIcon from "@/shared/assets/diamond.svg";
 import questionIcon from "@/shared/assets/question.svg";
 import sendIcon from "@/shared/assets/send.svg";
 
@@ -106,7 +104,7 @@ const FAQPage: React.FC = () => {
             {intl.formatMessage({ id: "about.bottomLinks.items.home.label" })}
           </Link>
           <Link to="/pricing" className={styles.bottomLink}>
-            <img src={dollarIcon} alt="" className={styles.linkIcon} />
+            <img src={diamondIcon} alt="" className={styles.linkIcon} />
             {intl.formatMessage({ id: "about.bottomLinks.items.pricing.label" })}
           </Link>
           <Link to="/about" className={styles.bottomLink}>

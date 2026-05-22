@@ -5,6 +5,7 @@ import { useIntl } from "react-intl";
 import { PRICING_TEXTS } from "@/shared/constants";
 import { useAuth } from "@/entities/user/AuthContext";
 import { stripeApi } from "@/shared/api/stripeApi";
+import homeIcon from "@/shared/assets/home.svg";
 import questionIcon from "@/shared/assets/question.svg";
 
 import styles from "./Pricing.module.css";
@@ -110,7 +111,7 @@ export default function PricingPage() {
         <div className={styles.bottomLinks}>
           <Link to="/" className={styles.bottomLink}>
             <img
-              src="/images/home.svg"
+              src={homeIcon}
               alt={intl.formatMessage({ id: "nav.home" })}
               className={styles.linkIcon}
             />
