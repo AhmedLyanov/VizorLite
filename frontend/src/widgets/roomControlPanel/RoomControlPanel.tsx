@@ -2,15 +2,23 @@ import { useState, useCallback } from "react";
 import { Tooltip, message } from "antd";
 import { useIntl } from "react-intl";
 
-import { Icon } from "@/shared/assets/icons/Icon";
 import { ROOM_BOARD_TEXTS } from "@/shared/constants/roomBoard";
 import MicLevelVisualizer from "@/shared/ui/waveform/MicLevelVisualizer";
 import sendIcon from "@/shared/assets/send.svg";
+import micOnIcon from "@/shared/assets/micOn.svg";
+import micOffIcon from "@/shared/assets/micOff.svg";
+import webcamOnIcon from "@/shared/assets/webcamOn.svg";
+import webcamOffIcon from "@/shared/assets/webcamOff.svg";
+import screenShareOnIcon from "@/shared/assets/screenShareOn.svg";
+import screenShareOffIcon from "@/shared/assets/screenShareOff.svg";
+import linkIcon from "@/shared/assets/link.svg";
+import participantsIcon from "@/shared/assets/participants.svg";
+import phoneOffIcon from "@/shared/assets/phone-off.svg";
+
 import { useChatStore } from "@/entities/chat";
 import { useDeviceStore, useAutoMute } from "@/entities/device";
 import { LeaveRoomModal } from "@/features/leaveRoom";
 import { RoomBoardControl } from "@/features/buttonRoomBoard";
-// import { MicSettings, CameraSettings, ShareSettings } from "@/features/deviceSettings";
 
 import styles from "./RoomControlPanel.module.css";
 
@@ -135,7 +143,7 @@ export default function RoomControlPanel({
               })}
             >
               <RoomBoardControl
-                icon={<Icon name={isMicOn ? "micOn" : "micOff"} />}
+                icon={<img src={isMicOn ? micOnIcon : micOffIcon} alt="mic" />}
                 onClick={toggleMicrophone}
                 active={!isMicOn}
                 modalTitle={intl.formatMessage({ id: ROOM_BOARD_TEXTS.SETTINGS.MICROPHONE })}
@@ -148,7 +156,7 @@ export default function RoomControlPanel({
               })}
             >
               <RoomBoardControl
-                icon={<Icon name={isCameraOn ? "cameraOn" : "cameraOff"} />}
+                icon={<img src={isCameraOn ? webcamOnIcon : webcamOffIcon} alt="camera" />}
                 onClick={handleToggleCamera}
                 active={!isCameraOn}
                 modalTitle={intl.formatMessage({ id: ROOM_BOARD_TEXTS.SETTINGS.CAMERA })}
@@ -160,7 +168,7 @@ export default function RoomControlPanel({
                 title={intl.formatMessage({ id: isChatOpen ? "chat.close" : "chat.open" })}
               >
                 <RoomBoardControl
-                  icon={<img src={sendIcon} alt="Chat" />}
+                  icon={<img src={sendIcon} alt="chat" />}
                   onClick={handleToggleChat}
                   active={isChatOpen}
                 />
@@ -182,7 +190,7 @@ export default function RoomControlPanel({
               })}
             >
               <RoomBoardControl
-                icon={<Icon name={isScreenSharing ? "screenShareOn" : "screenShareOff"} />}
+                icon={<img src={isScreenSharing ? screenShareOnIcon : screenShareOffIcon} alt="screen share" />}
                 onClick={handleToggleScreenShare}
                 active={isScreenSharing}
                 modalTitle={intl.formatMessage({ id: ROOM_BOARD_TEXTS.SETTINGS.SCREEN_SHARE })}
@@ -197,13 +205,13 @@ export default function RoomControlPanel({
                 placement="top"
                 title={intl.formatMessage({ id: ROOM_BOARD_TEXTS.TOOLTIPS.COPY_LINK })}
               >
-                <RoomBoardControl icon={<Icon name="link" />} onClick={copyRoomLink} />
+                <RoomBoardControl icon={<img src={linkIcon} alt="copy link" />} onClick={copyRoomLink} />
               </Tooltip>
             </div>
             <div className={styles.participantsCount}>
               <RoomBoardControl
                 mode="display"
-                icon={<Icon name="users" />}
+                icon={<img src={participantsIcon} alt="users" />}
                 text={`${participantCount}`}
                 variant="default"
                 bg="#2E3038"
@@ -213,7 +221,7 @@ export default function RoomControlPanel({
               placement="top"
               title={intl.formatMessage({ id: ROOM_BOARD_TEXTS.TOOLTIPS.LEAVE_ROOM })}
             >
-              <RoomBoardControl icon={<Icon name="hangUp" />} variant="danger" onClick={handleLeaveRoom} />
+              <RoomBoardControl icon={<img src={phoneOffIcon} alt="hang up" />} variant="danger" onClick={handleLeaveRoom} />
             </Tooltip>
           </div>
         </div>

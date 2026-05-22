@@ -99,6 +99,14 @@
   display: flex;
 }
 
+/* Единый размер для всех иконок в панели */
+.controlPanel img {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+}
+
+/* Для мобильных устройств размер иконок можно чуть увеличить, но они обычно скрыты */
 @media (max-width: 767px) {
   .controlPanel {
     padding: 6px 10px;
@@ -155,6 +163,12 @@
     font-size: 10px;
     top: -4px;
     right: -4px;
+  }
+
+  /* На мобильных устройствах иконки чуть меньше */
+  .controlPanel img {
+    width: 18px;
+    height: 18px;
   }
 }
 
