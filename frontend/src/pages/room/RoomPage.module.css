@@ -2,70 +2,52 @@
   width: 100%;
   min-height: 100vh;
   position: relative;
-  padding: var(--room-container-padding-mobile);
+  padding: var(--room-container-padding-mobile, 12px);
   padding-bottom: 100px;
-  background: var(--room-container-bg);
+  background: var(--room-container-bg, #0a0a0a);
   box-sizing: border-box;
-}
-
-.roomBox:fullscreen {
-  width: 100vw;
-  height: 100vh;
-  padding: 20px;
-  background: #000;
-}
-
-.roomBox:-webkit-full-screen {
-  width: 100vw;
-  height: 100vh;
-  padding: 20px;
-  background: #000;
-}
-
-.roomBox:-moz-full-screen {
-  width: 100vw;
-  height: 100vh;
-  padding: 20px;
-  background: #000;
-}
-
-.roomBox:-ms-fullscreen {
-  width: 100vw;
-  height: 100vh;
-  padding: 20px;
-  background: #000;
 }
 
 .roomBox {
   display: grid;
-  gap: var(--room-box-gap-mobile);
+  gap: var(--room-box-gap-mobile, 8px);
   justify-content: center;
   align-items: center;
-  padding: var(--room-box-padding-mobile);
+  padding: var(--room-box-padding-mobile, 8px);
   box-sizing: border-box;
   width: 100%;
-  transition:
-    grid-template-columns 0.3s ease,
-    grid-template-rows 0.3s ease;
+  min-height: calc(100vh - 100px);
+  transition: grid-template-columns 0.3s ease, grid-template-rows 0.3s ease;
+}
+
+.roomBox:fullscreen,
+.roomBox:-webkit-full-screen,
+.roomBox:-moz-full-screen,
+.roomBox:-ms-fullscreen {
+  width: 100vw;
+  height: 100vh;
+  min-height: 100vh;
+  padding: 20px;
+  background: #000;
 }
 
 .roomParticipant {
-  border-radius: var(--room-participant-border-radius);
+  border-radius: var(--room-participant-border-radius, 12px);
   width: 100%;
   height: 100%;
   object-fit: cover;
-  background: var(--room-participant-bg);
+  background: var(--room-participant-bg, #1a1a1a);
 }
 
 .videoContainer {
   position: relative;
   box-sizing: border-box;
-  border-radius: var(--room-participant-border-radius);
+  border-radius: var(--room-participant-border-radius, 12px);
   overflow: hidden;
-  transition:
-    width 0.3s ease,
-    height 0.3s ease;
+  transition: width 0.3s ease, height 0.3s ease;
   animation: fadeIn 0.3s ease;
+  background: #000;
+  aspect-ratio: 16 / 9;
 }
 
 @keyframes fadeIn {
@@ -82,41 +64,16 @@
 .videoLabel {
   position: absolute;
   bottom: 8px;
-  font-family: sans-serif;
   left: 8px;
-  background: var(--video-label-bg);
-  color: var(--video-label-color);
-  padding: var(--video-label-padding-mobile);
-  border-radius: var(--video-label-border-radius);
-  font-size: var(--video-label-fontsize-mobile);
+  background: var(--video-label-bg, rgba(0, 0, 0, 0.6));
+  color: var(--video-label-color, #fff);
+  padding: var(--video-label-padding-mobile, 4px 8px);
+  border-radius: var(--video-label-border-radius, 6px);
+  font-size: var(--video-label-fontsize-mobile, 11px);
+  font-family: system-ui, sans-serif;
+  backdrop-filter: blur(4px);
   z-index: 1;
-}
-
-.fullscreenBtn {
-  position: absolute;
-  top: 8px;
-  right: 8px;
-  background: rgba(0, 0, 0, 0.6);
-  border: none;
-  border-radius: 6px;
-  width: 36px;
-  height: 36px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  opacity: 0;
-  transition: opacity 0.2s ease;
-  z-index: 2;
-  padding: 0;
-}
-
-.videoContainer:hover .fullscreenBtn {
-  opacity: 1;
-}
-
-.fullscreenBtn:hover {
-  background: rgba(0, 0, 0, 0.8);
+  pointer-events: none;
 }
 
 .fullscreenBtn {
@@ -139,6 +96,15 @@
   backdrop-filter: blur(4px);
 }
 
+.videoContainer:hover .fullscreenBtn {
+  opacity: 1;
+}
+
+.fullscreenBtn:hover {
+  background: rgba(0, 0, 0, 0.8);
+  transform: scale(1.05);
+}
+
 .fullscreenBtn img {
   width: 20px;
   height: 20px;
@@ -146,119 +112,62 @@
   transition: transform 0.2s ease;
 }
 
-.roomBox:fullscreen {
-  width: 100vw;
-  height: 100vh;
-  padding: 20px;
-  background: #000;
-}
-
-.roomBox:-webkit-full-screen {
-  width: 100vw;
-  height: 100vh;
-  padding: 20px;
-  background: #000;
-}
-
-.roomBox:-moz-full-screen {
-  width: 100vw;
-  height: 100vh;
-  padding: 20px;
-  background: #000;
-}
-
-.roomBox:-ms-fullscreen {
-  width: 100vw;
-  height: 100vh;
-  padding: 20px;
-  background: #000;
-}
-
-.roomBox:fullscreen .videoContainer {
-  border-radius: 8px;
-}
-
-.roomBox:fullscreen .videoLabel {
-  background: rgba(0, 0, 0, 0.7);
-  font-size: 16px;
-  padding: 8px 12px;
-}
-
-.roomBox:fullscreen .fullscreenBtn {
-  width: 40px;
-  height: 40px;
-}
-
-.roomBox:-webkit-full-screen .videoContainer {
-  border-radius: 8px;
-}
-
-.roomBox:-webkit-full-screen .videoLabel {
-  background: rgba(0, 0, 0, 0.7);
-  font-size: 16px;
-  padding: 8px 12px;
-}
-
-.roomBox:-webkit-full-screen .fullscreenBtn {
-  width: 40px;
-  height: 40px;
-}
-
 @media (min-width: 480px) {
   .containerRoom {
-    padding: var(--room-container-padding-480);
+    padding: var(--room-container-padding-480, 16px);
+    padding-bottom: 100px;
   }
-
   .roomBox {
-    gap: var(--room-box-gap-480);
-    padding: var(--room-box-padding-480);
+    gap: var(--room-box-gap-480, 12px);
+    padding: var(--room-box-padding-480, 12px);
+  }
+  .videoLabel {
+    font-size: 12px;
+    padding: 5px 10px;
   }
 }
 
 @media (min-width: 768px) {
   .containerRoom {
-    padding: var(--room-container-padding-768);
+    padding: var(--room-container-padding-768, 20px);
+    padding-bottom: 100px;
   }
-
   .roomBox {
-    gap: var(--room-box-gap-768);
-    padding: var(--room-box-padding-768);
-    min-height: var(--room-box-min-height);
+    gap: var(--room-box-gap-768, 16px);
+    padding: var(--room-box-padding-768, 16px);
+    min-height: var(--room-box-min-height, 500px);
   }
-
   .videoLabel {
-    font-size: var(--video-label-fontsize-768);
-    padding: var(--video-label-padding-768);
+    font-size: 14px;
+    padding: 6px 12px;
   }
 }
 
 @media (min-width: 1024px) {
   .roomBox {
-    gap: var(--room-box-gap-1024);
-    padding: var(--room-box-padding-1024);
+    gap: var(--room-box-gap-1024, 20px);
+    padding: var(--room-box-padding-1024, 20px);
   }
-
   .videoLabel {
-    font-size: var(--video-label-fontsize-1024);
-    padding: var(--video-label-padding-1024);
+    font-size: 15px;
+    padding: 8px 14px;
   }
 }
 
 @media (min-width: 1440px) {
   .roomBox {
-    gap: var(--room-box-gap-1440);
-    padding: var(--room-box-padding-1440);
+    gap: var(--room-box-gap-1440, 24px);
+    padding: var(--room-box-padding-1440, 24px);
   }
-
   .videoLabel {
-    font-size: var(--video-label-fontsize-1440);
-    padding: var(--video-label-padding-1440);
+    font-size: 16px;
+    padding: 8px 16px;
   }
 }
 
 @media (min-width: 1920px) {
   .roomBox {
-    gap: var(--room-box-gap-1920);
-    padding: var(--room-box-padding-1920);
+    gap: var(--room-box-gap-1920, 32px);
+    padding: var(--room-box-padding-1920, 32px);
   }
 }

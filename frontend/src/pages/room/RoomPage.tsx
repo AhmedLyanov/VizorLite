@@ -167,8 +167,7 @@ export default function RoomPage() {
           socketId: string;
           userName: string;
         }>;
-      },
-      ) => {
+      }) => {
         users.forEach(({ socketId, userName }) => {
           setParticipants((prev) => {
             const map = new Map(prev);
@@ -317,7 +316,6 @@ export default function RoomPage() {
           gridTemplateRows: `repeat(${layout.rows}, 0fr)`,
           gap: "var(--room-box-gap-mobile)",
           width: "100%",
-          height: "calc(100vh - 120px)",
           placeItems: "center",
         }}
       >
@@ -345,8 +343,6 @@ export default function RoomPage() {
               <img src={fullscreenOff} alt="fullscreen on" />
             ) : (
               <img src={fullscreenOn} alt="fullscreen on" />
-
-
             )}
           </button>
         </div>
@@ -383,12 +379,8 @@ export default function RoomPage() {
                 <img src={fullscreenOff} alt="fullscreen on" />
               ) : (
                 <img src={fullscreenOn} alt="fullscreen on" />
-
-
               )}
             </button>
-
-
           </div>
         ))}
       </div>

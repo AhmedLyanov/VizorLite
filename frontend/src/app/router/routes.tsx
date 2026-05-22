@@ -27,7 +27,6 @@ export const routes: RouteObject[] = [
       { path: "/pricing", element: <PricingPage /> },
       { path: "/about", element: <AboutPage /> },
       { path: "/faq", element: <FAQPage /> },
-      { path: "/payments", element: <HistoryPricing /> },
       { path: "/pro", element: <ProFeaturesPage /> },
     ],
   },
@@ -36,13 +35,20 @@ export const routes: RouteObject[] = [
     element: <DefaultLayout />,
     children: [
       { path: "/community", element: <CommunityPage /> },
-
       { path: "/", element: <HomePage /> },
       {
         path: "/profile",
         element: (
           <ProtectedRoute>
             <ProfilePage />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/payments",   
+        element: (
+          <ProtectedRoute>
+            <HistoryPricing />
           </ProtectedRoute>
         ),
       },

@@ -1,158 +1,216 @@
+.controlPanel {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 8px 12px;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  box-sizing: border-box;
+}
+
+.controlPanel::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
+  z-index: 1;
+}
+
+.panelSection {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.panelSection:first-child {
+  gap: 8px;
+}
+
+.panelSection:nth-child(2) {
+  flex: 1;
+  justify-content: center;
+}
+
+.panelSection:last-child {
+  gap: 8px;
+  justify-content: flex-end;
+}
+
+.leftGroup {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.centerControls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.rightControls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.chatWrapper {
+  position: relative;
+}
+
+.unreadBadge {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  min-width: 16px;
+  height: 16px;
+  border-radius: 8px;
+  background: rgba(255, 77, 79, 0.9);
+  color: #fff;
+  font-size: 10px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 4px;
+  box-shadow: 0 2px 8px rgba(255, 77, 79, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(4px);
+  z-index: 3;
+}
+
+.micLevelVisualizer {
+  display: block;
+}
+
+.copyLinkBtn,
+.participantsCount {
+  display: flex;
+}
+
+@media (max-width: 767px) {
   .controlPanel {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    z-index: 1000;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 8px;
-    padding: 8px 12px;
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
+    padding: 6px 10px;
+    gap: 6px;
+    justify-content: center;
   }
 
-  .controlPanel::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 1px;
-    background: linear-gradient(90deg,
-        transparent,
-        rgba(255, 255, 255, 0.15),
-        transparent);
-    z-index: 1;
+  .micLevelVisualizer {
+    display: none;
   }
 
-  .panelSection {
-    display: flex;
-    align-items: center;
-    flex-shrink: 0;
+  .copyLinkBtn,
+  .participantsCount {
+    display: none;
   }
 
   .panelSection:first-child {
-    gap: 8px;
+    justify-content: flex-start;
+    gap: 6px;
   }
 
   .panelSection:nth-child(2) {
-    flex: 1;
+    flex: 0;
     justify-content: center;
   }
 
   .panelSection:last-child {
-    gap: 8px;
+    justify-content: flex-end;
+    gap: 0;
   }
 
-  .leftGroup {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-
-  .centerControls {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-
+  .leftGroup,
+  .centerControls,
   .rightControls {
-    display: flex;
-    align-items: center;
-    gap: 8px;
+    gap: 6px;
   }
 
-  .chatWrapper {
-    position: relative;
+  .controlPanel button {
+    min-width: 44px;
+    min-height: 44px;
+    padding: 0 12px;
+  }
+
+  .rightControls button:last-child {
+    background: #ff3b30;
+    padding: 0 16px;
+    font-weight: 600;
+    box-shadow: 0 2px 12px rgba(255, 59, 48, 0.3);
   }
 
   .unreadBadge {
-    position: absolute;
+    min-width: 18px;
+    height: 18px;
+    font-size: 10px;
     top: -4px;
     right: -4px;
-    min-width: 16px;
-    height: 16px;
-    border-radius: 8px;
-    background: rgba(255, 77, 79, 0.9);
-    color: #fff;
-    font-size: 10px;
-    font-weight: 600;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0 4px;
-    box-shadow: 0 2px 8px rgba(255, 77, 79, 0.4);
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    backdrop-filter: blur(4px);
-    -webkit-backdrop-filter: blur(4px);
-    z-index: 3;
   }
+}
 
-  @media (min-width: 768px) {
-    .controlPanel {
-      gap: 12px;
-      padding: 10px 20px;
-    }
-
-    .panelSection:first-child {
-      gap: 12px;
-    }
-
-    .leftGroup {
-      gap: 12px;
-    }
-
-    .centerControls {
-      gap: 12px;
-    }
-
-    .rightControls {
-      gap: 12px;
-    }
-
-    .unreadBadge {
-      min-width: 18px;
-      height: 18px;
-      font-size: 11px;
-      padding: 0 5px;
-    }
+@media (min-width: 768px) {
+  .controlPanel {
+    padding: 10px 20px;
+    gap: 12px;
   }
-
-  @media (min-width: 1024px) {
-    .controlPanel {
-      gap: 16px;
-      padding: 12px 24px;
-    }
-
-    .panelSection:first-child {
-      gap: 16px;
-    }
-
-    .leftGroup {
-      gap: 16px;
-    }
-
-    .centerControls {
-      gap: 16px;
-    }
-
-    .rightControls {
-      gap: 16px;
-    }
-
-    .unreadBadge {
-      min-width: 20px;
-      height: 20px;
-      font-size: 11px;
-      top: -6px;
-      right: -6px;
-    }
+  .panelSection:first-child {
+    gap: 12px;
   }
-
-  @media (min-width: 1440px) {
-    .controlPanel {
-      padding: 16px 32px;
-    }
+  .leftGroup {
+    gap: 12px;
   }
+  .centerControls {
+    gap: 12px;
+  }
+  .rightControls {
+    gap: 12px;
+  }
+  .unreadBadge {
+    min-width: 18px;
+    height: 18px;
+    font-size: 11px;
+    padding: 0 5px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .controlPanel {
+    padding: 12px 24px;
+    gap: 16px;
+  }
+  .panelSection:first-child {
+    gap: 16px;
+  }
+  .leftGroup {
+    gap: 16px;
+  }
+  .centerControls {
+    gap: 16px;
+  }
+  .rightControls {
+    gap: 16px;
+  }
+  .unreadBadge {
+    min-width: 20px;
+    height: 20px;
+    font-size: 11px;
+    top: -6px;
+    right: -6px;
+  }
+}
+
+@media (min-width: 1440px) {
+  .controlPanel {
+    padding: 16px 32px;
+  }
+}

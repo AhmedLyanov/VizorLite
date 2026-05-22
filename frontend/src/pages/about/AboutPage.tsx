@@ -4,9 +4,12 @@ import { Link } from "react-router-dom";
 
 import InstallBanner from "@/widgets/installBanner/InstallBanner";
 import { ABOUT_TEXTS } from "@/shared/constants";
+import homeIcon from "@/shared/assets/home.svg";
+import dollarIcon from "@/shared/assets/dollar.svg";
+import questionIcon from "@/shared/assets/question.svg";
+import sendIcon from "@/shared/assets/send.svg";
 
 import styles from "./AboutPage.module.css";
-
 
 const AboutPage: React.FC = () => {
   const intl = useIntl();
@@ -29,23 +32,7 @@ const AboutPage: React.FC = () => {
             {intl.formatMessage({ id: ABOUT_TEXTS.MISSION.DESCRIPTION })}
           </p>
 
-          <div className={styles.valuesGrid}>
-            {ABOUT_TEXTS.VALUES.ITEMS.map((value, index) => (
-              <div key={index} className={styles.valueItem}>
-                <img
-                  src={`@/shared/assets/${intl.formatMessage({ id: value.ICON })}`}
-                  alt={intl.formatMessage({ id: value.TITLE })}
-                  className={styles.valueIcon}
-                />
-                <div className={styles.valueContent}>
-                  <h3>{intl.formatMessage({ id: value.TITLE })}</h3>
-                  <p>{intl.formatMessage({ id: value.DESCRIPTION })}</p>
-                </div>
-              </div>
-            ))}
-          </div>
         </section>
-
         <section className={styles.statsSection}>
           <h2 className={styles.statsTitle}>
             {intl.formatMessage({ id: ABOUT_TEXTS.STATS.TITLE })}
@@ -69,8 +56,8 @@ const AboutPage: React.FC = () => {
             {intl.formatMessage({ id: ABOUT_TEXTS.TEAM.TITLE })}
           </h2>
           <div className={styles.teamGrid}>
-            {ABOUT_TEXTS.TEAM.ITEMS.map((member) => (
-              <div  className={styles.teamCard}>
+            {ABOUT_TEXTS.TEAM.ITEMS.map((member, idx) => (
+              <div key={idx} className={styles.teamCard}>
                 <div className={styles.memberImage}>
                   <svg className={styles.placeholderIcon} viewBox="0 0 24 24">
                     <path
@@ -123,47 +110,24 @@ const AboutPage: React.FC = () => {
 
         <InstallBanner />
       </div>
-
       <div className={styles.bottomContent}>
         <div className={styles.bottomLinks}>
-          {ABOUT_TEXTS.BOTTOM_LINKS.ITEMS.map((link, index) => {
-            const label = intl.formatMessage({ id: link.LABEL });
-            const iconSrc = `@/shared/assets/${intl.formatMessage({ id: link.ICON })}`;
-            
-            if ("HREF" in link) {
-              return (
-                <a
-                  key={index}
-                  href={link.HREF}
-                  className={styles.bottomLink}
-                  title={label}
-                >
-                  <img
-                    src={iconSrc}
-                    alt={label}
-                    className={styles.linkIcon}
-                  />
-                  {label}
-                </a>
-              );
-            }
-
-            return (
-              <Link
-                key={index}
-                to={link.PATH}
-                className={styles.bottomLink}
-                title={label}
-              >
-                <img
-                  src={iconSrc}
-                  alt={label}
-                  className={styles.linkIcon}
-                />
-                {label}
-              </Link>
-            );
-          })}
+          <Link to="/" className={styles.bottomLink}>
+            <img src={homeIcon} alt="" className={styles.linkIcon} />
+            {intl.formatMessage({ id: "about.bottomLinks.items.home.label" })}
+          </Link>
+          <Link to="/pricing" className={styles.bottomLink}>
+            <img src={dollarIcon} alt="" className={styles.linkIcon} />
+            {intl.formatMessage({ id: "about.bottomLinks.items.pricing.label" })}
+          </Link>
+          <Link to="/about" className={styles.bottomLink}>
+            <img src={questionIcon} alt="" className={styles.linkIcon} />
+            {intl.formatMessage({ id: "about.bottomLinks.items.about.label" })}
+          </Link>
+          <a href="mailto:support@vizorlite.com" className={styles.bottomLink}>
+            <img src={sendIcon} alt="" className={styles.linkIcon} />
+            {intl.formatMessage({ id: "about.bottomLinks.items.contacts.label" })}
+          </a>
         </div>
       </div>
     </div>

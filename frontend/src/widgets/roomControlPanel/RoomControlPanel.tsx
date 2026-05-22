@@ -6,13 +6,11 @@ import { Icon } from "@/shared/assets/icons/Icon";
 import { ROOM_BOARD_TEXTS } from "@/shared/constants/roomBoard";
 import MicLevelVisualizer from "@/shared/ui/waveform/MicLevelVisualizer";
 import sendIcon from "@/shared/assets/send.svg";
-
 import { useChatStore } from "@/entities/chat";
 import { useDeviceStore, useAutoMute } from "@/entities/device";
-
 import { LeaveRoomModal } from "@/features/leaveRoom";
 import { RoomBoardControl } from "@/features/buttonRoomBoard";
-import { MicSettings, CameraSettings, ShareSettings } from "@/features/deviceSettings";
+// import { MicSettings, CameraSettings, ShareSettings } from "@/features/deviceSettings";
 
 import styles from "./RoomControlPanel.module.css";
 
@@ -126,7 +124,9 @@ export default function RoomControlPanel({
       {contextHolder}
       <div className={styles.controlPanel}>
         <div className={styles.panelSection}>
-          <MicLevelVisualizer stream={stream} />
+          <div className={styles.micLevelVisualizer}>
+            <MicLevelVisualizer stream={stream} />
+          </div>
           <div className={styles.leftGroup}>
             <Tooltip
               placement="top"
@@ -139,7 +139,6 @@ export default function RoomControlPanel({
                 onClick={toggleMicrophone}
                 active={!isMicOn}
                 modalTitle={intl.formatMessage({ id: ROOM_BOARD_TEXTS.SETTINGS.MICROPHONE })}
-                modalContent={<MicSettings />}
               />
             </Tooltip>
             <Tooltip
@@ -153,54 +152,8 @@ export default function RoomControlPanel({
                 onClick={handleToggleCamera}
                 active={!isCameraOn}
                 modalTitle={intl.formatMessage({ id: ROOM_BOARD_TEXTS.SETTINGS.CAMERA })}
-                modalContent={<CameraSettings />}
               />
             </Tooltip>
-          </div>
-        </div>
-
-        <div className={styles.panelSection}>
-          <div className={styles.centerControls}>
-            <Tooltip
-              placement="top"
-              title={intl.formatMessage({
-                id: isScreenSharing
-                  ? ROOM_BOARD_TEXTS.TOOLTIPS.SCREEN_SHARE_STOP
-                  : ROOM_BOARD_TEXTS.TOOLTIPS.SCREEN_SHARE_START,
-              })}
-            >
-              <RoomBoardControl
-                icon={<Icon name={isScreenSharing ? "screenShareOn" : "screenShareOff"} />}
-                onClick={handleToggleScreenShare}
-                active={isScreenSharing}
-                modalTitle={intl.formatMessage({ id: ROOM_BOARD_TEXTS.SETTINGS.SCREEN_SHARE })}
-                modalContent={<ShareSettings />}
-              />
-            </Tooltip>
-            <Tooltip
-              placement="top"
-              title={intl.formatMessage({ id: ROOM_BOARD_TEXTS.TOOLTIPS.LEAVE_ROOM })}
-            >
-              <RoomBoardControl icon={<Icon name="hangUp" />} variant="danger" onClick={handleLeaveRoom} />
-            </Tooltip>
-          </div>
-        </div>
-
-        <div className={styles.panelSection}>
-          <div className={styles.rightControls}>
-            <Tooltip
-              placement="top"
-              title={intl.formatMessage({ id: ROOM_BOARD_TEXTS.TOOLTIPS.COPY_LINK })}
-            >
-              <RoomBoardControl icon={<Icon name="link" />} onClick={copyRoomLink} />
-            </Tooltip>
-            <RoomBoardControl
-              mode="display"
-              icon={<Icon name="users" />}
-              text={`${participantCount}`}
-              variant="default"
-              bg="#2E3038"
-            />
             <div className={styles.chatWrapper}>
               <Tooltip
                 placement="top"
@@ -216,6 +169,52 @@ export default function RoomControlPanel({
                 <span className={styles.unreadBadge}>{unreadCount > 99 ? "99+" : unreadCount}</span>
               )}
             </div>
+          </div>
+        </div>
+        <div className={styles.panelSection}>
+          <div className={styles.centerControls}>
+            <Tooltip
+              placement="top"
+              title={intl.formatMessage({
+                id: isScreenSharing
+                  ? ROOM_BOARD_TEXTS.TOOLTIPS.SCREEN_SHARE_STOP
+                  : ROOM_BOARD_TEXTS.TOOLTIPS.SCREEN_SHARE_START,
+              })}
+            >
+              <RoomBoardControl
+                icon={<Icon name={isScreenSharing ? "screenShareOn" : "screenShareOff"} />}
+                onClick={handleToggleScreenShare}
+                active={isScreenSharing}
+                modalTitle={intl.formatMessage({ id: ROOM_BOARD_TEXTS.SETTINGS.SCREEN_SHARE })}
+              />
+            </Tooltip>
+          </div>
+        </div>
+        <div className={styles.panelSection}>
+          <div className={styles.rightControls}>
+            <div className={styles.copyLinkBtn}>
+              <Tooltip
+                placement="top"
+                title={intl.formatMessage({ id: ROOM_BOARD_TEXTS.TOOLTIPS.COPY_LINK })}
+              >
+                <RoomBoardControl icon={<Icon name="link" />} onClick={copyRoomLink} />
+              </Tooltip>
+            </div>
+            <div className={styles.participantsCount}>
+              <RoomBoardControl
+                mode="display"
+                icon={<Icon name="users" />}
+                text={`${participantCount}`}
+                variant="default"
+                bg="#2E3038"
+              />
+            </div>
+            <Tooltip
+              placement="top"
+              title={intl.formatMessage({ id: ROOM_BOARD_TEXTS.TOOLTIPS.LEAVE_ROOM })}
+            >
+              <RoomBoardControl icon={<Icon name="hangUp" />} variant="danger" onClick={handleLeaveRoom} />
+            </Tooltip>
           </div>
         </div>
       </div>

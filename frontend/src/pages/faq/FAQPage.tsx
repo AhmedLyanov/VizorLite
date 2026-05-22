@@ -5,6 +5,12 @@ import { Link } from "react-router-dom";
 import InstallBanner from "@/widgets/installBanner/InstallBanner";
 import { FAQ_TEXTS } from "@/shared/constants";
 
+// Импортируем иконки
+import homeIcon from "@/shared/assets/home.svg";
+import dollarIcon from "@/shared/assets/dollar.svg";
+import questionIcon from "@/shared/assets/question.svg";
+import sendIcon from "@/shared/assets/send.svg";
+
 import styles from "./FAQPage.module.css";
 
 type FAQItemType = typeof FAQ_TEXTS.QUESTIONS[number];
@@ -24,7 +30,6 @@ const FAQPage: React.FC = () => {
       return next;
     });
   };
-
 
   const questionsByCategory = FAQ_TEXTS.QUESTIONS.reduce<Record<string, FAQItemType[]>>(
     (acc, item) => {
@@ -97,19 +102,19 @@ const FAQPage: React.FC = () => {
       <div className={styles.bottomContent}>
         <div className={styles.bottomLinks}>
           <Link to="/" className={styles.bottomLink}>
-            <img src="/assets/home.svg" alt="" className={styles.linkIcon} />
+            <img src={homeIcon} alt="" className={styles.linkIcon} />
             {intl.formatMessage({ id: "about.bottomLinks.items.home.label" })}
           </Link>
           <Link to="/pricing" className={styles.bottomLink}>
-            <img src="/assets/dollar.svg" alt="" className={styles.linkIcon} />
+            <img src={dollarIcon} alt="" className={styles.linkIcon} />
             {intl.formatMessage({ id: "about.bottomLinks.items.pricing.label" })}
           </Link>
           <Link to="/about" className={styles.bottomLink}>
-            <img src="/assets/question.svg" alt="" className={styles.linkIcon} />
+            <img src={questionIcon} alt="" className={styles.linkIcon} />
             {intl.formatMessage({ id: "about.bottomLinks.items.about.label" })}
           </Link>
           <a href="mailto:support@vizorlite.com" className={styles.bottomLink}>
-            <img src="/assets/send.svg" alt="" className={styles.linkIcon} />
+            <img src={sendIcon} alt="" className={styles.linkIcon} />
             {intl.formatMessage({ id: "about.bottomLinks.items.contacts.label" })}
           </a>
         </div>
