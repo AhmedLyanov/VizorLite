@@ -63,7 +63,7 @@ export default function Authentication() {
     handleSubmit,
     reset,
     setValue,
-    formState: { errors, isValid, touchedFields },
+    formState: { errors, isValid },
   } = useForm<any>({
     resolver: zodResolver(schema),
     mode: "onChange", 
