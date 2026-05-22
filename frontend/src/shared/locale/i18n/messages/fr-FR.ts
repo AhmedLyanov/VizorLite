@@ -150,10 +150,10 @@ export const frMessages = {
   "roomBoard.share.message":
     "Salut ! Rejoignez ma vidéoconférence sur VizorLite, voici le lien :",
 
-
   "home.hero.title": "VizorLite — communiquer, planifier, décider",
   "home.install.title": "VizorLite",
-  "home.install.description": "Téléchargez l'application pour une meilleure expérience sur votre appareil",
+  "home.install.description":
+    "Téléchargez l'application pour une meilleure expérience sur votre appareil",
   "home.install.button": "Installer",
   "home.button.create": "Créer une vidéoconférence",
   "home.button.join": "Rejoindre",
@@ -162,8 +162,7 @@ export const frMessages = {
   "home.bottom.translate": "Traduction",
   "home.bottom.faq": "FAQ",
 
-
-"ai.title.main": "Assistant Markus",
+  "ai.title.main": "Assistant Markus",
   "ai.button.toggle": "IA",
   "ai.button.send": "Envoyer",
   "ai.button.close": "✕",
@@ -175,8 +174,10 @@ export const frMessages = {
   "ai.message.thinking": "Réflexion...",
   "ai.error.title": "Erreur",
   "ai.error.default": "Échec de l'obtention d'une réponse de l'IA",
-  "ai.error.timeout": "Délai de la requête dépassé. Veuillez réessayer.",
-  "ai.error.emptyResponse": "L'IA a retourné une réponse vide. Veuillez réessayer.",
+  "ai.error.timeout":
+    "Délai de la requête dépassé. Veuillez réessayer.",
+  "ai.error.emptyResponse":
+    "L'IA a retourné une réponse vide. Veuillez réessayer.",
   "ai.hint.text": "Besoin d'aide ? Je suis là",
   "ai.snippets.create_meeting": "Comment créer une réunion ?",
   "ai.snippets.share_screen": "Comment partager l'écran ?",
@@ -272,13 +273,25 @@ export const frMessages = {
   "pricing.recommended": "Recommandé",
   "pricing.selectButton": "Choisir le plan",
 
+  // === NOUVEAUX CHAMPS POUR LA PAGE TARIFS (Free & Pro) ===
+  "pricing.plans.pro.name": "Pro",
+  "pricing.bestValue": "Meilleure valeur",
+  "pricing.free.button": "Commencer gratuitement",
+  "pricing.plans.free.name": "Gratuit",
+  "pricing.error.checkout":
+    "Erreur lors de la création de la session de paiement",
+  "pricing.free.feature1": "Jusqu'à 3 participants",
+  "pricing.free.feature2": "40 minutes par réunion",
+  "pricing.free.feature3": "Chat de base",
 
   "history.totalTransactions": "Transactions totales: ",
   "history.title": "Historique des paiements",
-  "history.subtitle": "Toutes les transactions de votre abonnement – toujours sous contrôle",
+  "history.subtitle":
+    "Toutes les transactions de votre abonnement – toujours sous contrôle",
   "history.empty": "Vous n'avez encore aucun paiement",
   "history.loading": "Chargement...",
-  "history.error": "Échec du chargement de l'historique des paiements",
+  "history.error":
+    "Échec du chargement de l'historique des paiements",
   "history.table.date": "Date",
   "history.table.description": "Description",
   "history.table.amount": "Montant",
@@ -297,7 +310,7 @@ export const frMessages = {
   "pricing.plans.basic.features.chat": "Chat partagé",
   "pricing.plans.basic.features.support": "Support de base",
 
-  "pricing.plans.business.name": "Business",
+  "pricing.plans.business.name": "Pro",
   "pricing.plans.business.price": "10€",
   "pricing.plans.business.period": "/mois",
   "pricing.plans.business.features.participants":
@@ -326,7 +339,7 @@ export const frMessages = {
     "Oui, vous pouvez changer de plan à tout moment dans votre compte personnel.",
   "pricing.faq.items.1.question": "Y a-t-il une période d'essai ?",
   "pricing.faq.items.1.answer":
-    "Une période d'essai de 14 jours est disponible pour les plans Business et Premium.",
+    "Une période d'essai de 14 jours est disponible pour les plans Pro et Premium.",
   "pricing.faq.items.2.question": "Comment fonctionne le paiement ?",
   "pricing.faq.items.2.answer":
     "Paiement par carte via une passerelle de paiement sécurisée. Débit automatique mensuel.",
@@ -341,31 +354,47 @@ export const frMessages = {
 
   // FAQ
   "faq.hero.title": "Questions fréquentes",
-  "faq.hero.subtitle": "Trouvez les réponses aux questions populaires sur VizorLite",
+  "faq.hero.subtitle":
+    "Trouvez les réponses aux questions populaires sur VizorLite",
   "faq.categories.general": "Questions générales",
   "faq.categories.technical": "Questions techniques",
   "faq.categories.security": "Sécurité",
   "faq.categories.pricing": "Tarifs",
   "faq.questions.howToCreateRoom.question": "Comment créer une salle ?",
-  "faq.questions.howToCreateRoom.answer": "Cliquez sur le bouton 'Créer une réunion' sur la page d'accueil. La salle sera créée instantanément et vous recevrez un lien unique pour inviter des participants.",
-  "faq.questions.maxParticipants.question": "Combien de participants peuvent être dans une salle ?",
-  "faq.questions.maxParticipants.answer": "Cela dépend de votre forfait. Forfait de base - jusqu'à 3 participants, Business - jusqu'à 25, Premium - jusqu'à 100 participants.",
+  "faq.questions.howToCreateRoom.answer":
+    "Cliquez sur le bouton 'Créer une réunion' sur la page d'accueil. La salle sera créée instantanément et vous recevrez un lien unique pour inviter des participants.",
+  "faq.questions.maxParticipants.question":
+    "Combien de participants peuvent être dans une salle ?",
+  "faq.questions.maxParticipants.answer":
+    "Cela dépend de votre forfait. Forfait de base - jusqu'à 3 participants, Pro - jusqu'à 25, Premium - jusqu'à 100 participants.",
   "faq.questions.isFree.question": "Est-ce gratuit ?",
-  "faq.questions.isFree.answer": "Oui, le forfait de base est totalement gratuit et comprend toutes les fonctionnalités nécessaires pour les appels vidéo.",
-  "faq.questions.browserSupport.question": "Quels navigateurs sont pris en charge ?",
-  "faq.questions.browserSupport.answer": "VizorLite prend en charge tous les navigateurs modernes : Chrome, Firefox, Safari, Edge dernières versions.",
+  "faq.questions.isFree.answer":
+    "Oui, le forfait de base est totalement gratuit et comprend toutes les fonctionnalités nécessaires pour les appels vidéo.",
+  "faq.questions.browserSupport.question":
+    "Quels navigateurs sont pris en charge ?",
+  "faq.questions.browserSupport.answer":
+    "VizorLite prend en charge tous les navigateurs modernes : Chrome, Firefox, Safari, Edge dernières versions.",
   "faq.questions.noDownload.question": "Dois-je télécharger quelque chose ?",
-  "faq.questions.noDownload.answer": "Non, VizorLite fonctionne directement dans le navigateur sans installation de logiciel supplémentaire.",
+  "faq.questions.noDownload.answer":
+    "Non, VizorLite fonctionne directement dans le navigateur sans installation de logiciel supplémentaire.",
   "faq.questions.screenShare.question": "Comment partager l'écran ?",
-  "faq.questions.screenShare.answer": "Pendant la réunion, cliquez sur le bouton 'Partager l'écran' dans le panneau de contrôle inférieur.",
-  "faq.questions.dataProtection.question": "Comment mes données sont-elles protégées ?",
-  "faq.questions.dataProtection.answer": "Nous utilisons le chiffrement WebRTC de bout en bout. Vos appels vidéo ne sont pas enregistrés ni stockés sur nos serveurs.",
+  "faq.questions.screenShare.answer":
+    "Pendant la réunion, cliquez sur le bouton 'Partager l'écran' dans le panneau de contrôle inférieur.",
+  "faq.questions.dataProtection.question":
+    "Comment mes données sont-elles protégées ?",
+  "faq.questions.dataProtection.answer":
+    "Nous utilisons le chiffrement WebRTC de bout en bout. Vos appels vidéo ne sont pas enregistrés ni stockés sur nos serveurs.",
   "faq.questions.encryption.question": "Le chiffrement est-il utilisé ?",
-  "faq.questions.encryption.answer": "Oui, toutes les connexions sont sécurisées avec le protocole WebRTC utilisant le chiffrement SRTP et DTLS.",
-  "faq.questions.changePlan.question": "Puis-je changer de forfait plus tard ?",
-  "faq.questions.changePlan.answer": "Oui, vous pouvez modifier votre forfait à tout moment dans votre compte personnel.",
-  "faq.questions.paymentMethods.question": "Quels modes de paiement sont disponibles ?",
-  "faq.questions.paymentMethods.answer": "Nous acceptons les paiements par carte bancaire via une passerelle de paiement sécurisée.",
+  "faq.questions.encryption.answer":
+    "Oui, toutes les connexions sont sécurisées avec le protocole WebRTC utilisant le chiffrement SRTP et DTLS.",
+  "faq.questions.changePlan.question":
+    "Puis-je changer de forfait plus tard ?",
+  "faq.questions.changePlan.answer":
+    "Oui, vous pouvez modifier votre forfait à tout moment dans votre compte personnel.",
+  "faq.questions.paymentMethods.question":
+    "Quels modes de paiement sont disponibles ?",
+  "faq.questions.paymentMethods.answer":
+    "Nous acceptons les paiements par carte bancaire via une passerelle de paiement sécurisée.",
 
   // Profile page
   "profile.title": "Profil",

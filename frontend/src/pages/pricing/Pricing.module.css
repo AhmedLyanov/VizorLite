@@ -1,341 +1,213 @@
-.sectionContent {
-    width: 100%;
-    min-height: 100vh;
-    padding: 12px 8px;
-    background: var(--primary-background-color);
-    overflow-x: hidden;
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
+.pricingPage {
+  width: 100%;
+  min-height: 100vh;
+  background: var(--primary-background-color, #f9f9f9);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem 1rem 3rem;
+  box-sizing: border-box;
 }
 
-.contentContainer {
-    width: 100%;
-    margin: 0 auto;
-    flex: 1;
+.heroSection {
+  text-align: center;
+  max-width: 800px;
+  margin-bottom: 3rem;
 }
 
 .mainTitle {
-    color: var(--primary-title-color);
-    text-align: center;
-    font-family: var(--primary-font);
-    font-size: 22px;
-    margin: 15px auto 12px;
-    padding: 0 12px;
-    line-height: 1.3;
+  font-family: var(--primary-font, system-ui, -apple-system, sans-serif);
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: var(--primary-title-color, #1a1a2e);
+  margin-bottom: 0.75rem;
+  letter-spacing: -0.02em;
 }
 
-.subtitle {
-    color: rgba(0, 0, 0, 0.6);
-    text-align: center;
-    font-family: var(--primary-font);
-    font-size: 14px;
-    max-width: 100%;
-    margin: 0 auto 30px;
-    padding: 0 12px;
-    line-height: 1.4;
-}
-
-.pricingCards {
-    display: grid;
-    gap: 20px;
-    width: 100%;
-    margin: 0 auto 30px;
-    padding: 0 12px;
-    grid-template-columns: 1fr;
+.pricingCardsWrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto 3rem;
 }
 
 .pricingCard {
-    background: var(--primary-white);
-    border-radius: 16px;
-    padding: 20px 16px;
-    box-shadow: 0 4px 15px rgba(51, 51, 51, 0.06);
-    border: 1px solid rgba(0, 0, 0, 0.06);
-    display: flex;
-    flex-direction: column;
-    position: relative;
-    transition: transform 0.25s ease, box-shadow 0.25s ease;
+  background: var(--primary-white, #ffffff);
+  border-radius: 2rem;
+  padding: 2rem 1.5rem;
+  position: relative;
+  transition: all 0.3s ease;
+  box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  flex: 1 1 300px;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
 }
 
-.recommended {
-    border: 1px solid rgba(0, 0, 0, 0.12);
-    box-shadow: 0 6px 20px rgba(51, 51, 51, 0.08);
+.pricingCard:hover {
+  box-shadow: 0 25px 40px -12px rgba(0, 0, 0, 0.15);
 }
 
-.recommendedBadge {
-    position: absolute;
-    top: -10px;
-    left: 50%;
-    background: var(--primary-title-color);
-    color: var(--primary-white);
-    font-family: var(--primary-font);
-    font-size: 11px;
-    font-weight: 600;
-    padding: 5px 16px;
-    border-radius: 16px;
-    white-space: nowrap;
+.proCard {
+  background: linear-gradient(145deg, #ffffff 0%, #fefefe 100%);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.cardBadge {
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--primary-title-color, #1a1a2e);
+  color: white;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.3rem 1rem;
+  border-radius: 40px;
+  letter-spacing: 0.3px;
+  white-space: nowrap;
 }
 
 .cardHeader {
-    text-align: center;
-    margin-bottom: 20px;
-    padding-bottom: 15px;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  text-align: center;
+  margin-bottom: 1.8rem;
 }
 
 .planName {
-    color: var(--primary-title-color);
-    font-family: var(--primary-font);
-    font-size: 20px;
-    font-weight: 600;
-    margin: 0 0 12px 0;
+  font-family: var(--primary-font, system-ui, sans-serif);
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--primary-title-color, #1a1a2e);
+  margin: 0 0 0.5rem 0;
 }
 
 .priceContainer {
-    display: flex;
-    align-items: baseline;
-    justify-content: center;
-    gap: 4px;
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 0.25rem;
 }
 
 .price {
-    color: var(--primary-title-color);
-    font-family: var(--primary-font);
-    font-size: 32px;
-    font-weight: 700;
+  font-size: 2.8rem;
+  font-weight: 800;
+  color: var(--primary-title-color, #1a1a2e);
+  letter-spacing: -0.01em;
 }
 
 .period {
-    color: rgba(0, 0, 0, 0.5);
-    font-family: var(--primary-font);
-    font-size: 13px;
+  font-size: 0.9rem;
+  color: rgba(0, 0, 0, 0.5);
+  font-weight: 500;
 }
 
 .featuresList {
-    flex: 1;
-    margin-bottom: 25px;
+  margin: 1.5rem 0 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  flex: 1;
 }
 
 .featureItem {
-    display: flex;
-    align-items: flex-start;
-    gap: 8px;
-    margin-bottom: 10px;
-    font-family: var(--primary-font);
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
 }
 
 .featureIcon {
-    width: 16px;
-    height: 16px;
-    opacity: 0.8;
-    flex-shrink: 0;
-    margin-top: 2px;
+  width: 20px;
+  height: 20px;
+  opacity: 0.85;
+  flex-shrink: 0;
 }
 
 .featureText {
-    color: var(--primary-title-color);
-    font-size: 13px;
-    line-height: 1.4;
+  font-family: var(--primary-font, system-ui, sans-serif);
+  font-size: 0.95rem;
+  color: var(--primary-title-color, #1a1a2e);
+  line-height: 1.4;
 }
 
 .selectButton {
-    width: 100%;
-    padding: 14px;
-    background: var(--primary-white);
-    border: 1px solid rgba(0, 0, 0, 0.12);
-    border-radius: 14px;
-    color: var(--primary-title-color);
-    font-family: var(--primary-font);
-    font-size: 15px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.25s ease;
-    outline: none;
-    margin-top: auto;
+  width: 100%;
+  padding: 0.9rem;
+  font-family: var(--primary-font, system-ui, sans-serif);
+  font-size: 1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 2rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background: var(--primary-title-color, #1a1a2e);
+  color: white;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
-.recommendedButton {
-    background: var(--primary-title-color);
-    color: var(--primary-white);
-    border: 1px solid var(--primary-title-color);
+.selectButton:hover {
+  filter: brightness(1.05);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
 }
 
-.faqSection {
-    width: 100%;
-    margin: 40px auto 30px;
-    padding: 0 12px;
+.selectButton:active {
+  transform: scale(0.98);
 }
 
-.faqTitle {
-    color: var(--primary-title-color);
-    text-align: center;
-    font-family: var(--primary-font);
-    font-size: 20px;
-    margin: 0 0 25px 0;
-    font-weight: 600;
+.proButton {
+  background: var(--primary-title-color, #1a1a2e);
 }
 
-.faqList {
-    background: var(--primary-white);
-    border-radius: 16px;
-    padding: 20px 16px;
-    box-shadow: 0 4px 15px rgba(51, 51, 51, 0.05);
-    border: 1px solid rgba(0, 0, 0, 0.05);
+.activeButton {
+  width: 100%;
+  padding: 0.9rem;
+  background: white;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 2rem;
+  cursor: default;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: none;
+  box-shadow: none;
 }
 
-.faqItem {
-    margin-bottom: 20px;
-    padding-bottom: 20px;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+.activeIcon {
+  width: 24px;
+  height: 24px;
+  filter: invert(1) brightness(0);
+  opacity: 0.85;
 }
 
-.faqItem:last-child {
-    margin-bottom: 0;
-    padding-bottom: 0;
-    border-bottom: none;
-}
-
-.faqQuestion {
-    color: var(--primary-title-color);
-    font-family: var(--primary-font);
-    font-size: 16px;
-    font-weight: 600;
-    margin: 0 0 8px 0;
-}
-
-.faqAnswer {
-    color: rgba(0, 0, 0, 0.6);
-    font-family: var(--primary-font);
-    font-size: 14px;
-    line-height: 1.5;
-    margin: 0;
-}
-
-.bottomContent {
-    margin-top: auto;
-    padding: 15px 0 8px;
-}
-
-.bottomLinks {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 12px;
-    width: 100%;
-    margin: 0 auto;
-    padding: 0 12px;
-}
-
-.bottomLink {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 10px 24px;
-    background: var(--primary-white);
-    border-radius: 12px;
-    text-decoration: none;
-    color: var(--primary-title-color);
-    font-family: var(--primary-font);
-    font-size: 14px;
-    font-weight: 500;
-    transition: all 0.2s ease;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
-    width: 100%;
-    max-width: 280px;
-    justify-content: center;
-}
-
-.linkIcon {
-    width: 16px;
-    height: 16px;
-    opacity: 0.7;
+.activeButton:disabled {
+  cursor: default;
+  opacity: 1;
 }
 
 @media (min-width: 768px) {
-    .sectionContent {
-        padding: 15px 10px;
-    }
-    
-    .contentContainer {
-        max-width: 1200px;
-    }
-    
-    .mainTitle {
-        font-size: 26px;
-        margin: 20px auto 15px;
-    }
-    
-    .subtitle {
-        font-size: 16px;
-        max-width: 600px;
-        margin-bottom: 40px;
-    }
-    
-    .pricingCards {
-        grid-template-columns: repeat(2, 1fr);
-        max-width: 1100px;
-        gap: 25px;
-        margin-bottom: 50px;
-    }
-    
-    .pricingCard {
-        padding: 25px 20px;
-        border-radius: 18px;
-    }
-    
-    .faqSection {
-        max-width: 800px;
-        margin: 50px auto 40px;
-    }
-    
-    .faqList {
-        padding: 25px 20px;
-        border-radius: 18px;
-    }
-    
-    .bottomLinks {
-        flex-direction: row;
-        justify-content: center;
-        gap: 20px;
-        max-width: 800px;
-    }
-    
-    .bottomLink {
-        width: auto;
-        padding: 8px 20px;
-    }
+  .pricingPage {
+    padding: 3rem 2rem 4rem;
+  }
+  .mainTitle {
+    font-size: 2.8rem;
+  }
+  .pricingCard {
+    padding: 2.5rem 2rem;
+  }
+  .planName {
+    font-size: 2rem;
+  }
+  .price {
+    font-size: 3.2rem;
+  }
 }
 
-@media (min-width: 1024px) {
-    .pricingCards {
-        grid-template-columns: repeat(3, 1fr);
-    }
-    
-    .mainTitle {
-        font-size: 28px;
-    }
-    
-    .pricingCard:hover {
-        box-shadow: 0 15px 40px rgba(51, 51, 51, 0.12);
-    }
-    
-    .selectButton:hover {
-        background: rgba(0, 0, 0, 0.02);
-        border-color: rgba(0, 0, 0, 0.2);
-        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
-    }
-    
-  
-    .recommendedButton:hover {
-        background: rgba(51, 51, 51, 0.9);
-    }
-    
-    .bottomLink:hover {
-        background: rgba(0, 0, 0, 0.02);
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
-    }
-    
-    .bottomLink:hover .linkIcon {
-        opacity: 0.9;
-    }
+@media (max-width: 767px) {
+  .pricingCardsWrapper {
+    flex-direction: column;
+    align-items: center;
+  }
 }

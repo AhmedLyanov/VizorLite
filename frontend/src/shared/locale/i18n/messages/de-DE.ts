@@ -151,7 +151,8 @@ export const deMessages = {
 
   "home.hero.title": "VizorLite — kommunizieren, planen, entscheiden",
   "home.install.title": "VizorLite",
-  "home.install.description": "Laden Sie die App herunter, um den Service komfortabler auf Ihrem Gerät zu nutzen",
+  "home.install.description":
+    "Laden Sie die App herunter, um den Service komfortabler auf Ihrem Gerät zu nutzen",
   "home.install.button": "Installieren",
   "home.button.create": "Video-Meeting erstellen",
   "home.button.join": "Verbinden",
@@ -172,8 +173,10 @@ export const deMessages = {
   "ai.message.thinking": "Denke nach...",
   "ai.error.title": "Fehler",
   "ai.error.default": "Keine Antwort von der KI erhalten",
-  "ai.error.timeout": "Zeitüberschreitung der Anfrage. Bitte versuchen Sie es erneut.",
-  "ai.error.emptyResponse": "KI hat eine leere Antwort zurückgegeben. Bitte versuchen Sie es erneut.",
+  "ai.error.timeout":
+    "Zeitüberschreitung der Anfrage. Bitte versuchen Sie es erneut.",
+  "ai.error.emptyResponse":
+    "KI hat eine leere Antwort zurückgegeben. Bitte versuchen Sie es erneut.",
   "ai.hint.text": "Brauchen Sie Hilfe? Ich bin da",
   "ai.snippets.create_meeting": "Wie erstelle ich einen Termin?",
   "ai.snippets.share_screen": "Wie teile ich den Bildschirm?",
@@ -270,6 +273,16 @@ export const deMessages = {
   "pricing.recommended": "Empfohlen",
   "pricing.selectButton": "Plan auswählen",
 
+  // === NEUE FELDER FÜR DIE PREISSEITE (Free & Pro) ===
+  "pricing.plans.pro.name": "Pro",
+  "pricing.bestValue": "Bestes Preis-Leistungs-Verhältnis",
+  "pricing.free.button": "Kostenlos starten",
+  "pricing.plans.free.name": "Kostenlos",
+  "pricing.error.checkout": "Fehler beim Erstellen der Checkout-Sitzung",
+  "pricing.free.feature1": "Bis zu 3 Teilnehmer",
+  "pricing.free.feature2": "40 Minuten pro Meeting",
+  "pricing.free.feature3": "Basisfunktionen des Chats",
+
   "pricing.plans.basic.name": "Basic",
   "pricing.plans.basic.price": "0€",
   "pricing.plans.basic.period": "/Monat",
@@ -279,7 +292,7 @@ export const deMessages = {
   "pricing.plans.basic.features.chat": "Gemeinsamer Chat",
   "pricing.plans.basic.features.support": "Basis-Support",
 
-  "pricing.plans.business.name": "Business",
+  "pricing.plans.business.name": "Pro",
   "pricing.plans.business.price": "10€",
   "pricing.plans.business.period": "/Monat",
   "pricing.plans.business.features.participants":
@@ -289,6 +302,22 @@ export const deMessages = {
   "pricing.plans.business.features.settings": "Erweiterte Einstellungen",
   "pricing.plans.business.features.support": "Prioritäts-Support",
   "pricing.plans.business.features.storage": "10GB Cloud-Speicher",
+
+  "history.totalTransactions": "Insgesamt Transaktionen: ",
+  "history.title": "Zahlungshistorie",
+  "history.subtitle":
+    "Alle Transaktionen Ihres Abonnements – immer unter Kontrolle",
+  "history.empty": "Sie haben noch keine Zahlungen",
+  "history.loading": "Laden...",
+  "history.error": "Fehler beim Laden der Zahlungshistorie",
+  "history.table.date": "Datum",
+  "history.table.description": "Beschreibung",
+  "history.table.amount": "Betrag",
+  "history.table.status": "Status",
+  "history.invoice": "Rechnung",
+  "status.paid": "Bezahlt",
+  "status.pending": "Ausstehend",
+  "status.expired": "Abgelaufen",
 
   "pricing.plans.premium.name": "Premium",
   "pricing.plans.premium.price": "20€",
@@ -302,29 +331,13 @@ export const deMessages = {
   "pricing.plans.premium.features.storage": "50GB Cloud-Speicher",
   "pricing.plans.premium.features.analytics": "Erweiterte Analytik",
 
-
-  "history.totalTransactions": "Insgesamt Transaktionen: ",
-  "history.title": "Zahlungshistorie",
-  "history.subtitle": "Alle Transaktionen Ihres Abonnements – immer unter Kontrolle",
-  "history.empty": "Sie haben noch keine Zahlungen",
-  "history.loading": "Laden...",
-  "history.error": "Fehler beim Laden der Zahlungshistorie",
-  "history.table.date": "Datum",
-  "history.table.description": "Beschreibung",
-  "history.table.amount": "Betrag",
-  "history.table.status": "Status",
-  "history.invoice": "Rechnung",
-  "status.paid": "Bezahlt",
-  "status.pending": "Ausstehend",
-  "status.expired": "Abgelaufen",
-
   "pricing.faq.title": "Häufig gestellte Fragen",
   "pricing.faq.items.0.question": "Kann ich den Tarif später wechseln?",
   "pricing.faq.items.0.answer":
     "Ja, Sie können Ihren Tarif jederzeit in Ihrem persönlichen Konto ändern.",
   "pricing.faq.items.1.question": "Gibt es eine Testphase?",
   "pricing.faq.items.1.answer":
-    "Für Business- und Premium-Tarife steht eine 14-tägige Testphase zur Verfügung.",
+    "Für Pro- und Premium-Tarife steht eine 14-tägige Testphase zur Verfügung.",
   "pricing.faq.items.2.question": "Wie funktioniert die Zahlung?",
   "pricing.faq.items.2.answer":
     "Zahlung per Karte über ein sicheres Zahlungsgateway. Automatische monatliche Abbuchung.",
@@ -339,32 +352,46 @@ export const deMessages = {
 
   // FAQ
   "faq.hero.title": "Häufig gestellte Fragen",
-  "faq.hero.subtitle": "Finden Sie Antworten auf häufige Fragen zu VizorLite",
+  "faq.hero.subtitle":
+    "Finden Sie Antworten auf häufige Fragen zu VizorLite",
   "faq.categories.general": "Allgemeine Fragen",
   "faq.categories.technical": "Technische Fragen",
   "faq.categories.security": "Sicherheit",
   "faq.categories.pricing": "Preise",
   "faq.questions.howToCreateRoom.question": "Wie erstelle ich einen Raum?",
-  "faq.questions.howToCreateRoom.answer": "Klicken Sie auf der Startseite auf die Schaltfläche 'Meeting erstellen'. Der Raum wird sofort erstellt und Sie erhalten einen eindeutigen Link, um Teilnehmer einzuladen.",
-  "faq.questions.maxParticipants.question": "Wie viele Teilnehmer können in einem Raum sein?",
-  "faq.questions.maxParticipants.answer": "Dies hängt von Ihrem Tarif ab. Im Basistarif - bis zu 3 Teilnehmer, Business - bis zu 25, Premium - bis zu 100 Teilnehmer.",
+  "faq.questions.howToCreateRoom.answer":
+    "Klicken Sie auf der Startseite auf die Schaltfläche 'Meeting erstellen'. Der Raum wird sofort erstellt und Sie erhalten einen eindeutigen Link, um Teilnehmer einzuladen.",
+  "faq.questions.maxParticipants.question":
+    "Wie viele Teilnehmer können in einem Raum sein?",
+  "faq.questions.maxParticipants.answer":
+    "Dies hängt von Ihrem Tarif ab. Im Basistarif - bis zu 3 Teilnehmer, Pro - bis zu 25, Premium - bis zu 100 Teilnehmer.",
   "faq.questions.isFree.question": "Ist es kostenlos?",
-  "faq.questions.isFree.answer": "Ja, der Basistarif ist völlig kostenlos und umfasst alle notwendigen Funktionen für Videoanrufe.",
-  "faq.questions.browserSupport.question": "Welche Browser werden unterstützt?",
-  "faq.questions.browserSupport.answer": "VizorLite unterstützt alle modernen Browser: Chrome, Firefox, Safari, Edge der neuesten Versionen.",
+  "faq.questions.isFree.answer":
+    "Ja, der Basistarif ist völlig kostenlos und umfasst alle notwendigen Funktionen für Videoanrufe.",
+  "faq.questions.browserSupport.question":
+    "Welche Browser werden unterstützt?",
+  "faq.questions.browserSupport.answer":
+    "VizorLite unterstützt alle modernen Browser: Chrome, Firefox, Safari, Edge der neuesten Versionen.",
   "faq.questions.noDownload.question": "Muss ich etwas herunterladen?",
-  "faq.questions.noDownload.answer": "Nein, VizorLite funktioniert direkt im Browser ohne Installation zusätzlicher Software.",
+  "faq.questions.noDownload.answer":
+    "Nein, VizorLite funktioniert direkt im Browser ohne Installation zusätzlicher Software.",
   "faq.questions.screenShare.question": "Wie teile ich den Bildschirm?",
-  "faq.questions.screenShare.answer": "Klicken Sie während des Meetings auf die Schaltfläche 'Bildschirm teilen' in der unteren Steuerleiste.",
-  "faq.questions.dataProtection.question": "Wie werden meine Daten geschützt?",
-  "faq.questions.dataProtection.answer": "Wir verwenden Ende-zu-Ende-WebRTC-Verschlüsselung. Ihre Videoanrufe werden nicht auf unseren Servern aufgezeichnet oder gespeichert.",
+  "faq.questions.screenShare.answer":
+    "Klicken Sie während des Meetings auf die Schaltfläche 'Bildschirm teilen' in der unteren Steuerleiste.",
+  "faq.questions.dataProtection.question":
+    "Wie werden meine Daten geschützt?",
+  "faq.questions.dataProtection.answer":
+    "Wir verwenden Ende-zu-Ende-WebRTC-Verschlüsselung. Ihre Videoanrufe werden nicht auf unseren Servern aufgezeichnet oder gespeichert.",
   "faq.questions.encryption.question": "Wird Verschlüsselung verwendet?",
-  "faq.questions.encryption.answer": "Ja, alle Verbindungen sind mit dem WebRTC-Protokoll mit SRTP- und DTLS-Verschlüsselung gesichert.",
+  "faq.questions.encryption.answer":
+    "Ja, alle Verbindungen sind mit dem WebRTC-Protokoll mit SRTP- und DTLS-Verschlüsselung gesichert.",
   "faq.questions.changePlan.question": "Kann ich meinen Tarif später ändern?",
-  "faq.questions.changePlan.answer": "Ja, Sie können Ihren Tarif jederzeit in Ihrem persönlichen Konto ändern.",
-  "faq.questions.paymentMethods.question": "Welche Zahlungsmethoden sind verfügbar?",
-  "faq.questions.paymentMethods.answer": "Wir akzeptieren Zahlungen per Bankkarte über ein sicheres Zahlungsgateway.",
-
+  "faq.questions.changePlan.answer":
+    "Ja, Sie können Ihren Tarif jederzeit in Ihrem persönlichen Konto ändern.",
+  "faq.questions.paymentMethods.question":
+    "Welche Zahlungsmethoden sind verfügbar?",
+  "faq.questions.paymentMethods.answer":
+    "Wir akzeptieren Zahlungen per Bankkarte über ein sicheres Zahlungsgateway.",
 
   // Profile page
   "profile.title": "Profil",
@@ -374,7 +401,8 @@ export const deMessages = {
   "profile.no.user.data": "Keine Benutzerdaten verfügbar",
   "profile.avatar.upload.title": "Avatar hochladen",
   "profile.avatar.delete.title": "Avatar löschen",
-  "profile.avatar.delete.confirm": "Möchten Sie Ihren Avatar wirklich löschen?",
+  "profile.avatar.delete.confirm":
+    "Möchten Sie Ihren Avatar wirklich löschen?",
   "profile.file.error.title": "Dateifehler",
   "profile.file.error.description": "Ungültige Datei",
   "profile.upload.error.title": "Hochladefehler",

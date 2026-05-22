@@ -250,6 +250,16 @@ export const zhMessages = {
   "pricing.recommended": "推荐",
   "pricing.selectButton": "选择计划",
 
+  // === 新增定价页面字段（免费版和专业版） ===
+  "pricing.plans.pro.name": "专业版",
+  "pricing.bestValue": "超值之选",
+  "pricing.free.button": "免费开始",
+  "pricing.plans.free.name": "免费版",
+  "pricing.error.checkout": "创建结账会话出错",
+  "pricing.free.feature1": "最多3名参与者",
+  "pricing.free.feature2": "每次会议40分钟",
+  "pricing.free.feature3": "基础聊天",
+
   "pricing.plans.basic.name": "基础版",
   "pricing.plans.basic.price": "¥0",
   "pricing.plans.basic.period": "/月",
@@ -268,18 +278,6 @@ export const zhMessages = {
   "pricing.plans.business.features.support": "优先支持",
   "pricing.plans.business.features.storage": "10GB云存储",
 
-  "pricing.plans.premium.name": "高级版",
-  "pricing.plans.premium.price": "¥199",
-  "pricing.plans.premium.period": "/月",
-  "pricing.plans.premium.features.participants": "每个会议最多100名参与者",
-  "pricing.plans.premium.features.time": "会议时间无限制",
-  "pricing.plans.premium.features.recording": "高清会议录制",
-  "pricing.plans.premium.features.branding": "自定义品牌",
-  "pricing.plans.premium.features.manager": "个人经理",
-  "pricing.plans.premium.features.storage": "50GB云存储",
-  "pricing.plans.premium.features.analytics": "高级分析",
-
-
   "history.totalTransactions": "总共交易: ",
   "history.title": "支付历史",
   "history.subtitle": "您的订阅的所有交易 - 始终在控制之中",
@@ -294,6 +292,17 @@ export const zhMessages = {
   "status.paid": "已支付",
   "status.pending": "待处理",
   "status.expired": "已过期",
+
+  "pricing.plans.premium.name": "高级版",
+  "pricing.plans.premium.price": "¥199",
+  "pricing.plans.premium.period": "/月",
+  "pricing.plans.premium.features.participants": "每个会议最多100名参与者",
+  "pricing.plans.premium.features.time": "会议时间无限制",
+  "pricing.plans.premium.features.recording": "高清会议录制",
+  "pricing.plans.premium.features.branding": "自定义品牌",
+  "pricing.plans.premium.features.manager": "个人经理",
+  "pricing.plans.premium.features.storage": "50GB云存储",
+  "pricing.plans.premium.features.analytics": "高级分析",
 
   "pricing.faq.title": "常见问题",
   "pricing.faq.items.0.question": "以后可以更改计划吗？",
@@ -328,7 +337,6 @@ export const zhMessages = {
   "profile.delete.error.description": "删除头像时出错",
   "profile.loading": "加载中...",
 
-
   // FAQ
   "faq.hero.title": "常见问题",
   "faq.hero.subtitle": "查找有关 VizorLite 的常见问题的答案",
@@ -357,4 +365,3 @@ export const zhMessages = {
   "faq.questions.paymentMethods.question": "有哪些支付方式？",
   "faq.questions.paymentMethods.answer": "我们通过安全支付网关接受银行卡支付。",
 };
-

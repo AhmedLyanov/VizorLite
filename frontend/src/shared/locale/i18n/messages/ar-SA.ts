@@ -263,6 +263,16 @@ export const arMessages = {
   "pricing.recommended": "موصى به",
   "pricing.selectButton": "اختر الخطة",
 
+  // === الحقول الجديدة لصفحة الأسعار (Free & Pro) ===
+  "pricing.plans.pro.name": "برو",
+  "pricing.bestValue": "أفضل قيمة",
+  "pricing.free.button": "ابدأ مجانًا",
+  "pricing.plans.free.name": "مجاني",
+  "pricing.error.checkout": "خطأ في إنشاء جلسة الدفع",
+  "pricing.free.feature1": "حتى 3 مشاركين",
+  "pricing.free.feature2": "40 دقيقة لكل اجتماع",
+  "pricing.free.feature3": "دردشة أساسية",
+
   "pricing.plans.basic.name": "الأساسية",
   "pricing.plans.basic.price": "0 ر.س",
   "pricing.plans.basic.period": "/شهر",
@@ -281,18 +291,6 @@ export const arMessages = {
   "pricing.plans.business.features.support": "دعم ذو أولوية",
   "pricing.plans.business.features.storage": "10 جيجابايت تخزين سحابي",
 
-  "pricing.plans.premium.name": "المميزة",
-  "pricing.plans.premium.price": "20 ر.س",
-  "pricing.plans.premium.period": "/شهر",
-  "pricing.plans.premium.features.participants": "حتى 100 مشارك في الاجتماع",
-  "pricing.plans.premium.features.time": "وقت اجتماع غير محدود",
-  "pricing.plans.premium.features.recording": "تسجيل اجتماعات بدقة عالية",
-  "pricing.plans.premium.features.branding": "تخصيص العلامة التجارية",
-  "pricing.plans.premium.features.manager": "مدير شخصي",
-  "pricing.plans.premium.features.storage": "50 جيجابايت تخزين سحابي",
-  "pricing.plans.premium.features.analytics": "تحليلات متقدمة",
-
-
   "history.totalTransactions": "اجمالي المعاملات: ",
   "history.title": "سجل المدفوعات",
   "history.subtitle": "جميع معاملات اشتراكك - دائمًا تحت السيطرة",
@@ -307,6 +305,17 @@ export const arMessages = {
   "status.paid": "مدفوع",
   "status.pending": "قيد الانتظار",
   "status.expired": "منتهي الصلاحية",
+
+  "pricing.plans.premium.name": "المميزة",
+  "pricing.plans.premium.price": "20 ر.س",
+  "pricing.plans.premium.period": "/شهر",
+  "pricing.plans.premium.features.participants": "حتى 100 مشارك في الاجتماع",
+  "pricing.plans.premium.features.time": "وقت اجتماع غير محدود",
+  "pricing.plans.premium.features.recording": "تسجيل اجتماعات بدقة عالية",
+  "pricing.plans.premium.features.branding": "تخصيص العلامة التجارية",
+  "pricing.plans.premium.features.manager": "مدير شخصي",
+  "pricing.plans.premium.features.storage": "50 جيجابايت تخزين سحابي",
+  "pricing.plans.premium.features.analytics": "تحليلات متقدمة",
 
   "pricing.faq.title": "الأسئلة الشائعة",
   "pricing.faq.items.0.question": "هل يمكنني تغيير الخطة لاحقًا؟",
@@ -336,7 +345,7 @@ export const arMessages = {
   "faq.questions.howToCreateRoom.question": "كيفية إنشاء غرفة؟",
   "faq.questions.howToCreateRoom.answer": "انقر على زر 'إنشاء اجتماع' في الصفحة الرئيسية. سيتم إنشاء الغرفة فورًا وستتلقى رابطًا فريدًا لدعوة المشاركين.",
   "faq.questions.maxParticipants.question": "كم عدد المشاركين الذين يمكنهم التواجد في الغرفة؟",
-  "faq.questions.maxParticipants.answer": "يعتمد ذلك على خطتك. الخطة الأساسية - حتى 3 مشاركين، Business - حتى 25، Premium - حتى 100 مشارك.",
+  "faq.questions.maxParticipants.answer": "يعتمد ذلك على خطتك. الخطة الأساسية - حتى 3 مشاركين، Pro - حتى 25، Premium - حتى 100 مشارك.",
   "faq.questions.isFree.question": "هل هو مجاني؟",
   "faq.questions.isFree.answer": "نعم، الخطة الأساسية مجانية تمامًا وتتضمن جميع الميزات الضرورية لمكالمات الفيديو.",
   "faq.questions.browserSupport.question": "ما المتصفحات المدعومة؟",

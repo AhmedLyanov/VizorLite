@@ -1,12 +1,10 @@
-// PricingPage.tsx
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useIntl } from "react-intl";
 
 import { PRICING_TEXTS } from "@/shared/constants";
 import { useAuth } from "@/entities/user/AuthContext";
 import { stripeApi } from "@/shared/api/stripeApi";
-import homeIcon from "@/shared/assets/home.svg";
-import questionIcon from "@/shared/assets/question.svg";
+import checkIcon from "@/shared/assets/check-mark.svg";
 
 import styles from "./Pricing.module.css";
 
@@ -15,7 +13,7 @@ export default function PricingPage() {
   const navigate = useNavigate();
   const { isAuthenticated } = useAuth();
 
-  const handleSelectPlan = async () => {
+  const handleSelectPro = async () => {
     if (!isAuthenticated) {
       navigate("/auth?redirect=/pricing");
       return;
@@ -31,102 +29,80 @@ export default function PricingPage() {
     }
   };
 
+  const freeFeatures = [
+    "pricing.free.feature1",
+    "pricing.free.feature2",
+    "pricing.free.feature3",
+  ];
+
   return (
-    <section className={styles.sectionContent}>
-      <div className={styles.contentContainer}>
+    <div className={styles.pricingPage}>
+      <div className={styles.heroSection}>
         <h1 className={styles.mainTitle}>
           {intl.formatMessage({ id: PRICING_TEXTS.TITLE })}
         </h1>
-        <p className={styles.subtitle}>
-          {intl.formatMessage({ id: PRICING_TEXTS.SUBTITLE })}
-        </p>
+      </div>
 
-        <div className={styles.singleCardWrapper}>
-          <div className={`${styles.pricingCard} ${styles.proCard}`}>
-            <div className={styles.cardHeader}>
-              <h3 className={styles.planName}>
-                {intl.formatMessage({
-                  id: "pricing.plans.pro.name",
-                  defaultMessage: "Pro",
-                })}
-              </h3>
-              <div className={styles.priceContainer}>
-                <span className={styles.price}>
-                  {intl.formatMessage({
-                    id: PRICING_TEXTS.PLANS.BUSINESS.PRICE,
-                  })}
-                </span>
-                <span className={styles.period}>
-                  {intl.formatMessage({
-                    id: PRICING_TEXTS.PLANS.BUSINESS.PERIOD,
-                  })}
-                </span>
-              </div>
+      <div className={styles.pricingCardsWrapper}>
+        <div className={styles.pricingCard}>
+          <div className={styles.cardHeader}>
+            <h3 className={styles.planName}>
+              {intl.formatMessage({ id: "pricing.plans.free.name" })}
+            </h3>
+            <div className={styles.priceContainer}>
+              <span className={styles.price}>0₽</span>
             </div>
-
-            <div className={styles.featuresList}>
-              {PRICING_TEXTS.PLANS.BUSINESS.FEATURES.map((feature, index) => (
-                <div key={index} className={styles.featureItem}>
-                  <img
-                    src="/images/check.svg"
-                    alt=""
-                    className={styles.featureIcon}
-                  />
-                  <span className={styles.featureText}>
-                    {intl.formatMessage({ id: feature })}
-                  </span>
-                </div>
-              ))}
-            </div>
-
-            <button
-              className={`${styles.selectButton} ${styles.proButton}`}
-              onClick={handleSelectPlan}
-            >
-              {intl.formatMessage({ id: PRICING_TEXTS.SELECT_BUTTON })}
-            </button>
           </div>
-        </div>
-
-        <div className={styles.faqSection}>
-          <h2 className={styles.faqTitle}>
-            {intl.formatMessage({ id: PRICING_TEXTS.FAQ.TITLE })}
-          </h2>
-          <div className={styles.faqList}>
-            {PRICING_TEXTS.FAQ.ITEMS.map((item, index) => (
-              <div key={index} className={styles.faqItem}>
-                <h4 className={styles.faqQuestion}>
-                  {intl.formatMessage({ id: item.question })}
-                </h4>
-                <p className={styles.faqAnswer}>
-                  {intl.formatMessage({ id: item.answer })}
-                </p>
+          <div className={styles.featuresList}>
+            {freeFeatures.map((feature, index) => (
+              <div key={index} className={styles.featureItem}>
+                <img src={checkIcon} alt="" className={styles.featureIcon} />
+                <span className={styles.featureText}>
+                  {intl.formatMessage({ id: feature })}
+                </span>
               </div>
             ))}
           </div>
+          <button className={styles.activeButton} disabled>
+            <img src={checkIcon} alt="" className={styles.activeIcon} />
+          </button>
         </div>
-      </div>
 
-      <div className={styles.bottomContent}>
-        <div className={styles.bottomLinks}>
-          <Link to="/" className={styles.bottomLink}>
-            <img
-              src={homeIcon}
-              alt={intl.formatMessage({ id: "nav.home" })}
-              className={styles.linkIcon}
-            />
-            <span>{intl.formatMessage({ id: "nav.home" })}</span>
-          </Link>
-          <Link to="/about" className={styles.bottomLink}>
-            <img
-              src={questionIcon}
-              alt={intl.formatMessage({ id: "nav.about" })}
-              className={styles.linkIcon}
-            />
-            <span>{intl.formatMessage({ id: "nav.about" })}</span>
-          </Link>
+        <div className={`${styles.pricingCard} ${styles.proCard}`}>
+          <div className={styles.cardBadge}>
+            <span>{intl.formatMessage({ id: "pricing.bestValue" })}</span>
+          </div>
+          <div className={styles.cardHeader}>
+            <h3 className={styles.planName}>
+              {intl.formatMessage({ id: "pricing.plans.pro.name" })}
+            </h3>
+            <div className={styles.priceContainer}>
+              <span className={styles.price}>
+                {intl.formatMessage({ id: PRICING_TEXTS.PLANS.BUSINESS.PRICE })}
+              </span>
+              <span className={styles.period}>
+                {intl.formatMessage({ id: PRICING_TEXTS.PLANS.BUSINESS.PERIOD })}
+              </span>
+            </div>
+          </div>
+          <div className={styles.featuresList}>
+            {PRICING_TEXTS.PLANS.BUSINESS.FEATURES.map((feature, index) => (
+              <div key={index} className={styles.featureItem}>
+                <img src={checkIcon} alt="" className={styles.featureIcon} />
+                <span className={styles.featureText}>
+                  {intl.formatMessage({ id: feature })}
+                </span>
+              </div>
+            ))}
+          </div>
+          <button
+            className={`${styles.selectButton} ${styles.proButton}`}
+            onClick={handleSelectPro}
+          >
+            {intl.formatMessage({ id: PRICING_TEXTS.SELECT_BUTTON })}
+          </button>
         </div>
       </div>
-    </section>
+    </div>
   );
 }

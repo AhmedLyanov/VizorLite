@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useIntl } from "react-intl";
+import { notification } from "antd";
 
 import { useRegister, useLogin, useVerifyEmail } from "@/entities/user";
 import { AUTHENTICATION_TEXTS } from "@/shared/constants/authentication";
@@ -62,7 +63,7 @@ export default function Authentication() {
     handleSubmit,
     reset,
     setValue,
-    formState: { errors, isValid },
+    formState: { errors, isValid, touchedFields },
   } = useForm<any>({
     resolver: zodResolver(schema),
     mode: "onChange", 
@@ -75,12 +76,15 @@ export default function Authentication() {
   const onSubmit = async (data: any) => {
     try {
       if (mode === "register") {
-        console.log("REGISTER DATA:", data);
-
         const res = await registerUser(data);
         setUserId(res.userId);
         setMode("verify");
         reset();
+        notification.success({
+          message: "Registration successful",
+          description: "Please check your email for verification code.",
+          placement: "topRight",
+        });
         return;
       }
 
@@ -92,13 +96,51 @@ export default function Authentication() {
           code: data.code,
         });
 
+        notification.success({
+          message: "Email verified",
+          description: "You can now log in.",
+          placement: "topRight",
+        });
         return;
       }
 
       if (mode === "login") {
         await loginUser(data);
+        notification.success({
+          message: "Welcome back!",
+          description: "You have successfully logged in.",
+          placement: "topRight",
+        });
       }
-    } catch (err) {
+    } catch (err: any) {
+      const status = err?.response?.status;
+      const message = err?.response?.data?.message || err?.message;
+
+      if (status === 401) {
+        notification.error({
+          message: "Authentication failed",
+          description: "Invalid email or password. Please try again.",
+          placement: "topRight",
+        });
+      } else if (status === 400) {
+        notification.error({
+          message: "Bad request",
+          description: message || "Please check your input data.",
+          placement: "topRight",
+        });
+      } else if (status === 409) {
+        notification.error({
+          message: "User already exists",
+          description: "This email is already registered. Please log in.",
+          placement: "topRight",
+        });
+      } else {
+        notification.error({
+          message: "Something went wrong",
+          description: message || "Please try again later.",
+          placement: "topRight",
+        });
+      }
       console.error("AUTH ERROR:", err);
     }
   };
@@ -106,6 +148,10 @@ export default function Authentication() {
   const toggleMode = () => {
     setMode(mode === "login" ? "register" : "login");
     reset();
+  };
+
+  const getInputErrorClass = (fieldName: string) => {
+    return errors[fieldName] ? styles.inputError : "";
   };
 
   return (
@@ -144,23 +190,23 @@ export default function Authentication() {
 
           {mode === "verify" && "Verify Email"}
         </h2>
+
         {mode === "register" && (
           <div className={styles.formGroup}>
             <label className={styles.formLabel}>Username</label>
-
-            <input {...register("username")} className={styles.formInput} />
-
+            <input
+              {...register("username")}
+              className={`${styles.formInput} ${getInputErrorClass("username")}`}
+            />
             {errors.username && (
-              <span className={styles.error}>
-                {errors.username.message as string}
-              </span>
+              <span className={styles.errorMessageText}>{errors.username.message as string}</span>
             )}
           </div>
         )}
+
         {mode === "register" && (
           <div className={styles.formGroup}>
             <label className={styles.formLabel}>Country</label>
-            
             <select
               className={styles.formInput}
               value={selectedCountry?.code || "US"}
@@ -174,12 +220,12 @@ export default function Authentication() {
             </select>
           </div>
         )}
+
         {mode === "register" && (
           <div className={styles.formGroup}>
             <label className={styles.formLabel}>Phone</label>
-
             <input
-              className={styles.formInput}
+              className={`${styles.formInput} ${getInputErrorClass("phone")}`}
               placeholder={phoneFormat.placeholder}
               {...register("phone")}
               onChange={(e) => {
@@ -187,42 +233,35 @@ export default function Authentication() {
                 setValue("phone", formatted, { shouldValidate: true });
               }}
             />
-
             {errors.phone && (
-              <span className={styles.error}>
-                {errors.phone.message as string}
-              </span>
+              <span className={styles.errorMessageText}>{errors.phone.message as string}</span>
             )}
           </div>
         )}
+
         {mode !== "verify" && (
           <div className={styles.formGroup}>
             <label className={styles.formLabel}>Email</label>
-
             <input
               type="email"
               {...register("email")}
-              className={styles.formInput}
+              className={`${styles.formInput} ${getInputErrorClass("email")}`}
             />
-
             {errors.email && (
-              <span className={styles.error}>
-                {errors.email.message as string}
-              </span>
+              <span className={styles.errorMessageText}>{errors.email.message as string}</span>
             )}
           </div>
         )}
+
         {mode !== "verify" && (
           <div className={styles.formGroup}>
             <label className={styles.formLabel}>Password</label>
-
             <div className={styles.passwordInputWrapper}>
               <input
                 type={showPassword ? "text" : "password"}
                 {...register("password")}
-                className={styles.formInput}
+                className={`${styles.formInput} ${getInputErrorClass("password")}`}
               />
-
               <button
                 type="button"
                 className={styles.showPasswordButton}
@@ -231,28 +270,22 @@ export default function Authentication() {
                 <img src={showPassword ? eyeOn : eyeOff} alt="" />
               </button>
             </div>
-
             {errors.password && (
-              <span className={styles.error}>
-                {errors.password.message as string}
-              </span>
+              <span className={styles.errorMessageText}>{errors.password.message as string}</span>
             )}
           </div>
         )}
+
         {mode === "verify" && (
           <div className={styles.formGroup}>
             <label className={styles.formLabel}>Code</label>
-
             <input
               {...register("code")}
-              className={styles.formInput}
+              className={`${styles.formInput} ${getInputErrorClass("code")}`}
               placeholder="123456"
             />
-
             {errors.code && (
-              <span className={styles.error}>
-                {errors.code.message as string}
-              </span>
+              <span className={styles.errorMessageText}>{errors.code.message as string}</span>
             )}
           </div>
         )}
@@ -271,26 +304,17 @@ export default function Authentication() {
           <div className={styles.switchMode}>
             <p className={styles.switchText}>
               {mode === "login"
-                ? intl.formatMessage({
-                    id: AUTHENTICATION_TEXTS.FORM.NO_ACCOUNT,
-                  })
-                : intl.formatMessage({
-                    id: AUTHENTICATION_TEXTS.FORM.HAVE_ACCOUNT,
-                  })}
+                ? intl.formatMessage({ id: AUTHENTICATION_TEXTS.FORM.NO_ACCOUNT })
+                : intl.formatMessage({ id: AUTHENTICATION_TEXTS.FORM.HAVE_ACCOUNT })}
             </p>
-
             <button
               type="button"
               className={styles.switchButton}
               onClick={toggleMode}
             >
               {mode === "login"
-                ? intl.formatMessage({
-                    id: AUTHENTICATION_TEXTS.FORM.CREATE_ACCOUNT,
-                  })
-                : intl.formatMessage({
-                    id: AUTHENTICATION_TEXTS.FORM.GO_TO_LOGIN,
-                  })}
+                ? intl.formatMessage({ id: AUTHENTICATION_TEXTS.FORM.CREATE_ACCOUNT })
+                : intl.formatMessage({ id: AUTHENTICATION_TEXTS.FORM.GO_TO_LOGIN })}
             </button>
           </div>
         )}

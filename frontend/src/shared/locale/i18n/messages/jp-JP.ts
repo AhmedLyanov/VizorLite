@@ -315,7 +315,14 @@ export const jpMessages = {
   "pricing.plans.premium.features.manager": "パーソナルマネージャー",
   "pricing.plans.premium.features.storage": "クラウドストレージ50GB",
   "pricing.plans.premium.features.analytics": "高度な分析",
-
+  "pricing.plans.pro.name": "Pro",
+  "pricing.bestValue": "ベストバリュー",
+  "pricing.free.button": "無料で始める",
+  "pricing.plans.free.name": "無料",
+  "pricing.error.checkout": "チェックアウトセッションの作成中にエラーが発生しました",
+  "pricing.free.feature1": "最大3名まで参加可能",
+  "pricing.free.feature2": "1回のミーティング最大40分",
+  "pricing.free.feature3": "ベーシックチャット",
   "pricing.faq.title": "よくある質問",
   "pricing.faq.items.0.question": "後でプランを変更できますか？",
   "pricing.faq.items.0.answer":

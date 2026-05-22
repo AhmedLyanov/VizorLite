@@ -2,8 +2,9 @@ import { useEffect, useState } from 'react';
 import { useIntl } from 'react-intl';
 
 import { stripeApi, type Transaction } from '@/shared/api/stripeApi';
+import LoadingSpinner from '@/shared/ui/loading/LoadingSpinner';
 
-import styles from './history-pricing.module.css';
+import styles from './HistoryPricingPage.module.css';
 
 const getStatusText = (status: Transaction['status'], intl: ReturnType<typeof useIntl>) => {
   switch (status) {
@@ -50,7 +51,7 @@ export default function SubscriptionHistoryPage() {
     return (
       <div className={styles.page}>
         <div className={styles.contentContainer}>
-          <div className={styles.loader}>{intl.formatMessage({ id: 'history.loading' })}</div>
+          <LoadingSpinner />
         </div>
       </div>
     );

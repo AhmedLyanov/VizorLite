@@ -260,11 +260,18 @@ export const ruMessages = {
   "about.bottomLinks.items.contacts.label": "Контакты",
   "about.bottomLinks.items.contacts.icon": "send.svg",
 
-  "pricing.title": "Pro",
+  "pricing.title": "Обновите план, чтобы получить больше возможностей",
   "pricing.subtitle": "Выберите подходящий план для ваших видеовстреч",
   "pricing.recommended": "Рекомендуем",
   "pricing.selectButton": "Выбрать план",
-
+  "pricing.plans.pro.name": "Pro",
+  "pricing.bestValue": "Лучшее предложение",
+  "pricing.free.button": "Начать бесплатно",
+  "pricing.plans.free.name": "Бесплатный",
+  "pricing.error.checkout": "Ошибка при создании платежной сессии",
+  "pricing.free.feature1": "До 3 участников",
+  "pricing.free.feature2": "40 минут на встречу",
+  "pricing.free.feature3": "Базовый чат",
   "pricing.plans.basic.name": "Базовый",
   "pricing.plans.basic.price": "0₽",
   "pricing.plans.basic.period": "/месяц",
@@ -272,7 +279,7 @@ export const ruMessages = {
   "pricing.plans.basic.features.time": "40 минут на встречу",
   "pricing.plans.basic.features.chat": "Общий чат",
   "pricing.plans.basic.features.support": "Базовая поддержка",
-
+  "pricing.current.plan": "Ваш текущий план",
   "pricing.plans.business.name": "Бизнес",
   "pricing.plans.business.price": "990₽",
   "pricing.plans.business.period": "/месяц",
@@ -315,7 +322,7 @@ export const ruMessages = {
     "Да, вы можете изменить тариф в любое время в личном кабинете.",
   "pricing.faq.items.1.question": "Есть ли пробный период?",
   "pricing.faq.items.1.answer":
-    "Для Business и Premium тарифов доступен 14-дневный пробный период.",
+    "Для Pro и Premium тарифов доступен 14-дневный пробный период.",
   "pricing.faq.items.2.question": "Как происходит оплата?",
   "pricing.faq.items.2.answer":
     "Оплата картой через безопасный платежный шлюз. Автоматическое списание каждый месяц.",
@@ -338,7 +345,7 @@ export const ruMessages = {
   "faq.questions.howToCreateRoom.question": "Как создать комнату?",
   "faq.questions.howToCreateRoom.answer": "Нажмите кнопку 'Создать встречу' на главной странице. Комната будет создана мгновенно, и вы получите уникальную ссылку для приглашения участников.",
   "faq.questions.maxParticipants.question": "Сколько участников может быть в комнате?",
-  "faq.questions.maxParticipants.answer": "Зависит от вашего тарифа. На базовом тарифе - до 3 участников, на Business - до 25, на Premium - до 100 участников.",
+  "faq.questions.maxParticipants.answer": "Зависит от вашего тарифа. На базовом тарифе - до 3 участников, на Pro - до 25, на Premium - до 100 участников.",
   "faq.questions.isFree.question": "Это бесплатно?",
   "faq.questions.isFree.answer": "Да, базовый тариф полностью бесплатен и включает все необходимые функции для видеосвязи.",
   "faq.questions.browserSupport.question": "Какие браузеры поддерживаются?",

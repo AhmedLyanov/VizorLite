@@ -266,6 +266,16 @@ export const enMessages = {
   "pricing.recommended": "Recommended",
   "pricing.selectButton": "Select Plan",
 
+  // === NEW FIELDS FOR PRICING PAGE (Free & Pro) ===
+  "pricing.plans.pro.name": "Pro",
+  "pricing.bestValue": "Best value",
+  "pricing.free.button": "Start for free",
+  "pricing.plans.free.name": "Free",
+  "pricing.error.checkout": "Error creating checkout session",
+  "pricing.free.feature1": "Up to 3 participants",
+  "pricing.free.feature2": "40 minutes per meeting",
+  "pricing.free.feature3": "Basic chat",
+
   "pricing.plans.basic.name": "Basic",
   "pricing.plans.basic.price": "$0",
   "pricing.plans.basic.period": "/month",
@@ -275,7 +285,7 @@ export const enMessages = {
   "pricing.plans.basic.features.chat": "Shared chat",
   "pricing.plans.basic.features.support": "Basic support",
 
-  "pricing.plans.business.name": "Business",
+  "pricing.plans.business.name": "Pro",
   "pricing.plans.business.price": "$10",
   "pricing.plans.business.period": "/month",
   "pricing.plans.business.features.participants":
@@ -288,7 +298,8 @@ export const enMessages = {
 
   "history.totalTransactions": "Total transactions: ",
   "history.title": "Payment history",
-  "history.subtitle": "All transactions of your subscription — always under control",
+  "history.subtitle":
+    "All transactions of your subscription — always under control",
   "history.empty": "You have no payments yet",
   "history.loading": "Loading...",
   "history.error": "Failed to load payment history",
@@ -319,7 +330,7 @@ export const enMessages = {
     "Yes, you can change your plan anytime in your personal account.",
   "pricing.faq.items.1.question": "Is there a trial period?",
   "pricing.faq.items.1.answer":
-    "A 14-day trial period is available for Business and Premium plans.",
+    "A 14-day trial period is available for Pro and Premium plans.",
   "pricing.faq.items.2.question": "How does payment work?",
   "pricing.faq.items.2.answer":
     "Payment by card through a secure payment gateway. Automatic monthly billing.",
@@ -334,32 +345,46 @@ export const enMessages = {
 
   // FAQ
   "faq.hero.title": "Frequently Asked Questions",
-  "faq.hero.subtitle": "Find answers to popular questions about VizorLite",
+  "faq.hero.subtitle":
+    "Find answers to popular questions about VizorLite",
   "faq.categories.general": "General Questions",
   "faq.categories.technical": "Technical Questions",
   "faq.categories.security": "Security",
   "faq.categories.pricing": "Pricing",
   "faq.questions.howToCreateRoom.question": "How to create a room?",
-  "faq.questions.howToCreateRoom.answer": "Click the 'Create meeting' button on the home page. The room will be created instantly, and you will receive a unique link to invite participants.",
-  "faq.questions.maxParticipants.question": "How many participants can be in a room?",
-  "faq.questions.maxParticipants.answer": "It depends on your plan. Basic plan - up to 3 participants, Business - up to 25, Premium - up to 100 participants.",
+  "faq.questions.howToCreateRoom.answer":
+    "Click the 'Create meeting' button on the home page. The room will be created instantly, and you will receive a unique link to invite participants.",
+  "faq.questions.maxParticipants.question":
+    "How many participants can be in a room?",
+  "faq.questions.maxParticipants.answer":
+    "It depends on your plan. Basic plan - up to 3 participants, Pro - up to 25, Premium - up to 100 participants.",
   "faq.questions.isFree.question": "Is it free?",
-  "faq.questions.isFree.answer": "Yes, the basic plan is completely free and includes all necessary features for video calls.",
-  "faq.questions.browserSupport.question": "Which browsers are supported?",
-  "faq.questions.browserSupport.answer": "VizorLite supports all modern browsers: Chrome, Firefox, Safari, Edge latest versions.",
+  "faq.questions.isFree.answer":
+    "Yes, the basic plan is completely free and includes all necessary features for video calls.",
+  "faq.questions.browserSupport.question":
+    "Which browsers are supported?",
+  "faq.questions.browserSupport.answer":
+    "VizorLite supports all modern browsers: Chrome, Firefox, Safari, Edge latest versions.",
   "faq.questions.noDownload.question": "Do I need to download anything?",
-  "faq.questions.noDownload.answer": "No, VizorLite works directly in the browser without installing additional software.",
+  "faq.questions.noDownload.answer":
+    "No, VizorLite works directly in the browser without installing additional software.",
   "faq.questions.screenShare.question": "How to share screen?",
-  "faq.questions.screenShare.answer": "During the meeting, click the 'Screen share' button in the bottom control panel.",
-  "faq.questions.dataProtection.question": "How is my data protected?",
-  "faq.questions.dataProtection.answer": "We use end-to-end WebRTC encryption. Your video calls are not recorded or stored on our servers.",
+  "faq.questions.screenShare.answer":
+    "During the meeting, click the 'Screen share' button in the bottom control panel.",
+  "faq.questions.dataProtection.question":
+    "How is my data protected?",
+  "faq.questions.dataProtection.answer":
+    "We use end-to-end WebRTC encryption. Your video calls are not recorded or stored on our servers.",
   "faq.questions.encryption.question": "Is encryption used?",
-  "faq.questions.encryption.answer": "Yes, all connections are secured with WebRTC protocol using SRTP and DTLS encryption.",
+  "faq.questions.encryption.answer":
+    "Yes, all connections are secured with WebRTC protocol using SRTP and DTLS encryption.",
   "faq.questions.changePlan.question": "Can I change my plan later?",
-  "faq.questions.changePlan.answer": "Yes, you can change your plan at any time in your personal account.",
-  "faq.questions.paymentMethods.question": "What payment methods are available?",
-  "faq.questions.paymentMethods.answer": "We accept payments by bank cards through a secure payment gateway.",
-
+  "faq.questions.changePlan.answer":
+    "Yes, you can change your plan at any time in your personal account.",
+  "faq.questions.paymentMethods.question":
+    "What payment methods are available?",
+  "faq.questions.paymentMethods.answer":
+    "We accept payments by bank cards through a secure payment gateway.",
 
   // Profile page
   "profile.title": "Profile",
