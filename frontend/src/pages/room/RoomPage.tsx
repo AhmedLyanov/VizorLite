@@ -72,8 +72,37 @@ export default function RoomPage() {
           localVideoRef.current.srcObject = mediaStream;
         }
       })
-      .catch(() => {
-        message.error("Не удалось получить доступ к камере/микрофону");
+      .catch(async (err) => {
+        console.error("MediaDevices error details:", {
+          name: err.name,
+          message: err.message,
+          constraint: err.constraint,
+          stack: err.stack,
+          timestamp: new Date().toISOString(),
+          userAgent: navigator.userAgent,
+        });
+        try {
+          const permissions = {
+            camera: await navigator.permissions?.query({ name: 'camera' as PermissionName }).catch(() => null),
+            microphone: await navigator.permissions?.query({ name: 'microphone' as PermissionName }).catch(() => null)
+          };
+          const devices = await navigator.mediaDevices.enumerateDevices().catch(() => []);
+          console.info("Device diagnostics:", { permissions, devices });
+        } catch (diagErr) {
+          console.warn("Diagnostics failed:", diagErr);
+        }
+        let errorMessage = "Не удалось получить доступ к камере/микрофону";
+        if (err.name === "NotAllowedError") {
+          errorMessage = "Доступ к камере/микрофону запрещен. Пожалуйста, разрешите доступ в настройках браузера.";
+        } else if (err.name === "NotFoundError") {
+          errorMessage = "Камера или микрофон не найдены. Проверьте подключение устройств.";
+        } else if (err.name === "NotReadableError") {
+          errorMessage = "Камера или микрофон уже используются другим приложением.";
+        } else if (err.name === "OverconstrainedError") {
+          errorMessage = "Устройство не соответствует требуемым ограничениям.";
+        }
+
+        message.error(errorMessage);
       });
   }, []);
 
