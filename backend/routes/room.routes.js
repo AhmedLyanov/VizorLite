@@ -7,7 +7,7 @@ import {
   getUserRooms,
   leaveRoom
 } from '../controllers/room.controller.js';
-import { auth } from '../middleware/auth.js';
+import { auth } from '../middleware/auth.middleware.js';
 
 const router = express.Router();
 router.post('/create', auth, createRoom);

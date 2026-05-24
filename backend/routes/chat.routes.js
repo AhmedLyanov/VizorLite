@@ -1,5 +1,5 @@
 import express from 'express';
-import { auth } from '../middleware/auth.js';
+import { auth } from '../middleware/auth.middleware.js';
 import { chatFileUpload } from '../middleware/upload.middleware.js';
 import { uploadFile, getChatHistory } from '../controllers/chat.controller.js';
 

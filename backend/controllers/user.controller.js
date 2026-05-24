@@ -165,10 +165,26 @@ export const updateSettings = async (req, res) => {
 
 export const updateSettingsSection = async (req, res) => {
   try {
-    const { section, data } = req.body; 
+    const { section } = req.params;
+    const { data } = req.body;
+
+    const user = await User.findById(req.userId);
+
+    if (!user) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+
+
+    if (section === 'background' && data.image && data.image.startsWith('data:image')) {
+      if (user.plan !== 'pro') {
+        return res.status(403).json({
+          error: 'Загрузка своего фона доступна только на PRO плане'
+        });
+      }
+    }
 
     const updatePath = `settings.${section}`;
-    const user = await User.findByIdAndUpdate(
+    const updatedUser = await User.findByIdAndUpdate(
       req.userId,
       { $set: { [updatePath]: data } },
       { new: true }
@@ -176,7 +192,7 @@ export const updateSettingsSection = async (req, res) => {
 
     res.json({
       success: true,
-      settings: user.settings
+      settings: updatedUser.settings
     });
   } catch (error) {
     console.error('❌ Update settings section error:', error);

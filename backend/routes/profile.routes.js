@@ -1,5 +1,5 @@
 import express from 'express';
-import { auth } from '../middleware/auth.js';
+import { auth } from '../middleware/auth.middleware.js';
 import { avatarUpload } from "../middleware/upload.middleware.js";
 import {
   uploadAvatar,
@@ -13,10 +13,10 @@ router.use(auth);
 
 router.post('/avatar', auth, avatarUpload, uploadAvatar);
 
-router.delete('/avatar', deleteAvatar);
+router.delete('/avatar', auth, deleteAvatar);
 
-router.get('/avatar', getAvatar);
+router.get('/avatar', auth, getAvatar);
 
-router.get('/avatar/:userId', getAvatar);
+router.get('/avatar/:userId', auth, getAvatar);
 
 export default router;
