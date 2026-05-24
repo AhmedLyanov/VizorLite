@@ -12,7 +12,7 @@ const { Text } = Typography;
 
 export const SettingsPopover: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [open, setOpen] = useState(false);
-  const { loadSettings, isLoading } = useSettingsStore();
+  const { loadSettings } = useSettingsStore();
   const { isAuthenticated } = useAuth();
 
   useEffect(() => {

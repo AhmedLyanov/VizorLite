@@ -2,7 +2,7 @@ import { Outlet } from "react-router-dom";
 
 import Aside from "@/widgets/aside/Aside";
 import AiHelperAntd from "@/features/ai/ui/AiHelper";
-import { BackgroundProvider } from "@/widgets/Background/BackgroundProvider"; 
+import { BackgroundProvider } from "@/widgets/background/BackgroundProvider"; 
 
 import styles from "./Default.module.css";
 

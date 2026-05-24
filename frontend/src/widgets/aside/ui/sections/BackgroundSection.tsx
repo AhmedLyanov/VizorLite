@@ -1,5 +1,5 @@
 import React from 'react';
-import { Upload, Button, Space, Radio, message, Divider, Row, Col } from 'antd';
+import { Upload, Button, Radio, message, Divider } from 'antd';
 import { PictureOutlined, DeleteOutlined } from '@ant-design/icons';
 
 import { useSettingsStore } from '@/entities/user/useSettingsStore';
