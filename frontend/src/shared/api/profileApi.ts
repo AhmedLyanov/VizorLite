@@ -5,6 +5,7 @@ export interface ProfileData {
     _id: string
     email: string
     username: string
+    plan?: 'free' | 'pro'
     createdAt: string
     updatedAt: string
     __v: number

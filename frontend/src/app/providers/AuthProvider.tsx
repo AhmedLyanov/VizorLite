@@ -33,6 +33,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
         email: profileData.user.email,
         createdAt: profileData.user.createdAt,
         avatar: profileData.user.avatar || null,
+        plan: profileData.user.plan, 
       };
     },
     enabled: !!token,

@@ -1,8 +1,9 @@
-import React from 'react';
-import { Upload, Button, Radio, message, Divider } from 'antd';
-import { PictureOutlined, DeleteOutlined } from '@ant-design/icons';
+import React, { useRef } from 'react';
+import { Button, Radio, message, Divider } from 'antd';
+import { DeleteOutlined, CrownOutlined, PlusOutlined } from '@ant-design/icons';
 
 import { useSettingsStore } from '@/entities/user/useSettingsStore';
+import { usePlan } from '@/entities/user/usePlan';
 
 const PRESET_BACKGROUNDS = [
   { id: 1, url: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1920', name: 'Горы' },
@@ -25,12 +26,13 @@ const PRESET_BACKGROUNDS = [
 
 export const BackgroundSection: React.FC = () => {
   const { settings, updateSection, isLoading } = useSettingsStore();
+  const { isPro } = usePlan();
+  const fileInputRef = useRef<HTMLInputElement>(null);
   const background = settings.background;
 
   const handleCustomUpload = async (file: File) => {
     const reader = new FileReader();
     reader.onload = async (e) => {
-      // 👇 ИСПРАВЛЕНИЕ ТУТ - проверяем тип
       const result = e.target?.result;
       if (typeof result === 'string') {
         await updateSection('background', { image: result });
@@ -39,6 +41,22 @@ export const BackgroundSection: React.FC = () => {
     };
     reader.readAsDataURL(file);
     return false;
+  };
+
+  const handleAddCustomClick = () => {
+    if (!isPro) {
+      message.warning('Загрузка своего фона доступна только на PRO плане');
+      return;
+    }
+    fileInputRef.current?.click();
+  };
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      handleCustomUpload(file);
+    }
+    e.target.value = '';
   };
 
   const handlePresetSelect = async (url: string) => {
@@ -53,16 +71,73 @@ export const BackgroundSection: React.FC = () => {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept="image/*"
+        style={{ display: 'none' }}
+        onChange={handleFileChange}
+      />
+
       <div>
         <div style={{ marginBottom: 12, fontWeight: 500, fontSize: 14 }}>Готовые фоны</div>
         <div style={{ 
           display: 'grid', 
           gridTemplateColumns: 'repeat(2, 1fr)', 
           gap: 10,
-          maxHeight: 300,
+          maxHeight: 400,
           overflowY: 'auto',
           paddingRight: 4
         }}>
+          <div
+            onClick={handleAddCustomClick}
+            style={{
+              height: 80,
+              background: '#f5f5f5',
+              borderRadius: 8,
+              cursor: isPro ? 'pointer' : 'not-allowed',
+              position: 'relative',
+              border: '1px dashed #d9d9d9',
+              transition: 'all 0.2s ease',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              flexDirection: 'column',
+              gap: 4,
+            }}
+            onMouseEnter={(e) => {
+              if (isPro) {
+                e.currentTarget.style.background = '#f0f0f0';
+                e.currentTarget.style.borderColor = '#1677ff';
+              }
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.background = '#f5f5f5';
+              e.currentTarget.style.borderColor = '#d9d9d9';
+            }}
+          >
+            <PlusOutlined style={{ fontSize: 24, color: isPro ? '#1677ff' : '#bfbfbf' }} />
+            {!isPro && (
+              <>
+                <span style={{ fontSize: 11, color: '#bfbfbf' }}>Только PRO</span>
+                <span style={{ 
+                  position: 'absolute',
+                  top: 4,
+                  right: 4,
+                  fontSize: 10, 
+                  background: '#faad14', 
+                  color: 'white', 
+                  padding: '2px 6px', 
+                  borderRadius: 10,
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: 2
+                }}>
+                  <CrownOutlined style={{ fontSize: 8 }} /> PRO
+                </span>
+              </>
+            )}
+          </div>
           {PRESET_BACKGROUNDS.map(bg => (
             <div
               key={bg.id}
@@ -125,18 +200,8 @@ export const BackgroundSection: React.FC = () => {
 
       <Divider style={{ margin: 0 }} />
 
-      <div>
-        <div style={{ marginBottom: 8, fontWeight: 500, fontSize: 14 }}>Свой фон</div>
-        <Upload accept="image/*" showUploadList={false} beforeUpload={handleCustomUpload}>
-          <Button icon={<PictureOutlined />} block loading={isLoading}>
-            Загрузить изображение
-          </Button>
-        </Upload>
-      </div>
-
       {background.image && (
         <>
-          <Divider style={{ margin: 0 }} />
           <div>
             <div style={{ marginBottom: 12, fontWeight: 500, fontSize: 14 }}>Настройки отображения</div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>

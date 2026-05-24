@@ -4,6 +4,7 @@ export interface User {
   id: string;
   username: string;
   email: string;
+  plan?: 'free' | 'pro';
   createdAt?: string;
   avatar?: string | null;
 }
