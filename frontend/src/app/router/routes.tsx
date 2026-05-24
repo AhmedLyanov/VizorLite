@@ -28,6 +28,14 @@ export const routes: RouteObject[] = [
       { path: "/about", element: <AboutPage /> },
       { path: "/faq", element: <FAQPage /> },
       { path: "/pro", element: <ProFeaturesPage /> },
+      {
+        path: "/payments",
+        element: (
+          <ProtectedRoute>
+            <HistoryPricing />
+          </ProtectedRoute>
+        ),
+      },
     ],
   },
 
@@ -41,14 +49,6 @@ export const routes: RouteObject[] = [
         element: (
           <ProtectedRoute>
             <ProfilePage />
-          </ProtectedRoute>
-        ),
-      },
-      {
-        path: "/payments",   
-        element: (
-          <ProtectedRoute>
-            <HistoryPricing />
           </ProtectedRoute>
         ),
       },

@@ -47,7 +47,20 @@ export const profileApi = {
     })
     return response.data
   },
+  getSettings: async () => {
+    const response = await api.get('/profile/settings');
+    return response.data;
+  },
 
+  updateSettings: async (settings: any) => {
+    const response = await api.put('/profile/settings', { settings });
+    return response.data;
+  },
+
+  updateSettingsSection: async (section: string, data: any) => {
+    const response = await api.patch(`/profile/settings/${section}`, { data });
+    return response.data;
+  },
   deleteAvatar: async (): Promise<{ success: boolean; message: string }> => {
     const response = await api.delete('/profile/avatar')
     return response.data

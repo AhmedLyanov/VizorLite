@@ -2,7 +2,6 @@
   width: 100%;
   min-height: 100vh;
   padding: 12px 8px;
-  background: var(--primary-background-color);
   overflow-x: hidden;
   box-sizing: border-box;
   display: flex;

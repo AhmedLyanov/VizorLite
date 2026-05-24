@@ -142,6 +142,58 @@ export const updateProfile = async (req, res) => {
   }
 };
 
+
+export const updateSettings = async (req, res) => {
+  try {
+    const { settings } = req.body;
+    const user = await User.findByIdAndUpdate(
+      req.userId,
+      { $set: { settings } },
+      { new: true }
+    ).select('-password');
+
+    res.json({
+      success: true,
+      settings: user.settings
+    });
+  } catch (error) {
+    console.error('❌ Update settings error:', error);
+    res.status(500).json({ error: 'Ошибка обновления настроек' });
+  }
+};
+
+
+export const updateSettingsSection = async (req, res) => {
+  try {
+    const { section, data } = req.body; 
+
+    const updatePath = `settings.${section}`;
+    const user = await User.findByIdAndUpdate(
+      req.userId,
+      { $set: { [updatePath]: data } },
+      { new: true }
+    ).select('-password');
+
+    res.json({
+      success: true,
+      settings: user.settings
+    });
+  } catch (error) {
+    console.error('❌ Update settings section error:', error);
+    res.status(500).json({ error: 'Ошибка обновления настроек' });
+  }
+};
+
+export const getSettings = async (req, res) => {
+  try {
+    const user = await User.findById(req.userId).select('settings');
+    res.json({ settings: user.settings });
+  } catch (error) {
+    console.error('❌ Get settings error:', error);
+    res.status(500).json({ error: 'Ошибка получения настроек' });
+  }
+};
+
 export const deleteAccount = async (req, res) => {
   try {
     await User.findByIdAndDelete(req.userId);

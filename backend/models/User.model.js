@@ -25,6 +25,28 @@ const userSchema = new mongoose.Schema({
     type: String,
     default: null
   },
+  settings: {
+    type: {
+      background: {
+        image: { type: String, default: null },
+        size: { type: String, enum: ['cover', 'contain', 'auto'], default: 'cover' },
+        position: { type: String, default: 'center' },
+        attachment: { type: String, enum: ['fixed', 'scroll'], default: 'fixed' }
+      },
+      // theme: { type: String, default: 'light' },
+      // notifications: { type: Object, default: {} },
+      // language: { type: String, default: 'en' },
+      // privacy: { type: Object, default: {} }
+    },
+    default: {
+      background: {
+        image: null,
+        size: 'cover',
+        position: 'center',
+        attachment: 'fixed'
+      }
+    }
+  },
   emailVerified: {
     type: Boolean,
     default: false
@@ -33,7 +55,6 @@ const userSchema = new mongoose.Schema({
     type: String,
     default: "free"
   },
-
   stripeCustomerId: {
     type: String,
     default: null

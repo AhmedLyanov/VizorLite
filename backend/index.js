@@ -9,11 +9,13 @@ import { fileURLToPath } from 'url';
 import userRoutes from "./routes/user.routes.js";
 import roomRoutes from "./routes/room.routes.js";
 import aiRoutes from "./routes/ai.routes.js";
-import profileRoutes from "./routes/profile.routes.js"; 
+import profileRoutes from "./routes/profile.routes.js";
 import socketService from "./services/websocket.service.js";
 import verificationRoutes from "./routes/verification.routes.js";
 import stripeRoutes from "./routes/stripe.routes.js";
-import chatRoutes from "./routes/chat.routes.js";  
+import chatRoutes from "./routes/chat.routes.js";
+import settingsRoutes from "./routes/settings.routes.js"; 
+
 
 dotenv.config();
 
@@ -48,6 +50,8 @@ app.use('/api/ai', aiRoutes);
 app.use('/api/profile', profileRoutes);
 app.use("/api/verification", verificationRoutes);
 app.use("/api/chat", chatRoutes);
+app.use("/api/profile", profileRoutes);
+app.use("/api/profile/settings", settingsRoutes);
 
 app.get("/", (req, res) => {
   res.json({ message: "Welcome Universe!" });

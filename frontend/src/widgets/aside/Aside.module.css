@@ -3,6 +3,7 @@ aside {
     width: 70px;
     height: 100vh;
     padding: 30px 0;
+    backdrop-filter: blur(10px);
 
 }
 
