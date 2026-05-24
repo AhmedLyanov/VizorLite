@@ -18,6 +18,7 @@ const AboutPage = lazy(() => import("@/pages/about/AboutPage"));
 const PricingPage = lazy(() => import("@/pages/pricing/PricingPage"));
 const ProFeaturesPage = lazy(() => import('@/pages/pro-features/ProFeaturesPage'));
 const NotFound = lazy(() => import("@/pages/notfound/Notfound"));
+const GuidePage = lazy(() => import("@/pages/guide/GuidePage"));
 const FAQPage = lazy(() => import("@/pages/faq/FAQPage"));
 
 export const routes: RouteObject[] = [
@@ -28,6 +29,7 @@ export const routes: RouteObject[] = [
       { path: "/about", element: <AboutPage /> },
       { path: "/faq", element: <FAQPage /> },
       { path: "/pro", element: <ProFeaturesPage /> },
+      { path: "/guide", element: <GuidePage /> },
       {
         path: "/payments",
         element: (
