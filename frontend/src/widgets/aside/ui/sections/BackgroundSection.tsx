@@ -1,9 +1,12 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import { Button, Radio, message, Divider } from 'antd';
-import { DeleteOutlined, CrownOutlined, PlusOutlined } from '@ant-design/icons';
+import { DeleteOutlined, PlusOutlined } from '@ant-design/icons';
 
+import { ProBadge } from "@/shared/ui/probadge/ProBadge";
 import { useSettingsStore } from '@/entities/user/useSettingsStore';
 import { usePlan } from '@/entities/user/usePlan';
+
+import styles from './BackgroundSection.module.css';
 
 const PRESET_BACKGROUNDS = [
   { id: 1, url: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1920', name: 'Горы' },
@@ -28,6 +31,7 @@ export const BackgroundSection: React.FC = () => {
   const { settings, updateSection, isLoading } = useSettingsStore();
   const { isPro } = usePlan();
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const [hoveredAdd, setHoveredAdd] = useState(false);
   const background = settings.background;
 
   const handleCustomUpload = async (file: File) => {
@@ -70,87 +74,38 @@ export const BackgroundSection: React.FC = () => {
   };
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+    <div className={styles.container}>
       <input
         ref={fileInputRef}
         type="file"
         accept="image/*"
-        style={{ display: 'none' }}
+        className={styles.hiddenInput}
         onChange={handleFileChange}
       />
 
       <div>
-        <div style={{ marginBottom: 12, fontWeight: 500, fontSize: 14 }}>Готовые фоны</div>
-        <div style={{ 
-          display: 'grid', 
-          gridTemplateColumns: 'repeat(2, 1fr)', 
-          gap: 10,
-          maxHeight: 400,
-          overflowY: 'auto',
-          paddingRight: 4
-        }}>
+        <div className={styles.sectionTitle}>Готовые фоны</div>
+        <div className={styles.grid}>
           <div
             onClick={handleAddCustomClick}
+            className={`${styles.addButton} ${isPro ? styles.addButtonPro : styles.addButtonFree}`}
             style={{
-              height: 80,
-              background: '#f5f5f5',
-              borderRadius: 8,
-              cursor: isPro ? 'pointer' : 'not-allowed',
-              position: 'relative',
-              border: '1px dashed #d9d9d9',
-              transition: 'all 0.2s ease',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              flexDirection: 'column',
-              gap: 4,
+              background: hoveredAdd && isPro ? '#f0f0f0' : '#f5f5f5',
+              borderColor: hoveredAdd && isPro ? '#1677ff' : '#d9d9d9'
             }}
-            onMouseEnter={(e) => {
-              if (isPro) {
-                e.currentTarget.style.background = '#f0f0f0';
-                e.currentTarget.style.borderColor = '#1677ff';
-              }
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.background = '#f5f5f5';
-              e.currentTarget.style.borderColor = '#d9d9d9';
-            }}
+            onMouseEnter={() => setHoveredAdd(true)}
+            onMouseLeave={() => setHoveredAdd(false)}
           >
-            <PlusOutlined style={{ fontSize: 24, color: isPro ? '#1677ff' : '#bfbfbf' }} />
-            {!isPro && (
-              <>
-                <span style={{ fontSize: 11, color: '#bfbfbf' }}>Только PRO</span>
-                <span style={{ 
-                  position: 'absolute',
-                  top: 4,
-                  right: 4,
-                  fontSize: 10, 
-                  background: '#faad14', 
-                  color: 'white', 
-                  padding: '2px 6px', 
-                  borderRadius: 10,
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: 2
-                }}>
-                  <CrownOutlined style={{ fontSize: 8 }} /> PRO
-                </span>
-              </>
-            )}
+            <PlusOutlined className={isPro ? styles.plusIconPro : styles.plusIconFree} />
+            {!isPro && <ProBadge />}
           </div>
+          
           {PRESET_BACKGROUNDS.map(bg => (
             <div
               key={bg.id}
               onClick={() => handlePresetSelect(bg.url)}
-              style={{
-                height: 80,
-                background: `url(${bg.url}) center/cover`,
-                borderRadius: 8,
-                cursor: 'pointer',
-                position: 'relative',
-                border: background.image === bg.url ? '2px solid #1677ff' : '1px solid #d9d9d9',
-                transition: 'all 0.2s ease',
-              }}
+              className={`${styles.presetItem} ${background.image === bg.url ? styles.presetItemSelected : styles.presetItemDefault}`}
+              style={{ background: `url(${bg.url}) center/cover` }}
               onMouseEnter={(e) => {
                 e.currentTarget.style.transform = 'scale(1.02)';
                 e.currentTarget.style.boxShadow = '0 4px 12px rgba(0,0,0,0.15)';
@@ -160,36 +115,11 @@ export const BackgroundSection: React.FC = () => {
                 e.currentTarget.style.boxShadow = 'none';
               }}
             >
-              <div style={{
-                position: 'absolute',
-                bottom: 6,
-                left: 8,
-                color: 'white',
-                textShadow: '0 1px 4px rgba(0,0,0,0.5)',
-                fontSize: 11,
-                fontWeight: 500,
-                background: 'rgba(0,0,0,0.4)',
-                padding: '2px 6px',
-                borderRadius: 4,
-                backdropFilter: 'blur(4px)',
-              }}>
+              <div className={styles.presetLabel}>
                 {bg.name}
               </div>
               {background.image === bg.url && (
-                <div style={{
-                  position: 'absolute',
-                  top: 4,
-                  right: 4,
-                  background: '#1677ff',
-                  borderRadius: '50%',
-                  width: 20,
-                  height: 20,
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  color: 'white',
-                  fontSize: 12,
-                }}>
+                <div className={styles.checkmark}>
                   ✓
                 </div>
               )}
@@ -198,17 +128,17 @@ export const BackgroundSection: React.FC = () => {
         </div>
       </div>
 
-      <Divider style={{ margin: 0 }} />
+      <Divider className={styles.divider} />
 
       {background.image && (
         <>
           <div>
-            <div style={{ marginBottom: 12, fontWeight: 500, fontSize: 14 }}>Настройки отображения</div>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+            <div className={styles.settingsGroup}>Настройки отображения</div>
+            <div className={styles.settingsContainer}>
               <div>
-                <div style={{ marginBottom: 8, fontSize: 13, color: '#666' }}>Размер</div>
-                <Radio.Group 
-                  value={background.size} 
+                <div className={styles.settingLabel}>Размер</div>
+                <Radio.Group
+                  value={background.size}
                   onChange={(e) => updateSection('background', { size: e.target.value })}
                   size="small"
                   buttonStyle="solid"
@@ -218,11 +148,11 @@ export const BackgroundSection: React.FC = () => {
                   <Radio.Button value="auto">Оригинал</Radio.Button>
                 </Radio.Group>
               </div>
-              
+
               <div>
-                <div style={{ marginBottom: 8, fontSize: 13, color: '#666' }}>Прокрутка</div>
-                <Radio.Group 
-                  value={background.attachment} 
+                <div className={styles.settingLabel}>Прокрутка</div>
+                <Radio.Group
+                  value={background.attachment}
                   onChange={(e) => updateSection('background', { attachment: e.target.value })}
                   size="small"
                   buttonStyle="solid"
@@ -232,10 +162,10 @@ export const BackgroundSection: React.FC = () => {
                 </Radio.Group>
               </div>
 
-              <Button 
-                icon={<DeleteOutlined />} 
+              <Button
+                icon={<DeleteOutlined />}
                 onClick={handleReset}
-                danger 
+                danger
                 size="middle"
                 loading={isLoading}
                 block

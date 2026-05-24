@@ -1,0 +1,133 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.sectionTitle {
+  margin-bottom: 12px;
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  max-height: 400px;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+.addButton {
+  height: 80px;
+  background: #f5f5f5;
+  border-radius: 8px;
+  position: relative;
+  border: 1px dashed #d9d9d9;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.addButtonPro {
+  cursor: pointer;
+}
+
+.addButtonFree {
+  cursor: not-allowed;
+}
+
+.addButtonHover {
+  background: #f0f0f0;
+  border-color: #1677ff;
+}
+
+.plusIconPro {
+  font-size: 24px;
+  color: #1677ff;
+}
+
+.plusIconFree {
+  font-size: 24px;
+  color: #bfbfbf;
+}
+
+.presetItem {
+  height: 80px;
+  border-radius: 8px;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.2s ease;
+}
+
+.presetItemSelected {
+  border: 2px solid #1677ff;
+}
+
+.presetItemDefault {
+  border: 1px solid #d9d9d9;
+}
+
+.presetItemHover {
+  transform: scale(1.02);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.presetLabel {
+  position: absolute;
+  bottom: 6px;
+  left: 8px;
+  color: white;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+  font-size: 11px;
+  font-weight: 500;
+  background: rgba(0, 0, 0, 0.4);
+  padding: 2px 6px;
+  border-radius: 4px;
+  backdrop-filter: blur(4px);
+}
+
+.checkmark {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  background: #1677ff;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 12px;
+}
+
+.divider {
+  margin: 0;
+}
+
+.settingsGroup {
+  margin-bottom: 12px;
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.settingsContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.settingLabel {
+  margin-bottom: 8px;
+  font-size: 13px;
+  color: #666;
+}
+
+.hiddenInput {
+  display: none;
+}

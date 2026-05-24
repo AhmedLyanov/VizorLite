@@ -1,0 +1,23 @@
+.badge {
+  font-size: 10px;
+  background: #faad14;
+  color: white;
+  padding: 2px 6px;
+  border-radius: 10px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  white-space: nowrap;
+}
+
+.badgeMedium {
+  font-size: 12px;
+  padding: 4px 10px;
+  border-radius: 12px;
+  gap: 6px;
+}
+
+.icon {
+  display: inline-flex;
+  align-items: center;
+}
