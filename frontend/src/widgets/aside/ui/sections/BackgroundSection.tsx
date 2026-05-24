@@ -30,8 +30,12 @@ export const BackgroundSection: React.FC = () => {
   const handleCustomUpload = async (file: File) => {
     const reader = new FileReader();
     reader.onload = async (e) => {
-      await updateSection('background', { image: e.target?.result });
-      message.success('Фон установлен');
+      // 👇 ИСПРАВЛЕНИЕ ТУТ - проверяем тип
+      const result = e.target?.result;
+      if (typeof result === 'string') {
+        await updateSection('background', { image: result });
+        message.success('Фон установлен');
+      }
     };
     reader.readAsDataURL(file);
     return false;
