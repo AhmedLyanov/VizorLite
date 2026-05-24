@@ -9,21 +9,21 @@ import { usePlan } from '@/entities/user/usePlan';
 import styles from './BackgroundSection.module.css';
 
 const PRESET_BACKGROUNDS = [
-  { id: 1, url: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1920', name: 'Горы' },
-  { id: 2, url: 'https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=1920', name: 'Лес' },
-  { id: 3, url: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1920', name: 'Пляж' },
-  { id: 4, url: 'https://images.unsplash.com/photo-1419242902214-272b3f66ee7a?w=1920', name: 'Космос' },
-  { id: 5, url: 'https://images.unsplash.com/photo-1541701494587-cb58502866ab?w=1920', name: 'Абстракция' },
-  { id: 6, url: 'https://images.unsplash.com/photo-1518837695005-2083093ee35b?w=1920', name: 'Океан' },
-  { id: 7, url: 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=1920', name: 'Горы снежные' },
-  { id: 8, url: 'https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?w=1920', name: 'Северное сияние' },
+  { id: 1, url: 'https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?q=80&w=2144&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', name: 'Город' },
+  { id: 2, url: 'https://images.unsplash.com/photo-1568607689150-17e625c1586e?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', name: 'Северное сияние' },
+  { id: 3, url: 'https://images.unsplash.com/photo-1470115636492-6d2b56f9146d?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', name: 'Дорога в лесу' },
+  { id: 4, url: 'https://images.unsplash.com/photo-1519681393784-d120267933ba?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', name: 'Космос' },
+  { id: 5, url: 'https://4kwallpapers.com/images/walls/thumbs_3t/26437.jpg', name: 'Розовый абстракт' },
+  { id: 6, url: 'https://4kwallpapers.com/images/walls/thumbs_3t/26438.jpg', name: 'Коричневый абстракт' },
+  { id: 7, url: 'https://4kwallpapers.com/images/walls/thumbs_3t/12264.jpg', name: 'Вид на море' },
+  { id: 8, url: 'https://4kwallpapers.com/images/walls/thumbs_3t/25111.jpg', name: 'Аниме' },
   { id: 9, url: 'https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=1920', name: 'Туманный лес' },
   { id: 10, url: 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=1920', name: 'Поле' },
-  { id: 11, url: 'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=1920', name: 'Сосновый лес' },
-  { id: 12, url: 'https://images.unsplash.com/photo-1510784722466-f2aa9c52fff6?w=1920', name: 'Звездное небо' },
-  { id: 13, url: 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?w=1920', name: 'Город' },
-  { id: 14, url: 'https://images.unsplash.com/photo-1493246507139-91e8fad1fc71?w=1920', name: 'Мост' },
-  { id: 15, url: 'https://images.unsplash.com/photo-1501854140801-50d01698950b?w=1920', name: 'Озеро' },
+  { id: 11, url: 'https://4kwallpapers.com/images/walls/thumbs_3t/21159.jpg', name: 'Дубай' },
+  { id: 12, url: 'https://4kwallpapers.com/images/walls/thumbs_3t/18646.jpg', name: 'Манхэттен, Нью-Йорк' },
+  { id: 13, url: 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?w=1920', name: 'Берег' },
+  { id: 14, url: 'https://4kwallpapers.com/images/walls/thumbs_3t/26268.jpg', name: 'Аниме 2' },
+  { id: 15, url: 'https://4kwallpapers.com/images/walls/thumbs_3t/6596.jpg', name: 'Солдат' },
   { id: 16, url: 'https://images.unsplash.com/photo-1426604966848-d7adac402bff?w=1920', name: 'Закат' },
 ];
 
@@ -99,7 +99,7 @@ export const BackgroundSection: React.FC = () => {
             <PlusOutlined className={isPro ? styles.plusIconPro : styles.plusIconFree} />
             {!isPro && <ProBadge />}
           </div>
-          
+
           {PRESET_BACKGROUNDS.map(bg => (
             <div
               key={bg.id}
