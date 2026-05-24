@@ -13,7 +13,6 @@ export default function Aside() {
     <aside className={styles.aside}>
       <div className={styles.asideContent}>
         <div className={styles.asideContentTop}>
-          {/* Авторизован — аватар / буква */}
           {isAuthenticated && user ? (
             <Tooltip placement="right" title="Профиль">
               <Link to="/profile" className={styles.navLink}>
@@ -63,12 +62,6 @@ export default function Aside() {
             <Link to="/community" className={styles.asideNavigationButton}>
               <Icon name="community" />
             </Link>
-          </Tooltip>
-
-          <Tooltip placement="right" title="История">
-            <button className={styles.asideNavigationButton}>
-              <Icon name="history" />
-            </button>
           </Tooltip>
         </div>
 
