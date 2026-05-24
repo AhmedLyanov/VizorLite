@@ -3,6 +3,7 @@ import { Tooltip } from "antd";
 
 import { useAuth } from "@/entities/user/AuthContext";
 import { Icon } from "@/shared/assets/icons/Icon";
+import { SettingsPopover } from "./ui/SettingsPopover";
 
 import styles from "./Aside.module.css";
 
@@ -30,7 +31,6 @@ export default function Aside() {
               </Link>
             </Tooltip>
           ) : (
-            /* Неавторизован — иконка плюса */
             <Tooltip placement="right" title="Войти">
               <Link to="/auth" className={styles.navLink}>
                 <div className={styles.asideAvatar}>
@@ -67,9 +67,11 @@ export default function Aside() {
 
         <div className={styles.asideContentBottom}>
           <Tooltip placement="right" title="Настройки">
-            <button className={styles.asideNavigationButton}>
-              <Icon name="settings" />
-            </button>
+            <SettingsPopover>
+              <button className={styles.asideNavigationButton}>
+                <Icon name="settings" />
+              </button>
+            </SettingsPopover>
           </Tooltip>
         </div>
       </div>
