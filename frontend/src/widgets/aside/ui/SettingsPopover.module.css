@@ -1,0 +1,23 @@
+.popoverContent {
+  width: 360px;
+}
+
+.spaceFullWidth {
+  width: 100%;
+}
+
+.dividerNoMargin {
+  margin: 0;
+}
+
+.dividerFooter {
+  margin: 12px 0 0 0;
+}
+
+.footerText {
+  font-size: 12px;
+}
+
+.buttonLinkNoPadding {
+  padding: 0;
+}
