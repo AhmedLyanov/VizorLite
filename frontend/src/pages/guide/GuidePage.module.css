@@ -6,7 +6,6 @@
   overflow-x: hidden;
 }
 
-/* Sidebar styles */
 .sidebar {
   position: fixed;
   top: 70px;
@@ -62,7 +61,6 @@
   border-left: 2px solid var(--primary-title-color);
 }
 
-/* Main content styles */
 .mainContent {
   flex: 1;
   margin-left: 260px;
@@ -161,7 +159,6 @@
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
 }
 
-/* Scrollbar styles */
 .sidebar::-webkit-scrollbar {
   width: 4px;
 }
@@ -174,7 +171,6 @@
   background: rgba(0, 0, 0, 0.15);
 }
 
-/* Responsive */
 @media (min-width: 768px) {
   .mainContent {
     padding: 15px 10px;
@@ -266,7 +262,6 @@
   }
 }
 
-/* Mobile */
 @media (max-width: 767px) {
   .sidebar {
     display: none;

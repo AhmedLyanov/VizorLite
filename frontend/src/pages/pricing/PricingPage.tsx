@@ -4,6 +4,7 @@ import { useIntl } from "react-intl";
 import { PRICING_TEXTS } from "@/shared/constants";
 import { useAuth } from "@/entities/user/AuthContext";
 import { stripeApi } from "@/shared/api/stripeApi";
+import { HelpLink } from "@/shared/ui/helplink/HelpLink";
 import checkIcon from "@/shared/assets/check-mark.svg";
 
 import styles from "./Pricing.module.css";
@@ -29,10 +30,21 @@ export default function PricingPage() {
     }
   };
 
+  const featureToGuideMap: Record<string, string> = {
+    'pricing.pro.feature.chat': 'chat-messages',
+    'pricing.pro.feature.ai': 'ai-features',
+    'pricing.pro.feature.screen': 'screen-sharing',
+    'pricing.pro.feature.background': 'background-effects',
+    'pricing.pro.feature.devices': 'device-settings',
+    'pricing.pro.feature.security': 'security',
+    'pricing.pro.feature.localization': 'localization',
+    'pricing.pro.feature.mobile': 'mobile-app',
+  };
+
   const freeFeatures = [
-    "pricing.free.feature1",
-    "pricing.free.feature2",
-    "pricing.free.feature3",
+    { id: "pricing.free.feature1", guideId: "getting-started" },
+    { id: "pricing.free.feature2", guideId: "creating-room" },
+    { id: "pricing.free.feature3", guideId: "join-room" },
   ];
 
   return (
@@ -56,10 +68,17 @@ export default function PricingPage() {
           <div className={styles.featuresList}>
             {freeFeatures.map((feature, index) => (
               <div key={index} className={styles.featureItem}>
-                <img src={checkIcon} alt="" className={styles.featureIcon} />
-                <span className={styles.featureText}>
-                  {intl.formatMessage({ id: feature })}
-                </span>
+                <div className={styles.featureTextWrapper}>
+                  <img src={checkIcon} alt="" className={styles.featureIcon} />
+                  <span className={styles.featureText}>
+                    {intl.formatMessage({ id: feature.id })}
+                  </span>
+                  <HelpLink 
+                    guideSectionId={feature.guideId}
+                    iconSize={14}
+                    tooltipText={intl.formatMessage({ id: "pricing.learnMore" })}
+                  />
+                </div>
               </div>
             ))}
           </div>
@@ -67,7 +86,6 @@ export default function PricingPage() {
             <img src={checkIcon} alt="" className={styles.activeIcon} />
           </button>
         </div>
-
         <div className={`${styles.pricingCard} ${styles.proCard}`}>
           <div className={styles.cardBadge}>
             <span>{intl.formatMessage({ id: "pricing.bestValue" })}</span>
@@ -86,14 +104,24 @@ export default function PricingPage() {
             </div>
           </div>
           <div className={styles.featuresList}>
-            {PRICING_TEXTS.PLANS.BUSINESS.FEATURES.map((feature, index) => (
-              <div key={index} className={styles.featureItem}>
-                <img src={checkIcon} alt="" className={styles.featureIcon} />
-                <span className={styles.featureText}>
-                  {intl.formatMessage({ id: feature })}
-                </span>
-              </div>
-            ))}
+            {PRICING_TEXTS.PLANS.BUSINESS.FEATURES.map((feature, index) => {
+              const guideId = featureToGuideMap[feature] || 'pro-features';
+              return (
+                <div key={index} className={styles.featureItem}>
+                  <div className={styles.featureTextWrapper}>
+                    <img src={checkIcon} alt="" className={styles.featureIcon} />
+                    <span className={styles.featureText}>
+                      {intl.formatMessage({ id: feature })}
+                    </span>
+                    <HelpLink 
+                      guideSectionId={guideId}
+                      iconSize={14}
+                      tooltipText={intl.formatMessage({ id: "pricing.learnMore" })}
+                    />
+                  </div>
+                </div>
+              );
+            })}
           </div>
           <button
             className={`${styles.selectButton} ${styles.proButton}`}
