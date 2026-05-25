@@ -272,6 +272,7 @@ export const frMessages = {
   "pricing.subtitle": "Choisissez le plan adapté à vos réunions vidéo",
   "pricing.recommended": "Recommandé",
   "pricing.selectButton": "Choisir le plan",
+  "pricing.learnMore": "En savoir plus",
 
   // === NOUVEAUX CHAMPS POUR LA PAGE TARIFS (Free & Pro) ===
   "pricing.plans.pro.name": "Pro",

@@ -249,6 +249,7 @@ export const zhMessages = {
   "pricing.subtitle": "选择适合您视频会议的计划",
   "pricing.recommended": "推荐",
   "pricing.selectButton": "选择计划",
+  "pricing.learnMore": "了解更多",
 
   // === 新增定价页面字段（免费版和专业版） ===
   "pricing.plans.pro.name": "专业版",

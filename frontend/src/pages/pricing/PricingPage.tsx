@@ -62,7 +62,9 @@ export default function PricingPage() {
               {intl.formatMessage({ id: "pricing.plans.free.name" })}
             </h3>
             <div className={styles.priceContainer}>
-              <span className={styles.price}>0₽</span>
+              <span className={styles.price}>
+                {intl.formatMessage({ id: PRICING_TEXTS.PLANS.BASIC.PRICE })}
+              </span>
             </div>
           </div>
           <div className={styles.featuresList}>

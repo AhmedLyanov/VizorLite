@@ -264,6 +264,7 @@ export const ruMessages = {
   "pricing.subtitle": "Выберите подходящий план для ваших видеовстреч",
   "pricing.recommended": "Рекомендуем",
   "pricing.selectButton": "Выбрать план",
+  "pricing.learnMore": "Узнать больше",
   "pricing.plans.pro.name": "Pro",
   "pricing.bestValue": "Лучшее предложение",
   "pricing.free.button": "Начать бесплатно",

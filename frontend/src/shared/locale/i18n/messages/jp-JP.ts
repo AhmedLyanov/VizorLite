@@ -269,6 +269,7 @@ export const jpMessages = {
   "pricing.subtitle": "あなたのビデオ会議に合ったプランをお選びください",
   "pricing.recommended": "おすすめ",
   "pricing.selectButton": "プランを選択",
+  "pricing.learnMore": "もっと詳しく",
 
   "pricing.plans.basic.name": "ベーシック",
   "pricing.plans.basic.price": "¥0",

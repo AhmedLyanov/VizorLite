@@ -262,6 +262,7 @@ export const arMessages = {
   "pricing.subtitle": "اختر الخطة المناسبة لاجتماعات الفيديو الخاصة بك",
   "pricing.recommended": "موصى به",
   "pricing.selectButton": "اختر الخطة",
+  "pricing.learnMore": "اعرف المزيد",
 
   // === الحقول الجديدة لصفحة الأسعار (Free & Pro) ===
   "pricing.plans.pro.name": "برو",

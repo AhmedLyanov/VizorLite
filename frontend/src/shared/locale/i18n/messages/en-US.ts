@@ -265,6 +265,7 @@ export const enMessages = {
   "pricing.subtitle": "Choose the right plan for your video meetings",
   "pricing.recommended": "Recommended",
   "pricing.selectButton": "Select Plan",
+  "pricing.learnMore": "Learn more",
 
   // === NEW FIELDS FOR PRICING PAGE (Free & Pro) ===
   "pricing.plans.pro.name": "Pro",

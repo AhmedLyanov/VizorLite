@@ -272,6 +272,7 @@ export const deMessages = {
   "pricing.subtitle": "Wählen Sie den passenden Plan für Ihre Video-Meetings",
   "pricing.recommended": "Empfohlen",
   "pricing.selectButton": "Plan auswählen",
+  "pricing.learnMore": "Mehr erfahren",
 
   // === NEUE FELDER FÜR DIE PREISSEITE (Free & Pro) ===
   "pricing.plans.pro.name": "Pro",
