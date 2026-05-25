@@ -1,5 +1,4 @@
-import React, { useRef, useEffect, useState } from 'react';
-
+import React, { useRef, useEffect, useState, useCallback } from 'react';
 import styles from './GuidePage.module.css';
 
 const GuidePage: React.FC = () => {
@@ -75,6 +74,10 @@ const GuidePage: React.FC = () => {
     }
   ];
 
+  const setSectionRef = useCallback((id: string) => (el: HTMLDivElement | null) => {
+    sectionRefs.current[id] = el;
+  }, []);
+
   const scrollToSection = (id: string, behavior: ScrollBehavior = 'smooth') => {
     const section = sectionRefs.current[id];
     if (section) {
@@ -98,8 +101,8 @@ const GuidePage: React.FC = () => {
         sessionStorage.removeItem('guideScrollTo');
       }, 100);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
 
   useEffect(() => {
     const handleScroll = () => {
@@ -121,7 +124,7 @@ const GuidePage: React.FC = () => {
 
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [guideSections]);
 
   return (
     <div className={styles.guidePage}>
@@ -152,7 +155,7 @@ const GuidePage: React.FC = () => {
           {guideSections.map((section) => (
             <section
               key={section.id}
-              ref={(el) => (sectionRefs.current[section.id] = el)}
+              ref={setSectionRef(section.id)}
               className={styles.guideSection}
               id={section.id}
             >
