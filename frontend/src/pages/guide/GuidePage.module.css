@@ -171,6 +171,47 @@
   background: rgba(0, 0, 0, 0.15);
 }
 
+.sectionContent ul,
+.sectionContent ol {
+  margin: 12px 0;
+  padding-left: 24px;
+}
+
+.sectionContent li {
+  margin: 6px 0;
+  line-height: 1.6;
+  color: rgba(0, 0, 0, 0.7);
+}
+
+.sectionContent p {
+  margin: 16px 0;
+}
+
+.sectionContent p:first-child {
+  margin-top: 0;
+}
+
+.sectionContent p:last-child {
+  margin-bottom: 0;
+}
+
+.sectionContent strong {
+  color: var(--primary-title-color);
+  font-weight: 600;
+}
+
+@media (min-width: 768px) {
+  .sectionContent ul,
+  .sectionContent ol {
+    padding-left: 32px;
+  }
+  
+  .sectionContent li {
+    margin: 8px 0;
+  }
+}
+
+
 @media (min-width: 768px) {
   .mainContent {
     padding: 15px 10px;
