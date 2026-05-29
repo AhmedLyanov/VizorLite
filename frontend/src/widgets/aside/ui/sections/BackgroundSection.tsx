@@ -6,6 +6,7 @@ import { DeleteOutlined, PlusOutlined } from '@ant-design/icons';
 import { ProBadge } from "@/shared/ui/probadge/ProBadge";
 import { useSettingsStore } from '@/entities/user/useSettingsStore';
 import { usePlan } from '@/entities/user/usePlan';
+import { profileApi } from '@/shared/api/profileApi';
 
 import styles from './BackgroundSection.module.css';
 
@@ -37,15 +38,20 @@ export const BackgroundSection: React.FC = () => {
   const background = settings.background;
 
   const handleCustomUpload = async (file: File) => {
-    const reader = new FileReader();
-    reader.onload = async (e) => {
-      const result = e.target?.result;
-      if (typeof result === 'string') {
-        await updateSection('background', { image: result });
+    try {
+      const form = new FormData();
+      form.append('background', file);
+      const res = await profileApi.uploadBackground(form);
+      if (res && res.success && res.data && res.data.backgroundUrl) {
+        await updateSection('background', { image: res.data.backgroundUrl });
         message.success(intl.formatMessage({ id: 'background.success.set' }));
+      } else {
+        message.error(intl.formatMessage({ id: 'background.error', defaultMessage: 'Failed to set background' }));
       }
-    };
-    reader.readAsDataURL(file);
+    } catch (err) {
+      console.error('Background upload failed', err);
+      message.error(intl.formatMessage({ id: 'background.error', defaultMessage: 'Failed to upload background' }));
+    }
     return false;
   };
 

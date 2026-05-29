@@ -48,6 +48,14 @@ export const profileApi = {
     })
     return response.data
   },
+  uploadBackground: async (formData: FormData): Promise<{ success: boolean; data: { backgroundUrl: string } }> => {
+    const response = await api.post('/profile/background', formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
+    });
+    return response.data;
+  },
   getSettings: async () => {
     const response = await api.get('/profile/settings');
     return response.data;

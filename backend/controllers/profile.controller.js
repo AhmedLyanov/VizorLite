@@ -4,6 +4,7 @@ import path from 'path';
 import fs from 'fs';
 import { fileURLToPath } from 'url';
 import { saveAvatar } from '../services/avatar.service.js';
+import { saveBackground, deleteBackgroundFile } from '../services/background.service.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -108,6 +109,50 @@ export const uploadAvatar = async (req, res) => {
       success: false,
       message: "Avatar upload failed"
     });
+  }
+};
+
+export const uploadBackground = async (req, res) => {
+  try {
+    if (!req.file) {
+      return res.status(400).json({ success: false, message: 'No file uploaded' });
+    }
+
+    const user = await User.findById(req.userId);
+    if (!user) {
+      return res.status(404).json({ success: false, message: 'User not found' });
+    }
+
+    if (!user.settings) {
+      user.settings = {
+        background: {
+          image: null,
+          size: 'cover',
+          position: 'center',
+          attachment: 'fixed'
+        }
+      };
+    }
+
+    if (user.settings.background && user.settings.background.image) {
+      deleteBackgroundFile(user.settings.background.image);
+    }
+
+    const backgroundPath = await saveBackground(req.file.buffer, req.userId);
+
+    user.settings.background = {
+      ...user.settings.background,
+      image: backgroundPath
+    };
+
+    await user.save();
+
+    const baseUrl = `${req.protocol}://${req.get('host')}`;
+
+    res.json({ success: true, data: { backgroundUrl: `${baseUrl}${backgroundPath}` } });
+  } catch (error) {
+    console.error('Background upload error:', error);
+    res.status(500).json({ success: false, message: 'Background upload failed' });
   }
 };
 

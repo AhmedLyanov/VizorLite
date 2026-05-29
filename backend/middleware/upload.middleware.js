@@ -21,7 +21,13 @@ export const avatarUpload = multer({
     fileFilter
 }).single("avatar");
 
-
+export const backgroundUpload = multer({
+    storage,
+    limits: {
+        fileSize: 15 * 1024 * 1024
+    },
+    fileFilter
+}).single("background");
 
 const chatStorage = multer.memoryStorage();
 

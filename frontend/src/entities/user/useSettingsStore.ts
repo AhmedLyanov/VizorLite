@@ -89,7 +89,20 @@ export const useSettingsStore = create<SettingsStore>()(
       }
     }),
     {
-      name: 'user-settings', 
+      name: 'user-settings',
+      partialize: (state) => {
+        const image = state.settings.background.image;
+        const background = {
+          ...state.settings.background,
+          image: typeof image === 'string' && image.startsWith('data:') ? null : image,
+        };
+        return {
+          settings: {
+            ...state.settings,
+            background,
+          },
+        };
+      },
     }
   )
 );

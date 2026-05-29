@@ -2,8 +2,12 @@ import { useEffect } from 'react';
 import { useSettingsStore } from '@/entities/user/useSettingsStore';
 
 export const BackgroundProvider = ({ children }: { children: React.ReactNode }) => {
-  const { settings } = useSettingsStore();
+  const { settings, loadSettings } = useSettingsStore();
   const background = settings.background;
+
+  useEffect(() => {
+    loadSettings();
+  }, []);
 
   useEffect(() => {
     if (background.image) {
