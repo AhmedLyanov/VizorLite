@@ -237,26 +237,27 @@ export const deMessages = {
   "about.stats.items.support.value": "24/7",
   "about.stats.items.support.label": "Support",
 
-  "about.team.title": "Unser Team",
-  "about.team.items.alexey.name": "Alexey Petrov",
-  "about.team.items.alexey.role": "Gründer & CEO",
+  "about.team.title": "Projekt-Ersteller",
+  "about.team.items.alexey.name": "Ahmed Borisovich Lyanov",
+  "about.team.items.alexey.role": "Middle Frontend Engineer",
   "about.team.items.alexey.description":
-    "10+ Jahre Webentwicklung. Erstellt VizorLite, um Videokonferenzen für jeden zugänglich zu machen.",
-  "about.team.items.maria.name": "Maria Sidorova",
-  "about.team.items.maria.role": "Lead Developer",
-  "about.team.items.maria.description":
-    "WebRTC und Echtzeit-Spezialist. Verantwortlich für Verbindungsstabilität und -qualität.",
-  "about.team.items.dmitry.name": "Dmitry Ivanov",
-  "about.team.items.dmitry.role": "UI/UX Designer",
-  "about.team.items.dmitry.description":
-    "Erstellt intuitive Schnittstellen. Glaubt, dass Technologie schön und einfach sein sollte.",
+    "Hat VizorLite von Grund auf als alleiniger Entwickler aufgebaut und sich auf Frontend-Erlebnis und Produktqualität konzentriert.",
 
   "about.timeline.title": "Unser Weg",
-  "about.timeline.items.2021.event": "Idee und erster Prototyp",
-  "about.timeline.items.2022.event": "Start der geschlossenen Beta-Tests",
-  "about.timeline.items.2023.event":
-    "Öffentliche Veröffentlichung von VizorLite",
-  "about.timeline.items.2024.event": "50K aktive Benutzer erreicht",
+  "about.timeline.months.january": "Januar",
+  "about.timeline.months.may": "Mai",
+  "about.timeline.items.2026.january.start.event":
+    "Ich habe VizorLite im Januar 2026 begonnen und entwickle das Projekt weiterhin.",
+  "about.timeline.items.2026.05.24.styles.event":
+    "Ich habe die Seitenstile refaktoriert und Inline-Stile in wiederverwendbare Module verschoben.",
+  "about.timeline.items.2026.05.24.pro.event":
+    "Pro-only Middleware und Hooks wurden hinzugefügt, um Premium-Funktionen zu schützen.",
+  "about.timeline.items.2026.05.25.guide.event":
+    "Eine dedizierte Guide-Seiten-Erfahrung für Besucher wurde ergänzt.",
+  "about.timeline.items.2026.05.25.content.event":
+    "Die Guides wurden mit neuem Produktcontent und Erklärungen ergänzt.",
+  "about.timeline.items.2026.05.25.settings.event":
+    "Audio- und Kamera-Steuerungen wurden in SettingsPopover ergänzt.",
 
   "about.cta.title": "Jetzt sofort nutzen",
   "about.cta.description":

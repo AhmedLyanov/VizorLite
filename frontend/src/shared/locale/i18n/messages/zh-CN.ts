@@ -217,24 +217,27 @@ export const zhMessages = {
   "about.stats.items.support.value": "24/7",
   "about.stats.items.support.label": "支持",
 
-  "about.team.title": "我们的团队",
-  "about.team.items.alexey.name": "阿列克谢·彼得罗夫",
-  "about.team.items.alexey.role": "创始人 & CEO",
+  "about.team.title": "项目创建者",
+  "about.team.items.alexey.name": "Ahmed Borisovich Lyanov",
+  "about.team.items.alexey.role": "Middle Frontend Engineer",
   "about.team.items.alexey.description":
-    "10年以上Web开发经验。创建VizorLite让每个人都能使用视频会议。",
-  "about.team.items.maria.name": "玛丽亚·西多罗娃",
-  "about.team.items.maria.role": "首席开发",
-  "about.team.items.maria.description":
-    "WebRTC和实时通信专家。负责连接稳定性和质量。",
-  "about.team.items.dmitry.name": "德米特里·伊万诺夫",
-  "about.team.items.dmitry.role": "UI/UX设计师",
-  "about.team.items.dmitry.description": "创建直观界面。相信技术应该美观简单。",
+    "独立完成 VizorLite 的开发，专注于前端体验和产品打磨。",
 
   "about.timeline.title": "我们的历程",
-  "about.timeline.items.2021.event": "想法和第一个原型",
-  "about.timeline.items.2022.event": "封闭测试启动",
-  "about.timeline.items.2023.event": "VizorLite公开发布",
-  "about.timeline.items.2024.event": "达到5万活跃用户",
+  "about.timeline.months.january": "一月",
+  "about.timeline.months.may": "五月",
+  "about.timeline.items.2026.january.start.event":
+    "我在 2026 年 1 月开始搭建 VizorLite，并持续开发中。",
+  "about.timeline.items.2026.05.24.styles.event":
+    "重构了站点样式，并将内联样式抽离为可复用模块。",
+  "about.timeline.items.2026.05.24.pro.event":
+    "增加了 Pro 专属的中间件和 hooks，用于保护高级功能。",
+  "about.timeline.items.2026.05.25.guide.event":
+    "为访客新增了专门的指南页体验。",
+  "about.timeline.items.2026.05.25.content.event":
+    "为指南页补充了新的产品内容和说明。",
+  "about.timeline.items.2026.05.25.settings.event":
+    "在 SettingsPopover 中增加了音频和摄像头控制。",
 
   "about.cta.title": "立即开始使用",
   "about.cta.description": "加入已经通过VizorLite进行交流的数千用户",

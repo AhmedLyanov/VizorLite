@@ -56,39 +56,47 @@ export const ABOUT_TEXTS = {
         NAME: "about.team.items.alexey.name",
         ROLE: "about.team.items.alexey.role",
         DESCRIPTION: "about.team.items.alexey.description"
-      },
-      {
-        ID: 2,
-        NAME: "about.team.items.maria.name",
-        ROLE: "about.team.items.maria.role",
-        DESCRIPTION: "about.team.items.maria.description"
-      },
-      {
-        ID: 3,
-        NAME: "about.team.items.dmitry.name",
-        ROLE: "about.team.items.dmitry.role",
-        DESCRIPTION: "about.team.items.dmitry.description"
       }
     ]
   },
   TIMELINE: {
     TITLE: "about.timeline.title",
     ITEMS: [
-      { 
-        YEAR: "2021", 
-        EVENT: "about.timeline.items.2021.event" 
+      {
+        DAY: "1",
+        YEAR: "2026",
+        MONTH_KEY: "about.timeline.months.january",
+        EVENT: "about.timeline.items.2026.january.start.event"
       },
-      { 
-        YEAR: "2022", 
-        EVENT: "about.timeline.items.2022.event" 
+      {
+        DAY: "24",
+        YEAR: "2026",
+        MONTH_KEY: "about.timeline.months.may",
+        EVENT: "about.timeline.items.2026.05.24.styles.event"
       },
-      { 
-        YEAR: "2023", 
-        EVENT: "about.timeline.items.2023.event" 
+      {
+        DAY: "24",
+        YEAR: "2026",
+        MONTH_KEY: "about.timeline.months.may",
+        EVENT: "about.timeline.items.2026.05.24.pro.event"
       },
-      { 
-        YEAR: "2024", 
-        EVENT: "about.timeline.items.2024.event" 
+      {
+        DAY: "25",
+        YEAR: "2026",
+        MONTH_KEY: "about.timeline.months.may",
+        EVENT: "about.timeline.items.2026.05.25.guide.event"
+      },
+      {
+        DAY: "25",
+        YEAR: "2026",
+        MONTH_KEY: "about.timeline.months.may",
+        EVENT: "about.timeline.items.2026.05.25.content.event"
+      },
+      {
+        DAY: "25",
+        YEAR: "2026",
+        MONTH_KEY: "about.timeline.months.may",
+        EVENT: "about.timeline.items.2026.05.25.settings.event"
       }
     ]
   },

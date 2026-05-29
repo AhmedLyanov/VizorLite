@@ -228,25 +228,27 @@ export const arMessages = {
   "about.stats.items.support.value": "24/7",
   "about.stats.items.support.label": "دعم",
 
-  "about.team.title": "فريقنا",
-  "about.team.items.alexey.name": "أليكسي بيتروف",
-  "about.team.items.alexey.role": "المؤسس والرئيس التنفيذي",
+  "about.team.title": "مُنشئ المشروع",
+  "about.team.items.alexey.name": "أحمد بوريسوفيتش ليانوف",
+  "about.team.items.alexey.role": "مطور واجهة أمامية متقدم",
   "about.team.items.alexey.description":
-    "أكثر من 10 سنوات في تطوير الويب. أنشأ VizorLite لجعل مؤتمرات الفيديو في متناول الجميع.",
-  "about.team.items.maria.name": "ماريا سيدوروفا",
-  "about.team.items.maria.role": "المطور الرئيسي",
-  "about.team.items.maria.description":
-    "متخصصة في WebRTC والاتصال في الوقت الحقيقي. مسؤولة عن استقرار وجودة الاتصال.",
-  "about.team.items.dmitry.name": "ديمتري إيفانوف",
-  "about.team.items.dmitry.role": "مصمم واجهة المستخدم/التجربة",
-  "about.team.items.dmitry.description":
-    "يصنع واجهات بديهية. يعتقد أن التكنولوجيا يجب أن تكون جميلة وبسيطة.",
+    "بنى VizorLite من الصفر كمطور واحد، مع التركيز على تجربة الواجهة الأمامية وجودة المنتج.",
 
   "about.timeline.title": "رحلتنا",
-  "about.timeline.items.2021.event": "الفكرة والنموذج الأولي الأول",
-  "about.timeline.items.2022.event": "إطلاق الاختبار التجريبي المغلق",
-  "about.timeline.items.2023.event": "الإصدار العام لـ VizorLite",
-  "about.timeline.items.2024.event": "وصل إلى 50 ألف مستخدم نشط",
+  "about.timeline.months.january": "يناير",
+  "about.timeline.months.may": "مايو",
+  "about.timeline.items.2026.january.start.event":
+    "بدأت بناء VizorLite في يناير 2026 وما زلت أستمر في تطويره.",
+  "about.timeline.items.2026.05.24.styles.event":
+    "قمت بإعادة تنظيم أنماط الموقع ونقلت الأنماط المضمنة إلى وحدات قابلة لإعادة الاستخدام.",
+  "about.timeline.items.2026.05.24.pro.event":
+    "أضفت طبقة وسيطة خاصة بالنسخة Pro وحلقات حماية للميزات المميزة.",
+  "about.timeline.items.2026.05.25.guide.event":
+    "أضفت تجربة dedicated لصفحة الدلائل للزوار.",
+  "about.timeline.items.2026.05.25.content.event":
+    "عززت صفحات الدلائل بمحتوى جديد وشرح للمنتج.",
+  "about.timeline.items.2026.05.25.settings.event":
+    "أضفت عناصر التحكم في الصوت والكاميرا إلى SettingsPopover.",
 
   "about.cta.title": "ابدأ الاستخدام الآن",
   "about.cta.description":

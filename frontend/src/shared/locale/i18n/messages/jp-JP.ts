@@ -235,25 +235,27 @@ export const jpMessages = {
   "about.stats.items.support.value": "24/7",
   "about.stats.items.support.label": "サポート",
 
-  "about.team.title": "私たちのチーム",
-  "about.team.items.alexey.name": "アレクセイ・ペトロフ",
-  "about.team.items.alexey.role": "創業者 & CEO",
+  "about.team.title": "プロジェクト作成者",
+  "about.team.items.alexey.name": "Ahmed Borisovich Lyanov",
+  "about.team.items.alexey.role": "Middle Frontend Engineer",
   "about.team.items.alexey.description":
-    "ウェブ開発経験10年以上。VizorLiteを創設し、誰もがビデオ会議を利用できるようにしました。",
-  "about.team.items.maria.name": "マリア・シドロワ",
-  "about.team.items.maria.role": "リードデベロッパー",
-  "about.team.items.maria.description":
-    "WebRTCとリアルタイム通信の専門家。接続の安定性と品質を担当しています。",
-  "about.team.items.dmitry.name": "ドミトリー・イワノフ",
-  "about.team.items.dmitry.role": "UI/UXデザイナー",
-  "about.team.items.dmitry.description":
-    "直感的なインターフェースを作成します。テクノロジーは美しくシンプルであるべきと信じています。",
+    "VizorLite を一人でゼロから開発し、フロントエンド体験とプロダクトの品質に注力しました。",
 
   "about.timeline.title": "私たちの歩み",
-  "about.timeline.items.2021.event": "アイデアと最初のプロトタイプ",
-  "about.timeline.items.2022.event": "クローズドベータテスト開始",
-  "about.timeline.items.2023.event": "VizorLiteのパブリックリリース",
-  "about.timeline.items.2024.event": "5万人のアクティブユーザーを達成",
+  "about.timeline.months.january": "1月",
+  "about.timeline.months.may": "5月",
+  "about.timeline.items.2026.january.start.event":
+    "2026年1月にVizorLiteの開発を始め、今も継続して開発しています。",
+  "about.timeline.items.2026.05.24.styles.event":
+    "サイトのスタイルをリファクタリングし、インラインスタイルを再利用可能なモジュールへ移行しました。",
+  "about.timeline.items.2026.05.24.pro.event":
+    "プレミアム機能を保護するために、Pro専用のミドルウェアとフックを追加しました。",
+  "about.timeline.items.2026.05.25.guide.event":
+    "訪問者向けに専用のガイドページ体験を追加しました。",
+  "about.timeline.items.2026.05.25.content.event":
+    "ガイドに新しい製品コンテンツと説明を追加しました。",
+  "about.timeline.items.2026.05.25.settings.event":
+    "SettingsPopover に音声とカメラのコントロールを追加しました。",
 
   "about.cta.title": "今すぐ使い始めましょう",
   "about.cta.description":

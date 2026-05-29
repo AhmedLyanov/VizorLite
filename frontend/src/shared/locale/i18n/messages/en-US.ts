@@ -231,25 +231,27 @@ export const enMessages = {
   "about.stats.items.support.value": "24/7",
   "about.stats.items.support.label": "support",
 
-  "about.team.title": "Our Team",
-  "about.team.items.alexey.name": "Alexey Petrov",
-  "about.team.items.alexey.role": "Founder & CEO",
+  "about.team.title": "Project creator",
+  "about.team.items.alexey.name": "Ahmed Borisovich Lyanov",
+  "about.team.items.alexey.role": "Middle Frontend Engineer",
   "about.team.items.alexey.description":
-    "10+ years in web development. Created VizorLite to make video conferencing accessible to everyone.",
-  "about.team.items.maria.name": "Maria Sidorova",
-  "about.team.items.maria.role": "Lead Developer",
-  "about.team.items.maria.description":
-    "WebRTC and real-time specialist. Responsible for connection stability and quality.",
-  "about.team.items.dmitry.name": "Dmitry Ivanov",
-  "about.team.items.dmitry.role": "UI/UX Designer",
-  "about.team.items.dmitry.description":
-    "Creates intuitive interfaces. Believes that technology should be beautiful and simple.",
+    "Built VizorLite end-to-end as the sole developer, focusing on frontend experience and product polish.",
 
   "about.timeline.title": "Our Journey",
-  "about.timeline.items.2021.event": "Idea and first prototype",
-  "about.timeline.items.2022.event": "Closed beta testing launch",
-  "about.timeline.items.2023.event": "Public release of VizorLite",
-  "about.timeline.items.2024.event": "Reached 50K active users",
+  "about.timeline.months.january": "January",
+  "about.timeline.months.may": "May",
+  "about.timeline.items.2026.january.start.event":
+    "Started building VizorLite in January 2026 and continue developing it.",
+  "about.timeline.items.2026.05.24.styles.event":
+    "Refactored the site styles and moved inline styles into reusable modules.",
+  "about.timeline.items.2026.05.24.pro.event":
+    "Added Pro-only middleware and hooks to protect premium features.",
+  "about.timeline.items.2026.05.25.guide.event":
+    "Added a dedicated guide page experience for visitors.",
+  "about.timeline.items.2026.05.25.content.event":
+    "Filled the guides with new product content and explanations.",
+  "about.timeline.items.2026.05.25.settings.event":
+    "Added audio and camera controls to SettingsPopover.",
 
   "about.cta.title": "Start using right now",
   "about.cta.description":

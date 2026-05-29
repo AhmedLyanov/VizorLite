@@ -238,25 +238,27 @@ export const frMessages = {
   "about.stats.items.support.value": "24/7",
   "about.stats.items.support.label": "support",
 
-  "about.team.title": "Notre équipe",
-  "about.team.items.alexey.name": "Alexey Petrov",
-  "about.team.items.alexey.role": "Fondateur & CEO",
+  "about.team.title": "Créateur du projet",
+  "about.team.items.alexey.name": "Ahmed Borisovich Lyanov",
+  "about.team.items.alexey.role": "Middle Frontend Engineer",
   "about.team.items.alexey.description":
-    "10+ ans en développement web. Créé VizorLite pour rendre les vidéoconférences accessibles à tous.",
-  "about.team.items.maria.name": "Maria Sidorova",
-  "about.team.items.maria.role": "Développeuse principale",
-  "about.team.items.maria.description":
-    "Spécialiste WebRTC et temps réel. Responsable de la stabilité et de la qualité des connexions.",
-  "about.team.items.dmitry.name": "Dmitry Ivanov",
-  "about.team.items.dmitry.role": "Designer UI/UX",
-  "about.team.items.dmitry.description":
-    "Crée des interfaces intuitives. Croit que la technologie doit être belle et simple.",
+    "A développé VizorLite de bout en bout en tant que seul développeur, en se concentrant sur l’expérience frontend et la qualité du produit.",
 
   "about.timeline.title": "Notre parcours",
-  "about.timeline.items.2021.event": "Idée et premier prototype",
-  "about.timeline.items.2022.event": "Lancement des tests bêta fermés",
-  "about.timeline.items.2023.event": "Publication publique de VizorLite",
-  "about.timeline.items.2024.event": "Atteint 50K utilisateurs actifs",
+  "about.timeline.months.january": "Janvier",
+  "about.timeline.months.may": "Mai",
+  "about.timeline.items.2026.january.start.event":
+    "J'ai commencé à construire VizorLite en janvier 2026 et je continue de le faire évoluer.",
+  "about.timeline.items.2026.05.24.styles.event":
+    "J'ai refactoré les styles du site et déplacé les styles inline vers des modules réutilisables.",
+  "about.timeline.items.2026.05.24.pro.event":
+    "J'ai ajouté une couche middleware Pro-only et des hooks pour protéger les fonctionnalités premium.",
+  "about.timeline.items.2026.05.25.guide.event":
+    "J'ai ajouté une expérience dédiée de page de guides pour les visiteurs.",
+  "about.timeline.items.2026.05.25.content.event":
+    "J'ai enrichi les guides avec de nouveaux contenus et explications produit.",
+  "about.timeline.items.2026.05.25.settings.event":
+    "J'ai ajouté les contrôles audio et caméra dans SettingsPopover.",
 
   "about.cta.title": "Commencez à utiliser dès maintenant",
   "about.cta.description":

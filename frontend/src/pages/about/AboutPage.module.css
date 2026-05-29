@@ -257,8 +257,9 @@
   padding: 6px 12px;
   border-radius: 20px;
   flex-shrink: 0;
-  min-width: 60px;
+  min-width: 112px;
   text-align: center;
+  line-height: 1.4;
 }
 
 .timelineEvent {

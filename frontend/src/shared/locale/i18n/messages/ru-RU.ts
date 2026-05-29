@@ -230,25 +230,27 @@ export const ruMessages = {
   "about.stats.items.support.value": "24/7",
   "about.stats.items.support.label": "поддержка",
 
-  "about.team.title": "Наша команда",
-  "about.team.items.alexey.name": "Алексей Петров",
-  "about.team.items.alexey.role": "Основатель & CEO",
+  "about.team.title": "Автор проекта",
+  "about.team.items.alexey.name": "Льянов Ахмед Борисович",
+  "about.team.items.alexey.role": "Middle Frontend Engineer",
   "about.team.items.alexey.description":
-    "10+ лет в веб-разработке. Создал VizorLite чтобы сделать видеоконференции доступными каждому.",
-  "about.team.items.maria.name": "Мария Сидорова",
-  "about.team.items.maria.role": "Lead Developer",
-  "about.team.items.maria.description":
-    "Специалист по WebRTC и реальному времени. Отвечает за стабильность и качество соединений.",
-  "about.team.items.dmitry.name": "Дмитрий Иванов",
-  "about.team.items.dmitry.role": "UI/UX Дизайнер",
-  "about.team.items.dmitry.description":
-    "Создает интуитивные интерфейсы. Верит, что технологии должны быть красивыми и простыми.",
+    "Создал VizorLite с нуля как единственный разработчик, уделяя внимание фронтенд-опыту и качеству продукта.",
 
   "about.timeline.title": "Наш путь",
-  "about.timeline.items.2021.event": "Идея и первый прототип",
-  "about.timeline.items.2022.event": "Запуск закрытого бета-тестирования",
-  "about.timeline.items.2023.event": "Публичный релиз VizorLite",
-  "about.timeline.items.2024.event": "Достигли 50K активных пользователей",
+  "about.timeline.months.january": "Январь",
+  "about.timeline.months.may": "Май",
+  "about.timeline.items.2026.january.start.event":
+    "Начал разрабатывать VizorLite в январе 2026 года и продолжаю развивать проект.",
+  "about.timeline.items.2026.05.24.styles.event":
+    "Провёл рефакторинг стилей сайта и вынес инлайн-стили в переиспользуемые модули.",
+  "about.timeline.items.2026.05.24.pro.event":
+    "Добавил Pro-only middleware и хуки для защиты премиум-функций.",
+  "about.timeline.items.2026.05.25.guide.event":
+    "Добавил отдельный опыт страницы с гайдами для посетителей.",
+  "about.timeline.items.2026.05.25.content.event":
+    "Заполнил гайды новым контентом и пояснениями по продукту.",
+  "about.timeline.items.2026.05.25.settings.event":
+    "Добавил управление аудио и камерой в SettingsPopover.",
 
   "about.cta.title": "Начните использовать прямо сейчас",
   "about.cta.description":

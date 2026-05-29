@@ -87,7 +87,9 @@ const AboutPage: React.FC = () => {
           <div className={styles.timeline}>
             {ABOUT_TEXTS.TIMELINE.ITEMS.map((milestone, index) => (
               <div key={index} className={styles.timelineItem}>
-                <div className={styles.timelineYear}>{milestone.YEAR}</div>
+                <div className={styles.timelineYear}>
+                  {milestone.DAY} {intl.formatMessage({ id: milestone.MONTH_KEY })} {milestone.YEAR}
+                </div>
                 <p className={styles.timelineEvent}>
                   {intl.formatMessage({ id: milestone.EVENT })}
                 </p>
