@@ -64,46 +64,85 @@ export default function RoomPage() {
   }, [remoteVideos]);
 
   useEffect(() => {
-    navigator.mediaDevices
-      .getUserMedia({ video: true, audio: true })
-      .then((mediaStream) => {
-        setStream(mediaStream);
-        if (localVideoRef.current) {
-          localVideoRef.current.srcObject = mediaStream;
-        }
-      })
-      .catch(async (err) => {
+    const acquireMedia = async () => {
+      const logErrorDetails = async (err: unknown) => {
+        const error = err as { name?: string; message?: string; constraint?: string; stack?: string };
         console.error("MediaDevices error details:", {
-          name: err.name,
-          message: err.message,
-          constraint: err.constraint,
-          stack: err.stack,
+          name: error?.name,
+          message: error?.message,
+          constraint: error?.constraint,
+          stack: error?.stack,
           timestamp: new Date().toISOString(),
           userAgent: navigator.userAgent,
         });
         try {
           const permissions = {
-            camera: await navigator.permissions?.query({ name: 'camera' as PermissionName }).catch(() => null),
-            microphone: await navigator.permissions?.query({ name: 'microphone' as PermissionName }).catch(() => null)
+            camera: await navigator.permissions?.query({ name: "camera" as PermissionName }).catch(() => null),
+            microphone: await navigator.permissions?.query({ name: "microphone" as PermissionName }).catch(() => null),
           };
           const devices = await navigator.mediaDevices.enumerateDevices().catch(() => []);
           console.info("Device diagnostics:", { permissions, devices });
         } catch (diagErr) {
           console.warn("Diagnostics failed:", diagErr);
         }
-        let errorMessage = "Не удалось получить доступ к камере/микрофону";
-        if (err.name === "NotAllowedError") {
-          errorMessage = "Доступ к камере/микрофону запрещен. Пожалуйста, разрешите доступ в настройках браузера.";
-        } else if (err.name === "NotFoundError") {
-          errorMessage = "Камера или микрофон не найдены. Проверьте подключение устройств.";
-        } else if (err.name === "NotReadableError") {
-          errorMessage = "Камера или микрофон уже используются другим приложением.";
-        } else if (err.name === "OverconstrainedError") {
-          errorMessage = "Устройство не соответствует требуемым ограничениям.";
-        }
+      };
 
-        message.error(errorMessage);
-      });
+      const createStream = async (constraints: MediaStreamConstraints) => {
+        return navigator.mediaDevices.getUserMedia(constraints);
+      };
+
+      let initialError: unknown = null;
+
+      try {
+        const mediaStream = await createStream({ video: true, audio: true });
+        setStream(mediaStream);
+        if (localVideoRef.current) {
+          localVideoRef.current.srcObject = mediaStream;
+        }
+        setIsCameraOn(mediaStream.getVideoTracks().length > 0);
+        return;
+      } catch (err: unknown) {
+        initialError = err;
+        await logErrorDetails(err);
+      }
+
+      const fallbackVideo = await createStream({ video: true, audio: false }).catch(() => null);
+      if (fallbackVideo) {
+        setStream(fallbackVideo);
+        if (localVideoRef.current) {
+          localVideoRef.current.srcObject = fallbackVideo;
+        }
+        setIsCameraOn(fallbackVideo.getVideoTracks().length > 0);
+        message.warning("Микрофон недоступен. Подключение выполнено только с видео.");
+        return;
+      }
+
+      const fallbackAudio = await createStream({ video: false, audio: true }).catch(() => null);
+      if (fallbackAudio) {
+        setStream(fallbackAudio);
+        if (localVideoRef.current) {
+          localVideoRef.current.srcObject = fallbackAudio;
+        }
+        setIsCameraOn(false);
+        message.warning("Камера недоступна. Подключение выполнено только с аудио.");
+        return;
+      }
+
+      let errorMessage = "Не удалось получить доступ к камере/микрофону";
+      const initialErrorObject = initialError as { name?: string } | null;
+      if (initialErrorObject?.name === "NotAllowedError") {
+        errorMessage = "Доступ к камере/микрофону запрещен. Пожалуйста, разрешите доступ в настройках браузера.";
+      } else if (initialErrorObject?.name === "NotFoundError") {
+        errorMessage = "Камера или микрофон не найдены. Проверьте подключение устройств.";
+      } else if (initialErrorObject?.name === "NotReadableError") {
+        errorMessage = "Камера или микрофон уже используются другим приложением.";
+      } else if (initialErrorObject?.name === "OverconstrainedError") {
+        errorMessage = "Устройство не соответствует требуемым ограничениям.";
+      }
+      message.error(errorMessage);
+    };
+
+    acquireMedia();
   }, []);
 
   const removePeer = useCallback((socketId: string) => {
